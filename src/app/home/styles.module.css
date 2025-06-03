@@ -1,0 +1,37 @@
+.container {
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  background-color: #1d1d1d;
+}
+
+.eventsSection {
+  position: relative;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.eventCards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.eventTypeHeading {
+  font-size: 24px;
+  font-weight: 800;
+  margin-top: 50px;
+}
+
+@media (max-width: 991px) {
+  .eventCards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .eventCards {
+    width: 100%;
+  }
+}

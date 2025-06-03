@@ -1,0 +1,85 @@
+.benefitsSection {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #fff;
+}
+
+.benefitsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.benefitCard {
+  width: 403px;
+  height: 271px;
+  border-radius: 21px;
+  padding: 30px;
+  position: relative;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefitLabel {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  padding: 10px 30px;
+  font-size: 30px;
+  font-weight: 800;
+  text-transform: uppercase;
+  background-color: #ef4138;
+}
+
+.benefitIconWrapper {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.benefitIcon {
+  margin-bottom: 20px;
+}
+
+.benefitDescription {
+  margin-top: 20px;
+}
+
+.benefitIconImage {
+  width: 30px;
+  height: 30px;
+}
+
+@media (max-width: 991px) {
+  .benefitsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .benefitCard {
+    width: 90%;
+  }
+}

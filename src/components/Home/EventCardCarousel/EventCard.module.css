@@ -1,0 +1,82 @@
+.card {
+  border-radius: 21px;
+  padding: 30px;
+  width: 427px;
+  background-color: #fff;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 21px;
+  padding: 8px 15px;
+  width: fit-content;
+  background-color: #d9d9d9;
+}
+
+.cardType {
+  font-weight: 700;
+  font-size: 18px;
+  color: #000;
+}
+
+.cardContent {
+  margin-top: 20px;
+  color: #424040;
+}
+
+.description {
+  margin-bottom: 20px;
+}
+
+.features {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.readyText {
+  margin: 20px 0;
+}
+
+.ctaButton {
+  border: none;
+  border-radius: 21px;
+  padding: 10px 30px;
+  font-weight: 700;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .card {
+    width: 90%;
+  }
+
+  .cardHeader {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.iconWrapper {
+  background-color: #000;
+  border-radius: 50%;
+  padding: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconWrapper img {
+  width: 23px;
+  height: 23px;
+}

@@ -1,0 +1,180 @@
+.serviceSection {
+  color: #fff;
+}
+
+.serviceInfo {
+  padding: 100px 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #121212;
+}
+
+.serviceLeft {
+  flex: 1;
+  padding-right: 10%;
+  margin-left: 10%;
+}
+
+.serviceRight {
+  flex: 1;
+}
+
+.subheading {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: right;
+  margin-right: 20%;
+}
+
+.headingService {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: right;
+  margin-right: 20%;
+}
+
+.headingPromo {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: right;
+}
+
+
+.heading {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+
+.serviceImageContainer {
+  position: relative;
+  margin-top: 30px;
+}
+
+.servicePlaceholder {
+  height: 370px;
+  border-radius: 10px;
+}
+
+.tapePlaceholder {
+  width: 100px;
+  height: 30px;
+  background-color: #555;
+  position: absolute;
+  top: -15px;
+  transform: rotate(-15deg);
+}
+
+.tapePlaceholder:nth-child(3) {
+  top: auto;
+  bottom: -15px;
+  left: auto;
+  right: 15%;
+  transform: rotate(15deg);
+}
+
+.experienceList {
+  margin-top: 20%;
+}
+
+.experienceItem,
+.experienceItemActive {
+  padding: 15px;
+  border-bottom: 1px solid #fff;
+  font-size: 24px;
+}
+
+.experienceItemActive {
+  color: #12c70e;
+}
+
+.appPromoSection {
+  padding: 100px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #121212;
+}
+
+.promoContent {
+  flex: 1;
+  text-align: right;
+  padding-right: 50px;
+}
+
+.promoText {
+  margin-bottom: 30px;
+}
+
+.ctaButton {
+  border: none;
+  border-radius: 100px;
+  padding: 15px 40px;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #04c400;
+  color: #000;
+}
+
+.appPreviewContainer {
+  flex: 1;
+  margin-left: 10%;
+}
+
+.appPreviewPlaceholder {
+  height: 500px;
+  border-radius: 10px;
+}
+
+.partnersSection {
+  padding: 100px 0;
+  text-align: center;
+  background-color: #1d1d1d;
+}
+
+.partnersLogos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.partnerLogo {
+  width: 150px;
+  border-radius: 5px;
+}
+
+@media (max-width: 991px) {
+  .serviceInfo {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .serviceLeft {
+    padding-right: 0;
+  }
+
+  .appPromoSection {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .promoContent {
+    text-align: center;
+    padding-right: 0;
+    margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 640px) {
+  .partnersLogos {
+    flex-wrap: wrap;
+  }
+}

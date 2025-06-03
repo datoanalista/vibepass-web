@@ -1,0 +1,65 @@
+.carouselContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: visible;
+  position: relative;
+  padding: 0 4rem;
+}
+
+.cardsWrapper {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease;
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+.card.active {
+  transform: scale(1.1);
+  opacity: 1;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.card.left,
+.card.right {
+  opacity: 0.6;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.card.hidden {
+  display: none;
+}
+
+.arrowLeft,
+.arrowRight {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+
+.arrowLeft {
+  left: 0;
+}
+
+.arrowRight {
+  right: 0;
+}
