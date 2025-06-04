@@ -1,0 +1,190 @@
+.footerContainer {
+  position: relative;
+  margin-top: 100px;
+}
+
+.waveBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 167px;
+  overflow: hidden;
+}
+
+.wave {
+  width: 100%;
+  height: 176px;
+  transform: rotate(-2.336deg);
+}
+
+.footerContent {
+  padding: 84px 82px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+  background-color: #121212;
+}
+
+@media (max-width: 991px) {
+  .footerContent {
+    padding: 60px 40px 40px;
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .footerContent {
+    padding: 40px 20px 30px;
+  }
+}
+
+.vibepassBrand {
+  position: relative;
+  margin-top: -60px;
+}
+
+.brandContainer {
+  position: relative;
+}
+
+.brandBackground {
+  width: 352px;
+  height: 85px;
+  transform: rotate(-5.418deg);
+  background-color: #12c70e;
+}
+
+.brandText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-5.453deg);
+  color: #121212;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.footerMain {
+  display: flex;
+  gap: 100px;
+  flex: 1;
+  justify-content: center;
+}
+
+@media (max-width: 991px) {
+  .footerMain {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.footerSection {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+}
+
+.sectionTitle {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.sectionDescription {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 400;
+  max-width: 566px;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .sectionDescription {
+    font-size: 18px;
+  }
+}
+
+.socialLinks {
+  display: flex;
+  gap: 44px;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .socialLinks {
+    justify-content: center;
+  }
+}
+
+.footerSocialIcon {
+  width: 41px;
+  height: 38px;
+  cursor: pointer;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contactIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.contactText {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.paymentLogos {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .paymentLogos {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}
+
+.paymentLogo {
+  max-width: 166px;
+  height: auto;
+}
+
+@media (max-width: 640px) {
+  .paymentLogo {
+    max-width: 100px;
+  }
+}
+
+.copyright {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+  width: 100%;
+  height: 63px;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  padding-left: 82px;
+}
+
+@media (max-width: 640px) {
+  .copyright {
+    padding-left: 20px;
+  }
+}

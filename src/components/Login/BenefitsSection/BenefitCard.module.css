@@ -1,0 +1,46 @@
+.cardContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 1);
+}
+
+.titleContainer {
+  background-color: rgba(239, 65, 56, 1);
+  align-self: center;
+  z-index: 10;
+  width: 307px;
+  max-width: 100%;
+  padding: 14px 32px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.descriptionContainer {
+  border-radius: 21px;
+  padding: 69px 17px;
+  font-weight: 400;
+  margin-top: -1px;
+}
+
+@media (max-width: 991px) {
+  .cardContainer {
+    margin-top: 40px;
+  }
+
+  .titleContainer {
+    padding: 14px 20px;
+  }
+
+  .descriptionContainer {
+    padding: 69px 20px;
+  }
+}

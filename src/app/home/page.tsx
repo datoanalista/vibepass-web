@@ -4,9 +4,10 @@ import styles from "./styles.module.css";
 import QrSection from "@/components/Home/QrSection/QrSection";
 import BenefitsSection from "@/components/Home/BenefitsSection/BenefitsSection";
 import ServiceSection from "@/components/Home/ServiceSection/ServiceSection";
-import Header from "@/components/Home/Header/Header";
+import Header from "@/components/Shared/Header/Header";
 import HeroGif from "@/components/Home/HeroGif/HeroGif";
 import EventCardCarousel from "@/components/Home/EventCardCarousel/EventCardCarousel";
+import Footer from "@/components/Shared/Footer/Footer";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <QrSection />
       <BenefitsSection />
       <ServiceSection />
+      <Footer />
     </div>
   );
 }

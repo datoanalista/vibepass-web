@@ -1,0 +1,105 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  font-family:
+    "Inter",
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  background-color: #1d1d1d;
+  color: #fff;
+}
+
+.content {
+  padding: 0 82px;
+  position: relative;
+}
+
+@media (max-width: 991px) {
+  .content {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding: 0 20px;
+  }
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 21px;
+  margin-top: 48px;
+}
+
+@media (max-width: 640px) {
+  .breadcrumb {
+    justify-content: center;
+  }
+}
+
+.breadcrumbText {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.breadcrumbArrow {
+  width: 18px;
+  height: 10px;
+  transform: rotate(89.983deg);
+}
+
+.pageTitle {
+  color: #fff;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 97px;
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .pageTitle {
+    text-align: center;
+  }
+}
+
+
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* opcional si necesitas adaptar para móvil */
+  gap: 1rem;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  background: #e0e0e0;
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+}
+
+
+.filterButton span {
+  color: #424040;
+  font-size: 20px;
+  font-weight: 400;
+}
