@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useRef } from "react";
 import styles from "./AttractionsSection.module.css";
 import CategoryHeader from "../CategoryHeader/CategoryHeader";
 import AttractionCard from "../AttractionCard/AttractionCard";
@@ -14,12 +14,46 @@ export default function AttractionsSection({
   attractions,
   onQuantityChange,
 }: AttractionsSectionProps) {
+  const [heightRestrictionScrollPosition, setHeightRestrictionScrollPosition] =
+    useState(0);
+  const [kidsZoneScrollPosition, setKidsZoneScrollPosition] = useState(0);
+  const heightRestrictionRef = useRef<HTMLDivElement>(null);
+  const kidsZoneRef = useRef<HTMLDivElement>(null);
+
   const heightRestrictionAttractions = attractions.filter(
     (attraction) => attraction.category === "heightRestriction",
   );
   const kidsZoneAttractions = attractions.filter(
     (attraction) => attraction.category === "kidsZone",
   );
+
+  const handleScroll = (
+    direction: "left" | "right",
+    category: "heightRestriction" | "kidsZone",
+  ) => {
+    const ref =
+      category === "heightRestriction" ? heightRestrictionRef : kidsZoneRef;
+    const setScrollPosition =
+      category === "heightRestriction"
+        ? setHeightRestrictionScrollPosition
+        : setKidsZoneScrollPosition;
+
+    if (ref.current) {
+      const scrollAmount = 336; // Approximate width of one card plus gap
+      const currentScroll = ref.current.scrollLeft;
+      const newScroll =
+        direction === "left"
+          ? currentScroll - scrollAmount
+          : currentScroll + scrollAmount;
+
+      ref.current.scrollTo({
+        left: newScroll,
+        behavior: "smooth",
+      });
+
+      setScrollPosition(newScroll);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -28,8 +62,7 @@ export default function AttractionsSection({
       <div className={styles.sectionsContainer}>
         {/* Height Restriction Section */}
         <div className={styles.categorySection}>
-          <CategoryHeader subtitle="Desde 1,40 metros" title="" />
-          <div className={styles.attractionsGrid}>
+          <div className={styles.attractionsGrid} ref={heightRestrictionRef}>
             {heightRestrictionAttractions.map((attraction) => (
               <AttractionCard
                 key={attraction.id}
@@ -45,7 +78,11 @@ export default function AttractionsSection({
             ))}
           </div>
           <div className={styles.navigationContainer}>
-            <button className={styles.navButton}>
+            <button
+              className={styles.navButton}
+              onClick={() => handleScroll("left", "heightRestriction")}
+              aria-label="Scroll left"
+            >
               <svg
                 width="41"
                 height="41"
@@ -59,7 +96,11 @@ export default function AttractionsSection({
                 />
               </svg>
             </button>
-            <button className={styles.navButton}>
+            <button
+              className={styles.navButton}
+              onClick={() => handleScroll("right", "heightRestriction")}
+              aria-label="Scroll right"
+            >
               <svg
                 width="41"
                 height="41"
@@ -79,7 +120,7 @@ export default function AttractionsSection({
         {/* Kids Zone Section */}
         <div className={styles.categorySection}>
           <CategoryHeader subtitle="Zona Kids" title="" />
-          <div className={styles.attractionsGrid}>
+          <div className={styles.attractionsGrid} ref={kidsZoneRef}>
             {kidsZoneAttractions.map((attraction) => (
               <AttractionCard
                 key={attraction.id}
@@ -95,7 +136,11 @@ export default function AttractionsSection({
             ))}
           </div>
           <div className={styles.navigationContainer}>
-            <button className={styles.navButton}>
+            <button
+              className={styles.navButton}
+              onClick={() => handleScroll("left", "kidsZone")}
+              aria-label="Scroll left"
+            >
               <svg
                 width="41"
                 height="41"
@@ -109,7 +154,11 @@ export default function AttractionsSection({
                 />
               </svg>
             </button>
-            <button className={styles.navButton}>
+            <button
+              className={styles.navButton}
+              onClick={() => handleScroll("right", "kidsZone")}
+              aria-label="Scroll right"
+            >
               <svg
                 width="41"
                 height="41"

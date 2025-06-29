@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styles from "./styles.module.css";
 import Header from "@/components/Shared/Header/Header";
 import Footer from "@/components/Shared/Footer/Footer";
@@ -16,7 +16,27 @@ import {
 
 export default function PurchasePage() {
   const [attractions, setAttractions] = useState<Attraction[]>(attractionsData);
-  const [cartItems] = useState<CartItem[]>(initialCartData);
+  const [staticCartItems] = useState<CartItem[]>(
+    initialCartData.filter((item) => item.category !== "attractions"),
+  );
+
+  // Generate dynamic cart items based on attraction quantities
+  const dynamicAttractionItems = useMemo(() => {
+    return attractions
+      .filter((attraction) => attraction.quantity > 0)
+      .map((attraction) => ({
+        id: attraction.id + 1000, // Offset to avoid ID conflicts
+        name: attraction.name,
+        quantity: attraction.quantity,
+        price: attraction.price,
+        category: "attractions" as const,
+      }));
+  }, [attractions]);
+
+  // Combine static and dynamic cart items
+  const allCartItems = useMemo(() => {
+    return [...staticCartItems, ...dynamicAttractionItems];
+  }, [staticCartItems, dynamicAttractionItems]);
 
   const handleQuantityChange = (attractionId: number, newQuantity: number) => {
     setAttractions((prev) =>
@@ -71,7 +91,7 @@ export default function PurchasePage() {
 
         {/* Cart Sidebar */}
         <div className={styles.rightSection}>
-          <PurchaseCartSidebar cartItems={cartItems} />
+          <PurchaseCartSidebar cartItems={allCartItems} />
         </div>
       </div>
 
