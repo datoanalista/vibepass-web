@@ -1,0 +1,184 @@
+.container {
+  background-color: rgba(232, 232, 232, 1);
+  display: flex;
+  padding-bottom: 221px;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.headerSpacer {
+  display: flex;
+  min-height: 3px;
+  width: 100%;
+}
+
+.breadcrumbSection {
+  align-self: center;
+  display: flex;
+  margin-top: 55px;
+  width: 100%;
+  max-width: 1642px;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.breadcrumbText {
+  color: rgba(116, 114, 114, 1);
+  font-size: 16px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 400;
+  align-self: end;
+  margin-top: 28px;
+}
+
+.schoolSelector {
+  align-self: start;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.schoolFlag {
+  border-radius: 10px;
+  background-color: rgba(255, 0, 0, 1);
+  border-color: rgba(163, 163, 163, 1);
+  border-style: solid;
+  border-width: 1px;
+  align-self: stretch;
+  display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.flagImage {
+  aspect-ratio: 2.31;
+  object-fit: contain;
+  object-position: center;
+  width: 37px;
+}
+
+.schoolName {
+  color: rgba(116, 114, 114, 1);
+  font-size: 16px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 400;
+  align-self: stretch;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.dropdownArrow {
+  aspect-ratio: 1.83;
+  object-fit: contain;
+  object-position: center;
+  width: 11px;
+  align-self: stretch;
+  margin-top: auto;
+  margin-bottom: auto;
+  flex-shrink: 0;
+}
+
+.dividerSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 2px;
+  width: 100%;
+  padding-left: 70px;
+  padding-right: 70px;
+  align-items: start;
+}
+
+.dividerImage {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.dividerLine {
+  position: relative;
+  border-color: rgba(27, 39, 53, 1);
+  border-style: solid;
+  border-width: 2px;
+  width: 148px;
+  flex-shrink: 0;
+  height: 2px;
+}
+
+.mainContent {
+  align-self: center;
+  display: flex;
+  margin-top: 67px;
+  width: 100%;
+  max-width: 1650px;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.paginationInfo {
+  color: rgba(66, 64, 64, 1);
+  font-size: 16px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 400;
+  align-self: end;
+  margin-top: 76px;
+  margin-right: 142px;
+}
+
+.currentPage {
+  color: rgba(1, 168, 226, 1);
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+  .container {
+    padding-bottom: 100px;
+  }
+
+  .breadcrumbSection {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+
+  .dividerSection {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .mainContent {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+
+  .paginationInfo {
+    margin-right: 10px;
+    margin-top: 40px;
+  }
+}

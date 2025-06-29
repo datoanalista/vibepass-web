@@ -1,0 +1,271 @@
+.section {
+  width: 100%;
+  margin-top: 83px;
+}
+
+.sectionHeader {
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  align-self: start;
+  width: 263px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 50px;
+  background-color: #01a8e2;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: rgba(27, 39, 53, 1);
+  font-weight: 700;
+}
+
+.formContainer {
+  border-radius: 10px;
+  background-color: rgba(217, 217, 217, 1);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  padding-left: 20px;
+  padding-right: 80px;
+  padding-top: 28px;
+  padding-bottom: 49px;
+}
+
+.gridContainer {
+  gap: 20px;
+  display: flex;
+}
+
+.typeColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  line-height: normal;
+  width: 16%;
+  margin-left: 0px;
+}
+
+.priceCapacityColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  line-height: normal;
+  width: 42%;
+  margin-left: 20px;
+}
+
+.limitColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  line-height: normal;
+  width: 16%;
+  margin-left: 20px;
+}
+
+.salesPeriodColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  line-height: normal;
+  width: 26%;
+  margin-left: 20px;
+}
+
+.ticketGroup {
+  margin-bottom: 51px;
+}
+
+.ticketGroup:last-child {
+  margin-bottom: 0;
+}
+
+.formGroup {
+  margin-bottom: 4px;
+}
+
+.label {
+  display: block;
+  color: rgba(18, 18, 18, 1);
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  align-self: start;
+}
+
+.input {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 186px;
+  max-width: 100%;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: rgba(116, 114, 114, 1);
+  border: none;
+  outline: none;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.input::placeholder {
+  color: rgba(116, 114, 114, 1);
+}
+
+.priceCapacityRow {
+  display: flex;
+  align-items: start;
+  gap: 100px;
+  flex-wrap: wrap;
+}
+
+.priceCapacityRow .formGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1;
+}
+
+.priceCapacityRow .input {
+  width: 100%;
+}
+
+.salesPeriodGroup {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.salesPeriodGroup .formGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.salesPeriodGroup .input {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: rgba(116, 114, 114, 1);
+  border: none;
+  outline: none;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 14px;
+}
+
+.deleteIcon {
+  aspect-ratio: 0.94;
+  object-fit: contain;
+  object-position: center;
+  width: 16px;
+  align-self: end;
+  margin-top: 26px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.addButton {
+  border-radius: 10px;
+  background-color: rgba(1, 168, 226, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  margin-top: 35px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  align-items: stretch;
+  gap: 5px;
+  font-size: 13px;
+  color: rgba(27, 39, 53, 1);
+  border: none;
+  cursor: pointer;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.addIcon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 19px;
+  flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+  .section {
+    margin-top: 40px;
+  }
+
+  .formContainer {
+    max-width: 100%;
+    padding-right: 20px;
+  }
+
+  .gridContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+
+  .typeColumn,
+  .priceCapacityColumn,
+  .limitColumn,
+  .salesPeriodColumn {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 40px;
+  }
+
+  .typeColumn {
+    margin-top: 0;
+  }
+
+  .input {
+    margin-right: 2px;
+    padding-right: 20px;
+    white-space: initial;
+    max-width: 100%;
+  }
+
+  .priceCapacityRow {
+    max-width: 100%;
+    margin-right: 2px;
+  }
+
+  .priceCapacityRow .input {
+    padding-right: 20px;
+    white-space: initial;
+  }
+}

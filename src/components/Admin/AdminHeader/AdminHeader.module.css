@@ -1,0 +1,133 @@
+.header {
+  background-color: rgba(27, 39, 53, 1);
+  display: flex;
+  width: 100%;
+  padding: 14px 70px;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 991px) {
+  .header {
+    padding: 14px 20px;
+  }
+}
+
+.headerContent {
+  display: flex;
+  width: 100%;
+  max-width: 1647px;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+  .headerContent {
+    max-width: 100%;
+  }
+}
+
+.welcomeSection {
+  display: flex;
+  margin: auto 0;
+  align-items: stretch;
+  gap: 17px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 700;
+}
+
+.welcomeIcon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.welcomeText {
+  margin: auto 0;
+  flex-basis: auto;
+}
+
+.rightSection {
+  display: flex;
+  align-items: stretch;
+  gap: 62px;
+}
+
+.userProfile {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 400;
+}
+
+.userAvatar {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  display: flex;
+  margin: auto 0;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.userName {
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  align-self: start;
+}
+
+.userRole {
+  color: rgba(163, 163, 163, 1);
+  font-size: 14px;
+}
+
+.actionsSection {
+  display: flex;
+  margin: auto 0;
+  align-items: stretch;
+  gap: 100px;
+}
+
+.divider {
+  border-color: rgba(255, 255, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  width: 1px;
+  flex-shrink: 0;
+  height: 38px;
+}
+
+.logoutIcon {
+  width: 21px;
+  height: 15px;
+  object-fit: contain;
+  align-self: start;
+  margin-top: 20px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.logoutIcon:hover {
+  opacity: 0.8;
+}

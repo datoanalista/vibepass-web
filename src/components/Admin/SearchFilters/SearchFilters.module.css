@@ -1,0 +1,196 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1651px;
+  gap: 13px;
+}
+
+@media (max-width: 991px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+.filtersRow {
+  display: flex;
+  width: 1022px;
+  max-width: 100%;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.searchBox {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(116, 114, 114, 1);
+  display: flex;
+  padding: 7px 11px;
+  align-items: stretch;
+  gap: 17px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: rgba(116, 114, 114, 1);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .searchBox {
+    white-space: initial;
+  }
+}
+
+.searchIcon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  align-self: start;
+  flex-shrink: 0;
+}
+
+.searchText {
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.timeFilter {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(116, 114, 114, 1);
+  padding: 7px 13px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: rgba(116, 114, 114, 1);
+  font-weight: 400;
+}
+
+.dateRangePicker {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(116, 114, 114, 1);
+  display: flex;
+  padding: 0 10px;
+  align-items: start;
+  gap: 22px;
+}
+
+.dateRangeLeft,
+.dateRangeRight {
+  display: flex;
+  align-items: stretch;
+  gap: 9px;
+}
+
+.arrowIcon {
+  width: 6px;
+  height: 11px;
+  object-fit: contain;
+  margin: auto 0;
+  flex-shrink: 0;
+}
+
+.dateDivider {
+  border-color: rgba(116, 114, 114, 1);
+  border-style: solid;
+  border-width: 1px;
+  width: 1px;
+  flex-shrink: 0;
+  height: 31px;
+}
+
+.dateRangeContent {
+  align-self: stretch;
+  display: flex;
+  margin: auto 0;
+  align-items: stretch;
+  gap: 8px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: rgba(116, 114, 114, 1);
+  font-weight: 400;
+}
+
+.calendarIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.dateRangeText {
+  margin: auto 0;
+  flex-basis: auto;
+}
+
+.createEventButton {
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(
+    135deg,
+    rgba(1, 168, 226, 1) 0%,
+    rgba(0, 140, 186, 1) 100%
+  );
+  align-self: end;
+  display: flex;
+  padding: 23px 51px;
+  align-items: stretch;
+  gap: 9px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 400;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.createEventButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 991px) {
+  .createEventButton {
+    padding: 23px 20px;
+  }
+}
+
+.plusIcon {
+  width: 20px;
+  height: 22px;
+  object-fit: contain;
+  align-self: start;
+  flex-shrink: 0;
+}
+
+.createEventText {
+  flex-basis: auto;
+}

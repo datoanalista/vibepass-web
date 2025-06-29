@@ -1,0 +1,416 @@
+.card {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  padding: 18px 16px 11px 17px;
+}
+
+@media (max-width: 991px) {
+  .card {
+    max-width: 100%;
+  }
+}
+
+.detailsHeader {
+  display: flex;
+  width: 100%;
+  max-width: 1540px;
+  align-items: start;
+  gap: 51px;
+}
+
+@media (max-width: 991px) {
+  .detailsHeader {
+    max-width: 100%;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+}
+
+.statusColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.statusIndicator {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.activeStatus {
+  background-color: rgba(18, 199, 14, 1);
+  border-radius: 50%;
+  width: 21px;
+  height: 21px;
+  margin: auto 0;
+  flex-shrink: 0;
+}
+
+.eventImage {
+  width: 82px;
+  height: 68px;
+  object-fit: contain;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.locationLabel {
+  color: rgba(66, 64, 64, 1);
+  font-size: 14px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 600;
+  align-self: center;
+  margin-top: 27px;
+}
+
+.eventInfo {
+  margin-top: 19px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+}
+
+.eventName {
+  color: rgba(0, 0, 0, 1);
+  font-weight: 700;
+}
+
+.eventEmail {
+  color: rgba(66, 64, 64, 1);
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+@media (max-width: 991px) {
+  .eventEmail {
+    margin-right: 3px;
+  }
+}
+
+.priceColumn {
+  align-self: end;
+  display: flex;
+  margin-top: 23px;
+  flex-direction: column;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .priceColumn {
+    white-space: initial;
+  }
+}
+
+.price {
+  color: rgba(1, 168, 226, 1);
+  font-size: 16px;
+  font-weight: 700;
+  align-self: end;
+}
+
+.phoneLabel {
+  color: rgba(66, 64, 64, 1);
+  font-size: 14px;
+  font-weight: 600;
+  align-self: start;
+  margin-top: 55px;
+}
+
+@media (max-width: 991px) {
+  .phoneLabel {
+    margin-top: 40px;
+  }
+}
+
+.paymentMethod {
+  color: rgba(66, 64, 64, 1);
+  font-size: 16px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 400;
+  margin-top: 26px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 115px;
+}
+
+.attendeesColumn {
+  display: flex;
+  margin-top: 18px;
+  flex-direction: column;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 14px;
+}
+
+.attendeesBadge {
+  border-radius: 10px;
+  background-color: rgba(1, 168, 226, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  align-self: end;
+  display: flex;
+  padding: 11px 22px;
+  align-items: start;
+  gap: 14px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 400;
+}
+
+@media (max-width: 991px) {
+  .attendeesBadge {
+    padding: 11px 20px;
+  }
+}
+
+.usersIcon {
+  width: 14px;
+  height: 13px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.attendeesInfo {
+  display: flex;
+  align-items: stretch;
+  gap: 7px;
+}
+
+.attendeesLabel {
+  flex-grow: 1;
+}
+
+.attendeesCount {
+  /* Additional styling if needed */
+}
+
+.rutLabel {
+  color: rgba(66, 64, 64, 1);
+  font-weight: 600;
+  align-self: start;
+  margin-top: 44px;
+}
+
+@media (max-width: 991px) {
+  .rutLabel {
+    margin-top: 40px;
+  }
+}
+
+.dateColumn {
+  align-self: end;
+  margin-top: 97px;
+}
+
+@media (max-width: 991px) {
+  .dateColumn {
+    margin-top: 40px;
+  }
+}
+
+.dateLabel {
+  color: rgba(66, 64, 64, 1);
+  font-size: 14px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 600;
+}
+
+.periodColumn {
+  display: flex;
+  margin-top: 18px;
+  flex-direction: column;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 14px;
+  color: rgba(66, 64, 64, 1);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .periodColumn {
+    white-space: initial;
+  }
+}
+
+.moreIcon {
+  width: 33px;
+  height: 21px;
+  object-fit: contain;
+  border-radius: 21px;
+  align-self: end;
+}
+
+.periodLabel {
+  align-self: start;
+  margin-top: 53px;
+}
+
+@media (max-width: 991px) {
+  .periodLabel {
+    margin-top: 40px;
+  }
+}
+
+.divider {
+  width: 1618px;
+  height: 1px;
+  background-color: rgba(200, 200, 200, 1);
+  margin: 8px 0;
+}
+
+@media (max-width: 991px) {
+  .divider {
+    max-width: 100%;
+  }
+}
+
+.detailsRow {
+  align-self: center;
+  display: flex;
+  margin-top: 7px;
+  width: 100%;
+  max-width: 1509px;
+  align-items: stretch;
+  gap: 100px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 14px;
+  color: rgba(66, 64, 64, 1);
+  font-weight: 400;
+}
+
+@media (max-width: 991px) {
+  .detailsRow {
+    max-width: 100%;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+}
+
+.location {
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 130px;
+}
+
+.phone,
+.rut,
+.date,
+.time {
+  /* Additional styling if needed */
+}
+
+.simpleCard {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.simpleContent {
+  display: flex;
+  align-items: stretch;
+  gap: 100px;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+@media (max-width: 991px) {
+  .simpleContent {
+    gap: 20px;
+  }
+}
+
+.simpleCard .statusIndicator {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.simpleCard .eventInfo {
+  margin: auto 0;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+}
+
+.simpleCard .price {
+  color: rgba(1, 168, 226, 1);
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin: auto 0;
+}
+
+.simpleCard .paymentMethod {
+  color: rgba(66, 64, 64, 1);
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  margin: auto 0;
+  flex-basis: auto;
+}
+
+.simpleCard .attendeesBadge {
+  align-self: start;
+  font-size: 14px;
+}
+
+.simpleCard .moreIcon {
+  margin: auto 0;
+  flex-shrink: 0;
+}

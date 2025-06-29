@@ -1,0 +1,139 @@
+.header {
+  background-color: rgba(27, 39, 53, 1);
+  display: flex;
+  width: 100%;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerContent {
+  display: flex;
+  width: 100%;
+  max-width: 1647px;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.welcomeSection {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  align-items: stretch;
+  gap: 17px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 700;
+}
+
+.userIcon {
+  aspect-ratio: 1.03;
+  object-fit: contain;
+  object-position: center;
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.welcomeText {
+  margin-top: auto;
+  margin-bottom: auto;
+  flex-basis: auto;
+}
+
+.userSection {
+  display: flex;
+  align-items: stretch;
+  gap: 62px;
+}
+
+.userProfile {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 400;
+}
+
+.profileAvatar {
+  aspect-ratio: 1.02;
+  object-fit: contain;
+  object-position: center;
+  width: 58px;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.userName {
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  align-self: start;
+}
+
+.userRole {
+  color: rgba(163, 163, 163, 1);
+  font-size: 14px;
+}
+
+.headerActions {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  align-items: stretch;
+  gap: 100px;
+}
+
+.divider {
+  border-color: rgba(255, 255, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  width: 1px;
+  flex-shrink: 0;
+  height: 38px;
+}
+
+.logoutIcon {
+  aspect-ratio: 1.4;
+  object-fit: contain;
+  object-position: center;
+  width: 21px;
+  align-self: start;
+  margin-top: 20px;
+  flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+  .header {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .headerContent {
+    max-width: 100%;
+  }
+}

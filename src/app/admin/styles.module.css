@@ -1,0 +1,1184 @@
+.container {
+  background-color: rgba(232, 232, 232, 1);
+  display: flex;
+  padding-bottom: 68px;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+/* Header Styles */
+.header {
+  background-color: rgba(27, 39, 53, 1);
+  display: flex;
+  width: 100%;
+  padding: 14px 70px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerContent {
+  display: flex;
+  width: 100%;
+  max-width: 1647px;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.welcomeSection {
+  display: flex;
+  margin: auto 0;
+  align-items: stretch;
+  gap: 17px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 700;
+}
+
+.userIcon {
+  aspect-ratio: 1.03;
+  object-fit: contain;
+  object-position: center;
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.welcomeText {
+  margin: auto 0;
+  flex-basis: auto;
+}
+
+.userSection {
+  display: flex;
+  align-items: stretch;
+  gap: 62px;
+}
+
+.userProfile {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 400;
+}
+
+.profileAvatar {
+  aspect-ratio: 1.02;
+  object-fit: contain;
+  object-position: center;
+  width: 58px;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  display: flex;
+  margin: auto 0;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.userName {
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  align-self: start;
+}
+
+.userRole {
+  color: rgba(163, 163, 163, 1);
+  font-size: 14px;
+}
+
+.headerActions {
+  display: flex;
+  margin: auto 0;
+  align-items: stretch;
+  gap: 100px;
+}
+
+.divider {
+  border-color: rgba(255, 255, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+  width: 1px;
+  flex-shrink: 0;
+  height: 38px;
+}
+
+.logoutIcon {
+  aspect-ratio: 1.4;
+  object-fit: contain;
+  object-position: center;
+  width: 21px;
+  align-self: start;
+  margin-top: 20px;
+  flex-shrink: 0;
+}
+
+.headerSpacer {
+  display: flex;
+  min-height: 3px;
+  width: 100%;
+}
+
+/* Navigation Styles */
+.topNavigation {
+  align-self: center;
+  display: flex;
+  margin-top: 55px;
+  width: 100%;
+  max-width: 1642px;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.navigationTabs {
+  align-self: end;
+  display: flex;
+  margin-top: 28px;
+  align-items: stretch;
+  gap: 100px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: rgba(116, 114, 114, 1);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.navTab {
+  cursor: pointer;
+}
+
+.schoolSelector {
+  align-self: start;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.schoolFlag {
+  border-radius: 10px;
+  background-color: rgba(255, 0, 0, 1);
+  border: 1px solid rgba(163, 163, 163, 1);
+  align-self: stretch;
+  display: flex;
+  padding: 12px 5px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.flagImage {
+  aspect-ratio: 2.31;
+  object-fit: contain;
+  object-position: center;
+  width: 37px;
+}
+
+.schoolName {
+  color: rgba(116, 114, 114, 1);
+  font-size: 16px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 400;
+  align-self: stretch;
+  margin: auto 0;
+}
+
+.dropdownArrow {
+  aspect-ratio: 1.83;
+  object-fit: contain;
+  object-position: center;
+  width: 11px;
+  align-self: stretch;
+  margin: auto 0;
+  flex-shrink: 0;
+}
+
+/* Divider Section */
+.dividerSection {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 2px;
+  width: 100%;
+  padding: 0 70px;
+  align-items: start;
+}
+
+.dividerImage {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.dividerLine {
+  position: relative;
+  border: 2px solid rgba(27, 39, 53, 1);
+  width: 56px;
+  flex-shrink: 0;
+  height: 2px;
+}
+
+/* Filters Section */
+.filtersSection {
+  align-self: center;
+  display: flex;
+  margin-top: 53px;
+  width: 100%;
+  max-width: 1651px;
+  flex-direction: column;
+}
+
+.searchFilters {
+  display: flex;
+  width: 1022px;
+  max-width: 100%;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.searchBox {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(116, 114, 114, 1);
+  display: flex;
+  padding: 7px 11px;
+  align-items: stretch;
+  gap: 17px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: rgba(116, 114, 114, 1);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.searchIcon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 18px;
+  align-self: start;
+  flex-shrink: 0;
+}
+
+.searchText {
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.filterButton {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(116, 114, 114, 1);
+  padding: 7px 13px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: rgba(116, 114, 114, 1);
+  font-weight: 400;
+}
+
+.dateRangeFilter {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(116, 114, 114, 1);
+  display: flex;
+  padding: 0 10px;
+  align-items: start;
+  gap: 22px;
+}
+
+.dateRangeContent {
+  display: flex;
+  align-items: stretch;
+  gap: 9px;
+}
+
+.dateArrowLeft,
+.dateArrowRight {
+  aspect-ratio: 0.55;
+  object-fit: contain;
+  object-position: center;
+  width: 6px;
+  margin: auto 0;
+  flex-shrink: 0;
+}
+
+.dateRangeDivider {
+  border: 1px solid rgba(116, 114, 114, 1);
+  width: 1px;
+  flex-shrink: 0;
+  height: 31px;
+}
+
+.calendarIcon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.dateText {
+  align-self: stretch;
+  margin: auto 0;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: rgba(116, 114, 114, 1);
+  font-weight: 400;
+  flex-basis: auto;
+}
+
+.createEventButton {
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  align-self: end;
+  display: flex;
+  margin-top: 13px;
+  padding: 23px 51px;
+  align-items: stretch;
+  gap: 9px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 400;
+  background: linear-gradient(135deg, #01a8e2 0%, #0084b6 100%);
+  cursor: pointer;
+}
+
+.plusIcon {
+  aspect-ratio: 0.91;
+  object-fit: contain;
+  object-position: center;
+  width: 20px;
+  align-self: start;
+  flex-shrink: 0;
+}
+
+.createEventText {
+  flex-basis: auto;
+}
+
+/* Active Events Section */
+.activeEventsSection {
+  align-self: center;
+  margin-top: 22px;
+  width: 100%;
+  max-width: 1650px;
+}
+
+.sectionHeader {
+  border-radius: 10px;
+  background-color: rgba(1, 168, 226, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 263px;
+  max-width: 100%;
+  padding: 5px 16px 54px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: rgba(27, 39, 53, 1);
+  font-weight: 700;
+}
+
+.eventsContainer {
+  border-radius: 10px;
+  background-color: rgba(217, 217, 217, 1);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  width: 100%;
+  padding: 21px 16px 34px;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.eventsListHeader {
+  align-self: start;
+  display: flex;
+  align-items: stretch;
+  gap: 5px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: rgba(18, 18, 18, 1);
+  font-weight: 400;
+}
+
+.eventsSelectorText {
+  flex-grow: 1;
+}
+
+.dropdownSmall {
+  aspect-ratio: 1.5;
+  object-fit: contain;
+  object-position: center;
+  width: 9px;
+  margin: auto 0;
+  flex-shrink: 0;
+}
+
+/* Event Card Styles */
+.eventCard {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  margin-top: 21px;
+  width: 100%;
+  padding: 18px 0 11px;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.eventCardHeader {
+  display: flex;
+  margin-left: 17px;
+  width: 100%;
+  max-width: 1540px;
+  align-items: start;
+  gap: 51px;
+}
+
+.eventCardLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.eventDetails {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.statusIndicator {
+  background-color: rgba(18, 199, 14, 1);
+  border-radius: 50%;
+  display: flex;
+  margin: auto 0;
+  width: 21px;
+  flex-shrink: 0;
+  height: 21px;
+}
+
+.schoolLogo {
+  aspect-ratio: 1.21;
+  object-fit: contain;
+  object-position: center;
+  width: 82px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.placeLabel {
+  color: rgba(66, 64, 64, 1);
+  font-size: 14px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 600;
+  align-self: center;
+  margin-top: 27px;
+}
+
+.eventInfo {
+  margin-top: 19px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+}
+
+.schoolNameBold {
+  color: rgba(0, 0, 0, 1);
+  font-weight: 700;
+}
+
+.schoolEmail {
+  color: rgba(66, 64, 64, 1);
+  font-weight: 400;
+}
+
+.priceSection {
+  align-self: end;
+  display: flex;
+  margin-top: 23px;
+  flex-direction: column;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  white-space: nowrap;
+}
+
+.price {
+  color: rgba(1, 168, 226, 1);
+  font-size: 16px;
+  font-weight: 700;
+  align-self: end;
+}
+
+.phoneLabel {
+  color: rgba(66, 64, 64, 1);
+  font-size: 14px;
+  font-weight: 600;
+  align-self: start;
+  margin-top: 55px;
+}
+
+.paymentMethod {
+  color: rgba(66, 64, 64, 1);
+  font-size: 16px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 400;
+  margin-top: 26px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 115px;
+}
+
+.attendeesSection {
+  display: flex;
+  margin-top: 18px;
+  flex-direction: column;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 14px;
+}
+
+.attendeesButton {
+  border-radius: 10px;
+  background-color: rgba(1, 168, 226, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  align-self: end;
+  display: flex;
+  padding: 11px 22px;
+  align-items: start;
+  gap: 14px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 400;
+}
+
+.attendeesIcon {
+  aspect-ratio: 1.08;
+  object-fit: contain;
+  object-position: center;
+  width: 14px;
+  flex-shrink: 0;
+}
+
+.attendeesText {
+  display: flex;
+  align-items: stretch;
+  gap: 7px;
+}
+
+.rutLabel {
+  color: rgba(66, 64, 64, 1);
+  font-weight: 600;
+  align-self: start;
+  margin-top: 44px;
+}
+
+.dateLabel {
+  color: rgba(66, 64, 64, 1);
+  font-size: 14px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 600;
+  align-self: end;
+  margin-top: 97px;
+}
+
+.periodSection {
+  display: flex;
+  margin-top: 18px;
+  flex-direction: column;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 14px;
+  color: rgba(66, 64, 64, 1);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.menuIcon {
+  aspect-ratio: 1.57;
+  object-fit: contain;
+  object-position: center;
+  width: 33px;
+  border-radius: 21px;
+  align-self: end;
+}
+
+.periodLabel {
+  align-self: start;
+  margin-top: 53px;
+}
+
+.eventDivider {
+  aspect-ratio: 250;
+  object-fit: contain;
+  object-position: center;
+  width: 1618px;
+  margin-top: 8px;
+  max-width: 100%;
+}
+
+.eventCardSimple {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  margin-top: 39px;
+  width: 100%;
+  padding: 9px 61px 9px 17px;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.eventCardSimpleContent {
+  display: flex;
+  align-items: stretch;
+  gap: 53px;
+  flex-wrap: wrap;
+}
+
+.eventCardSimpleLeft {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.eventCardSimpleInfo {
+  display: flex;
+  margin: auto 0;
+  align-items: stretch;
+  gap: 100px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+
+/* Section Divider */
+.sectionDivider {
+  aspect-ratio: 1000;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  margin-top: 39px;
+}
+
+/* Scheduled Events Section */
+.scheduledEventsSection {
+  align-self: center;
+  display: flex;
+  margin-top: 28px;
+  width: 100%;
+  max-width: 1650px;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.sectionTitle {
+  color: rgba(66, 64, 64, 1);
+  font-size: 16px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 700;
+  align-self: start;
+  margin-left: 16px;
+}
+
+.scheduledEventsContainer {
+  border-radius: 10px;
+  background-color: rgba(217, 217, 217, 1);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 21px;
+  width: 100%;
+  padding: 29px 16px;
+}
+
+.scheduledEventCard {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  width: 100%;
+  padding: 9px 57px;
+  align-items: stretch;
+  gap: 20px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.scheduledEventCard:last-child {
+  margin-bottom: 0;
+}
+
+.scheduledEventContent {
+  display: flex;
+  align-items: stretch;
+  gap: 100px;
+  flex-wrap: wrap;
+}
+
+.scheduledEventLeft {
+  display: flex;
+  align-items: stretch;
+  gap: 53px;
+}
+
+.scheduledEventInfo {
+  display: flex;
+  margin: auto 0;
+  align-items: center;
+  gap: 96px;
+  font-weight: 400;
+  flex-wrap: wrap;
+}
+
+/* Past Events Section */
+.pastEventsSection {
+  align-self: center;
+  display: flex;
+  margin-top: 24px;
+  width: 100%;
+  max-width: 1650px;
+  flex-direction: column;
+  align-items: stretch;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+}
+
+.pastEventsContainer {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 23px;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.pastEventsHeader {
+  border-radius: 10px;
+  background-color: rgba(217, 217, 217, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  width: 100%;
+  padding: 19px 70px;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(66, 64, 64, 1);
+  font-weight: 400;
+  justify-content: center;
+}
+
+.pastEventsHeaderRow {
+  display: flex;
+  margin-left: 103px;
+  width: 889px;
+  max-width: 100%;
+  align-items: stretch;
+  gap: 100px;
+}
+
+.headerItem {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.pastEventRow {
+  display: flex;
+  margin-top: 29px;
+  margin-left: 68px;
+  width: 1288px;
+  max-width: 100%;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.pastEventLeft {
+  align-self: stretch;
+  display: flex;
+  align-items: stretch;
+  gap: 53px;
+}
+
+.pastEventInfo {
+  display: flex;
+  margin: auto 0;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.pastEventData {
+  align-self: stretch;
+  display: flex;
+  margin: auto 0;
+  align-items: stretch;
+  gap: 100px;
+  color: rgba(66, 64, 64, 1);
+  white-space: nowrap;
+}
+
+.pastEventDate {
+  font-weight: 400;
+}
+
+.pastEventTickets {
+  font-weight: 700;
+}
+
+.pastEventRevenue {
+  align-self: stretch;
+  display: flex;
+  margin: auto 0;
+  align-items: stretch;
+  gap: 100px;
+  color: rgba(66, 64, 64, 1);
+  font-weight: 700;
+}
+
+.pastEventAmount {
+  /* amount styling */
+}
+
+.viewMoreIcon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 18px;
+  align-self: start;
+  flex-shrink: 0;
+}
+
+.rowDivider {
+  aspect-ratio: 1000;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  margin-top: 24px;
+}
+
+/* Pagination */
+.pagination {
+  align-self: end;
+  display: flex;
+  margin-top: 40px;
+  width: 380px;
+  max-width: 100%;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+  color: rgba(66, 64, 64, 1);
+  font-weight: 400;
+  justify-content: space-between;
+}
+
+.rowsPerPage {
+  align-self: stretch;
+  display: flex;
+  align-items: stretch;
+  gap: 11px;
+}
+
+.rowsPerPageText {
+  margin: auto 0;
+  flex-grow: 1;
+}
+
+.rowsSelector {
+  border-radius: 10px;
+  border: 1px solid rgba(66, 64, 64, 1);
+  display: flex;
+  padding: 2px 10px;
+  align-items: stretch;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.rowsNumber {
+  /* number styling */
+}
+
+.pageInfo {
+  align-self: stretch;
+  display: flex;
+  margin: auto 0;
+  align-items: stretch;
+  gap: 23px;
+}
+
+.pageText {
+  /* page text styling */
+}
+
+.paginationArrow {
+  aspect-ratio: 0.55;
+  object-fit: contain;
+  object-position: center;
+  width: 6px;
+  align-self: stretch;
+  margin: auto 0;
+  flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+  .header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .headerContent {
+    max-width: 100%;
+  }
+
+  .navigationTabs {
+    white-space: initial;
+  }
+
+  .topNavigation {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+
+  .dividerSection {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .filtersSection {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+
+  .searchBox {
+    white-space: initial;
+  }
+
+  .createEventButton {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .activeEventsSection {
+    max-width: 100%;
+  }
+
+  .sectionHeader {
+    padding-right: 20px;
+  }
+
+  .eventsContainer {
+    max-width: 100%;
+  }
+
+  .eventCardHeader {
+    max-width: 100%;
+  }
+
+  .schoolEmail {
+    margin-right: 3px;
+  }
+
+  .phoneLabel {
+    margin-top: 40px;
+  }
+
+  .rutLabel {
+    margin-top: 40px;
+  }
+
+  .dateLabel {
+    margin-top: 40px;
+  }
+
+  .periodLabel {
+    margin-top: 40px;
+  }
+
+  .periodSection {
+    white-space: initial;
+  }
+
+  .eventDivider {
+    max-width: 100%;
+  }
+
+  .eventCardSimple {
+    max-width: 100%;
+    padding-right: 20px;
+  }
+
+  .eventCardSimpleInfo {
+    max-width: 100%;
+  }
+
+  .sectionDivider {
+    max-width: 100%;
+  }
+
+  .scheduledEventsSection {
+    max-width: 100%;
+  }
+
+  .sectionTitle {
+    margin-left: 10px;
+  }
+
+  .scheduledEventsContainer {
+    max-width: 100%;
+  }
+
+  .scheduledEventCard {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .scheduledEventContent {
+    max-width: 100%;
+  }
+
+  .scheduledEventInfo {
+    max-width: 100%;
+  }
+
+  .pastEventsSection {
+    max-width: 100%;
+  }
+
+  .pastEventsContainer {
+    max-width: 100%;
+  }
+
+  .pastEventsHeader {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .pastEventData {
+    white-space: initial;
+  }
+
+  .rowsSelector {
+    white-space: initial;
+  }
+}
