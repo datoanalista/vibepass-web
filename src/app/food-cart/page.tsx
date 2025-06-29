@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./styles.module.css";
-import Header from "@/components/Shared/Header/Header";
 import FoodCategoryTabs from "@/components/FoodCart/FoodCategoryTabs/FoodCategoryTabs";
 import FoodCartSidebar from "@/components/FoodCart/FoodCartSidebar/FoodCartSidebar";
 import { foodItemsData, FoodItem } from "@/data/FoodCart/foodItemsData";
+import Header from "@/components/Shared/Header/Header";
 import Footer from "@/components/Shared/Footer/Footer";
 
 export default function FoodCartPage() {
@@ -20,11 +20,11 @@ export default function FoodCartPage() {
 
   return (
     <div className={styles.container}>
-
+      {/* Navigation Header */}
       <Header />
 
-      {/* Divider */}
-      <div className={styles.divider} />
+      {/* Border divider */}
+      <div className={styles.borderDivider} />
 
       {/* Event Section */}
       <div className={styles.eventSection}>
@@ -46,35 +46,37 @@ export default function FoodCartPage() {
         />
       </div>
 
-      {/* Promo Section */}
-      <div className={styles.promoSection}>
-        <div className={styles.promoText}>
-          <div className={styles.promoMessage}>
-            Añade tus productos antes del evento
-          </div>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/399bab42e12cf80d8c1e28fd46b34100fed6bd9b?placeholderIfAbsent=true"
-            alt="Check icon"
-            className={styles.promoIcon}
-          />
-        </div>
-        <div className={styles.cartTag}>Carrito de compra</div>
-      </div>
-
       {/* Main Content */}
       <div className={styles.mainContent}>
         <div className={styles.contentGrid}>
           <div className={styles.leftColumn}>
+            {/* Promo Section */}
+            <div className={styles.promoSection}>
+              <div className={styles.promoText}>
+                <div className={styles.promoMessage}>
+                  Añade tus productos antes del evento
+                </div>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/399bab42e12cf80d8c1e28fd46b34100fed6bd9b?placeholderIfAbsent=true"
+                  alt="Check icon"
+                  className={styles.promoIcon}
+                />
+              </div>
+            </div>
+
             <FoodCategoryTabs
               foodItems={foodItems}
               onQuantityChange={handleQuantityChange}
             />
           </div>
           <div className={styles.rightColumn}>
+            <div className={styles.cartHeader}>Carrito de compra</div>
             <FoodCartSidebar foodItems={foodItems} />
           </div>
         </div>
       </div>
+
+      {/* Footer */}
       <Footer />
     </div>
   );
