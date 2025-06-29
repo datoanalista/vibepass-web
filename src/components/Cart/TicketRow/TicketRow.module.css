@@ -1,0 +1,20 @@
+.container {
+  align-self: center;
+  display: flex;
+  width: 855px;
+  max-width: 100%;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.name {
+  font-weight: 400;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.price {
+  font-weight: 700;
+}

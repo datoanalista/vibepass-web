@@ -5,6 +5,11 @@ import styles from "./Footer.module.css";
 const Footer: React.FC = () => {
   return (
     <div className={styles.footerContainer}>
+       <img
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/e6e933ace048d7cae6dde66d45ab3545057f5b8d?placeholderIfAbsent=true"
+        alt="Footer divider"
+        className={styles.footerDivider}
+      />
       <div className={styles.waveBackground}>
         <svg
           width="1728"

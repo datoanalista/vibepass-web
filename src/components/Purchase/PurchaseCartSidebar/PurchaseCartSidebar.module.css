@@ -1,0 +1,129 @@
+.container {
+  width: 551px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.header {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  width: 551px;
+  height: 45px;
+  padding: 0 22px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+  background-color: #01a8e2;
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  width: 551px;
+  min-height: 592px;
+  padding: 29px 22px 22px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-top: -16px;
+  background-color: #d9d9d9;
+}
+
+.categorySection {
+  margin-bottom: 21px;
+}
+
+.categoryTitle {
+  color: #747272;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #747272;
+  padding-bottom: 4px;
+}
+
+.itemRow {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.itemIndicator {
+  width: 5px;
+  height: 17px;
+  border-radius: 100px;
+  flex-shrink: 0;
+  background-color: #01a8e2;
+}
+
+.itemName {
+  color: #424040;
+  font-size: 14px;
+  font-weight: 400;
+  flex: 1;
+}
+
+.itemQuantity {
+  color: #424040;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: auto;
+}
+
+.itemPrice {
+  color: #121212;
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: auto;
+}
+
+.total {
+  color: #121212;
+  font-size: 24px;
+  font-weight: 700;
+  width: 477px;
+  height: 82px;
+  margin: 40px auto 64px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.continueButton {
+  color: #1b2735;
+  font-size: 20px;
+  font-weight: 700;
+  width: 366px;
+  height: 61px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #01a8e2 0%, #b0bbdb 100%);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
+  display: block;
+}
+
+@media (max-width: 991px) {
+  .container,
+  .header,
+  .content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding: 20px 15px;
+  }
+
+  .total,
+  .continueButton {
+    width: 100%;
+    margin: 20px 0;
+  }
+}

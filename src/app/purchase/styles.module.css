@@ -1,0 +1,373 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  font-family:
+    "Inter",
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  position: relative;
+  background-color: #fff;
+}
+
+/* Header Section */
+.headerSection {
+  position: relative;
+  width: 100%;
+  height: 212px;
+}
+
+.headerImage {
+  width: 100%;
+  height: 115px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.gradientLine {
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #12c70e 0%, #00a8a3 50.48%, #bc28aa 100%);
+  position: absolute;
+  top: 115px;
+  left: 0;
+}
+
+.borderLine {
+  width: 100%;
+  height: 1px;
+  border: 1px solid #424040;
+  position: absolute;
+  top: 97px;
+  left: 0;
+}
+
+.eventInfo {
+  position: absolute;
+  top: 146px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 140px;
+}
+
+.eventLogo {
+  width: 149px;
+  height: 62px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.eventTitle {
+  color: #424040;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.eventBrand {
+  font-weight: 700;
+}
+
+.vibepassLogo {
+  width: 140px;
+  height: 62px;
+}
+
+/* Main Content */
+.mainContent {
+  display: flex;
+  gap: 84px;
+  padding: 86px 140px 0;
+  min-height: calc(100vh - 212px);
+}
+
+.leftSection {
+  flex: 1;
+  position: relative;
+}
+
+.rightSection {
+  width: 551px;
+  flex-shrink: 0;
+}
+
+.statusIndicator {
+  position: absolute;
+  top: 159px;
+  left: 180px;
+}
+
+/* Promotions Section */
+.promotionsSection {
+  margin-bottom: 167px;
+}
+
+.sectionTitle {
+  color: #424040;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 49px;
+}
+
+.promotionsGrid {
+  display: flex;
+  gap: 82px;
+}
+
+/* Footer Section */
+.footerSection {
+  width: 100%;
+  height: 621px;
+  position: relative;
+  margin-top: 246px;
+}
+
+.footerBackground {
+  width: 100%;
+  height: 621px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.footerContent {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 103px 130px 0;
+}
+
+.brandSection {
+  position: absolute;
+  left: 50%;
+  top: 103px;
+  transform: translateX(-50%) rotate(-5.418deg);
+}
+
+.brandBackground {
+  width: 352px;
+  height: 85px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #01a8e2 0%, #99b7db 100%);
+}
+
+.brandText {
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-0.035deg);
+  color: #424040;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 900;
+  width: 191px;
+}
+
+.followSection {
+  width: 472px;
+  margin-top: 148px;
+}
+
+.followTitle {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.followDescription {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 64px;
+}
+
+.socialIcons {
+  width: 224px;
+  height: 46px;
+}
+
+.contactSection {
+  width: 350px;
+  margin-top: 148px;
+}
+
+.contactTitle {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 63px;
+}
+
+.contactIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.contactEmail {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.paymentLogos {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.mercadoPagoLogo {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 166px;
+  height: 166px;
+}
+
+.webpayLogo {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 113px;
+  height: 38px;
+  margin-top: 64px;
+}
+
+.paymentLogo {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 112px;
+  height: 112px;
+  margin-top: 27px;
+}
+
+.copyright {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+  width: 100%;
+  height: 63px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+  .eventInfo {
+    padding: 0 40px;
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+  }
+
+  .mainContent {
+    flex-direction: column;
+    padding: 40px;
+    gap: 40px;
+  }
+
+  .rightSection {
+    width: 100%;
+  }
+
+  .promotionsGrid {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .footerContent {
+    flex-direction: column;
+    padding: 40px;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .brandSection {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin-bottom: 40px;
+  }
+
+  .brandBackground {
+    transform: none;
+  }
+
+  .brandText {
+    transform: none;
+    position: relative;
+    top: auto;
+    left: auto;
+  }
+
+  .followSection,
+  .contactSection {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .paymentLogos {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .eventInfo {
+    padding: 0 20px;
+  }
+
+  .eventLogo,
+  .vibepassLogo {
+    width: 100px;
+    height: auto;
+  }
+
+  .eventTitle {
+    font-size: 12px;
+  }
+
+  .mainContent {
+    padding: 20px;
+  }
+
+  .brandText {
+    font-size: 32px;
+  }
+
+  .followTitle,
+  .contactTitle {
+    font-size: 20px;
+  }
+
+  .followDescription,
+  .contactEmail {
+    font-size: 16px;
+  }
+
+  .copyright {
+    font-size: 16px;
+  }
+
+  .paymentLogos {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

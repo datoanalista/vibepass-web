@@ -1,0 +1,80 @@
+.container {
+  position: relative;
+}
+
+.sectionsContainer {
+  width: 941px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding-top: 60px;
+  background-color: #d9d9d9;
+}
+
+.categorySection {
+  position: relative;
+  margin-bottom: 31px;
+}
+
+.attractionsGrid {
+  display: flex;
+  gap: 111px;
+  padding: 0 19px;
+  margin-bottom: 25px;
+}
+
+.navigationContainer {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 -41px;
+  pointer-events: none;
+}
+
+.navButton {
+  width: 41px;
+  height: 41px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  pointer-events: all;
+}
+
+.navButton:first-child {
+  position: absolute;
+  left: -41px;
+}
+
+.navButton:last-child {
+  position: absolute;
+  right: -41px;
+}
+
+.navButton svg {
+  fill: #424040;
+}
+
+@media (max-width: 991px) {
+  .sectionsContainer {
+    width: 100%;
+  }
+
+  .attractionsGrid {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .navigationContainer {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .attractionsGrid {
+    padding: 0 10px;
+  }
+}

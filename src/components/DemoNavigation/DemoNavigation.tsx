@@ -18,6 +18,9 @@ const DemoNavigation: React.FC = () => {
           <Link href="/login" className={styles.navLink}>
             Login Page
           </Link>
+          <Link href="/food-cart" className={styles.navLink}>
+            Food Cart
+          </Link>
         </div>
       </div>
     </nav>

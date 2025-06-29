@@ -49,6 +49,17 @@ export default function HomePage() {
               View Login Page
             </Link>
           </div>
+
+          <div className={styles.featureCard}>
+            <h2 className={styles.featureTitle}>🍔 Food Cart</h2>
+            <p className={styles.featureDescription}>
+              Shopping cart for food items and beverages with quantity
+              selection.
+            </p>
+            <Link href="/food-cart" className={styles.featureButton}>
+              View Food Cart
+            </Link>
+          </div>
         </div>
 
         <div className={styles.highlights}>

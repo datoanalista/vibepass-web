@@ -3,19 +3,14 @@ import React from "react";
 import styles from "./styles.module.css";
 import LoginForm from "@/components/Login/LoginForm/LoginForm";
 import BenefitsSection from "@/components/Login/BenefitsSection/BenefitsSection";
+import Header from "@/components/Shared/Header/Header";
 
 export default function LoginPage() {
   return (
     <div className={styles.container}>
-      <div className={styles.header} />
-
+      <Header />
       <div className={styles.mainContent}>
         <div className={styles.leftColumn}>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/014a8ad2fbf77f580b01eefe9061a3c77423e149?placeholderIfAbsent=true"
-            alt="Icon"
-            className={styles.topIcon}
-          />
           <LoginForm />
           <img
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/b916b45693aa84529c1c699ff8bde3981a2accfe?placeholderIfAbsent=true"

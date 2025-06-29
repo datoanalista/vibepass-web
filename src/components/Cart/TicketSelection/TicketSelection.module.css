@@ -1,0 +1,122 @@
+.container {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: stretch;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 991px) {
+  .container {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}
+
+.header {
+  border-radius: 10px;
+  background-color: rgba(18, 199, 14, 1);
+  align-self: start;
+  padding: 6px 29px 39px 29px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 400;
+}
+
+@media (max-width: 991px) {
+  .header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.content {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  width: 100%;
+  padding-bottom: 34px;
+  flex-direction: column;
+  align-items: stretch;
+  font-size: 14px;
+  color: rgba(18, 18, 18, 1);
+}
+
+@media (max-width: 991px) {
+  .content {
+    max-width: 100%;
+  }
+}
+
+.spacer {
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  width: 249px;
+  flex-shrink: 0;
+  height: 11px;
+}
+
+.date {
+  font-size: 13px;
+  font-weight: 400;
+  align-self: start;
+  margin-top: 9px;
+  margin-left: 29px;
+}
+
+@media (max-width: 991px) {
+  .date {
+    margin-left: 10px;
+  }
+}
+
+.tableHeader {
+  background-color: rgba(66, 64, 64, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  margin-top: 14px;
+  padding: 7px 44px;
+  align-items: stretch;
+  gap: 20px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 400;
+  white-space: nowrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+  .tableHeader {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    white-space: initial;
+  }
+}
+
+.ticketList {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.divider {
+  border-color: rgba(219, 218, 218, 1);
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 29px;
+  margin-bottom: 26px;
+  flex-shrink: 0;
+  height: 1px;
+}
+
+@media (max-width: 991px) {
+  .divider {
+    max-width: 100%;
+  }
+}

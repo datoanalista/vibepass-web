@@ -1,0 +1,68 @@
+.container {
+  align-self: center;
+  display: flex;
+  margin-top: 23px;
+  width: 100%;
+  max-width: 1618px;
+  align-items: stretch;
+  gap: 20px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 400;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+.content {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.eventDetails {
+  display: flex;
+  align-items: stretch;
+  gap: 23px;
+  flex-wrap: wrap;
+}
+
+.eventImage {
+  aspect-ratio: 2.4;
+  object-fit: contain;
+  object-position: center;
+  width: 178px;
+  flex-shrink: 0;
+  max-width: 100%;
+}
+
+.eventTitle {
+  margin-top: auto;
+  margin-bottom: auto;
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.logo {
+  aspect-ratio: 2.27;
+  object-fit: contain;
+  object-position: center;
+  width: 168px;
+  flex-shrink: 0;
+  max-width: 100%;
+}
