@@ -119,7 +119,6 @@ export default function AttractionsSection({
 
         {/* Kids Zone Section */}
         <div className={styles.categorySection}>
-          <CategoryHeader subtitle="Zona Kids" title="" />
           <div className={styles.attractionsGrid} ref={kidsZoneRef}>
             {kidsZoneAttractions.map((attraction) => (
               <AttractionCard
