@@ -1,0 +1,239 @@
+/* Event Card */
+.eventCard {
+  width: 427px;
+  height: 666px;
+  position: relative;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+@media (max-width: 991px) {
+  .eventCard {
+    width: 90%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .eventCard {
+    width: 95%;
+    height: auto;
+    min-height: 500px;
+  }
+}
+
+.eventCardBackground {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 3px solid #d9d9d9;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #d9d9d9;
+}
+
+.kermesseBackground {
+  border: 3px solid #07a9e2;
+  background-color: #fff;
+}
+
+/* Event Card Header */
+.eventCardHeader {
+  position: absolute;
+  left: 32px;
+  top: 46px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 172px;
+  height: 26px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 0 12px;
+  background-color: #e5e5e5;
+}
+
+.kermesseCard .eventCardHeader {
+  background-color: #d9d9d9;
+}
+
+.eventCardIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.eventCardTitle {
+  color: #000;
+  font:
+    700 18px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.kermesseCard .eventCardTitle {
+  font:
+    700 20px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+/* Event Card Description */
+.eventCardDescription {
+  width: 361px;
+  color: #424040;
+  position: absolute;
+  left: 33px;
+  top: 106px;
+  font:
+    400 14px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.kermesseCard .eventCardDescription {
+  top: 125px;
+  font:
+    400 15px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 640px) {
+  .eventCardDescription {
+    font-size: 12px;
+    width: 90%;
+  }
+}
+
+/* Event Card Button */
+.eventCardButton {
+  width: 320px;
+  height: 37px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #b0bbdb 46.15%, #e68572 100%);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  left: 48px;
+  top: 192px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kermesseButton {
+  width: 361px;
+  background: linear-gradient(90deg, #01a8e2 0.1%, #b0bbdb 72.97%);
+  left: 32px;
+  top: 223px;
+}
+
+.eventCardButtonText {
+  color: #000;
+  font:
+    700 14px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.kermesseButtonText {
+  color: #fff;
+  font:
+    700 15px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+/* Event Card Features */
+.eventCardFeatures {
+  position: absolute;
+  left: 46px;
+  top: 271px;
+  width: 320px;
+  height: 211px;
+  border-radius: 10px;
+  background: linear-gradient(
+    114deg,
+    #e68572 31.17%,
+    rgba(22, 170, 225, 0.8) 100%
+  );
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 26px 0;
+}
+
+.kermesseFeatures {
+  left: 32px;
+  top: 302px;
+  width: 361px;
+  height: 241px;
+  background: linear-gradient(113deg, #019acf 0.82%, #b0bbdb 100%);
+}
+
+.eventCard:last-child .eventCardFeatures {
+  background: linear-gradient(114deg, #b0bbdb 42.33%, #e68572 97.83%);
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 17px;
+  padding-left: 27px;
+}
+
+.kermesseFeatures .featureItem {
+  padding-left: 26px;
+}
+
+.featureIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.featureText {
+  color: #424040;
+  font:
+    400 13px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.kermesseFeatureText {
+  color: #fff;
+  font:
+    400 14px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+/* Event Card CTA */
+.eventCardCta {
+  color: #747272;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 48px;
+  text-align: center;
+  font:
+    400 15px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}

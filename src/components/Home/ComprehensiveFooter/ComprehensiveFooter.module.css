@@ -1,0 +1,252 @@
+/* Trust Section */
+.trustSection {
+  position: absolute;
+  left: 0;
+  top: 4364px;
+  width: 100vw;
+  height: 341px;
+  min-width: 100%;
+}
+
+@media (max-width: 991px) {
+  .trustSection {
+    top: 4400px;
+  }
+}
+
+.trustUnderline {
+  width: 148px;
+  height: 9px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #06a8e1 0%, #9bb8dc 100%);
+  position: absolute;
+  left: 50%;
+  top: 57px;
+  transform: translateX(-50%);
+}
+
+.trustTitle {
+  color: #424040;
+  text-transform: uppercase;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 461px;
+  height: 45px;
+  text-align: center;
+  font:
+    800 30px Poppins,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.trustLogos {
+  width: 1658px;
+  height: 159px;
+  position: absolute;
+  left: 50%;
+  top: 182px;
+  transform: translateX(-50%);
+}
+
+/* Footer Section */
+.footerSection {
+  position: absolute;
+  left: 0;
+  top: 4833px;
+  width: 100vw;
+  height: 621px;
+  min-width: 100%;
+}
+
+@media (max-width: 991px) {
+  .footerSection {
+    top: 4800px;
+  }
+}
+
+.footerBackground {
+  width: 3385px;
+  height: 621px;
+  position: absolute;
+  left: -1314px;
+  top: 0;
+}
+
+.footerLogo {
+  width: 273px;
+  height: 75px;
+  position: absolute;
+  right: 484px;
+  bottom: 158px;
+}
+
+.footerContent {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 200px;
+}
+
+@media (max-width: 991px) {
+  .footerContent {
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 20px;
+  }
+}
+
+.footerBrand {
+  position: relative;
+}
+
+.footerBrandBackground {
+  width: 352px;
+  height: 85px;
+  transform: rotate(-5.418deg);
+  border-radius: 10px;
+  background: linear-gradient(90deg, #01a8e2 0%, #99b7db 100%);
+}
+
+.footerBrandText {
+  transform: translate(-50%, -50%) rotate(-5.453deg);
+  color: #424040;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font:
+    900 40px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.footerInfo {
+  text-align: left;
+}
+
+.footerInfoTitle {
+  color: #fff;
+  margin-bottom: 28px;
+  font:
+    900 24px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.footerInfoDescription {
+  color: #fff;
+  width: 472px;
+  margin-bottom: 64px;
+  font:
+    400 20px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 640px) {
+  .footerInfoDescription {
+    width: 100%;
+    font-size: 16px;
+  }
+}
+
+.footerSocialIcons {
+  width: 224px;
+  height: 46px;
+}
+
+.footerContact {
+  text-align: left;
+}
+
+.footerContactTitle {
+  color: #fff;
+  margin-bottom: 65px;
+  font:
+    900 20px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.footerContactEmail {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 63px;
+}
+
+.footerContactIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.footerContactEmailText {
+  color: #fff;
+  font:
+    400 20px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.footerPaymentLogos {
+  display: flex;
+  align-items: center;
+  gap: 27px;
+}
+
+@media (max-width: 640px) {
+  .footerPaymentLogos {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}
+
+.footerPaymentLogo {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 640px) {
+  .footerPaymentLogo {
+    width: 80px;
+    height: auto;
+  }
+}
+
+.footerCopyright {
+  width: 100%;
+  height: 63px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+}
+
+.footerCopyrightText {
+  color: #fff;
+  font:
+    400 20px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}

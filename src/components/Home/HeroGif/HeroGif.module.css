@@ -1,6 +1,16 @@
 .container {
   width: 100%;
+  position: absolute;
+  top: 115px;
+  left: 0;
+  z-index: 1;
   overflow: hidden;
+}
+
+@media (max-width: 991px) {
+  .container {
+    top: 115px;
+  }
 }
 
 .heroGif {

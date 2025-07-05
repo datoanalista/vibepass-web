@@ -1,0 +1,179 @@
+/* Benefits Section */
+.benefitsSection {
+  position: absolute;
+  left: 0;
+  top: 2117px;
+  width: 100%;
+  height: 505px;
+}
+
+@media (max-width: 991px) {
+  .benefitsSection {
+    top: 2400px;
+    height: auto;
+    padding: 40px 0;
+  }
+}
+
+.benefitsBackground {
+  width: 1728px;
+  height: 650px;
+  transform: rotate(30.304deg);
+  position: absolute;
+  left: -786px;
+  top: 45px;
+}
+
+.benefitsTitle {
+  color: #424040;
+  text-transform: uppercase;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 325px;
+  height: 45px;
+  text-align: center;
+  font:
+    800 30px Poppins,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 640px) {
+  .benefitsTitle {
+    font-size: 24px;
+  }
+}
+
+.benefitsUnderline {
+  width: 148px;
+  height: 9px;
+  position: absolute;
+  left: 50%;
+  top: 70px;
+  transform: translateX(-50%);
+}
+
+.benefitsCards {
+  display: flex;
+  justify-content: center;
+  gap: 150px;
+  position: absolute;
+  left: 50%;
+  top: 234px;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 991px) {
+  .benefitsCards {
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+  }
+}
+
+.benefitCard {
+  width: 403px;
+  height: 271px;
+  position: relative;
+}
+
+@media (max-width: 991px) {
+  .benefitCard {
+    width: 90%;
+    max-width: 380px;
+  }
+}
+
+.benefitBackground {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 6px 4px 0px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.benefitBackground1 {
+  background: linear-gradient(180deg, #e68572 0%, #11aae1 100%);
+}
+
+.benefitBackground2 {
+  background: linear-gradient(180deg, #01a8e2 0%, #aabadb 100%);
+}
+
+.benefitBackground3 {
+  background: linear-gradient(180deg, #b0bbdb 0%, #e68572 100%);
+}
+
+.benefitHeader {
+  position: absolute;
+  left: 50%;
+  top: -23px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.benefitTag {
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 10px;
+  padding: 1px 20px;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  background-color: #1b2735;
+  font:
+    800 30px Poppins,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.benefitIconWrapper {
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+
+.benefitIcon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 35px;
+  height: 35px;
+}
+
+.benefitContent {
+  color: #424040;
+  position: absolute;
+  left: 44px;
+  top: 92px;
+  width: 315px;
+  font:
+    400 20px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 640px) {
+  .benefitContent {
+    font-size: 16px;
+    width: 90%;
+  }
+}
+
+.benefitStrong {
+  font-weight: 700;
+}

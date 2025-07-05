@@ -1,31 +1,30 @@
 "use client";
 import React from "react";
 import styles from "./styles.module.css";
-import QrSection from "@/components/Home/QrSection/QrSection";
-import BenefitsSection from "@/components/Home/BenefitsSection/BenefitsSection";
-import ServiceSection from "@/components/Home/ServiceSection/ServiceSection";
-import Header from "@/components/Shared/Header/Header";
+import ComprehensiveFooter from "@/components/Home/ComprehensiveFooter/ComprehensiveFooter";
+import HeroSection from "@/components/Home/HeroSection/HeroSection";
+import EventCardsSection from "@/components/Home/EventCardsSection/EventCardsSection";
+import NavigationArrows from "@/components/Home/NavigationArrows/NavigationArrows";
+import QRInstructionsSection from "@/components/Home/QRInstructionsSection/QRInstructionsSection";
+import DifferenceSection from "@/components/Home/DifferenceSection/DifferenceSection";
+import OurServiceSection from "@/components/Home/OurServiceSection/OurServiceSection";
+import BottomCTASection from "@/components/Home/BottomCTASection/BottomCTASection";
+import HeaderElements from "@/components/Home/HeaderElements/HeaderElements";
 import HeroGif from "@/components/Home/HeroGif/HeroGif";
-import EventCardCarousel from "@/components/Home/EventCardCarousel/EventCardCarousel";
-import Footer from "@/components/Shared/Footer/Footer";
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Header />
+      <HeaderElements />
       <HeroGif />
-
-      <section className={styles.eventsSection}>
-        <EventCardCarousel />
-        <div className={styles.eventTypeHeading}>
-          ¿Qué tipo de evento buscas?
-        </div>
-      </section>
-
-      <QrSection />
-      <BenefitsSection />
-      <ServiceSection />
-      <Footer />
+      <HeroSection />
+      <EventCardsSection />
+      <NavigationArrows />
+      <QRInstructionsSection />
+      <DifferenceSection />
+      <OurServiceSection />
+      <BottomCTASection />
+      <ComprehensiveFooter />
     </div>
   );
 }

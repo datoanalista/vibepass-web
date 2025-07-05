@@ -1,0 +1,190 @@
+/* QR Section */
+.qrSection {
+  width: 100vw;
+  height: 877px;
+  position: absolute;
+  left: 0;
+  top: 1285px;
+  overflow: hidden;
+  min-width: 100%;
+}
+
+@media (max-width: 991px) {
+  .qrSection {
+    height: auto;
+    padding: 40px 0;
+    top: 1800px;
+  }
+}
+
+.qrBackground {
+  width: 100%;
+  height: 781px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.bgShape1 {
+  width: 868px;
+  height: 781px;
+  position: absolute;
+  left: -71px;
+  top: 0;
+}
+
+.bgShape2 {
+  width: 250px;
+  height: 625px;
+  position: absolute;
+  right: 164px;
+  top: 11px;
+}
+
+.bgShape3 {
+  width: 680px;
+  height: 694px;
+  position: absolute;
+  left: 49px;
+  top: 9px;
+}
+
+.bgShape4 {
+  width: 1239px;
+  height: 695px;
+  position: absolute;
+  left: 584px;
+  top: 9px;
+}
+
+.bgShape5 {
+  width: 258px;
+  height: 676px;
+  position: absolute;
+  right: 162px;
+  top: 29px;
+}
+
+.qrBackgroundImage {
+  width: 1405px;
+  height: 790px;
+  position: absolute;
+  left: -74px;
+  top: -86px;
+}
+
+.qrContent {
+  position: absolute;
+  right: 200px;
+  top: 151px;
+  z-index: 2;
+}
+
+@media (max-width: 991px) {
+  .qrContent {
+    position: relative;
+    right: auto;
+    top: auto;
+    padding: 20px;
+    text-align: center;
+  }
+}
+
+.qrTitle {
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  width: 343px;
+  height: 30px;
+  margin-bottom: 42px;
+  font:
+    800 20px Poppins,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 640px) {
+  .qrTitle {
+    font-size: 16px;
+    width: 100%;
+  }
+}
+
+.qrUnderline {
+  width: 328px;
+  height: 0px;
+  margin: 0 auto 59px;
+  background-color: #00a8a3;
+}
+
+.qrSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 126px;
+}
+
+@media (max-width: 991px) {
+  .qrSteps {
+    gap: 60px;
+  }
+}
+
+.qrStep {
+  display: flex;
+  align-items: center;
+  gap: 96px;
+}
+
+@media (max-width: 991px) {
+  .qrStep {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+}
+
+.stepNumber {
+  position: relative;
+  width: 45px;
+  height: 46px;
+}
+
+.stepNumberText {
+  color: #1b2735;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font:
+    600 32px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.stepText {
+  color: #fff;
+  width: 607px;
+  font:
+    400 20px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 991px) {
+  .stepText {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .stepText {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,56 @@
+/* Hero Image */
+.heroImage {
+  width: 1523px;
+  height: 573px;
+  position: absolute;
+  left: 50%;
+  top: -70px;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+@media (max-width: 991px) {
+  .heroImage {
+    width: 100%;
+    height: auto;
+    left: 0;
+    transform: none;
+  }
+}
+
+/* Event Type Title */
+.eventTypeTitle {
+  color: #424040;
+  text-transform: uppercase;
+  position: absolute;
+  left: 50%;
+  top: 279px;
+  transform: translateX(-50%);
+  width: 391px;
+  height: 29px;
+  text-align: center;
+  z-index: 2;
+  font:
+    800 24px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 991px) {
+  .eventTypeTitle {
+    font-size: 20px;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 200px;
+  }
+}
+
+@media (max-width: 640px) {
+  .eventTypeTitle {
+    font-size: 18px;
+    top: 150px;
+  }
+}
