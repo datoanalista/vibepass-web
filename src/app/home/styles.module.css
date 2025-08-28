@@ -13,3 +13,9 @@
     min-height: auto;
   }
 }
+
+.footerWrapper {
+  position: absolute;
+  top: 4833px;
+  width: 100%;
+}

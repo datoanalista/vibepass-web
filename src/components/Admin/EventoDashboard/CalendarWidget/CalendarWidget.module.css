@@ -1,0 +1,170 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  align-items: stretch;
+  color: #000000;
+  margin: auto 0;
+  font:
+    16px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 991px) {
+  .container {
+    margin-top: 40px;
+  }
+}
+
+.title {
+  font-weight: 700;
+  align-self: center;
+}
+
+.calendarCard {
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  margin-top: 6px;
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  font-weight: 400;
+  padding: 30px;
+  border: 1px solid #a3a3a3;
+}
+
+@media (max-width: 991px) {
+  .calendarCard {
+    padding: 0 20px;
+  }
+}
+
+.calendarHeader {
+  align-self: center;
+  display: flex;
+  width: 190px;
+  max-width: 100%;
+  align-items: start;
+  gap: 38px;
+}
+
+.navigationArrow {
+  aspect-ratio: 0.5;
+  object-fit: contain;
+  object-position: center;
+  width: 4px;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+.monthYear {
+  align-self: stretch;
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 105px;
+}
+
+.daysHeader {
+  display: flex;
+  margin-top: 24px;
+  align-items: stretch;
+  gap: 25px;
+  color: #747272;
+}
+
+.dayHeader {
+  flex-grow: 1;
+}
+
+.calendarWeek {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  white-space: nowrap;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+@media (max-width: 991px) {
+  .calendarWeek {
+    white-space: initial;
+  }
+}
+
+.calendarWeek:first-of-type {
+  align-self: start;
+  margin-top: 27px;
+  gap: 34px;
+}
+
+@media (max-width: 991px) {
+  .calendarWeek:first-of-type {
+    margin-left: 4px;
+  }
+}
+
+.calendarWeek:nth-of-type(2) {
+  margin: 25px 10px 0 11px;
+}
+
+@media (max-width: 991px) {
+  .calendarWeek:nth-of-type(2) {
+    margin-left: 10px;
+  }
+}
+
+.calendarWeek:nth-of-type(4) {
+  margin-top: 20px;
+  align-items: center;
+  gap: 30px;
+}
+
+@media (max-width: 991px) {
+  .calendarWeek:nth-of-type(4) {
+    margin: 0 8px 0 6px;
+  }
+}
+
+.calendarWeek:last-of-type {
+  align-self: start;
+  margin-top: 21px;
+  gap: 29px;
+}
+
+@media (max-width: 991px) {
+  .calendarWeek:last-of-type {
+    margin-left: 5px;
+  }
+}
+
+.calendarDay {
+  /* Base day styles already handled by calendarWeek children */
+}
+
+.selectedDay {
+  background-color: #01a8e2;
+  border-radius: 50%;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28px;
+  justify-content: center;
+  height: 28px;
+  padding: 0 4px;
+}
+
+@media (max-width: 991px) {
+  .selectedDay {
+    white-space: initial;
+  }
+}
+
+.otherMonth {
+  color: #424040;
+}

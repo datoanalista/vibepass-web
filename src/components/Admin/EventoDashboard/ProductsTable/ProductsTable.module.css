@@ -1,0 +1,246 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1559px;
+  margin-top: 88px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 991px) {
+  .container {
+    max-width: 100%;
+    margin: 40px 2px 0 0;
+  }
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  max-width: 1554px;
+  align-items: start;
+  gap: 20px;
+  color: #1b2735;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+  .header {
+    max-width: 100%;
+  }
+}
+
+.sectionTitle {
+  display: flex;
+  margin-top: 15px;
+  align-items: stretch;
+  gap: 18px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.titleIcon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.createButton {
+  border-radius: 10px;
+  background-color: #01a8e2;
+  display: flex;
+  align-items: stretch;
+  gap: 5px;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 10px 17px;
+  cursor: pointer;
+}
+
+.createIcon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 19px;
+  flex-shrink: 0;
+}
+
+.tableContainer {
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  margin-top: 14px;
+  width: 100%;
+  padding-bottom: 14px;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px solid #a3a3a3;
+  font:
+    400 16px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 991px) {
+  .tableContainer {
+    max-width: 100%;
+  }
+}
+
+.tableHeader {
+  border-radius: 10px;
+  background-color: #d9d9d9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: stretch;
+  gap: 40px 100px;
+  color: #424040;
+  flex-wrap: wrap;
+  padding: 8px 55px;
+}
+
+@media (max-width: 991px) {
+  .tableHeader {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+}
+
+.headerCell {
+  line-height: 1;
+  margin: auto 0;
+}
+
+.tableContent {
+  align-self: center;
+  display: flex;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 1441px;
+  flex-direction: column;
+  gap: 51px;
+}
+
+@media (max-width: 991px) {
+  .tableContent {
+    max-width: 100%;
+    gap: 40px;
+  }
+}
+
+.tableRow {
+  display: flex;
+  align-items: start;
+  gap: 20px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.productType {
+  color: #000000;
+  white-space: nowrap;
+  line-height: 1;
+  text-align: center;
+  margin-top: 14px;
+}
+
+@media (max-width: 991px) {
+  .productType {
+    white-space: initial;
+  }
+}
+
+.dataCell {
+  color: #000000;
+  white-space: nowrap;
+  margin-top: 14px;
+}
+
+@media (max-width: 991px) {
+  .dataCell {
+    white-space: initial;
+  }
+}
+
+.dataCellBlue {
+  color: #01a8e2;
+  white-space: nowrap;
+  margin-top: 14px;
+}
+
+@media (max-width: 991px) {
+  .dataCellBlue {
+    white-space: initial;
+  }
+}
+
+.unusedQuotasCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.viewAllSection {
+  display: flex;
+  margin-top: 44px;
+  align-items: stretch;
+  gap: 16px;
+  font-size: 15px;
+  color: #424040;
+}
+
+@media (max-width: 991px) {
+  .viewAllSection {
+    margin-top: 40px;
+  }
+}
+
+.viewAllText {
+  flex-grow: 1;
+}
+
+.viewAllIcon {
+  aspect-ratio: 1.75;
+  object-fit: contain;
+  object-position: center;
+  width: 14px;
+  flex-shrink: 0;
+  margin: auto 0;
+}
+
+.cancelledCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.editButton {
+  border-radius: 10px;
+  background-color: #01a8e2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: #ffffff;
+  justify-content: center;
+  padding: 5px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .editButton {
+    white-space: initial;
+  }
+}

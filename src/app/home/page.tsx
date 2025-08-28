@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import styles from "./styles.module.css";
-import ComprehensiveFooter from "@/components/Home/ComprehensiveFooter/ComprehensiveFooter";
+import Footer from "@/components/Shared/Footer/Footer";
 import HeroSection from "@/components/Home/HeroSection/HeroSection";
 import EventCardsSection from "@/components/Home/EventCardsSection/EventCardsSection";
 import NavigationArrows from "@/components/Home/NavigationArrows/NavigationArrows";
@@ -9,13 +9,14 @@ import QRInstructionsSection from "@/components/Home/QRInstructionsSection/QRIns
 import DifferenceSection from "@/components/Home/DifferenceSection/DifferenceSection";
 import OurServiceSection from "@/components/Home/OurServiceSection/OurServiceSection";
 import BottomCTASection from "@/components/Home/BottomCTASection/BottomCTASection";
-import HeaderElements from "@/components/Home/HeaderElements/HeaderElements";
-import HeroGif from "@/components/Home/HeroGif/HeroGif";
+import HeroGif from "@/components/Shared/HeroGif/HeroGif";
+import Header from "@/components/Shared/Header/Header";
+import TrustSection from "@/components/Home/TrustSection/TrustSection";
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <HeaderElements />
+      <Header />
       <HeroGif />
       <HeroSection />
       <EventCardsSection />
@@ -24,7 +25,10 @@ export default function Home() {
       <DifferenceSection />
       <OurServiceSection />
       <BottomCTASection />
-      <ComprehensiveFooter />
+      <TrustSection />
+      <div className={styles.footerWrapper}>
+        <Footer />
+      </div>
     </div>
   );
 }

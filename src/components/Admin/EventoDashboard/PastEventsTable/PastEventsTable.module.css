@@ -1,0 +1,235 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1559px;
+  margin-top: 69px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 400;
+}
+
+@media (max-width: 991px) {
+  .container {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}
+
+.sectionTitle {
+  align-self: start;
+  display: flex;
+  align-items: stretch;
+  gap: 25px;
+  color: #1b2735;
+  margin: 0 0 0 42px;
+  font:
+    700 16px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+@media (max-width: 991px) {
+  .sectionTitle {
+    margin: 0 0 0 10px;
+  }
+}
+
+.titleIcon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 34px;
+  flex-shrink: 0;
+}
+
+.tableContainer {
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  margin-top: 32px;
+  width: 100%;
+  padding-bottom: 12px;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px solid #a3a3a3;
+}
+
+@media (max-width: 991px) {
+  .tableContainer {
+    max-width: 100%;
+  }
+}
+
+.tableHeader {
+  border-radius: 10px;
+  background-color: #d9d9d9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 40px 100px;
+  font-size: 16px;
+  color: #424040;
+  padding: 9px 55px;
+}
+
+@media (max-width: 991px) {
+  .tableHeader {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+}
+
+.headerCell {
+  line-height: 1;
+  align-self: stretch;
+  margin: auto 0;
+}
+
+.tableContent {
+  align-self: center;
+  display: flex;
+  margin-top: 33px;
+  width: 100%;
+  max-width: 1441px;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+  .tableContent {
+    max-width: 100%;
+  }
+}
+
+.tableRows {
+  display: flex;
+  align-items: start;
+  gap: 40px 100px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+@media (max-width: 991px) {
+  .tableRows {
+    max-width: 100%;
+  }
+}
+
+.tableRow {
+  display: flex;
+  align-items: start;
+  gap: 40px 100px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.clientCell {
+  font-size: 16px;
+  color: #000000;
+  line-height: 19px;
+}
+
+.rutCell {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #000000;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .rutCell {
+    white-space: initial;
+  }
+}
+
+.nameCell {
+  font-size: 16px;
+  color: #000000;
+}
+
+.emailCell {
+  font-size: 16px;
+  color: #000000;
+  white-space: nowrap;
+  padding: 0 4px 0 38px;
+}
+
+@media (max-width: 991px) {
+  .emailCell {
+    padding-left: 20px;
+    white-space: initial;
+  }
+}
+
+.dateCell {
+  font-size: 16px;
+  color: #000000;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .dateCell {
+    white-space: initial;
+  }
+}
+
+.viewAllSection {
+  display: flex;
+  margin-top: 58px;
+  align-items: stretch;
+  gap: 21px;
+  font-size: 15px;
+  color: #424040;
+}
+
+@media (max-width: 991px) {
+  .viewAllSection {
+    margin-top: 40px;
+  }
+}
+
+.viewAllText {
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 151px;
+}
+
+.viewAllIcon {
+  aspect-ratio: 1.75;
+  object-fit: contain;
+  object-position: center;
+  width: 14px;
+  align-self: start;
+  flex-shrink: 0;
+}
+
+.actionsColumn {
+  align-self: start;
+  margin-top: 19px;
+  font-size: 16px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+.reportButton {
+  border-radius: 10px;
+  background-color: #01a8e2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 5px 18px;
+  cursor: pointer;
+}

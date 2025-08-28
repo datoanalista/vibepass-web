@@ -1,0 +1,182 @@
+.container {
+  align-self: center;
+  margin-top: 19px;
+  width: 100%;
+  max-width: 1603px;
+}
+
+@media (max-width: 991px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+.container > div {
+  gap: 20px;
+  display: flex;
+}
+
+@media (max-width: 991px) {
+  .container > div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  line-height: normal;
+  width: 36%;
+  margin-left: 0px;
+}
+
+@media (max-width: 991px) {
+  .leftColumn {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.leftColumn > div {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-self: stretch;
+  align-items: start;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 400;
+  margin: auto 0;
+}
+
+@media (max-width: 991px) {
+  .leftColumn > div {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}
+
+.tooltip {
+  background-color: #d9d9d9;
+  align-self: end;
+  display: flex;
+  margin-top: 9px;
+  width: 175px;
+  max-width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  font-size: 12px;
+  color: #424040;
+  justify-content: center;
+  padding: 12px 7px;
+  border: 1px solid #a3a3a3;
+}
+
+.totalSalesCard {
+  margin: 18px 0 0 42px;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  line-height: normal;
+  width: 64%;
+  margin-left: 20px;
+}
+
+@media (max-width: 991px) {
+  .rightColumn {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.rightColumn > div {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+@media (max-width: 991px) {
+  .rightColumn > div {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}
+
+.dailyStatsGrid {
+  margin-top: 77px;
+}
+
+@media (max-width: 991px) {
+  .dailyStatsGrid {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}
+
+.dailyStatsGrid > div {
+  gap: 20px;
+  display: flex;
+}
+
+@media (max-width: 991px) {
+  .dailyStatsGrid > div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+}
+
+.dailyStatsGrid > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  line-height: normal;
+  width: 50%;
+  margin-left: 0px;
+}
+
+@media (max-width: 991px) {
+  .dailyStatsGrid > div > div:first-child {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.dailyStatsGrid > div > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  line-height: normal;
+  width: 50%;
+  margin-left: 20px;
+}
+
+@media (max-width: 991px) {
+  .dailyStatsGrid > div > div:last-child {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.registrationsCard {
+  margin-top: 5px;
+  flex-grow: 1;
+}
+
+@media (max-width: 991px) {
+  .registrationsCard {
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+}

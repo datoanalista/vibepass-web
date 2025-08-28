@@ -1,0 +1,80 @@
+.container {
+  align-self: center;
+  display: flex;
+  margin-top: 53px;
+  width: 100%;
+  max-width: 1638px;
+  align-items: stretch;
+  gap: 40px 100px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 991px) {
+  .container {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}
+
+.eventTitle {
+  color: #747272;
+  margin: auto 0;
+  font:
+    400 16px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.eventLabel {
+  font-weight: 700;
+}
+
+.schoolSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.flagContainer {
+  border-radius: 10px;
+  background-color: #ff0000;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 12px 5px;
+  border: 1px solid #a3a3a3;
+}
+
+.flagImage {
+  aspect-ratio: 2.31;
+  object-fit: contain;
+  object-position: center;
+  width: 37px;
+}
+
+.schoolName {
+  color: #747272;
+  align-self: stretch;
+  margin: auto 0;
+  font:
+    400 16px Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.dropdownIcon {
+  aspect-ratio: 1.83;
+  object-fit: contain;
+  object-position: center;
+  width: 11px;
+  align-self: stretch;
+  flex-shrink: 0;
+  margin: auto 0;
+}
