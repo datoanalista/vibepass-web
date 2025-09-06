@@ -1,0 +1,70 @@
+/* Event Cards Container */
+.eventCardsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  position: absolute;
+  left: 50%;
+  top: 364px;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Pantallas muy grandes (1600px+) */
+@media (min-width: 1600px) {
+  .eventCardsContainer {
+    gap: 60px;
+    max-width: 1400px;
+  }
+}
+
+/* Pantallas grandes (1400-1599px) */
+@media (max-width: 1599px) {
+  .eventCardsContainer {
+    gap: 40px;
+    max-width: 1200px;
+  }
+}
+
+/* Pantallas medianas (1200-1399px) */
+@media (max-width: 1399px) {
+  .eventCardsContainer {
+    gap: 30px;
+    max-width: 1100px;
+  }
+}
+
+/* Pantallas pequeñas-medianas (992-1199px) */
+@media (max-width: 1199px) {
+  .eventCardsContainer {
+    gap: 20px;
+    max-width: 1000px;
+  }
+}
+
+@media (max-width: 991px) {
+  .eventCardsContainer {
+    flex-direction: column;
+    gap: 40px;
+    top: 280px;
+    align-items: center;
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .eventCardsContainer {
+    top: 220px;
+    padding: 0 10px;
+  }
+}
+
+.featureIcon {
+  width: 24px;
+  height: 24px;
+}
