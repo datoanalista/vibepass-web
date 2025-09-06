@@ -1,0 +1,70 @@
+"use client";
+import React from "react";
+import Link from "next/link";
+import styles from "./UniversalHeader.module.css";
+
+const UniversalHeader: React.FC = () => {
+  return (
+    <header className={styles.header}>
+      <div className={styles.container}>
+        {/* Logo */}
+        <Link href="/" className={styles.logoLink}>
+          <img
+            src="/images/icon_vibepass.svg"
+            alt="Vibepass"
+            className={styles.logo}
+          />
+        </Link>
+
+        {/* Right Group: Navigation + Account Button */}
+        <div className={styles.rightGroup}>
+          {/* Navigation */}
+          <nav className={styles.nav}>
+            <Link href="/eventos" className={styles.navLink}>
+              Eventos
+            </Link>
+            <Link href="/qr" className={styles.navLink}>
+              QR
+            </Link>
+            <Link href="/diferenciacion" className={styles.navLink}>
+              Diferenciación
+            </Link>
+            <Link href="/servicio" className={styles.navLink}>
+              Servicio
+            </Link>
+            <Link href="/cotizacion" className={styles.navLink}>
+              Cotización
+            </Link>
+          </nav>
+
+          {/* User Account Button */}
+          <Link href="/login" className={styles.accountButton}>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={styles.userIcon}
+            >
+              <path
+                d="M8 8C10.2091 8 12 6.20914 12 4C12 1.79086 10.2091 0 8 0C5.79086 0 4 1.79086 4 4C4 6.20914 5.79086 8 8 8ZM8 10C5.335 10 0 11.335 0 14V16H16V14C16 11.335 10.665 10 8 10Z"
+                fill="currentColor"
+              />
+            </svg>
+            <span className={styles.accountText}>Mi cuenta</span>
+          </Link>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button className={styles.mobileMenuButton}>
+          <span className={styles.hamburger}></span>
+          <span className={styles.hamburger}></span>
+          <span className={styles.hamburger}></span>
+        </button>
+      </div>
+    </header>
+  );
+};
+
+export default UniversalHeader;

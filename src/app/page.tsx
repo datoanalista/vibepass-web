@@ -19,17 +19,17 @@ export default function HomePage() {
         </div>
 
         <div className={styles.features}>
-          <div className={styles.featureCard}>
-            <h2 className={styles.featureTitle}>🏠 Home Page</h2>
+          <div className={`${styles.featureCard} ${styles.featured}`}>
+            <h2 className={styles.featureTitle}>🏠 New Home Page</h2>
             <p className={styles.featureDescription}>
-              Original home page with existing components and functionality.
+              Reconstruido desde cero con diseño responsive y header universal. Header con color #1B2735 y altura 115px.
             </p>
             <Link href="/home" className={styles.featureButton}>
-              View Home Page
+              View New Home
             </Link>
           </div>
 
-          <div className={`${styles.featureCard} ${styles.featured}`}>
+          <div className={styles.featureCard}>
             <h2 className={styles.featureTitle}>🚀 Landing Page</h2>
             <p className={styles.featureDescription}>
               New customizable landing page designed for external customers and
@@ -58,6 +58,16 @@ export default function HomePage() {
             </p>
             <Link href="/food-cart" className={styles.featureButton}>
               View Food Cart
+            </Link>
+          </div>
+
+          <div className={styles.featureCard}>
+            <h2 className={styles.featureTitle}>🏠 Original Home (Old)</h2>
+            <p className={styles.featureDescription}>
+              Versión original del home con problemas responsive (solo para referencia).
+            </p>
+            <Link href="/home_old" className={styles.featureButton}>
+              View Original Home
             </Link>
           </div>
         </div>

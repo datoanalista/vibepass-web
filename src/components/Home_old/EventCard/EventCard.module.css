@@ -1,15 +1,40 @@
 /* Event Card */
 .eventCard {
-  width: 427px;
+  width: 100%;
+  max-width: 380px;
   height: 666px;
   position: relative;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  flex: 1;
+  min-width: 320px;
+}
+
+/* Pantallas grandes (1400px+) */
+@media (min-width: 1400px) {
+  .eventCard {
+    max-width: 400px;
+  }
+}
+
+/* Pantallas medianas (1200-1399px) */
+@media (max-width: 1399px) {
+  .eventCard {
+    max-width: 360px;
+  }
+}
+
+/* Pantallas pequeñas-medianas (992-1199px) */
+@media (max-width: 1199px) {
+  .eventCard {
+    max-width: 340px;
+  }
 }
 
 @media (max-width: 991px) {
   .eventCard {
     width: 90%;
     max-width: 400px;
+    flex: none;
   }
 }
 
@@ -84,10 +109,12 @@
 
 /* Event Card Description */
 .eventCardDescription {
-  width: 361px;
+  width: calc(100% - 66px);
+  max-width: 361px;
   color: #424040;
   position: absolute;
   left: 33px;
+  right: 33px;
   top: 106px;
   font:
     400 14px Inter,
@@ -116,13 +143,15 @@
 
 /* Event Card Button */
 .eventCardButton {
-  width: 320px;
+  width: calc(100% - 96px);
+  max-width: 320px;
   height: 37px;
   border-radius: 10px;
   background: linear-gradient(90deg, #b0bbdb 46.15%, #e68572 100%);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   position: absolute;
   left: 48px;
+  right: 48px;
   top: 192px;
   display: flex;
   align-items: center;
@@ -130,9 +159,11 @@
 }
 
 .kermesseButton {
-  width: 361px;
+  width: calc(100% - 64px);
+  max-width: 361px;
   background: linear-gradient(90deg, #01a8e2 0.1%, #b0bbdb 72.97%);
   left: 32px;
+  right: 32px;
   top: 223px;
 }
 
@@ -160,8 +191,10 @@
 .eventCardFeatures {
   position: absolute;
   left: 46px;
+  right: 46px;
   top: 271px;
-  width: 320px;
+  width: calc(100% - 92px);
+  max-width: 320px;
   height: 211px;
   border-radius: 10px;
   background: linear-gradient(
@@ -175,8 +208,10 @@
 
 .kermesseFeatures {
   left: 32px;
+  right: 32px;
   top: 302px;
-  width: 361px;
+  width: calc(100% - 64px);
+  max-width: 361px;
   height: 241px;
   background: linear-gradient(113deg, #019acf 0.82%, #b0bbdb 100%);
 }
