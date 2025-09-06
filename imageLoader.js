@@ -5,7 +5,8 @@ export default function customLoader({ src, width, quality }) {
     return src;
   }
   
-  // For local images, add basePath
-  const basePath = '/vibepass-web';
+  // For local images, add basePath only in production
+  const isProd = process.env.NODE_ENV === 'production';
+  const basePath = isProd ? '/vibepass-web' : '';
   return `${basePath}${src}`;
 }

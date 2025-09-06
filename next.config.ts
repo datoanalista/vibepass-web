@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 
+// Configuración condicional para desarrollo vs producción
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig: NextConfig = {
   // Configuración para GitHub Pages
   output: 'export',
@@ -13,9 +16,9 @@ const nextConfig: NextConfig = {
     loaderFile: './imageLoader.js'
   },
   
-  // BasePath para GitHub Pages (nombre del repositorio)
-  basePath: '/vibepass-web',
-  assetPrefix: '/vibepass-web/',
+  // BasePath solo para producción (GitHub Pages)
+  basePath: isProd ? '/vibepass-web' : '',
+  assetPrefix: isProd ? '/vibepass-web/' : '',
   
   // Configuración adicional para compatibilidad
   distDir: 'out'
