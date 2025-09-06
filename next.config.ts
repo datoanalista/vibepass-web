@@ -18,12 +18,7 @@ const nextConfig: NextConfig = {
   assetPrefix: '/vibepass-web/',
   
   // Configuración adicional para compatibilidad
-  distDir: 'out',
-  
-  // Desactivar características server-side
-  experimental: {
-    esmExternals: 'loose'
-  }
+  distDir: 'out'
 };
 
 export default nextConfig;
