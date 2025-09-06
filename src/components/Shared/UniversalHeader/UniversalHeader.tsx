@@ -14,10 +14,6 @@ const UniversalHeader: React.FC = () => {
             alt="Vibepass"
             className={styles.logo}
           />
-          <span className={styles.logoText}>
-            <span className={styles.vibe}>Vibe</span>
-            <span className={styles.pass}>pass</span>
-          </span>
         </Link>
 
         {/* Navigation */}
@@ -42,19 +38,19 @@ const UniversalHeader: React.FC = () => {
         {/* User Account Button */}
         <Link href="/login" className={styles.accountButton}>
           <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={styles.userIcon}
           >
             <path
-              d="M10 10C12.7614 10 15 7.76142 15 5C15 2.23858 12.7614 0 10 0C7.23858 0 5 2.23858 5 5C5 7.76142 7.23858 10 10 10ZM10 12.5C6.66875 12.5 0 14.1688 0 17.5V20H20V17.5C20 14.1688 13.3312 12.5 10 12.5Z"
+              d="M8 8C10.2091 8 12 6.20914 12 4C12 1.79086 10.2091 0 8 0C5.79086 0 4 1.79086 4 4C4 6.20914 5.79086 8 8 8ZM8 10C5.335 10 0 11.335 0 14V16H16V14C16 11.335 10.665 10 8 10Z"
               fill="currentColor"
             />
           </svg>
-          Mi cuenta
+          <span className={styles.accountText}>Mi cuenta</span>
         </Link>
 
         {/* Mobile Menu Button */}

@@ -23,7 +23,6 @@
 .logoLink {
   display: flex;
   align-items: center;
-  gap: 12px;
   text-decoration: none;
   transition: opacity 0.3s ease;
 }
@@ -33,22 +32,8 @@
 }
 
 .logo {
-  height: 40px;
+  height: 45px;
   width: auto;
-}
-
-.logoText {
-  font-size: 2rem;
-  font-weight: 700;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-}
-
-.vibe {
-  color: #12C70E;
-}
-
-.pass {
-  color: #FFFFFF;
 }
 
 /* Navigation */
@@ -89,27 +74,32 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #12C70E;
+  background-color: #00BFFF;
   color: #FFFFFF;
   text-decoration: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  font-size: 0.9rem;
-  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
   font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  transition: all 0.3s ease;
-  border: 2px solid #12C70E;
+  transition: all 0.2s ease;
+  border: none;
 }
 
 .accountButton:hover {
-  background-color: transparent;
-  color: #12C70E;
+  background-color: #0099CC;
   transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 191, 255, 0.3);
 }
 
 .userIcon {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.accountText {
+  white-space: nowrap;
 }
 
 /* Mobile Menu Button */
@@ -181,6 +171,10 @@
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
   }
+  
+  .accountText {
+    display: block;
+  }
 }
 
 @media (max-width: 480px) {
@@ -196,15 +190,16 @@
     height: 28px;
   }
   
-  .accountButton span {
+  .accountText {
     display: none;
   }
   
   .accountButton {
-    padding: 0.5rem;
-    border-radius: 50%;
+    padding: 0.6rem;
+    border-radius: 8px;
     width: 40px;
     height: 40px;
     justify-content: center;
+    gap: 0;
   }
 }
