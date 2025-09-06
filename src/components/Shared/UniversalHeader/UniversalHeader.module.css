@@ -19,6 +19,13 @@
   padding: 0 2rem;
 }
 
+/* Right Side Group (Navigation + Account Button) */
+.rightGroup {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
 /* Logo Section */
 .logoLink {
   display: flex;
@@ -127,6 +134,10 @@
     padding: 0 1.5rem;
   }
   
+  .rightGroup {
+    gap: 2.5rem;
+  }
+  
   .nav {
     gap: 2rem;
   }
@@ -135,6 +146,10 @@
 @media (max-width: 991px) {
   .container {
     padding: 0 1rem;
+  }
+  
+  .rightGroup {
+    gap: 2rem;
   }
   
   .nav {
@@ -151,12 +166,12 @@
     height: 80px;
   }
   
-  .logoText {
-    font-size: 1.5rem;
-  }
-  
   .logo {
     height: 32px;
+  }
+  
+  .rightGroup {
+    gap: 1rem;
   }
   
   .nav {
