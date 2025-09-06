@@ -7,22 +7,24 @@
   transition: all 0.3s ease;
 }
 
-/* Center Card (Kermesse) - Medidas exactas de Figma */
+/* Center Card (Kermesse) - Ajustado para proporciones del Figma */
 .centerCard {
-  width: 427px;
-  height: 666px;
+  width: 320px;
+  height: 500px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   z-index: 2;
   background-color: #fff;
+  transform: scale(1.1);
 }
 
-/* Side Cards (Izquierda y Derecha) - Medidas exactas de Figma */
+/* Side Cards (Izquierda y Derecha) - Más pequeñas */
 .sideCard {
-  width: 427px;
-  height: 555px;
+  width: 300px;
+  height: 420px;
   border: 2px solid #747272;
   z-index: 1;
   background-color: #f8f8f8;
+  opacity: 0.9;
 }
 
 /* Card Background */
@@ -56,20 +58,20 @@
   height: 26px;
 }
 
-/* Center Card Header - Medidas exactas de Figma */
+/* Center Card Header - Proporcional al nuevo tamaño */
 .centerCard .cardHeader {
-  width: 300px;
-  top: 46px;
-  left: 32px;
+  width: 220px;
+  top: 35px;
+  left: 25px;
   background-color: #D9D9D9;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 /* Side Cards Header */
 .sideCard .cardHeader {
-  width: 280px;
-  top: 46px;
-  left: 32px;
+  width: 200px;
+  top: 35px;
+  left: 25px;
   background-color: rgba(217, 217, 217, 0.7);
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
 }
@@ -103,18 +105,18 @@
   z-index: 10;
 }
 
-/* Center Card Description - Medidas exactas */
+/* Center Card Description - Proporcional */
 .centerCard .eventDescription {
-  width: 361px;
-  top: 125px;
-  left: 33px;
+  width: 270px;
+  top: 95px;
+  left: 25px;
 }
 
 /* Side Cards Description */
 .sideCard .eventDescription {
-  width: 340px;
-  top: 106px;
-  left: 33px;
+  width: 250px;
+  top: 85px;
+  left: 25px;
 }
 
 /* CTA Button - Posición absoluta según Figma */
@@ -133,18 +135,18 @@
   transition: all 0.2s ease;
 }
 
-/* Center Card Button - Medidas exactas */
+/* Center Card Button - Proporcional */
 .centerCard .ctaButton {
-  width: 361px;
-  top: 223px;
-  left: 32px;
+  width: 270px;
+  top: 170px;
+  left: 25px;
 }
 
 /* Side Cards Button */
 .sideCard .ctaButton {
-  width: 320px;
-  top: 192px;
-  left: 48px;
+  width: 240px;
+  top: 145px;
+  left: 30px;
 }
 
 .ctaButton:hover {
@@ -164,20 +166,20 @@
   justify-content: space-around;
 }
 
-/* Center Card Features - Medidas exactas */
+/* Center Card Features - Proporcional */
 .centerCard .featuresCard {
-  width: 361px;
-  height: 241px;
-  top: 302px;
-  left: 32px;
+  width: 270px;
+  height: 180px;
+  top: 230px;
+  left: 25px;
 }
 
 /* Side Cards Features */
 .sideCard .featuresCard {
-  width: 320px;
-  height: 211px;
-  top: 271px;
-  left: 46px;
+  width: 240px;
+  height: 160px;
+  top: 200px;
+  left: 30px;
 }
 
 .featureItem {
@@ -224,18 +226,18 @@
   text-align: center;
 }
 
-/* Center Card Bottom Text - Medidas exactas */
+/* Center Card Bottom Text - Proporcional */
 .centerCard .bottomTextContainer {
-  width: 205px;
-  top: 590px;
+  width: 180px;
+  top: 440px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 /* Side Cards Bottom Text */
 .sideCard .bottomTextContainer {
-  width: 205px;
-  top: 500px;
+  width: 160px;
+  top: 380px;
   left: 50%;
   transform: translateX(-50%);
 }
