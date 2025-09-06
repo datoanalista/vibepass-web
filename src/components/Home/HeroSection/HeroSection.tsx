@@ -11,7 +11,7 @@ const HeroSection: React.FC = () => {
         className={styles.heroImage}
       />
 
-      <div className={styles.eventTypeTitle}>¿Qué tipo de evento buscas?</div>
+      <div className={styles.eventTypeTitle}>¿Qué tipo de evento buscai?</div>
     </>
   );
 };
