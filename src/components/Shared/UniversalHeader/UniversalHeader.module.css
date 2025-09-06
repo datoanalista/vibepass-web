@@ -1,7 +1,7 @@
 /* Universal Header */
 .header {
   background-color: #1B2735;
-  height: 115px;
+  height: 70px;
   width: 100%;
   position: sticky;
   top: 0;
@@ -39,7 +39,7 @@
 }
 
 .logo {
-  height: 45px;
+  height: 38px;
   width: auto;
 }
 
@@ -163,7 +163,7 @@
 
 @media (max-width: 768px) {
   .header {
-    height: 80px;
+    height: 60px;
   }
   
   .logo {
