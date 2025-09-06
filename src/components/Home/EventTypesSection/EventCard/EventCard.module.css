@@ -1,79 +1,114 @@
-/* Event Card Base */
+/* Event Card Base - Approach flexible como home_old */
 .eventCard {
+  width: 100%;
   position: relative;
-  border-radius: 10px;
-  background-color: #fff;
-  overflow: visible;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  flex: 1;
+  min-width: 300px;
   transition: all 0.3s ease;
 }
 
-/* Center Card (Kermesse) - Ajustado para proporciones del Figma */
+/* Center Card (Kermesse) - Más alta y destacada */
 .centerCard {
-  width: 320px;
-  height: 500px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  max-width: 400px;
+  height: 666px;
   z-index: 2;
-  background-color: #fff;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 /* Side Cards (Izquierda y Derecha) - Más pequeñas */
 .sideCard {
-  width: 300px;
-  height: 420px;
-  border: 2px solid #747272;
+  max-width: 380px;
+  height: 555px;
   z-index: 1;
-  background-color: #f8f8f8;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
-/* Card Background */
+/* Pantallas muy grandes (1600px+) */
+@media (min-width: 1600px) {
+  .centerCard {
+    max-width: 420px;
+  }
+  .sideCard {
+    max-width: 400px;
+  }
+}
+
+/* Pantallas grandes (1400-1599px) */
+@media (max-width: 1599px) {
+  .centerCard {
+    max-width: 400px;
+  }
+  .sideCard {
+    max-width: 380px;
+  }
+}
+
+/* Pantallas medianas (1200-1399px) */
+@media (max-width: 1399px) {
+  .centerCard {
+    max-width: 380px;
+  }
+  .sideCard {
+    max-width: 360px;
+  }
+}
+
+/* Pantallas pequeñas-medianas (992-1199px) */
+@media (max-width: 1199px) {
+  .centerCard {
+    max-width: 360px;
+  }
+  .sideCard {
+    max-width: 340px;
+  }
+}
+
+/* Card Background - Como home_old */
 .cardBackground {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  left: 0;
+  top: 0;
   z-index: 0;
 }
 
 .centerBackground {
+  border: 3px solid #07a9e2;
   background-color: #fff;
 }
 
 .sideBackground {
-  background-color: #f8f8f8;
+  border: 3px solid #d9d9d9;
+  background-color: #d9d9d9;
 }
 
-/* Card Header - Posicionamiento absoluto según Figma */
+/* Card Header - Como home_old con especificaciones Figma */
 .cardHeader {
   position: absolute;
+  left: 32px;
+  top: 46px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 8px 15px;
-  border-radius: 10px;
-  z-index: 10;
+  width: 172px;
   height: 26px;
-}
-
-/* Center Card Header - Proporcional al nuevo tamaño */
-.centerCard .cardHeader {
-  width: 220px;
-  top: 35px;
-  left: 25px;
-  background-color: #D9D9D9;
+  border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 0 12px;
+  z-index: 10;
+  background-color: #e5e5e5;
 }
 
-/* Side Cards Header */
+.centerCard .cardHeader {
+  background-color: #d9d9d9;
+}
+
 .sideCard .cardHeader {
-  width: 200px;
-  top: 35px;
-  left: 25px;
-  background-color: rgba(217, 217, 217, 0.7);
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+  background-color: #e5e5e5;
 }
 
 .eventIcon {
@@ -85,68 +120,72 @@
 }
 
 .eventTitle {
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 100%;
-  color: #1B2735;
-  letter-spacing: 0%;
+  color: #000;
+  font: 700 18px Inter, -apple-system, Roboto, Helvetica, sans-serif;
 }
 
-/* Event Description - Posición absoluta según Figma */
+.centerCard .eventTitle {
+  font: 700 20px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+/* Event Description - Como home_old */
 .eventDescription {
-  position: absolute;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 100%;
-  letter-spacing: 0%;
+  width: calc(100% - 66px);
+  max-width: 361px;
   color: #424040;
-  z-index: 10;
-}
-
-/* Center Card Description - Proporcional */
-.centerCard .eventDescription {
-  width: 270px;
-  top: 95px;
-  left: 25px;
-}
-
-/* Side Cards Description */
-.sideCard .eventDescription {
-  width: 250px;
-  top: 85px;
-  left: 25px;
-}
-
-/* CTA Button - Posición absoluta según Figma */
-.ctaButton {
   position: absolute;
+  left: 33px;
+  right: 33px;
+  top: 106px;
+  z-index: 10;
+  font: 400 14px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.centerCard .eventDescription {
+  top: 125px;
+  font: 400 15px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+/* CTA Button - Como home_old con gradientes de Figma */
+.ctaButton {
+  width: calc(100% - 96px);
+  max-width: 320px;
   height: 37px;
-  border: none;
   border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: #FFFFFF;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
+  position: absolute;
+  left: 48px;
+  right: 48px;
+  top: 192px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
   cursor: pointer;
   z-index: 10;
   transition: all 0.2s ease;
+  
+  /* Default gradient para cards laterales */
+  background: linear-gradient(90deg, #b0bbdb 46.15%, #e68572 100%);
+  color: #000;
 }
 
-/* Center Card Button - Proporcional */
 .centerCard .ctaButton {
-  width: 270px;
-  top: 170px;
-  left: 25px;
+  width: calc(100% - 64px);
+  max-width: 361px;
+  background: linear-gradient(90deg, #01a8e2 0.1%, #b0bbdb 72.97%);
+  left: 32px;
+  right: 32px;
+  top: 223px;
+  color: #fff;
 }
 
-/* Side Cards Button */
-.sideCard .ctaButton {
-  width: 240px;
-  top: 145px;
-  left: 30px;
+.buttonText {
+  font: 700 14px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.centerCard .buttonText {
+  font: 700 15px Inter, -apple-system, Roboto, Helvetica, sans-serif;
 }
 
 .ctaButton:hover {
@@ -154,153 +193,127 @@
   box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.3);
 }
 
-/* Features Card - Posición absoluta según Figma */
+/* Features Card - Como home_old con gradientes de Figma */
 .featuresCard {
   position: absolute;
+  left: 46px;
+  right: 46px;
+  top: 271px;
+  width: calc(100% - 92px);
+  max-width: 320px;
+  height: 211px;
   border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  padding: 20px;
+  padding: 26px 0;
   z-index: 10;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  
+  /* Default gradient para cards laterales */
+  background: linear-gradient(114deg, #e68572 31.17%, rgba(22, 170, 225, 0.8) 100%);
 }
 
-/* Center Card Features - Proporcional */
 .centerCard .featuresCard {
-  width: 270px;
-  height: 180px;
-  top: 230px;
-  left: 25px;
+  left: 32px;
+  right: 32px;
+  top: 302px;
+  width: calc(100% - 64px);
+  max-width: 361px;
+  height: 241px;
+  background: linear-gradient(113deg, #019acf 0.82%, #b0bbdb 100%);
 }
 
-/* Side Cards Features */
-.sideCard .featuresCard {
-  width: 240px;
-  height: 160px;
-  top: 200px;
-  left: 30px;
+/* Card derecha tiene gradiente específico */
+.eventCard:last-child .featuresCard {
+  background: linear-gradient(114deg, #b0bbdb 42.33%, #e68572 97.83%);
 }
 
+/* Feature Items - Como home_old */
 .featureItem {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 15px;
+  margin-bottom: 17px;
+  padding-left: 27px;
 }
 
-.featureItem:last-child {
-  margin-bottom: 0;
+.centerCard .featureItem {
+  padding-left: 26px;
 }
 
 .featureIcon {
   width: 24px;
   height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  padding: 4px;
 }
 
 .iconImage {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
 
 .featureText {
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 100%;
-  color: #FFFFFF;
-  letter-spacing: 0%;
+  color: #424040;
+  font: 400 13px Inter, -apple-system, Roboto, Helvetica, sans-serif;
 }
 
-/* Bottom Text - Posición absoluta según Figma */
+.centerCard .featureText {
+  color: #fff;
+  font: 400 14px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+/* Bottom Text - Como home_old */
 .bottomTextContainer {
   position: absolute;
-  z-index: 10;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 48px;
   text-align: center;
-}
-
-/* Center Card Bottom Text - Proporcional */
-.centerCard .bottomTextContainer {
-  width: 180px;
-  top: 440px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-/* Side Cards Bottom Text */
-.sideCard .bottomTextContainer {
-  width: 160px;
-  top: 380px;
-  left: 50%;
-  transform: translateX(-50%);
+  z-index: 10;
 }
 
 .bottomText {
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 100%;
-  letter-spacing: 0%;
   color: #747272;
-  margin: 0;
-  width: 100%;
+  font: 400 15px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  margin: 0 0 10px 0;
 }
 
 .bottomLine {
   width: 200px;
   height: 0.5px;
   border-top: 0.5px solid #747272;
-  margin: 15px auto 0;
+  margin: 10px auto 0;
   transform: rotate(-0.29deg);
 }
 
-/* Responsive Design - Mantener proporciones de Figma */
+/* Responsive como home_old */
 @media (max-width: 991px) {
-  /* En mobile, mantenemos las medidas pero centramos */
+  .eventCard {
+    width: 90%;
+    max-width: 400px;
+    flex: none;
+    margin: 0 auto 2rem;
+  }
+  
   .centerCard {
-    margin: 0 auto;
-  }
-  
-  .sideCard {
-    margin: 0 auto;
-  }
-  
-  /* Ajustar posiciones para pantallas más pequeñas */
-  .centerCard .bottomTextContainer {
-    top: 580px;
-  }
-  
-  .sideCard .bottomTextContainer {
-    top: 490px;
+    transform: none;
   }
 }
 
 @media (max-width: 640px) {
-  /* Para mobile, reducir escala manteniendo proporciones */
-  .centerCard, .sideCard {
-    transform: scale(0.85);
-    transform-origin: center top;
-    margin: 0 auto 1rem;
+  .eventCard {
+    width: 95%;
+    height: auto;
+    min-height: 500px;
   }
   
   .centerCard {
-    height: 666px; /* Mantener altura original */
+    min-height: 550px;
   }
   
-  .sideCard {
-    height: 555px; /* Mantener altura original */
-  }
-}
-
-@media (max-width: 480px) {
-  .centerCard, .sideCard {
-    transform: scale(0.75);
+  .eventDescription {
+    font-size: 12px;
+    width: 90%;
   }
 }

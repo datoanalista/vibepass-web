@@ -46,18 +46,12 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       <p className={styles.eventDescription}>{event.description}</p>
 
       {/* Botón Ver eventos */}
-      <button 
-        className={styles.ctaButton}
-        style={{ background: event.buttonGradient }}
-      >
-        {event.ctaText}
+      <button className={styles.ctaButton}>
+        <span className={styles.buttonText}>{event.ctaText}</span>
       </button>
 
       {/* Card de features */}
-      <div 
-        className={styles.featuresCard}
-        style={{ background: event.cardGradient }}
-      >
+      <div className={styles.featuresCard}>
         {event.features.map((feature, index) => (
           <div key={index} className={styles.featureItem}>
             <div className={styles.featureIcon}>
