@@ -40,9 +40,11 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 3rem;
+  gap: 2rem;
   flex-wrap: nowrap;
-  max-width: 1300px;
+  max-width: 1400px;
+  min-height: 700px;
+  position: relative;
 }
 
 /* Arrow Buttons */
