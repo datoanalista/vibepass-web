@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import styles from "./SearchFilters.module.css";
+import { getImagePath } from "@/utils/getImagePath";
 
 export default function SearchFilters() {
   return (
@@ -8,7 +9,7 @@ export default function SearchFilters() {
       <div className={styles.filtersRow}>
         <div className={styles.searchBox}>
           <img
-            src="/images/search-icon.png"
+            src={getImagePath("/images/search-icon.png")}
             alt="Search"
             className={styles.searchIcon}
           />
@@ -20,7 +21,7 @@ export default function SearchFilters() {
         <div className={styles.dateRangePicker}>
           <div className={styles.dateRangeLeft}>
             <img
-              src="/images/arrow-left.png"
+              src={getImagePath("/images/arrow-left.png")}
               alt="Previous"
               className={styles.arrowIcon}
             />
@@ -29,7 +30,7 @@ export default function SearchFilters() {
 
           <div className={styles.dateRangeContent}>
             <img
-              src="/images/calendar-icon.png"
+              src={getImagePath("/images/calendar-icon.png")}
               alt="Calendar"
               className={styles.calendarIcon}
             />
@@ -39,7 +40,7 @@ export default function SearchFilters() {
           <div className={styles.dateRangeRight}>
             <div className={styles.dateDivider} />
             <img
-              src="/images/arrow-right.png"
+              src={getImagePath("/images/arrow-right.png")}
               alt="Next"
               className={styles.arrowIcon}
             />
@@ -49,7 +50,7 @@ export default function SearchFilters() {
 
       <div className={styles.createEventButton}>
         <img
-          src="/images/plus-icon.png"
+          src={getImagePath("/images/plus-icon.png")}
           alt="Add"
           className={styles.plusIcon}
         />

@@ -1,8 +1,10 @@
+import { getImagePath } from "@/utils/getImagePath";
+
 export const logosPartners = [
-    "/images/logoUBio.png",
-    "/images/logoUConce.png",
-    "/images/logoBilzPap.png",
-    "/images/logoArauco.png",
-    "/images/britishRoyal.png",
-    "/images/santiagoCollege.png",
+    getImagePath("/images/logoUBio.png"),
+    getImagePath("/images/logoUConce.png"),
+    getImagePath("/images/logoBilzPap.png"),
+    getImagePath("/images/logoArauco.png"),
+    getImagePath("/images/britishRoyal.png"),
+    getImagePath("/images/santiagoCollege.png"),
   ];

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import styles from "./AdminHeader.module.css";
+import { getImagePath } from "@/utils/getImagePath";
 
 export default function AdminHeader() {
   return (
@@ -8,7 +9,7 @@ export default function AdminHeader() {
       <div className={styles.headerContent}>
         <div className={styles.welcomeSection}>
           <img
-            src="/images/welcome-icon.png"
+            src={getImagePath("/images/welcome-icon.png")}
             alt="Welcome Icon"
             className={styles.welcomeIcon}
           />
@@ -18,7 +19,7 @@ export default function AdminHeader() {
         <div className={styles.rightSection}>
           <div className={styles.userProfile}>
             <img
-              src="/images/user-avatar.png"
+              src={getImagePath("/images/user-avatar.png")}
               alt="User Avatar"
               className={styles.userAvatar}
             />
@@ -31,7 +32,7 @@ export default function AdminHeader() {
           <div className={styles.actionsSection}>
             <div className={styles.divider} />
             <img
-              src="/images/logout-icon.png"
+              src={getImagePath("/images/logout-icon.png")}
               alt="Logout"
               className={styles.logoutIcon}
             />

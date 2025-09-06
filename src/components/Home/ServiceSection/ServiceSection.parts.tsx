@@ -1,12 +1,13 @@
 import React from "react";
 import styles from "./ServiceSection.module.css";
 import { logosPartners } from "@/data/Home/logosPartners";
+import { getImagePath } from "@/utils/getImagePath";
 
 // Imagen con cintas
 export const ServiceImage = () => (
   <div className={styles.serviceImageContainer}>
     <img
-      src="/images/bannerKermesse.png"
+      src={getImagePath("/images/bannerKermesse.png")}
       alt="Banner Kermesse"
       className={styles.servicePlaceholder}
     />
@@ -40,7 +41,7 @@ export const AppPromo = () => (
   <div className={styles.appPromoSection}>
         <div className={styles.appPreviewContainer}>
     <img
-      src="/images/bannerPhone.png"
+      src={getImagePath("/images/bannerPhone.png")}
       alt="Banner Phone"
       className={styles.appPreviewPlaceholder}
     />
