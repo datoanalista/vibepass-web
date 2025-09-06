@@ -1,0 +1,155 @@
+/* Event Types Section */
+.eventTypesSection {
+  padding: 60px 0 80px;
+  background-color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Section Title */
+.sectionTitle {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: #424040;
+  text-align: center;
+  margin: 0 0 50px 0;
+  position: relative;
+  z-index: 10;
+}
+
+/* Events Grid */
+.eventsGrid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  position: relative;
+}
+
+.cardsContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: nowrap;
+  max-width: 1300px;
+}
+
+/* Arrow Buttons */
+.arrowButton {
+  background-color: rgba(27, 39, 53, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.arrowButton:hover {
+  background-color: #1B2735;
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.arrowButton svg {
+  opacity: 0.9;
+}
+
+.arrowButton:hover svg {
+  opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+  
+  .cardsContainer {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .cardsContainer {
+    gap: 1.5rem;
+  }
+  
+  .arrowButton {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 991px) {
+  .eventsGrid {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .cardsContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+  }
+  
+  .arrowButton {
+    display: none;
+  }
+  
+  .sectionTitle {
+    font-size: 22px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .eventTypesSection {
+    padding: 40px 0 60px;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 20px;
+    margin-bottom: 25px;
+    line-height: 110%;
+  }
+  
+  .cardsContainer {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+  
+  .sectionTitle {
+    font-size: 18px;
+  }
+  
+  .cardsContainer {
+    gap: 1rem;
+  }
+}

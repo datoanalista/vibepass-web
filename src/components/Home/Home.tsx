@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import UniversalHeader from "@/components/Shared/UniversalHeader/UniversalHeader";
+import EventTypesSection from "./EventTypesSection/EventTypesSection";
 import styles from "./Home.module.css";
 import { getImagePath } from "@/utils/getImagePath";
 
@@ -19,12 +20,15 @@ const Home: React.FC = () => {
         />
       </div>
 
-      {/* Contenido temporal */}
+      {/* Sección de tipos de eventos */}
+      <EventTypesSection />
+      
+      {/* Contenido temporal para otras secciones */}
       <main className={styles.mainContent}>
         <div className={styles.constructionSection}>
-          <h1 className={styles.constructionTitle}>Sitio en construcción</h1>
+          <h1 className={styles.constructionTitle}>Más secciones próximamente</h1>
           <p className={styles.constructionText}>
-            Estamos trabajando en una nueva experiencia para ti.
+            Continuaremos construyendo el resto de la página.
           </p>
           <div className={styles.constructionIcon}>
             🚧
