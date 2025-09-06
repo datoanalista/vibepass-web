@@ -13,6 +13,8 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read
+  deployments: write
 
 # Allow only one concurrent deployment
 concurrency:
@@ -26,6 +28,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
         
       - name: Setup Node.js
         uses: actions/setup-node@v4
