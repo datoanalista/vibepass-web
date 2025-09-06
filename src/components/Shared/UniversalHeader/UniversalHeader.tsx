@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import styles from "./UniversalHeader.module.css";
+import { getImagePath } from "@/utils/getImagePath";
 
 const UniversalHeader: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const UniversalHeader: React.FC = () => {
         {/* Logo */}
         <Link href="/" className={styles.logoLink}>
           <img
-            src="/images/icon_vibepass.svg"
+            src={getImagePath("/images/icon_vibepass.svg")}
             alt="Vibepass"
             className={styles.logo}
           />
