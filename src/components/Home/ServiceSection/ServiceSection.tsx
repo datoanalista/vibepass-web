@@ -10,21 +10,21 @@ const ServiceSection: React.FC = () => {
       title: "Fiesta papás",
       isSelected: false,
       icon: "no_select.png",
-      background: "#01A8E2"
+      background: "transparent" // Sin fondo como en Figma
     },
     {
       id: 2,
       title: "KOT - Kermesse On Tour",
       isSelected: true,
       icon: "derecha_select.png", 
-      background: "#424040"
+      background: "transparent" // Sin fondo como en Figma
     },
     {
       id: 3,
       title: "Cine bajo las estrellas",
       isSelected: true,
       icon: "derecha_select.png",
-      background: "#424040"
+      background: "transparent" // Sin fondo como en Figma
     }
   ];
 

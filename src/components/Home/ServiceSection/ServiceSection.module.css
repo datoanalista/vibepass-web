@@ -22,6 +22,7 @@
   flex: 1;
   max-width: 600px;
   position: relative;
+  margin-left: 255px; /* Espacio left como en Figma */
 }
 
 /* Title Container */
@@ -80,11 +81,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px; /* Más compacto */
-  border-radius: 8px;
+  padding: 8px 0; /* Sin padding lateral, solo vertical */
+  border-radius: 0; /* Sin border-radius */
   transition: all 0.3s ease;
   cursor: pointer;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: none; /* Sin box-shadow */
+  border-bottom: 1px solid #E0E0E0; /* Solo línea inferior */
 }
 
 .serviceItem:hover {
@@ -99,7 +101,7 @@
   font-size: 16px; /* Reducido de 24px a 16px */
   line-height: 100%;
   letter-spacing: 0%;
-  color: #FFFFFF;
+  color: #424040; /* Color oscuro como en Figma, no blanco */
   flex: 1;
 }
 
@@ -114,26 +116,25 @@
 /* Right Content */
 .rightContent {
   flex: 1;
-  max-width: 600px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: stretch; /* Para que use toda la altura disponible */
+  height: 100%;
 }
 
 /* Family Image */
 .familyImage {
   width: 100%;
-  max-width: 500px;
-  height: auto;
+  max-width: none; /* Sin límite de ancho */
+  height: 400px; /* Altura fija para coincidir con contenido izquierdo */
   object-fit: cover;
-  border-radius: 15px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 0; /* Sin border-radius para usar todo el espacio */
+  box-shadow: none; /* Sin box shadow */
   transition: all 0.3s ease;
 }
 
 .familyImage:hover {
   transform: scale(1.02);
-  box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* Responsive Design */
