@@ -1,0 +1,218 @@
+/* Differences Section */
+.differencesSection {
+  width: 100%;
+  padding: 80px 0 100px;
+  background-color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Title Container */
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+/* Section Title - Especificaciones exactas de Figma */
+.sectionTitle {
+  font-family: Poppins, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: #1B2735;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+/* Title Underline - Especificaciones exactas del rectángulo */
+.titleUnderline {
+  width: 148px;
+  height: 9px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #05A9E2 0%, #A5B9DB 100%);
+}
+
+/* Differences Grid */
+.differencesGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 120px;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+/* Individual Difference Item */
+.differenceItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.differenceItem:hover {
+  transform: translateY(-10px);
+}
+
+/* Icon Container */
+.iconContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  transition: all 0.3s ease;
+}
+
+.differenceItem:hover .iconContainer {
+  transform: scale(1.1);
+}
+
+.circleBackground {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  z-index: 2;
+  object-fit: contain;
+}
+
+/* Text Container */
+.textContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 60px;
+  transition: all 0.3s ease;
+}
+
+.differenceItem:hover .textContainer {
+  transform: scale(1.05);
+}
+
+.rectangleBackground {
+  width: 200px;
+  height: 60px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  object-fit: cover;
+}
+
+.text {
+  font-family: Poppins, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .differencesGrid {
+    gap: 80px;
+  }
+  
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .differencesSection {
+    padding: 60px 0 80px;
+  }
+  
+  .differencesGrid {
+    flex-direction: column;
+    gap: 60px;
+  }
+  
+  .titleContainer {
+    margin-bottom: 60px;
+  }
+  
+  .sectionTitle {
+    font-size: 28px;
+  }
+  
+  .text {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 640px) {
+  .differencesSection {
+    padding: 40px 0 60px;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 24px;
+  }
+  
+  .text {
+    font-size: 22px;
+  }
+  
+  .iconContainer {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .circleBackground {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .textContainer {
+    width: 180px;
+    height: 50px;
+  }
+  
+  .rectangleBackground {
+    width: 180px;
+    height: 50px;
+  }
+}
