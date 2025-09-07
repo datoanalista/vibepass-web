@@ -124,19 +124,15 @@
   color: #000;
   font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   font-weight: 700;
-  font-size: clamp(14px, 4vw, 18px); /* Se ajusta automáticamente */
+  font-size: clamp(14px, 4vw, 18px); /* Mismo tamaño para todas */
   line-height: 100%;
   white-space: nowrap; /* Fuerza una sola línea */
   overflow: hidden;
   text-overflow: ellipsis; /* ... si es muy largo */
-  max-width: 240px; /* Límite máximo para todos */
+  max-width: 240px; /* Límite máximo para todas */
 }
 
-.centerCard .eventTitle {
-  /* Mismo tamaño que las cards laterales */
-  font-size: clamp(14px, 4vw, 18px);
-  max-width: 240px;
-}
+/* Card central sin override - mismo tamaño que laterales */
 
 /* Event Description - Como home_old */
 .eventDescription {
@@ -148,12 +144,12 @@
   right: 33px;
   top: 106px;
   z-index: 10;
-  font: 400 14px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font: 400 14px Inter, -apple-system, Roboto, Helvetica, sans-serif; /* Mismo tamaño para todas */
 }
 
 .centerCard .eventDescription {
   top: 86px; /* Reducido de 125px - espacio a la mitad */
-  font: 400 15px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  /* Mismo font que las laterales - sin override */
 }
 
 /* CTA Button - Como home_old con gradientes de Figma */
@@ -191,12 +187,10 @@
 }
 
 .buttonText {
-  font: 700 14px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font: 700 14px Inter, -apple-system, Roboto, Helvetica, sans-serif; /* Mismo tamaño para todas */
 }
 
-.centerCard .buttonText {
-  font: 700 15px Inter, -apple-system, Roboto, Helvetica, sans-serif;
-}
+/* Card central sin override - mismo tamaño que laterales */
 
 .ctaButton:hover {
   transform: translateY(-1px);
@@ -266,12 +260,12 @@
 
 .featureText {
   color: #424040;
-  font: 400 13px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font: 400 13px Inter, -apple-system, Roboto, Helvetica, sans-serif; /* Mismo tamaño para todas */
 }
 
 .centerCard .featureText {
-  color: #fff;
-  font: 400 14px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  color: #fff; /* Solo cambia el color, no el tamaño */
+  font: 400 13px Inter, -apple-system, Roboto, Helvetica, sans-serif; /* Mismo tamaño */
 }
 
 /* Bottom Text - Como home_old */
