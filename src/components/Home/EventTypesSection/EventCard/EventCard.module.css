@@ -134,7 +134,7 @@
 
 /* Card central sin override - mismo tamaño que laterales */
 
-/* Event Description - Como home_old */
+/* Event Description - Proporción basada en card central */
 .eventDescription {
   width: calc(100% - 66px);
   max-width: 361px;
@@ -142,7 +142,7 @@
   position: absolute;
   left: 33px;
   right: 33px;
-  top: 133px; /* Ajustado proporcionalmente: 121px + 10% */
+  top: 120px; /* Basado en proporción de card central perfecta */
   z-index: 10;
   font: 400 14px Inter, -apple-system, Roboto, Helvetica, sans-serif; /* Mismo tamaño para todas */
 }
@@ -152,7 +152,7 @@
   /* Mismo font que las laterales - sin override */
 }
 
-/* CTA Button - Como home_old con gradientes de Figma */
+/* CTA Button - Proporción basada en card central */
 .ctaButton {
   width: calc(100% - 96px);
   max-width: 320px;
@@ -162,7 +162,7 @@
   position: absolute;
   left: 48px;
   right: 48px;
-  top: 232px; /* Ajustado proporcionalmente: 211px + 10% */
+  top: 207px; /* Basado en proporción de card central (198px * 517px/545px) */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -197,15 +197,15 @@
   box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.3);
 }
 
-/* Features Card - Optimizado para distribución de espacio */
+/* Features Card - Proporción basada en card central */
 .featuresCard {
   position: absolute;
   left: 46px;
   right: 46px;
-  top: 328px; /* Ajustado proporcionalmente: 298px + 10% */
+  top: 275px; /* Basado en proporción de card central (290px * 517px/545px) */
   width: calc(100% - 92px);
   max-width: 320px;
-  height: 157px; /* Ajustado proporcionalmente: 143px + 10% */
+  height: 160px; /* Basado en proporción de card central (169px * 517px/545px) */
   border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 3px 0; /* 3px superior e inferior como solicitado */
