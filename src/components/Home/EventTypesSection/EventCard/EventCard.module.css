@@ -11,7 +11,7 @@
 /* Center Card (Kermesse) - Más alta y destacada */
 .centerCard {
   max-width: 400px;
-  height: 495px; /* 450px + 10% = 495px */
+  height: 545px; /* 495px + 10% = 545px */
   z-index: 2;
   transform: scale(1.05);
 }
@@ -19,7 +19,7 @@
 /* Side Cards (Izquierda y Derecha) - 95% altura central, 10% más ancho */
 .sideCard {
   max-width: 440px; /* 400px + 10% = 440px */
-  height: 470px; /* 95% de 495px = 470px */
+  height: 517px; /* 470px + 10% = 517px */
   z-index: 1;
   opacity: 0.95;
 }
@@ -142,13 +142,13 @@
   position: absolute;
   left: 33px;
   right: 33px;
-  top: 121px; /* Ajustado proporcionalmente: 110px + 10% */
+  top: 133px; /* Ajustado proporcionalmente: 121px + 10% */
   z-index: 10;
   font: 400 14px Inter, -apple-system, Roboto, Helvetica, sans-serif; /* Mismo tamaño para todas */
 }
 
 .centerCard .eventDescription {
-  top: 115px; /* Ajustado proporcionalmente: 105px + 10% */
+  top: 126px; /* Ajustado proporcionalmente: 115px + 10% */
   /* Mismo font que las laterales - sin override */
 }
 
@@ -162,7 +162,7 @@
   position: absolute;
   left: 48px;
   right: 48px;
-  top: 211px; /* Ajustado proporcionalmente: 192px + 10% */
+  top: 232px; /* Ajustado proporcionalmente: 211px + 10% */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,7 +182,7 @@
   background: linear-gradient(90deg, #01a8e2 0.1%, #b0bbdb 72.97%);
   left: 32px;
   right: 32px;
-  top: 198px; /* Ajustado proporcionalmente: 180px + 10% */
+  top: 218px; /* Ajustado proporcionalmente: 198px + 10% */
   color: #fff;
 }
 
@@ -202,10 +202,10 @@
   position: absolute;
   left: 46px;
   right: 46px;
-  top: 298px; /* Ajustado proporcionalmente: 271px + 10% */
+  top: 328px; /* Ajustado proporcionalmente: 298px + 10% */
   width: calc(100% - 92px);
   max-width: 320px;
-  height: 143px; /* Ajustado proporcionalmente: 130px + 10% */
+  height: 157px; /* Ajustado proporcionalmente: 143px + 10% */
   border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 0; /* Sin padding para control total */
@@ -222,10 +222,10 @@
 .centerCard .featuresCard {
   left: 32px;
   right: 32px;
-  top: 264px; /* Ajustado proporcionalmente: 240px + 10% */
+  top: 290px; /* Ajustado proporcionalmente: 264px + 10% */
   width: calc(100% - 64px);
   max-width: 361px;
-  height: 154px; /* Ajustado proporcionalmente: 140px + 10% */
+  height: 169px; /* Ajustado proporcionalmente: 154px + 10% */
   padding: 0; /* Sin padding para control total */
   background: linear-gradient(113deg, #019acf 0.82%, #b0bbdb 100%);
 }
