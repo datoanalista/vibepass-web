@@ -279,12 +279,12 @@
   font: 400 13px Inter, -apple-system, Roboto, Helvetica, sans-serif; /* Mismo tamaño */
 }
 
-/* Bottom Text - Como home_old */
+/* Bottom Text - Centrado en el espacio disponible */
 .bottomTextContainer {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 10px; /* Reducido de 20px a 10px - muy pegado al borde */
+  bottom: 30px; /* Centrado en el espacio entre features y borde */
   text-align: center;
   z-index: 10;
   width: 250px; /* Más ancho para evitar salto de línea */
