@@ -23,6 +23,24 @@ const Home: React.FC = () => {
       {/* Sección de tipos de eventos */}
       <EventTypesSection />
       
+      {/* Sección QR - Simple */}
+      <section style={{ 
+        width: '100%', 
+        margin: '80px 0 60px 0', 
+        padding: '0',
+        backgroundColor: '#FFFFFF'
+      }}>
+        <img
+          src={getImagePath("/images/QRsection.svg")}
+          alt="¿Cómo utilizar tu código QR?"
+          style={{
+            width: '100%',
+            height: 'auto',
+            display: 'block'
+          }}
+        />
+      </section>
+      
       {/* Contenido temporal para otras secciones */}
       <main className={styles.mainContent}>
         <div className={styles.constructionSection}>
