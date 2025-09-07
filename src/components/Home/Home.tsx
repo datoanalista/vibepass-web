@@ -2,6 +2,7 @@
 import React from "react";
 import UniversalHeader from "@/components/Shared/UniversalHeader/UniversalHeader";
 import EventTypesSection from "./EventTypesSection/EventTypesSection";
+import DifferencesSection from "./DifferencesSection/DifferencesSection";
 import styles from "./Home.module.css";
 import { getImagePath } from "@/utils/getImagePath";
 
@@ -40,6 +41,9 @@ const Home: React.FC = () => {
           }}
         />
       </section>
+      
+      {/* Sección Nuestra Diferencia */}
+      <DifferencesSection />
       
       {/* Contenido temporal para otras secciones */}
       <main className={styles.mainContent}>
