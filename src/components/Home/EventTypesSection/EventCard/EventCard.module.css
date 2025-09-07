@@ -94,13 +94,14 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  width: 250px; /* Aumentado de 172px a 250px para evitar doble línea */
+  width: 280px; /* Más ancho para títulos largos */
   height: 26px;
   border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 0 12px;
   z-index: 10;
   background-color: #e5e5e5;
+  overflow: hidden; /* Evita desbordamiento */
 }
 
 .centerCard .cardHeader {
@@ -121,11 +122,19 @@
 
 .eventTitle {
   color: #000;
-  font: 700 18px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: clamp(14px, 4vw, 18px); /* Se ajusta automáticamente */
+  line-height: 100%;
+  white-space: nowrap; /* Fuerza una sola línea */
+  overflow: hidden;
+  text-overflow: ellipsis; /* ... si es muy largo */
+  max-width: 220px; /* Límite máximo */
 }
 
 .centerCard .eventTitle {
-  font: 700 20px Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(16px, 4.5vw, 20px); /* Más grande pero adaptable */
+  max-width: 240px; /* Más espacio para el título central */
 }
 
 /* Event Description - Como home_old */
