@@ -278,7 +278,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 48px;
+  bottom: 20px; /* Reducido de 48px a 20px - mucho más cerca */
   text-align: center;
   z-index: 10;
   width: 250px; /* Más ancho para evitar salto de línea */
