@@ -38,7 +38,7 @@
   background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
   width: 400px; /* Reducido para mejor proporción */
   height: 40px; /* Más compacto */
-  left: -20px; /* Menos salida del contenedor */
+  left: -10px; /* Ajustado a -10px como solicitado */
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -126,7 +126,7 @@
 .familyImage {
   width: 100%;
   max-width: none; /* Sin límite de ancho */
-  height: 400px; /* Altura fija para coincidir con contenido izquierdo */
+  height: 280px; /* Reducido proporcionalmente para abarcar desde barra hasta último item */
   object-fit: cover;
   border-radius: 0; /* Sin border-radius para usar todo el espacio */
   box-shadow: none; /* Sin box shadow */

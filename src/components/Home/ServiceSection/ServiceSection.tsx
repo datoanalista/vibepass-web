@@ -8,22 +8,22 @@ const ServiceSection: React.FC = () => {
     {
       id: 1,
       title: "Fiesta papás",
-      isSelected: false,
-      icon: "no_select.png",
+      isSelected: true,
+      icon: "derecha_select.png", // Flecha azulada (derecha)
       background: "transparent" // Sin fondo como en Figma
     },
     {
       id: 2,
       title: "KOT - Kermesse On Tour",
-      isSelected: true,
-      icon: "derecha_select.png", 
+      isSelected: false,
+      icon: "no_select.png", // Flecha oscura (levantada)
       background: "transparent" // Sin fondo como en Figma
     },
     {
       id: 3,
       title: "Cine bajo las estrellas",
-      isSelected: true,
-      icon: "derecha_select.png",
+      isSelected: false,
+      icon: "no_select.png", // Flecha oscura (levantada)
       background: "transparent" // Sin fondo como en Figma
     }
   ];
