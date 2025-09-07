@@ -69,7 +69,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       {/* Texto inferior */}
       <div className={styles.bottomTextContainer}>
         <p className={styles.bottomText}>{event.bottomText}</p>
-        {event.isCenter && <div className={styles.bottomLine} />}
+        <div className={styles.bottomLine} />
       </div>
     </div>
   );
