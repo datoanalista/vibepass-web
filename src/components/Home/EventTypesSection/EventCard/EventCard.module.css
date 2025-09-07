@@ -142,13 +142,13 @@
   position: absolute;
   left: 33px;
   right: 33px;
-  top: 119px; /* Centrado entre título y botón para cards laterales */
+  top: 132px; /* Centrado entre título (~72px) y botón (192px) = 132px */
   z-index: 10;
   font: 400 14px Inter, -apple-system, Roboto, Helvetica, sans-serif; /* Mismo tamaño para todas */
 }
 
 .centerCard .eventDescription {
-  top: 113px; /* Centrado entre título (top: 46px) y botón (top: 180px) */
+  top: 126px; /* Centrado entre título (~72px) y botón (180px) = 126px */
   /* Mismo font que las laterales - sin override */
 }
 
