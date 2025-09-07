@@ -4,7 +4,7 @@
   padding: 60px 0; /* Reducido padding */
   background-color: #FFFFFF;
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Cambiar para permitir que barra se extienda */
 }
 
 .container {
