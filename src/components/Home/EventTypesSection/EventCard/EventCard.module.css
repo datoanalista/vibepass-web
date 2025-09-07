@@ -284,7 +284,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 32px; /* Subido 2px desde 30px */
+  bottom: 35px; /* Subido 3px más: 32px + 3px = 35px */
   text-align: center;
   z-index: 10;
   width: 250px; /* Más ancho para evitar salto de línea */
