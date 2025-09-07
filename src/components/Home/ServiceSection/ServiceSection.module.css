@@ -22,7 +22,7 @@
   flex: 1;
   max-width: 600px;
   position: relative;
-  margin-left: 255px; /* Espacio left como en Figma */
+  margin-left: 127px; /* Mitad de 255px = 127px */
 }
 
 /* Title Container */
