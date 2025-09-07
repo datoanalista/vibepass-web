@@ -129,12 +129,13 @@
   white-space: nowrap; /* Fuerza una sola línea */
   overflow: hidden;
   text-overflow: ellipsis; /* ... si es muy largo */
-  max-width: 220px; /* Límite máximo */
+  max-width: 240px; /* Límite máximo para todos */
 }
 
 .centerCard .eventTitle {
-  font-size: clamp(16px, 4.5vw, 20px); /* Más grande pero adaptable */
-  max-width: 240px; /* Más espacio para el título central */
+  /* Mismo tamaño que las cards laterales */
+  font-size: clamp(14px, 4vw, 18px);
+  max-width: 240px;
 }
 
 /* Event Description - Como home_old */
