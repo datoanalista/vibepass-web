@@ -38,7 +38,7 @@
   background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
   width: 400px; /* Reducido para mejor proporción */
   height: 40px; /* Más compacto */
-  left: -10px; /* Ajustado a -10px como solicitado */
+  left: -15px; /* Movido a -15px como solicitado */
   border-radius: 8px;
   display: flex;
   align-items: center;
