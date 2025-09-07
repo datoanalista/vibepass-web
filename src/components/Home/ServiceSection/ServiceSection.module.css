@@ -1,7 +1,7 @@
 /* Service Section */
 .serviceSection {
   width: 100%;
-  padding: 100px 0;
+  padding: 60px 0; /* Reducido padding */
   background-color: #FFFFFF;
   position: relative;
   overflow: hidden;
@@ -27,51 +27,51 @@
 /* Title Container */
 .titleContainer {
   position: relative;
-  margin-bottom: 60px;
+  margin-bottom: 40px; /* Reducido spacing */
   width: 100%;
 }
 
-/* Title Bar - Especificaciones exactas de Figma */
+/* Title Bar - Ajustado para proporciones del Figma */
 .titleBar {
   position: relative;
   background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
-  width: 853px; /* Ancho exacto de Figma */
-  height: 60px; /* Altura exacta */
-  left: -32px; /* Se sale del contenedor como en Figma */
-  border-radius: 10px;
+  width: 400px; /* Reducido para mejor proporción */
+  height: 40px; /* Más compacto */
+  left: -20px; /* Menos salida del contenedor */
+  border-radius: 8px;
   display: flex;
   align-items: center;
-  padding: 0 64px; /* Para centrar el texto considerando el left negativo */
+  padding: 0 32px;
 }
 
-/* Section Title - Especificaciones exactas */
+/* Section Title - Reducido para mejor proporción */
 .sectionTitle {
   font-family: Poppins, -apple-system, Roboto, Helvetica, sans-serif;
   font-weight: 800;
-  font-size: 30px;
+  font-size: 20px; /* Reducido de 30px a 20px */
   line-height: 100%;
   letter-spacing: 0%;
   color: #424040;
   margin: 0;
-  text-transform: none; /* Según tu texto no está en uppercase */
+  text-transform: none;
 }
 
 /* Subtitle */
 .subtitle {
   font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 18px; /* Reducido de 24px a 18px */
   line-height: 100%;
   letter-spacing: 0%;
   color: #424040;
-  margin: 0 0 40px 0;
+  margin: 0 0 30px 0; /* Reducido spacing */
 }
 
 /* Services List */
 .servicesList {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px; /* Reducido spacing */
   width: 100%;
 }
 
@@ -80,11 +80,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 25px;
-  border-radius: 10px;
+  padding: 10px 20px; /* Más compacto */
+  border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .serviceItem:hover {
@@ -96,7 +96,7 @@
 .serviceText {
   font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 16px; /* Reducido de 24px a 16px */
   line-height: 100%;
   letter-spacing: 0%;
   color: #FFFFFF;
@@ -105,8 +105,8 @@
 
 /* Service Icon */
 .serviceIcon {
-  width: 24px;
-  height: 24px;
+  width: 18px; /* Más pequeño */
+  height: 18px;
   object-fit: contain;
   flex-shrink: 0;
 }
