@@ -4,6 +4,8 @@ import UniversalHeader from "@/components/Shared/UniversalHeader/UniversalHeader
 import EventTypesSection from "./EventTypesSection/EventTypesSection";
 import DifferencesSection from "./DifferencesSection/DifferencesSection";
 import ServiceSection from "./ServiceSection/ServiceSection";
+import QuoteSection from "./QuoteSection/QuoteSection";
+import PartnersSection from "./PartnersSection/PartnersSection";
 import styles from "./Home.module.css";
 import { getImagePath } from "@/utils/getImagePath";
 
@@ -48,6 +50,12 @@ const Home: React.FC = () => {
       
       {/* Sección Conoce Nuestro Servicio */}
       <ServiceSection />
+      
+      {/* Sección Cotiza con Nosotros */}
+      <QuoteSection />
+      
+      {/* Sección Ellos Confían en Nosotros */}
+      <PartnersSection />
       
       {/* Contenido temporal para otras secciones */}
       <main className={styles.mainContent}>
