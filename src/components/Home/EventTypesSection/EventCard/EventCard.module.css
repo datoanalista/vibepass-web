@@ -233,18 +233,27 @@
   background: linear-gradient(114deg, #b0bbdb 42.33%, #e68572 97.83%);
 }
 
-/* Feature Items - Como home_old */
+/* Feature Items - Optimizado para altura reducida */
 .featureItem {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 8px; /* Reducido de 17px a 8px para más compacto */
+  margin-bottom: 4px; /* Reducido a 4px para que quepan todos */
   padding-left: 27px;
+  flex-shrink: 0; /* Evita que se compriman */
+}
+
+.featureItem:last-child {
+  margin-bottom: 0; /* Último item sin margin para optimizar espacio */
 }
 
 .centerCard .featureItem {
   padding-left: 26px;
-  margin-bottom: 10px; /* Un poco más de espacio en la central */
+  margin-bottom: 6px; /* Espacio ajustado para card central */
+}
+
+.centerCard .featureItem:last-child {
+  margin-bottom: 0;
 }
 
 .featureIcon {
