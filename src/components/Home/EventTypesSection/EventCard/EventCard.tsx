@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 import styles from "./EventCard.module.css";
 import { getImagePath } from "@/utils/getImagePath";
 
@@ -24,8 +25,17 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push('/eventos');
+  };
+
   return (
-    <div className={`${styles.eventCard} ${event.isCenter ? styles.centerCard : styles.sideCard}`}>
+    <div 
+      className={`${styles.eventCard} ${event.isCenter ? styles.centerCard : styles.sideCard}`}
+      onClick={handleCardClick}
+    >
       {/* Background de la card */}
       <div className={`${styles.cardBackground} ${event.isCenter ? styles.centerBackground : styles.sideBackground}`} />
 

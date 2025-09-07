@@ -9,7 +9,7 @@ const UniversalHeader: React.FC = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         {/* Logo */}
-        <Link href="/" className={styles.logoLink}>
+        <Link href="/home" className={styles.logoLink}>
           <img
             src={getImagePath("/images/icon_vibepass.svg")}
             alt="Vibepass"
