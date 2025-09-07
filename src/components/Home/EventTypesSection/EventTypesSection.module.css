@@ -81,75 +81,45 @@
   }
 }
 
-/* Arrow Buttons - Rediseñados con iconos personalizados */
+/* Arrow Buttons - Simplificados para mostrar iconos originales */
 .arrowButton {
-  background-color: rgba(27, 39, 53, 0.9);
+  background: transparent; /* Sin fondo para mostrar el icono original */
   border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 60px; /* Más grande para acomodar el icono completo */
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
   flex-shrink: 0;
   position: relative;
   z-index: 5;
-  overflow: hidden;
-}
-
-.arrowButton::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: radial-gradient(circle, rgba(18, 199, 14, 0.3) 0%, transparent 70%);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.4s ease;
-  z-index: 1;
+  padding: 0;
 }
 
 .arrowIcon {
-  width: 24px;
-  height: 24px;
-  filter: brightness(0) invert(1);
+  width: 50px; /* Tamaño completo del icono */
+  height: 50px;
   transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
+  filter: none; /* Sin filtros para mantener diseño original */
+  object-fit: contain;
 }
 
-/* Hover Effects - Elegantes y llamativos */
+/* Hover Effects - Elegantes para iconos originales */
 .arrowButton:hover {
-  background-color: #12C70E;
-  transform: scale(1.15) rotate(5deg);
-  box-shadow: 0 10px 25px rgba(18, 199, 14, 0.4);
-}
-
-.arrowButton:hover::before {
-  width: 80px;
-  height: 80px;
+  transform: scale(1.1);
+  filter: brightness(1.2) drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
 }
 
 .arrowButton:hover .arrowIcon {
-  transform: scale(1.2);
-  filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  transform: scale(1.05);
 }
 
 /* Click Effect - Pulento! */
 .arrowButton:active {
-  transform: scale(1.05) rotate(0deg);
+  transform: scale(0.95);
   transition: all 0.1s ease;
-}
-
-.arrowButton:active::before {
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(circle, rgba(18, 199, 14, 0.6) 0%, transparent 70%);
 }
 
 .arrowButton:active .arrowIcon {
