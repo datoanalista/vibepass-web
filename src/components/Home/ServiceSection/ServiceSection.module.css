@@ -35,27 +35,27 @@
   overflow: visible; /* Permitir que titleBar se extienda */
 }
 
-/* Title Bar - FORZAR tamaño pequeño */
+/* Title Bar - Doble ancho como solicitado */
 .titleBar {
   position: relative;
   background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
-  width: 220px !important; /* FORZAR ancho pequeño con !important */
-  max-width: 220px !important;
-  min-width: 220px !important;
+  width: 440px !important; /* Doble de 220px = 440px */
+  max-width: 440px !important;
+  min-width: 440px !important;
   height: 40px; /* Más compacto */
   left: -15px; /* Barra extendida hacia la izquierda */
   border-radius: 8px;
   display: flex;
   align-items: center;
-  padding: 0 15px !important; /* FORZAR padding pequeño */
+  padding: 0 30px !important; /* Padding proporcional al ancho doble */
   overflow: hidden;
 }
 
-/* Section Title - Reducido para barra pequeña */
+/* Section Title - Aumentado para barra doble */
 .sectionTitle {
   font-family: Poppins, -apple-system, Roboto, Helvetica, sans-serif;
   font-weight: 800;
-  font-size: 16px !important; /* MÁS pequeño para barra reducida */
+  font-size: 22px !important; /* Aumentado para barra más ancha */
   line-height: 100%;
   letter-spacing: 0%;
   color: #424040;
@@ -133,7 +133,7 @@
 .familyImage {
   width: 100%;
   max-width: none; /* Sin límite de ancho */
-  height: 260px; /* Altura moderada desde barra hasta item final */
+  height: 234px; /* Reducido 10%: 260px - 26px = 234px */
   object-fit: cover;
   border-radius: 0; /* Sin border-radius para usar todo el espacio */
   box-shadow: none; /* Sin box shadow */
