@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import UniversalHeader from "@/components/Shared/UniversalHeader/UniversalHeader";
+import Footer from "@/components/Shared/Footer/Footer";
 import EventTypesSection from "./EventTypesSection/EventTypesSection";
 import DifferencesSection from "./DifferencesSection/DifferencesSection";
 import ServiceSection from "./ServiceSection/ServiceSection";
@@ -57,18 +58,8 @@ const Home: React.FC = () => {
       {/* Sección Ellos Confían en Nosotros */}
       <PartnersSection />
       
-      {/* Contenido temporal para otras secciones */}
-      <main className={styles.mainContent}>
-        <div className={styles.constructionSection}>
-          <h1 className={styles.constructionTitle}>Más secciones próximamente</h1>
-          <p className={styles.constructionText}>
-            Continuaremos construyendo el resto de la página.
-          </p>
-          <div className={styles.constructionIcon}>
-            🚧
-          </div>
-        </div>
-      </main>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
