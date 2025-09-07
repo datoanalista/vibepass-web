@@ -39,13 +39,13 @@
 .titleBar {
   position: relative;
   background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
-  width: 400px; /* Reducido para mejor proporción */
+  width: 320px; /* Reducido hasta altura de las flechas */
   height: 40px; /* Más compacto */
   left: -15px; /* Barra extendida hacia la izquierda */
   border-radius: 8px;
   display: flex;
   align-items: center;
-  padding: 0 37px 0 37px; /* Padding ajustado para mantener texto en posición */
+  padding: 0 25px 0 30px; /* Padding ajustado para ancho menor */
 }
 
 /* Section Title - Reducido para mejor proporción */
@@ -129,7 +129,7 @@
 .familyImage {
   width: 100%;
   max-width: none; /* Sin límite de ancho */
-  height: 280px; /* Reducido proporcionalmente para abarcar desde barra hasta último item */
+  height: 200px; /* Más compacta para coincidir con contenido */
   object-fit: cover;
   border-radius: 0; /* Sin border-radius para usar todo el espacio */
   box-shadow: none; /* Sin box shadow */
