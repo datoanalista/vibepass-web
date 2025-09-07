@@ -35,29 +35,33 @@
   overflow: visible; /* Permitir que titleBar se extienda */
 }
 
-/* Title Bar - Ajustado para proporciones del Figma */
+/* Title Bar - FORZAR tamaño pequeño */
 .titleBar {
   position: relative;
   background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
-  width: 280px; /* Más reducido para terminar a altura de flechas */
+  width: 220px !important; /* FORZAR ancho pequeño con !important */
+  max-width: 220px !important;
+  min-width: 220px !important;
   height: 40px; /* Más compacto */
   left: -15px; /* Barra extendida hacia la izquierda */
   border-radius: 8px;
   display: flex;
   align-items: center;
-  padding: 0 20px 0 25px; /* Padding ajustado para ancho aún menor */
+  padding: 0 15px !important; /* FORZAR padding pequeño */
+  overflow: hidden;
 }
 
-/* Section Title - Reducido para mejor proporción */
+/* Section Title - Reducido para barra pequeña */
 .sectionTitle {
   font-family: Poppins, -apple-system, Roboto, Helvetica, sans-serif;
   font-weight: 800;
-  font-size: 20px; /* Reducido de 30px a 20px */
+  font-size: 16px !important; /* MÁS pequeño para barra reducida */
   line-height: 100%;
   letter-spacing: 0%;
   color: #424040;
   margin: 0;
   text-transform: none;
+  white-space: nowrap; /* Evitar quiebre */
 }
 
 /* Subtitle */
@@ -129,7 +133,7 @@
 .familyImage {
   width: 100%;
   max-width: none; /* Sin límite de ancho */
-  height: 320px; /* Aumentada para cubrir desde barra hasta item final */
+  height: 260px; /* Altura moderada desde barra hasta item final */
   object-fit: cover;
   border-radius: 0; /* Sin border-radius para usar todo el espacio */
   box-shadow: none; /* Sin box shadow */
