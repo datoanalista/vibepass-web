@@ -38,11 +38,11 @@
   background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
   width: 400px; /* Reducido para mejor proporción */
   height: 40px; /* Más compacto */
-  left: -15px; /* Movido a -15px como solicitado */
+  left: -15px; /* Barra extendida hacia la izquierda */
   border-radius: 8px;
   display: flex;
   align-items: center;
-  padding: 0 32px;
+  padding: 0 37px 0 37px; /* Padding ajustado para mantener texto en posición */
 }
 
 /* Section Title - Reducido para mejor proporción */
