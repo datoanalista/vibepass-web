@@ -5,7 +5,23 @@
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   flex: 1;
   min-width: 300px;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+/* Hover Effects - Elegantes y suaves */
+.eventCard:hover {
+  transform: translateY(-8px) scale(1.02);
+  filter: drop-shadow(0px 20px 40px rgba(0, 0, 0, 0.15));
+  z-index: 10;
+}
+
+.centerCard:hover {
+  transform: scale(1.08) translateY(-8px); /* Combinar el scale original con hover */
+}
+
+.sideCard:hover {
+  opacity: 1; /* Aumenta opacidad en hover */
 }
 
 /* Center Card (Kermesse) - Más alta y destacada */
@@ -64,7 +80,7 @@
   }
 }
 
-/* Card Background - Como home_old */
+/* Card Background - Con efectos hover mejorados */
 .cardBackground {
   width: 100%;
   height: 100%;
@@ -74,6 +90,7 @@
   left: 0;
   top: 0;
   z-index: 0;
+  transition: all 0.4s ease;
 }
 
 .centerBackground {
@@ -86,7 +103,19 @@
   background-color: #d9d9d9;
 }
 
-/* Card Header - Como home_old con especificaciones Figma */
+/* Hover effects para backgrounds */
+.eventCard:hover .centerBackground {
+  border-color: #01a8e2;
+  box-shadow: 0px 15px 30px 0px rgba(1, 168, 226, 0.2);
+}
+
+.eventCard:hover .sideBackground {
+  border-color: #b0bbdb;
+  box-shadow: 0px 15px 30px 0px rgba(176, 187, 219, 0.2);
+  background-color: #fff;
+}
+
+/* Card Header - Con efectos hover mejorados */
 .cardHeader {
   position: absolute;
   left: 32px;
@@ -102,6 +131,7 @@
   z-index: 10;
   background-color: #e5e5e5;
   overflow: hidden; /* Evita desbordamiento */
+  transition: all 0.3s ease;
 }
 
 .centerCard .cardHeader {
@@ -110,6 +140,20 @@
 
 .sideCard .cardHeader {
   background-color: #e5e5e5;
+}
+
+/* Hover effects para headers */
+.eventCard:hover .cardHeader {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.centerCard:hover .cardHeader {
+  background-color: #b8b8b8;
+}
+
+.sideCard:hover .cardHeader {
+  background-color: #d0d0d0;
 }
 
 .eventIcon {
@@ -193,11 +237,21 @@
 /* Card central sin override - mismo tamaño que laterales */
 
 .ctaButton:hover {
-  transform: translateY(-1px);
-  box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.25);
 }
 
-/* Features Card - Proporción basada en card central */
+/* Hover específico para botón central */
+.centerCard:hover .ctaButton {
+  box-shadow: 0px 12px 20px 0px rgba(1, 168, 226, 0.4);
+}
+
+/* Hover específico para botones laterales */
+.sideCard:hover .ctaButton {
+  box-shadow: 0px 12px 20px 0px rgba(176, 187, 219, 0.4);
+}
+
+/* Features Card - Con efectos hover mejorados */
 .featuresCard {
   position: absolute;
   left: 46px;
@@ -214,9 +268,24 @@
   flex-direction: column;
   justify-content: space-evenly; /* Distribuir espacio uniformemente entre elementos */
   align-items: flex-start;
+  transition: all 0.3s ease;
   
   /* Default gradient para cards laterales */
   background: linear-gradient(114deg, #e68572 31.17%, rgba(22, 170, 225, 0.8) 100%);
+}
+
+/* Hover effects para features card */
+.eventCard:hover .featuresCard {
+  transform: translateY(-2px);
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.centerCard:hover .featuresCard {
+  box-shadow: 0px 10px 20px 0px rgba(1, 154, 207, 0.3);
+}
+
+.sideCard:hover .featuresCard {
+  box-shadow: 0px 10px 20px 0px rgba(230, 133, 114, 0.3);
 }
 
 .centerCard .featuresCard {
@@ -228,6 +297,7 @@
   height: 169px; /* Ajustado proporcionalmente: 154px + 10% */
   padding: 3px 0; /* 3px superior e inferior como solicitado */
   background: linear-gradient(113deg, #019acf 0.82%, #b0bbdb 100%);
+  transition: all 0.3s ease;
 }
 
 /* Card derecha tiene gradiente específico */
@@ -266,6 +336,7 @@
 .featureText {
   color: #424040;
   font: 400 13px Inter, -apple-system, Roboto, Helvetica, sans-serif; /* Mismo tamaño para todas */
+  transition: all 0.3s ease;
 }
 
 .centerCard .featureText {
@@ -273,7 +344,22 @@
   font: 400 13px Inter, -apple-system, Roboto, Helvetica, sans-serif; /* Mismo tamaño */
 }
 
-/* Bottom Text - Centrado en el espacio disponible */
+/* Hover effects para texto de features */
+.eventCard:hover .featureText {
+  transform: translateX(3px);
+}
+
+.centerCard:hover .featureText {
+  color: #f0f8ff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.sideCard:hover .featureText {
+  color: #1B2735;
+  font-weight: 500;
+}
+
+/* Bottom Text - Con efectos hover elegantes */
 .bottomTextContainer {
   position: absolute;
   left: 50%;
@@ -282,6 +368,7 @@
   text-align: center;
   z-index: 10;
   width: 250px; /* Más ancho para evitar salto de línea */
+  transition: all 0.3s ease;
 }
 
 .bottomText {
@@ -291,6 +378,7 @@
   white-space: nowrap; /* Fuerza una sola línea */
   overflow: hidden;
   text-overflow: ellipsis; /* ... si es muy largo */
+  transition: all 0.3s ease;
 }
 
 .bottomLine {
@@ -299,6 +387,20 @@
   border-top: 0.5px solid #747272;
   margin: 3px auto 0; /* Reducido de 10px a 3px */
   transform: rotate(-0.29deg);
+  transition: all 0.3s ease;
+}
+
+/* Hover effects para texto inferior */
+.eventCard:hover .bottomText {
+  color: #1B2735;
+  font-weight: 500;
+  transform: scale(1.05);
+}
+
+.eventCard:hover .bottomLine {
+  width: 220px;
+  border-color: #1B2735;
+  transform: rotate(-0.29deg) scaleX(1.1);
 }
 
 /* Responsive como home_old */
