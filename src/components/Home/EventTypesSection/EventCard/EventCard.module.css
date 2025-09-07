@@ -197,7 +197,7 @@
   box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.3);
 }
 
-/* Features Card - Como home_old con gradientes de Figma */
+/* Features Card - Optimizado para distribución de espacio */
 .featuresCard {
   position: absolute;
   left: 46px;
@@ -208,11 +208,11 @@
   height: 157px; /* Ajustado proporcionalmente: 143px + 10% */
   border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  padding: 0; /* Sin padding para control total */
+  padding: 3px 0; /* 3px superior e inferior como solicitado */
   z-index: 10;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrar los iconos verticalmente */
+  justify-content: space-evenly; /* Distribuir espacio uniformemente entre elementos */
   align-items: flex-start;
   
   /* Default gradient para cards laterales */
@@ -226,7 +226,7 @@
   width: calc(100% - 64px);
   max-width: 361px;
   height: 169px; /* Ajustado proporcionalmente: 154px + 10% */
-  padding: 0; /* Sin padding para control total */
+  padding: 3px 0; /* 3px superior e inferior como solicitado */
   background: linear-gradient(113deg, #019acf 0.82%, #b0bbdb 100%);
 }
 
@@ -235,27 +235,21 @@
   background: linear-gradient(114deg, #b0bbdb 42.33%, #e68572 97.83%);
 }
 
-/* Feature Items - Centrados verticalmente */
+/* Feature Items - Distribución automática del espacio */
 .featureItem {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 8px; /* Espaciado uniforme */
+  margin: 0; /* Sin margin - flexbox maneja la distribución */
   padding-left: 27px;
   flex-shrink: 0; /* Evita que se compriman */
-}
-
-.featureItem:last-child {
-  margin-bottom: 0; /* Último item sin margin */
+  flex: 1; /* Cada item toma espacio igual */
 }
 
 .centerCard .featureItem {
   padding-left: 26px;
-  margin-bottom: 8px; /* Mismo espaciado que laterales */
-}
-
-.centerCard .featureItem:last-child {
-  margin-bottom: 0;
+  margin: 0; /* Sin margin - distribución automática */
+  flex: 1; /* Espacio distribuido uniformemente */
 }
 
 .featureIcon {
