@@ -152,7 +152,7 @@
 }
 
 .centerCard .eventDescription {
-  top: 125px;
+  top: 86px; /* Reducido de 125px - espacio a la mitad */
   font: 400 15px Inter, -apple-system, Roboto, Helvetica, sans-serif;
 }
 
@@ -186,7 +186,7 @@
   background: linear-gradient(90deg, #01a8e2 0.1%, #b0bbdb 72.97%);
   left: 32px;
   right: 32px;
-  top: 223px;
+  top: 180px; /* Ajustado proporcionalmente */
   color: #fff;
 }
 
@@ -227,7 +227,7 @@
 .centerCard .featuresCard {
   left: 32px;
   right: 32px;
-  top: 302px;
+  top: 240px; /* Reducido de 302px - más cerca del botón */
   width: calc(100% - 64px);
   max-width: 361px;
   height: 241px;
