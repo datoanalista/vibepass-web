@@ -60,7 +60,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px; /* Más separación entre círculo y rectángulo */
+  gap: 5px; /* Rectángulo casi pegado al círculo */
   position: relative;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -108,8 +108,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 229px; /* Ancho del rectángulo según Figma */
-  height: 47px; /* Altura correcta según especificaciones */
+  width: 160px; /* Más pequeño para que quepa el texto */
+  height: 35px; /* Más compacto como en Figma */
   transition: all 0.3s ease;
   border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* #00000040 */
@@ -127,7 +127,7 @@
 .text {
   font-family: Poppins, -apple-system, Roboto, Helvetica, sans-serif;
   font-weight: 800;
-  font-size: 18px; /* Ajustado para que quepa en 229px de ancho */
+  font-size: 14px; /* Más pequeño para rectángulo compacto */
   line-height: 100%;
   letter-spacing: 0%;
   text-transform: uppercase;
