@@ -49,35 +49,35 @@
   position: relative;
 }
 
-/* Pantallas muy grandes (1600px+) */
+/* Pantallas muy grandes (1600px+) - Doble separación para card central */
 @media (min-width: 1600px) {
   .cardsContainer {
-    gap: 60px;
-    max-width: 1400px;
+    gap: 120px; /* Doble de 60px */
+    max-width: 1600px; /* Más ancho para acomodar gaps grandes */
   }
 }
 
 /* Pantallas grandes (1400-1599px) */
 @media (max-width: 1599px) {
   .cardsContainer {
-    gap: 40px;
-    max-width: 1200px;
+    gap: 80px; /* Doble de 40px */
+    max-width: 1400px;
   }
 }
 
 /* Pantallas medianas (1200-1399px) */
 @media (max-width: 1399px) {
   .cardsContainer {
-    gap: 30px;
-    max-width: 1100px;
+    gap: 60px; /* Doble de 30px */
+    max-width: 1300px;
   }
 }
 
 /* Pantallas pequeñas-medianas (992-1199px) */
 @media (max-width: 1199px) {
   .cardsContainer {
-    gap: 20px;
-    max-width: 1000px;
+    gap: 40px; /* Doble de 20px */
+    max-width: 1200px;
   }
 }
 

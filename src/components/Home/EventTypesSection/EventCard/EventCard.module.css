@@ -11,15 +11,15 @@
 /* Center Card (Kermesse) - Más alta y destacada */
 .centerCard {
   max-width: 400px;
-  height: 450px; /* Reducido de 540px a 450px para acomodar features más bajas */
+  height: 495px; /* 450px + 10% = 495px */
   z-index: 2;
   transform: scale(1.05);
 }
 
-/* Side Cards (Izquierda y Derecha) - Más pequeñas */
+/* Side Cards (Izquierda y Derecha) - 95% altura central, 10% más ancho */
 .sideCard {
-  max-width: 380px;
-  height: 420px; /* Reducido de 500px a 420px */
+  max-width: 440px; /* 400px + 10% = 440px */
+  height: 470px; /* 95% de 495px = 470px */
   z-index: 1;
   opacity: 0.95;
 }
@@ -30,7 +30,7 @@
     max-width: 420px;
   }
   .sideCard {
-    max-width: 400px;
+    max-width: 462px; /* 420px + 10% */
   }
 }
 
@@ -40,7 +40,7 @@
     max-width: 400px;
   }
   .sideCard {
-    max-width: 380px;
+    max-width: 440px; /* 400px + 10% */
   }
 }
 
@@ -50,7 +50,7 @@
     max-width: 380px;
   }
   .sideCard {
-    max-width: 360px;
+    max-width: 418px; /* 380px + 10% */
   }
 }
 
@@ -60,7 +60,7 @@
     max-width: 360px;
   }
   .sideCard {
-    max-width: 340px;
+    max-width: 396px; /* 360px + 10% */
   }
 }
 
@@ -142,13 +142,13 @@
   position: absolute;
   left: 33px;
   right: 33px;
-  top: 110px; /* Más hacia arriba para mejor balance visual */
+  top: 121px; /* Ajustado proporcionalmente: 110px + 10% */
   z-index: 10;
   font: 400 14px Inter, -apple-system, Roboto, Helvetica, sans-serif; /* Mismo tamaño para todas */
 }
 
 .centerCard .eventDescription {
-  top: 105px; /* Más hacia arriba para equilibrar espacios */
+  top: 115px; /* Ajustado proporcionalmente: 105px + 10% */
   /* Mismo font que las laterales - sin override */
 }
 
@@ -162,7 +162,7 @@
   position: absolute;
   left: 48px;
   right: 48px;
-  top: 192px;
+  top: 211px; /* Ajustado proporcionalmente: 192px + 10% */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,7 +182,7 @@
   background: linear-gradient(90deg, #01a8e2 0.1%, #b0bbdb 72.97%);
   left: 32px;
   right: 32px;
-  top: 180px; /* Ajustado proporcionalmente */
+  top: 198px; /* Ajustado proporcionalmente: 180px + 10% */
   color: #fff;
 }
 
@@ -202,10 +202,10 @@
   position: absolute;
   left: 46px;
   right: 46px;
-  top: 271px;
+  top: 298px; /* Ajustado proporcionalmente: 271px + 10% */
   width: calc(100% - 92px);
   max-width: 320px;
-  height: 130px; /* Altura reducida */
+  height: 143px; /* Ajustado proporcionalmente: 130px + 10% */
   border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 0; /* Sin padding para control total */
@@ -222,10 +222,10 @@
 .centerCard .featuresCard {
   left: 32px;
   right: 32px;
-  top: 240px; /* Reducido de 302px - más cerca del botón */
+  top: 264px; /* Ajustado proporcionalmente: 240px + 10% */
   width: calc(100% - 64px);
   max-width: 361px;
-  height: 140px; /* Altura reducida */
+  height: 154px; /* Ajustado proporcionalmente: 140px + 10% */
   padding: 0; /* Sin padding para control total */
   background: linear-gradient(113deg, #019acf 0.82%, #b0bbdb 100%);
 }
