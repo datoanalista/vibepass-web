@@ -15,6 +15,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 80px;
+  overflow: visible; /* Permitir que elementos se extiendan fuera */
 }
 
 /* Left Content */
@@ -23,6 +24,7 @@
   max-width: 600px;
   position: relative;
   margin-left: 127px; /* Mitad de 255px = 127px */
+  overflow: visible; /* Permitir que titleBar se extienda */
 }
 
 /* Title Container */
@@ -30,6 +32,7 @@
   position: relative;
   margin-bottom: 40px; /* Reducido spacing */
   width: 100%;
+  overflow: visible; /* Permitir que titleBar se extienda */
 }
 
 /* Title Bar - Ajustado para proporciones del Figma */
