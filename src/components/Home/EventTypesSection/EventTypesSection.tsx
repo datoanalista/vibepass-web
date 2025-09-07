@@ -2,6 +2,7 @@
 import React from "react";
 import styles from "./EventTypesSection.module.css";
 import EventCard from "./EventCard/EventCard";
+import { getImagePath } from "@/utils/getImagePath";
 
 const EventTypesSection: React.FC = () => {
   const eventTypes = [
@@ -68,9 +69,11 @@ const EventTypesSection: React.FC = () => {
         <div className={styles.eventsGrid}>
           {/* Flecha izquierda */}
           <button className={styles.arrowButton} aria-label="Evento anterior">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M15 18L9 12L15 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <img
+              src={getImagePath("/images/icon_left.svg")}
+              alt="Anterior"
+              className={styles.arrowIcon}
+            />
           </button>
 
           {/* Event Cards */}
@@ -82,9 +85,11 @@ const EventTypesSection: React.FC = () => {
 
           {/* Flecha derecha */}
           <button className={styles.arrowButton} aria-label="Siguiente evento">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 18L15 12L9 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <img
+              src={getImagePath("/images/icon_right.svg")}
+              alt="Siguiente"
+              className={styles.arrowIcon}
+            />
           </button>
         </div>
       </div>
