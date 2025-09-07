@@ -233,23 +233,23 @@
   background: linear-gradient(114deg, #b0bbdb 42.33%, #e68572 97.83%);
 }
 
-/* Feature Items - Optimizado para altura reducida */
+/* Feature Items - Centrados verticalmente */
 .featureItem {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 4px; /* Reducido a 4px para que quepan todos */
+  margin-bottom: 8px; /* Espaciado uniforme */
   padding-left: 27px;
   flex-shrink: 0; /* Evita que se compriman */
 }
 
 .featureItem:last-child {
-  margin-bottom: 0; /* Último item sin margin para optimizar espacio */
+  margin-bottom: 0; /* Último item sin margin */
 }
 
 .centerCard .featureItem {
   padding-left: 26px;
-  margin-bottom: 6px; /* Espacio ajustado para card central */
+  margin-bottom: 8px; /* Mismo espaciado que laterales */
 }
 
 .centerCard .featureItem:last-child {
