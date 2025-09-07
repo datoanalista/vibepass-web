@@ -284,7 +284,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 30px; /* Centrado en el espacio entre features y borde */
+  bottom: 32px; /* Subido 2px desde 30px */
   text-align: center;
   z-index: 10;
   width: 250px; /* Más ancho para evitar salto de línea */
