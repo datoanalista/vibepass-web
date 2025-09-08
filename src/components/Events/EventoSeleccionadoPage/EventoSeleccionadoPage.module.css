@@ -349,7 +349,7 @@
   height: auto;
   border-radius: 0; /* Sin border-radius para que ocupe todo el ancho */
   object-fit: cover;
-  max-height: 439px; /* 338px + 30% = 439px */
+  max-height: 615px; /* 439px + 40% = 615px */
   display: block;
 }
 
@@ -374,45 +374,10 @@
   width: 100%;
   max-width: 1200px;
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 2 columnas principales */
-  gap: 40px;
-}
-
-.infoSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-.sectionTitle {
-  font-family: Inter;
-  font-weight: 700;
-  font-style: Bold;
-  line-height: 100%;
-  letter-spacing: 0%;
-  color: white;
-  font-size: 20px;
-  text-align: center;
-  margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.infoGrid {
-  display: grid;
-  gap: 15px;
-  width: 100%;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas siempre */
+  gap: 20px;
   justify-items: center;
-}
-
-/* Grid dinámico: 1 columna si hay 1 card, 2 columnas si hay 2+ */
-.infoGrid.singleCard {
-  grid-template-columns: 1fr;
-  justify-content: center;
-}
-
-.infoGrid.multipleCards {
-  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
 }
 
 .infoCard {
@@ -422,11 +387,12 @@
   border-radius: 12px;
   padding: 16px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   transition: transform 0.3s ease, background 0.3s ease;
-  width: 100%;
-  max-width: 280px;
+  width: 260px; /* Tamaño fijo */
+  height: 120px; /* Altura fija */
+  position: relative; /* Para la etiqueta de categoría */
 }
 
 .infoCard:hover {
@@ -444,6 +410,26 @@
 .cardContent {
   flex: 1;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.cardCategory {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-family: Inter;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 10px;
+  color: #01A8E2;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2px 6px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .cardTitle {
@@ -453,17 +439,23 @@
   line-height: 100%;
   letter-spacing: 0%;
   color: white;
-  font-size: 16px;
-  margin: 0 0 8px 0;
+  font-size: 14px;
+  margin: 0 0 6px 0;
 }
 
 .cardDescription {
   font-family: Inter;
   font-weight: 400;
-  font-size: 13px;
-  line-height: 120%;
+  font-size: 11px;
+  line-height: 130%;
   color: rgba(255, 255, 255, 0.9);
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
+  /* Máximo 2 líneas con ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cardPrice {
@@ -687,7 +679,7 @@
   }
 
   .childrenImage {
-    max-height: 330px; /* 254px + 30% = 330px */
+    max-height: 462px; /* 330px + 40% = 462px */
   }
 
   .infoOverlay {
@@ -695,27 +687,16 @@
   }
 
   .infoContainer {
-    grid-template-columns: 1fr; /* Una sola columna en móvil */
-    gap: 25px;
-  }
-
-  .infoSection {
-    gap: 12px;
-  }
-
-  .sectionTitle {
-    font-size: 18px;
-  }
-
-  .infoGrid {
-    grid-template-columns: 1fr; /* Una sola columna por sección en móvil */
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en móvil */
+    gap: 15px;
   }
 
   .infoCard {
-    max-width: 100%;
+    width: 100%;
+    max-width: 180px;
+    height: 110px;
     padding: 12px;
-    gap: 10px;
+    gap: 8px;
   }
 
   .cardIcon {
