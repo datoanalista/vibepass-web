@@ -29,6 +29,35 @@ const EventoSeleccionadoPage: React.FC = () => {
   const handleEntradaSelect = (tipo: string) => {
     setSelectedEntrada(selectedEntrada === tipo ? null : tipo);
   };
+
+  // Extraer nombres de alimentos/bebidas y actividades
+  const getRandomItems = () => {
+    if (!event) return [];
+    
+    const items: string[] = [];
+    
+    // Agregar alimentos/bebidas
+    if (event.alimentosBebestibles) {
+      event.alimentosBebestibles.forEach((item: any) => {
+        if (item.activo && item.nombre) {
+          items.push(item.nombre);
+        }
+      });
+    }
+    
+    // Agregar actividades
+    if (event.actividades) {
+      event.actividades.forEach((actividad: any) => {
+        if (actividad.activa && actividad.nombreActividad) {
+          items.push(actividad.nombreActividad);
+        }
+      });
+    }
+    
+    return items;
+  };
+
+  const randomItems = getRandomItems();
   return (
     <main className={styles.eventoSeleccionadoPage}>
       {/* Navegación breadcrumb */}
@@ -126,6 +155,23 @@ const EventoSeleccionadoPage: React.FC = () => {
                 alt="Niños" 
                 className={styles.childrenImage}
               />
+              {/* Elementos de texto flotantes */}
+              <div className={styles.floatingItems}>
+                {randomItems.map((item, index) => (
+                  <span
+                    key={`${item}-${index}`}
+                    className={styles.floatingItem}
+                    style={{
+                      left: `${Math.random() * 85 + 5}%`, // 5% a 90% del ancho
+                      top: `${Math.random() * 80 + 10}%`, // 10% a 90% de la altura
+                      animationDelay: `${Math.random() * 5}s`, // Delay aleatorio 0-5s
+                      animationDuration: `${3 + Math.random() * 4}s`, // Duración 3-7s
+                    }}
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
