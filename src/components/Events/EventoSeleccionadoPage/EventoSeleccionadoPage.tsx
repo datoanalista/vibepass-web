@@ -151,7 +151,11 @@ const EventoSeleccionadoPage: React.FC = () => {
                   {event.alimentosBebestibles && event.alimentosBebestibles.filter((item: any) => item.activo).length > 0 && (
                     <div className={styles.infoSection}>
                       <h3 className={styles.sectionTitle}>Alimentos y Bebidas</h3>
-                      <div className={styles.infoGrid}>
+                      <div className={`${styles.infoGrid} ${
+                        event.alimentosBebestibles.filter((item: any) => item.activo).slice(0, showMore ? undefined : 9).length === 1 
+                          ? styles.singleCard 
+                          : styles.multipleCards
+                      }`}>
                         {event.alimentosBebestibles
                           .filter((item: any) => item.activo)
                           .slice(0, showMore ? undefined : 9)
@@ -179,7 +183,11 @@ const EventoSeleccionadoPage: React.FC = () => {
                   {event.actividades && event.actividades.filter((actividad: any) => actividad.activa).length > 0 && (
                     <div className={styles.infoSection}>
                       <h3 className={styles.sectionTitle}>Actividades</h3>
-                      <div className={styles.infoGrid}>
+                      <div className={`${styles.infoGrid} ${
+                        event.actividades.filter((actividad: any) => actividad.activa).slice(0, showMore ? undefined : 9).length === 1 
+                          ? styles.singleCard 
+                          : styles.multipleCards
+                      }`}>
                         {event.actividades
                           .filter((actividad: any) => actividad.activa)
                           .slice(0, showMore ? undefined : 9)

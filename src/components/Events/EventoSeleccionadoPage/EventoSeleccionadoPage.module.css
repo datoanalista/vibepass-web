@@ -349,7 +349,7 @@
   height: auto;
   border-radius: 0; /* Sin border-radius para que ocupe todo el ancho */
   object-fit: cover;
-  max-height: 338px; /* 260px + 30% = 338px */
+  max-height: 439px; /* 338px + 30% = 439px */
   display: block;
 }
 
@@ -400,10 +400,19 @@
 
 .infoGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columnas por sección */
   gap: 15px;
   width: 100%;
   justify-items: center;
+}
+
+/* Grid dinámico: 1 columna si hay 1 card, 2 columnas si hay 2+ */
+.infoGrid.singleCard {
+  grid-template-columns: 1fr;
+  justify-content: center;
+}
+
+.infoGrid.multipleCards {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .infoCard {
@@ -678,7 +687,7 @@
   }
 
   .childrenImage {
-    max-height: 254px; /* 195px + 30% = 254px */
+    max-height: 330px; /* 254px + 30% = 330px */
   }
 
   .infoOverlay {
