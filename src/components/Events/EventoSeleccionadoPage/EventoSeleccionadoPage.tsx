@@ -26,26 +26,64 @@ const EventoSeleccionadoPage: React.FC = () => {
   const { event, loading, error } = useEventDetails(eventoId);
   const [selectedEntrada, setSelectedEntrada] = useState<string | null>(null);
   const [showMore, setShowMore] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
 
   const handleEntradaSelect = (tipo: string) => {
     setSelectedEntrada(selectedEntrada === tipo ? null : tipo);
   };
 
-  // Contar total de items activos
-  const getTotalItems = () => {
-    if (!event) return 0;
+  // Obtener todos los items para el carrusel
+  const getAllItems = () => {
+    if (!event) return [];
     
-    let total = 0;
+    const allItems: any[] = [];
     
+    // Agregar alimentos/bebidas
     if (event.alimentosBebestibles) {
-      total += event.alimentosBebestibles.filter((item: any) => item.activo).length;
+      event.alimentosBebestibles
+        .filter((item: any) => item.activo)
+        .forEach((item: any) => {
+          allItems.push({
+            ...item,
+            type: 'alimento',
+            displayName: item.nombre,
+            displayPrice: item.precioUnitario
+          });
+        });
     }
     
+    // Agregar actividades
     if (event.actividades) {
-      total += event.actividades.filter((actividad: any) => actividad.activa).length;
+      event.actividades
+        .filter((actividad: any) => actividad.activa)
+        .forEach((actividad: any) => {
+          allItems.push({
+            ...actividad,
+            type: 'actividad',
+            displayName: actividad.nombreActividad,
+            displayPrice: actividad.precioUnitario
+          });
+        });
     }
     
-    return total;
+    return allItems;
+  };
+
+  const allItems = getAllItems();
+  const itemsPerPage = 3; // Siempre 3 cards por página
+  const totalPages = Math.ceil(allItems.length / itemsPerPage);
+
+  const nextSlide = () => {
+    setCarouselIndex((prev) => (prev + 1) % totalPages);
+  };
+
+  const prevSlide = () => {
+    setCarouselIndex((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  const getCurrentItems = () => {
+    const startIndex = carouselIndex * itemsPerPage;
+    return allItems.slice(startIndex, startIndex + itemsPerPage);
   };
   return (
     <main className={styles.eventoSeleccionadoPage}>
@@ -144,63 +182,62 @@ const EventoSeleccionadoPage: React.FC = () => {
                 alt="Niños" 
                 className={styles.childrenImage}
               />
-              {/* Contenido informativo sobre la imagen */}
+              {/* Carrusel informativo sobre la imagen */}
               <div className={styles.infoOverlay}>
                 <div className={styles.infoContainer}>
-                  {/* Alimentos y Bebidas */}
-                  {event.alimentosBebestibles && event.alimentosBebestibles
-                    .filter((item: any) => item.activo)
-                    .slice(0, showMore ? undefined : 9)
-                    .map((item: any) => (
-                      <div key={item.id || item._id} className={styles.infoCard}>
-                        <span className={styles.cardCategory}>Alimento y Bebida</span>
+                  <div className={styles.carouselContainer}>
+                    {/* Botón anterior */}
+                    {totalPages > 1 && (
+                      <button 
+                        className={styles.carouselButton}
+                        onClick={prevSlide}
+                      >
                         <img 
-                          src={getImagePath("/images/fastfood.png")} 
-                          alt="Alimento" 
-                          className={styles.cardIcon}
+                          src={getImagePath("/images/icon_left.svg")} 
+                          alt="Anterior" 
+                          style={{width: '20px', height: '20px'}}
                         />
-                        <div className={styles.cardContent}>
-                          <h4 className={styles.cardTitle}>{item.nombre}</h4>
-                          <p className={styles.cardDescription}>{item.descripcion}</p>
-                          <p className={styles.cardPrice}>
-                            ${item.precioUnitario.toLocaleString('es-CL')}
-                          </p>
+                      </button>
+                    )}
+                    
+                    {/* Contenido del carrusel */}
+                    <div className={styles.carouselContent}>
+                      {getCurrentItems().map((item: any) => (
+                        <div key={item.id || item._id} className={styles.infoCard}>
+                          <span className={styles.cardCategory}>
+                            {item.type === 'alimento' ? 'Alimento y Bebida' : 'Actividad'}
+                          </span>
+                          <img 
+                            src={getImagePath(item.type === 'alimento' ? "/images/fastfood.png" : "/images/person-play.png")} 
+                            alt={item.type === 'alimento' ? 'Alimento' : 'Actividad'}
+                            className={styles.cardIcon}
+                          />
+                          <div className={styles.cardContent}>
+                            <h4 className={styles.cardTitle}>{item.displayName}</h4>
+                            <p className={styles.cardDescription}>{item.descripcion}</p>
+                            <p className={styles.cardPrice}>
+                              ${item.displayPrice.toLocaleString('es-CL')}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  
-                  {/* Actividades */}
-                  {event.actividades && event.actividades
-                    .filter((actividad: any) => actividad.activa)
-                    .slice(0, showMore ? undefined : 9)
-                    .map((actividad: any) => (
-                      <div key={actividad.id || actividad._id} className={styles.infoCard}>
-                        <span className={styles.cardCategory}>Actividad</span>
+                      ))}
+                    </div>
+                    
+                    {/* Botón siguiente */}
+                    {totalPages > 1 && (
+                      <button 
+                        className={styles.carouselButton}
+                        onClick={nextSlide}
+                      >
                         <img 
-                          src={getImagePath("/images/person-play.png")} 
-                          alt="Actividad" 
-                          className={styles.cardIcon}
+                          src={getImagePath("/images/icon_right.svg")} 
+                          alt="Siguiente" 
+                          style={{width: '20px', height: '20px'}}
                         />
-                        <div className={styles.cardContent}>
-                          <h4 className={styles.cardTitle}>{actividad.nombreActividad}</h4>
-                          <p className={styles.cardDescription}>{actividad.descripcion}</p>
-                          <p className={styles.cardPrice}>
-                            ${actividad.precioUnitario.toLocaleString('es-CL')}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
+                      </button>
+                    )}
+                  </div>
                 </div>
-                
-                {/* Botón Ver más */}
-                {getTotalItems() > 9 && (
-                  <button 
-                    className={styles.verMasBtn}
-                    onClick={() => setShowMore(!showMore)}
-                  >
-                    {showMore ? 'Ver menos' : 'Ver más'}
-                  </button>
-                )}
               </div>
             </div>
           </div>

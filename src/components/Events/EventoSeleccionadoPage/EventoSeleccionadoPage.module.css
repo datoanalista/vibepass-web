@@ -366,18 +366,47 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente */
   overflow-y: auto;
 }
 
 .infoContainer {
   width: 100%;
-  max-width: 1200px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columnas siempre */
+  max-width: 1000px;
+  position: relative;
+}
+
+.carouselContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 20px;
-  justify-items: center;
-  align-items: start;
+}
+
+.carouselContent {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+  width: 820px; /* Ancho para mostrar exactamente 3 cards: 260px * 3 + 20px * 2 = 820px */
+  justify-content: center;
+}
+
+.carouselButton {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.carouselButton:hover {
+  background: white;
+  transform: scale(1.1);
 }
 
 .infoCard {
@@ -424,8 +453,8 @@
   font-weight: 600;
   font-style: italic;
   font-size: 10px;
-  color: #01A8E2;
-  background: rgba(255, 255, 255, 0.9);
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   padding: 2px 6px;
   border-radius: 8px;
   text-transform: uppercase;
@@ -686,17 +715,20 @@
     padding: 15px;
   }
 
-  .infoContainer {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en móvil */
-    gap: 15px;
+  .carouselContent {
+    width: 400px; /* Ancho para 2 cards en móvil: 180px * 2 + 20px = 380px */
   }
 
   .infoCard {
-    width: 100%;
-    max-width: 180px;
+    width: 180px;
     height: 110px;
     padding: 12px;
     gap: 8px;
+  }
+
+  .carouselButton {
+    width: 35px;
+    height: 35px;
   }
 
   .cardIcon {
