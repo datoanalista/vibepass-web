@@ -1,8 +1,10 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { getImagePath } from '@/utils/getImagePath';
 import styles from './UpcomingEvents.module.css';
 
 interface Event {
+  _id: string;
   informacionGeneral: {
     nombreEvento: string;
     descripcion: string;
@@ -28,6 +30,12 @@ interface UpcomingEventsProps {
 }
 
 const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
+  const router = useRouter();
+
+  const handleEventClick = (eventId: string) => {
+    router.push(`/evento-seleccionado?eventoId=${eventId}`);
+  };
+
   const formatDate = (fechaEvento: string) => {
     const [year, month, day] = fechaEvento.split('-').map(Number);
     const months = [
@@ -79,7 +87,11 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
           const availableTickets = calculateAvailableTickets(event.entradas);
           
           return (
-            <div key={index} className={styles.eventCard}>
+            <div 
+              key={index} 
+              className={styles.eventCard}
+              onClick={() => handleEventClick(event._id)}
+            >
               {/* Cantidad de tickets */}
               <div className={styles.ticketsInfo}>
                 <span className={styles.ticketsText}>{formatNumber(availableTickets)} tickets disponibles</span>
