@@ -302,18 +302,11 @@
   opacity: 0.8;
 }
 
-/* Características Section Styles */
-.caracteristicasSection {
-  width: 90%;
-  margin: 60px auto 40px auto;
-  position: relative;
-}
-
+/* Características Box - Fuera de la sección */
 .caracteristicasBox {
   width: 504px; /* 315px + 60% más ancho */
   height: 42px;
-  margin-left: -27px; /* Pegado a la izquierda con extensión */
-  margin-right: auto; /* Quitar margin-right */
+  margin: 60px 0 0 0; /* Solo margin top, sin laterales */
   border-radius: 10px;
   background: linear-gradient(90deg, #01A8E2 0%, #A5B9DB 100%);
   display: flex;
@@ -322,6 +315,13 @@
   padding: 0 20px;
   position: relative;
   z-index: 2;
+}
+
+/* Características Section Styles */
+.caracteristicasSection {
+  width: 90%;
+  margin: -10px auto 40px auto; /* Margin top negativo para solapamiento */
+  position: relative;
 }
 
 .caracteristicasTitle {
@@ -538,17 +538,16 @@
     height: 20px;
   }
 
-  .caracteristicasSection {
-    width: 90%;
-    margin: 40px auto 30px auto;
-  }
-
   .caracteristicasBox {
     width: 472px; /* 295px + 60% más ancho */
     height: 38px;
-    margin-left: -20px; /* Pegado a la izquierda con extensión */
-    margin-right: auto; /* Alinear a la izquierda */
+    margin: 40px 0 0 0; /* Solo margin top, sin laterales */
     justify-content: flex-start; /* Alinear contenido a la izquierda */
+  }
+
+  .caracteristicasSection {
+    width: 90%;
+    margin: -10px auto 30px auto; /* Margin top negativo para solapamiento */
   }
 
   .caracteristicasTitle {
