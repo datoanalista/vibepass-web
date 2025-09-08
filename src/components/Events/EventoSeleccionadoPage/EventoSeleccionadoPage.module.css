@@ -312,13 +312,13 @@
 .caracteristicasBox {
   width: 504px; /* 315px + 60% más ancho */
   height: 42px;
-  margin-left: auto; /* Quitar margin-left negativo */
-  margin-right: -27px; /* Pegado a la derecha con extensión */
+  margin-left: -27px; /* Pegado a la izquierda con extensión */
+  margin-right: auto; /* Quitar margin-right */
   border-radius: 10px;
   background: linear-gradient(90deg, #01A8E2 0%, #A5B9DB 100%);
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Alinear contenido a la derecha */
+  justify-content: flex-start; /* Alinear contenido a la izquierda */
   padding: 0 20px;
   position: relative;
   z-index: 2;
@@ -546,9 +546,9 @@
   .caracteristicasBox {
     width: 472px; /* 295px + 60% más ancho */
     height: 38px;
-    margin-left: auto; /* Alinear a la derecha */
-    margin-right: -20px; /* Pegado a la derecha con extensión */
-    justify-content: flex-end; /* Alinear contenido a la derecha */
+    margin-left: -20px; /* Pegado a la izquierda con extensión */
+    margin-right: auto; /* Alinear a la izquierda */
+    justify-content: flex-start; /* Alinear contenido a la izquierda */
   }
 
   .caracteristicasTitle {
