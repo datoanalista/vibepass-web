@@ -5,6 +5,21 @@ import { useEventDetails } from '@/hooks/useEventDetails';
 import { getImagePath } from '@/utils/getImagePath';
 import styles from './EventoSeleccionadoPage.module.css';
 
+interface Entrada {
+  id?: string;
+  _id?: string;
+  tipoEntrada: string;
+  precio: number;
+  cuposDisponibles: number;
+  entradasVendidas: number;
+  activa: boolean;
+  limitePorPersona?: number;
+  fechasVenta?: {
+    inicio: string;
+    fin: string;
+  };
+}
+
 const EventoSeleccionadoPage: React.FC = () => {
   const searchParams = useSearchParams();
   const eventoId = searchParams.get('eventoId');
@@ -64,7 +79,7 @@ const EventoSeleccionadoPage: React.FC = () => {
           <div className={styles.entradasSection}>
             <h3 className={styles.entradasTitle}>Selecciona tu tipo de entrada</h3>
             <div className={styles.entradasGrid}>
-              {event.entradas && event.entradas.filter(entrada => entrada.activa).map((entrada) => (
+              {event.entradas && event.entradas.filter((entrada: Entrada) => entrada.activa).map((entrada: Entrada) => (
                 <div 
                   key={entrada.id || entrada._id}
                   className={`${styles.entradaCard} ${selectedEntrada === entrada.tipoEntrada ? styles.selected : ''}`}
