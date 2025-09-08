@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEventDetails } from '@/hooks/useEventDetails';
@@ -9,6 +9,11 @@ const EventoSeleccionadoPage: React.FC = () => {
   const searchParams = useSearchParams();
   const eventoId = searchParams.get('eventoId');
   const { event, loading, error } = useEventDetails(eventoId);
+  const [selectedEntrada, setSelectedEntrada] = useState<string | null>(null);
+
+  const handleEntradaSelect = (tipo: string) => {
+    setSelectedEntrada(selectedEntrada === tipo ? null : tipo);
+  };
   return (
     <main className={styles.eventoSeleccionadoPage}>
       {/* Navegación breadcrumb */}
@@ -53,6 +58,107 @@ const EventoSeleccionadoPage: React.FC = () => {
             <p className={styles.descriptionText}>
               {event.informacionGeneral?.descripcion || 'Descripción no disponible'}
             </p>
+          </div>
+
+          {/* Sección de entradas */}
+          <div className={styles.entradasSection}>
+            <h3 className={styles.entradasTitle}>Selecciona tu tipo de entrada</h3>
+            <div className={styles.entradasGrid}>
+              <div 
+                className={`${styles.entradaCard} ${selectedEntrada === 'VIP' ? styles.selected : ''}`}
+                onClick={() => handleEntradaSelect('VIP')}
+              >
+                <div className={styles.entradaCardInner}>
+                  <img 
+                    src={getImagePath("/images/icon_information.png")} 
+                    alt="Información" 
+                    className={styles.infoIcon}
+                  />
+                  <span className={styles.entradaText}>VIP</span>
+                  <img 
+                    src={getImagePath("/images/solar_ticket-bold.png")} 
+                    alt="Ticket" 
+                    className={styles.ticketIcon}
+                  />
+                </div>
+              </div>
+
+              <div 
+                className={`${styles.entradaCard} ${selectedEntrada === 'General' ? styles.selected : ''}`}
+                onClick={() => handleEntradaSelect('General')}
+              >
+                <div className={styles.entradaCardInner}>
+                  <img 
+                    src={getImagePath("/images/icon_information.png")} 
+                    alt="Información" 
+                    className={styles.infoIcon}
+                  />
+                  <span className={styles.entradaText}>General</span>
+                  <img 
+                    src={getImagePath("/images/solar_ticket-bold.png")} 
+                    alt="Ticket" 
+                    className={styles.ticketIcon}
+                  />
+                </div>
+              </div>
+
+              <div 
+                className={`${styles.entradaCard} ${selectedEntrada === 'Estudiantes' ? styles.selected : ''}`}
+                onClick={() => handleEntradaSelect('Estudiantes')}
+              >
+                <div className={styles.entradaCardInner}>
+                  <img 
+                    src={getImagePath("/images/icon_information.png")} 
+                    alt="Información" 
+                    className={styles.infoIcon}
+                  />
+                  <span className={styles.entradaText}>Estudiantes</span>
+                  <img 
+                    src={getImagePath("/images/solar_ticket-bold.png")} 
+                    alt="Ticket" 
+                    className={styles.ticketIcon}
+                  />
+                </div>
+              </div>
+
+              <div 
+                className={`${styles.entradaCard} ${selectedEntrada === 'Profesores' ? styles.selected : ''}`}
+                onClick={() => handleEntradaSelect('Profesores')}
+              >
+                <div className={styles.entradaCardInner}>
+                  <img 
+                    src={getImagePath("/images/icon_information.png")} 
+                    alt="Información" 
+                    className={styles.infoIcon}
+                  />
+                  <span className={styles.entradaText}>Profesores</span>
+                  <img 
+                    src={getImagePath("/images/solar_ticket-bold.png")} 
+                    alt="Ticket" 
+                    className={styles.ticketIcon}
+                  />
+                </div>
+              </div>
+
+              <div 
+                className={`${styles.entradaCard} ${selectedEntrada === 'Tercera Edad' ? styles.selected : ''}`}
+                onClick={() => handleEntradaSelect('Tercera Edad')}
+              >
+                <div className={styles.entradaCardInner}>
+                  <img 
+                    src={getImagePath("/images/icon_information.png")} 
+                    alt="Información" 
+                    className={styles.infoIcon}
+                  />
+                  <span className={styles.entradaText}>Tercera Edad</span>
+                  <img 
+                    src={getImagePath("/images/solar_ticket-bold.png")} 
+                    alt="Ticket" 
+                    className={styles.ticketIcon}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
