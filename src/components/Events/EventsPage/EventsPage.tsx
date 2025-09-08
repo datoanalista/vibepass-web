@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEvents } from '@/hooks/useEvents';
+import EventsCarousel from '../EventsCarousel/EventsCarousel';
+import UpcomingEvents from '../UpcomingEvents/UpcomingEvents';
 import styles from './EventsPage.module.css';
 import { getImagePath } from '@/utils/getImagePath';
 
@@ -17,62 +19,55 @@ const EventsPage: React.FC = () => {
 
   return (
     <main className={styles.eventsPage}>
-      {/* Navegación breadcrumb */}
-      <div className={styles.breadcrumb}>
-        <Link href="/home" className={styles.breadcrumbItem}>
-          HOME
-        </Link>
-        <img 
-          src={getImagePath("/images/flecha_home.svg")} 
-          alt=">" 
-          className={styles.breadcrumbArrow}
-        />
-        <span className={styles.breadcrumbItem}>EVENTOS</span>
+      {/* Loading overlay */}
+      {loading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingContent}>
+            <div className={styles.loadingSpinner}></div>
+            <h2 className={styles.loadingTitle}>Cargando eventos...</h2>
+            <p className={styles.loadingText}>Obteniendo la mejor experiencia para ti</p>
+          </div>
+        </div>
+      )}
+
+      {/* Navegación breadcrumb y filtros en la misma fila */}
+      <div className={styles.topRow}>
+        <div className={styles.breadcrumb}>
+          <Link href="/home" className={styles.breadcrumbItem}>
+            HOME
+          </Link>
+          <img 
+            src={getImagePath("/images/flecha_home.svg")} 
+            alt=">" 
+            className={styles.breadcrumbArrow}
+          />
+          <span className={styles.breadcrumbItem}>EVENTOS</span>
+        </div>
+
+        <div className={styles.filtersContainer}>
+          <div className={styles.dropdown}>
+            <span className={styles.dropdownText}>Institución</span>
+            <span className={styles.dropdownArrow}>▼</span>
+          </div>
+          <div className={styles.dropdown}>
+            <span className={styles.dropdownText}>Lugar</span>
+            <span className={styles.dropdownArrow}>▼</span>
+          </div>
+        </div>
       </div>
 
-      {/* Filtros dropdown */}
-      <div className={styles.filtersContainer}>
-        <div className={styles.dropdown}>
-          <span className={styles.dropdownText}>Institución</span>
-          <span className={styles.dropdownArrow}>▼</span>
+      {/* Carrusel de eventos */}
+      {events.length > 0 && (
+        <div className={styles.carouselSection}>
+          <EventsCarousel events={events} />
         </div>
-        <div className={styles.dropdown}>
-          <span className={styles.dropdownText}>Lugar</span>
-          <span className={styles.dropdownArrow}>▼</span>
-        </div>
-      </div>
+      )}
 
-      {/* Título principal */}
-      <h1 className={styles.mainTitle}>VER EVENTOS</h1>
+      {/* Próximos eventos */}
+      {events.length > 0 && (
+        <UpcomingEvents events={events} />
+      )}
 
-      {/* Banner en construcción */}
-      <div className={styles.constructionBanner}>
-        <h2 className={styles.constructionTitle}>Página en Construcción</h2>
-        <p className={styles.constructionText}>
-          Estamos trabajando en la funcionalidad de eventos. Pronto podrás ver todos los eventos disponibles.
-        </p>
-        
-        {/* Debug Info */}
-        <div className={styles.debugInfo}>
-          <h3>🔍 Debug Info:</h3>
-          <p><strong>Loading:</strong> {loading ? '⏳ Sí' : '✅ No'}</p>
-          <p><strong>Error:</strong> {error ? `❌ ${error}` : '✅ Ninguno'}</p>
-          <p><strong>Events Count:</strong> {events.length}</p>
-          {events.length > 0 && (
-            <div className={styles.eventsPreview}>
-              <h4>📋 First Event Preview:</h4>
-              <p><strong>Name:</strong> {events[0].informacionGeneral.nombreEvento}</p>
-              <p><strong>Date:</strong> {events[0].informacionGeneral.fechaEvento}</p>
-              <p><strong>Location:</strong> {events[0].informacionGeneral.lugarEvento}</p>
-            </div>
-          )}
-          <button onClick={refetch} className={styles.refetchButton}>
-            🔄 Refetch Events
-          </button>
-        </div>
-        
-        <div className={styles.constructionIcon}>🚧</div>
-      </div>
     </main>
   );
 };

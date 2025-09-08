@@ -1,0 +1,311 @@
+.upcomingEvents {
+  padding: 80px 40px;
+  background-color: #FFFFFF;
+}
+
+.sectionTitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #1B2735;
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+
+.separator {
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #06A8E1 0%, #9BB8DC 100%);
+  margin: 0 auto 60px auto;
+  border-radius: 2px;
+}
+
+.eventsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.eventCard {
+  background: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.eventCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.ticketsInfo {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 2;
+}
+
+.ticketsText {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFFFFF;
+  background: #121212;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.ticketsBar {
+  width: 60px;
+  height: 3px;
+  background: #121212;
+  border-radius: 2px;
+  position: absolute;
+  top: -15px;
+  left: 15px;
+}
+
+.eventImageContainer {
+  width: 100%;
+  height: 308px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px 12px 0 0;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eventImage {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.eventCard:hover .eventImage {
+  transform: scale(1.015);
+}
+
+.eventInfo {
+  display: flex;
+  height: 150px !important;
+}
+
+.dateBox {
+  width: 25%;
+  background: #1B2735;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 15px 10px;
+}
+
+.dateNumber {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFFFFF;
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.dateMonth {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFFFFF;
+  font-size: 12px;
+  text-align: center;
+}
+
+.dateIcon {
+  position: absolute;
+  bottom: 8px;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.infoBox {
+  width: 75%;
+  background: #D9D9D9;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.locationInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.locationIcon {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+}
+
+.locationText {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #1B2735;
+  font-size: 11px;
+}
+
+.eventName {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #1B2735;
+  font-size: 13px;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.eventTime {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #1B2735;
+  font-size: 11px;
+  margin-bottom: 12px;
+}
+
+.buyButton {
+  background: linear-gradient(90deg, #01A8E2 0%, #B0BBDB 100%) !important;
+  border: none !important;
+  border-radius: 100px !important;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: flex-end !important;
+  transition: transform 0.2s ease !important;
+  width: 120px !important;
+  height: 30px !important;
+  padding: 0 !important;
+}
+
+.buyButton:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.3) !important;
+}
+
+.buttonText {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #000000;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .eventsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  
+  .upcomingEvents {
+    padding: 60px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .eventsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 400px;
+  }
+  
+  .upcomingEvents {
+    padding: 40px 20px;
+  }
+  
+  .sectionTitle {
+    font-size: 28px;
+  }
+  
+  .eventImageContainer {
+    height: 220px;
+  }
+  
+  .eventInfo {
+    height: 130px !important;
+  }
+  
+  .dateNumber {
+    font-size: 24px;
+  }
+  
+  .dateMonth {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .upcomingEvents {
+    padding: 30px 15px;
+  }
+  
+  .sectionTitle {
+    font-size: 24px;
+  }
+  
+  .eventImageContainer {
+    height: 180px;
+  }
+  
+  .eventInfo {
+    height: 120px !important;
+  }
+  
+  .dateNumber {
+    font-size: 20px;
+  }
+  
+  .buyButton {
+    width: 100px !important;
+    height: 25px !important;
+  }
+  
+  .buttonText {
+    font-size: 10px;
+  }
+}

@@ -11,7 +11,15 @@ interface Event {
     lugarEvento: string;
     bannerPromocional: string;
     fechaCreacion: string;
+    estado: string;
   };
+  entradas: Array<{
+    cuposDisponibles: number;
+    entradasVendidas: number;
+    tipoEntrada: string;
+    precio: number;
+    activa: boolean;
+  }>;
   // Agregar más campos según la respuesta de la API
 }
 
@@ -53,10 +61,17 @@ export const useEvents = (): UseEventsReturn => {
       console.log('🎪 Events API Response:', data);
       
       // La API devuelve { status, message, data: { events: [...] } }
-      const eventsArray = data?.data?.events || data?.events || (Array.isArray(data) ? data : []);
-      console.log('📋 Extracted events:', eventsArray);
+      const allEvents = data?.data?.events || data?.events || (Array.isArray(data) ? data : []);
+      console.log('📋 All events from API:', allEvents);
       
-      setEvents(eventsArray);
+      // Filtrar eventos con estado "programado" o "en_curso"
+      const activeEvents = allEvents.filter((event: Event) => 
+        event.informacionGeneral?.estado === 'programado' || 
+        event.informacionGeneral?.estado === 'en_curso'
+      );
+      console.log('🎯 Active events (programado/en_curso):', activeEvents);
+      
+      setEvents(activeEvents);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
       console.error('❌ Error fetching events:', errorMessage);
