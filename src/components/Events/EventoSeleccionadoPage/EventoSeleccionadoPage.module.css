@@ -349,7 +349,7 @@
   height: auto;
   border-radius: 0; /* Sin border-radius para que ocupe todo el ancho */
   object-fit: cover;
-  max-height: 200px; /* Ajustar según el Figma - aproximadamente 1/4 de la altura de la barra */
+  max-height: 260px; /* 200px + 30% = 260px */
   display: block;
 }
 
@@ -545,7 +545,7 @@
   }
 
   .childrenImage {
-    max-height: 150px;
+    max-height: 195px; /* 150px + 30% = 195px */
   }
 
   .constructionContent {
