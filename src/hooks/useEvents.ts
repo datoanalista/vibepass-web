@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { API_ENDPOINTS } from '@/config/api';
 
 interface Event {
-  _id: string;
+  id: string;
   informacionGeneral: {
     nombreEvento: string;
     descripcion: string;
@@ -64,6 +64,7 @@ export const useEvents = (): UseEventsReturn => {
       // La API devuelve { status, message, data: { events: [...] } }
       const allEvents = data?.data?.events || data?.events || (Array.isArray(data) ? data : []);
       console.log('📋 All events from API:', allEvents);
+      
       
       // Filtrar eventos con estado "programado" o "en_curso"
       const activeEvents = allEvents.filter((event: Event) => 
