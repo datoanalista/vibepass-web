@@ -88,16 +88,24 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
           
           // Debug: verificar la estructura del evento
           console.log('🔍 Event data:', event);
-          console.log('🆔 Event ID:', event._id);
+          console.log('🆔 Event ID (_id):', event._id);
+          console.log('🆔 Event ID (id):', event.id);
           console.log('🔑 All event keys:', Object.keys(event));
+          
+          // Buscar cualquier campo que contenga 'id'
+          const idFields = Object.keys(event).filter(key => key.toLowerCase().includes('id'));
+          console.log('🔍 Fields containing "id":', idFields);
           
           return (
             <div 
               key={index} 
               className={styles.eventCard}
               onClick={() => {
-                console.log('🖱️ Clicking event with ID:', event._id);
-                handleEventClick(event._id);
+                // Intentar diferentes campos de ID
+                const eventId = event._id || event.id || `event-${index}`;
+                console.log('🖱️ Clicking event with ID:', eventId);
+                console.log('🖱️ Event object:', event);
+                handleEventClick(eventId);
               }}
             >
               {/* Cantidad de tickets */}
