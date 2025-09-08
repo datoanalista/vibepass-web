@@ -25,39 +25,28 @@ const EventoSeleccionadoPage: React.FC = () => {
   const eventoId = searchParams.get('eventoId');
   const { event, loading, error } = useEventDetails(eventoId);
   const [selectedEntrada, setSelectedEntrada] = useState<string | null>(null);
+  const [showMore, setShowMore] = useState(false);
 
   const handleEntradaSelect = (tipo: string) => {
     setSelectedEntrada(selectedEntrada === tipo ? null : tipo);
   };
 
-  // Extraer nombres de alimentos/bebidas y actividades
-  const getRandomItems = () => {
-    if (!event) return [];
+  // Contar total de items activos
+  const getTotalItems = () => {
+    if (!event) return 0;
     
-    const items: string[] = [];
+    let total = 0;
     
-    // Agregar alimentos/bebidas
     if (event.alimentosBebestibles) {
-      event.alimentosBebestibles.forEach((item: any) => {
-        if (item.activo && item.nombre) {
-          items.push(item.nombre);
-        }
-      });
+      total += event.alimentosBebestibles.filter((item: any) => item.activo).length;
     }
     
-    // Agregar actividades
     if (event.actividades) {
-      event.actividades.forEach((actividad: any) => {
-        if (actividad.activa && actividad.nombreActividad) {
-          items.push(actividad.nombreActividad);
-        }
-      });
+      total += event.actividades.filter((actividad: any) => actividad.activa).length;
     }
     
-    return items;
+    return total;
   };
-
-  const randomItems = getRandomItems();
   return (
     <main className={styles.eventoSeleccionadoPage}>
       {/* Navegación breadcrumb */}
@@ -155,22 +144,47 @@ const EventoSeleccionadoPage: React.FC = () => {
                 alt="Niños" 
                 className={styles.childrenImage}
               />
-              {/* Elementos de texto flotantes */}
-              <div className={styles.floatingItems}>
-                {randomItems.map((item, index) => (
-                  <span
-                    key={`${item}-${index}`}
-                    className={styles.floatingItem}
-                    style={{
-                      left: `${Math.random() * 85 + 5}%`, // 5% a 90% del ancho
-                      top: `${Math.random() * 80 + 10}%`, // 10% a 90% de la altura
-                      animationDelay: `${Math.random() * 5}s`, // Delay aleatorio 0-5s
-                      animationDuration: `${3 + Math.random() * 4}s`, // Duración 3-7s
-                    }}
+              {/* Contenido informativo sobre la imagen */}
+              <div className={styles.infoOverlay}>
+                <div className={styles.infoGrid}>
+                  {/* Alimentos y Bebidas */}
+                  {event.alimentosBebestibles && event.alimentosBebestibles
+                    .filter((item: any) => item.activo)
+                    .slice(0, showMore ? undefined : 9)
+                    .map((item: any) => (
+                      <div key={item.id || item._id} className={styles.infoCard}>
+                        <h4 className={styles.cardTitle}>{item.nombre}</h4>
+                        <p className={styles.cardDescription}>{item.descripcion}</p>
+                        <p className={styles.cardPrice}>
+                          ${item.precioUnitario.toLocaleString('es-CL')}
+                        </p>
+                      </div>
+                    ))}
+                  
+                  {/* Actividades */}
+                  {event.actividades && event.actividades
+                    .filter((actividad: any) => actividad.activa)
+                    .slice(0, showMore ? undefined : 9)
+                    .map((actividad: any) => (
+                      <div key={actividad.id || actividad._id} className={styles.infoCard}>
+                        <h4 className={styles.cardTitle}>{actividad.nombreActividad}</h4>
+                        <p className={styles.cardDescription}>{actividad.descripcion}</p>
+                        <p className={styles.cardPrice}>
+                          ${actividad.precioUnitario.toLocaleString('es-CL')}
+                        </p>
+                      </div>
+                    ))}
+                </div>
+                
+                {/* Botón Ver más */}
+                {getTotalItems() > 9 && (
+                  <button 
+                    className={styles.verMasBtn}
+                    onClick={() => setShowMore(!showMore)}
                   >
-                    {item}
-                  </span>
-                ))}
+                    {showMore ? 'Ver menos' : 'Ver más'}
+                  </button>
+                )}
               </div>
             </div>
           </div>
