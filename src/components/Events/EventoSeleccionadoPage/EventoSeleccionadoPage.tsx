@@ -113,8 +113,13 @@ const EventoSeleccionadoPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Solo la imagen de características */}
+          {/* Sección características con barra y imagen */}
           <div className={styles.caracteristicasSection}>
+            {/* Barra azul posicionada sobre la imagen */}
+            <div className={styles.caracteristicasBar}>
+              <h3 className={styles.caracteristicasTitle}>Conoce las características de nuestro evento</h3>
+            </div>
+            
             <div className={styles.caracteristicasContent}>
               <img 
                 src={getImagePath("/images/childrens.png")} 
