@@ -33,38 +33,39 @@ const EventoSeleccionadoPage: React.FC = () => {
             comprar tickets y disfrutar de la mejor experiencia.
           </p>
 
-          {/* Debug Info - Datos del evento */}
-          <div className={styles.debugInfo}>
-            <h3>🔍 Debug Info - Evento ID: {eventoId || 'undefined'}</h3>
-            
-            {!eventoId && (
-              <div className={styles.warningInfo}>
-                <p><strong>⚠️ Advertencia:</strong> No se proporcionó un ID de evento. Ve a la página de eventos y haz clic en una card para ver los detalles.</p>
-                <p>URL actual: {typeof window !== 'undefined' ? window.location.href : 'N/A'}</p>
+          {/* Vista del evento */}
+          {eventoId && loading && (
+            <div className={styles.loadingContainer}>
+              <div className={styles.loadingSpinner}></div>
+              <p>Cargando evento...</p>
+            </div>
+          )}
+          
+          {eventoId && error && (
+            <div className={styles.errorContainer}>
+              <p><strong>❌ Error:</strong> {error}</p>
+            </div>
+          )}
+          
+          {eventoId && event && (
+            <div className={styles.eventView}>
+              {/* Imagen del evento */}
+              <div className={styles.eventImageContainer}>
+                <img
+                  src={event.informacionGeneral?.bannerPromocional || event.imagenPrincipal}
+                  alt={event.informacionGeneral?.nombreEvento || 'Evento'}
+                  className={styles.eventImage}
+                />
               </div>
-            )}
-            
-            {eventoId && loading && <p>⏳ Cargando datos del evento...</p>}
-            
-            {eventoId && error && (
-              <div className={styles.errorInfo}>
-                <p><strong>❌ Error:</strong> {error}</p>
+              
+              {/* Descripción del evento */}
+              <div className={styles.eventDescription}>
+                <p className={styles.descriptionText}>
+                  {event.informacionGeneral?.descripcion || 'Descripción no disponible'}
+                </p>
               </div>
-            )}
-            
-            {eventoId && event && (
-              <div className={styles.eventInfo}>
-                <h4>📋 Información del Evento:</h4>
-                <p><strong>ID:</strong> {event.id}</p>
-                <p><strong>Nombre:</strong> {event.informacionGeneral?.nombreEvento || 'N/A'}</p>
-                <p><strong>Descripción:</strong> {event.informacionGeneral?.descripcion || 'N/A'}</p>
-                <p><strong>Fecha:</strong> {event.informacionGeneral?.fechaEvento || 'N/A'}</p>
-                <p><strong>Hora:</strong> {event.informacionGeneral?.horaInicio || 'N/A'} - {event.informacionGeneral?.horaTermino || 'N/A'}</p>
-                <p><strong>Lugar:</strong> {event.informacionGeneral?.lugarEvento || 'N/A'}</p>
-                <p><strong>Estado:</strong> {event.informacionGeneral?.estado || 'N/A'}</p>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
 
           <div className={styles.constructionFeatures}>
             <div className={styles.feature}>
