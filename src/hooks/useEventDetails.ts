@@ -55,20 +55,18 @@ interface ApiResponse {
   };
 }
 
-export const useEventUsers = (eventoId: string | null) => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [event, setEvent] = useState<EventData | null>(null);
+export const useEventDetails = (eventoId: string | null) => {
+  const [event, setEvent] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!eventoId) {
-      setUsers([]);
       setEvent(null);
       return;
     }
 
-    const fetchUsers = async () => {
+    const fetchEventDetails = async () => {
       setLoading(true);
       setError(null);
 
@@ -77,7 +75,7 @@ export const useEventUsers = (eventoId: string | null) => {
         const eventsUrl = process.env.NEXT_PUBLIC_API_EVENTS_URL || 'http://localhost:3001/api/events';
         const apiUrl = eventsUrl.replace('/api/events', '');
         
-        const response = await fetch(`${apiUrl}/api/users?eventoId=${eventoId}`, {
+        const response = await fetch(`${apiUrl}/api/events/${eventoId}`, {
           headers: {
             'Content-Type': 'application/json',
             'ngrok-skip-browser-warning': 'true'
@@ -88,24 +86,20 @@ export const useEventUsers = (eventoId: string | null) => {
           throw new Error(`Error: ${response.status}`);
         }
 
-        const data: ApiResponse = await response.json();
+        const data = await response.json();
+        console.log('🎪 Event Details API Response:', data);
         
-        if (data.status === 'success') {
-          setUsers(data.data.users);
-          setEvent(data.data.event);
-        } else {
-          throw new Error(data.message || 'Error al obtener usuarios');
-        }
+        setEvent(data);
       } catch (err) {
-        console.error('Error fetching users:', err);
+        console.error('Error fetching event details:', err);
         setError(err instanceof Error ? err.message : 'Error desconocido');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUsers();
+    fetchEventDetails();
   }, [eventoId]);
 
-  return { users, event, loading, error };
+  return { event, loading, error };
 };

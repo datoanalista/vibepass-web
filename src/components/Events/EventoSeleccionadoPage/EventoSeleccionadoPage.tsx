@@ -1,14 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useEventUsers } from '@/hooks/useEventUsers';
+import { useEventDetails } from '@/hooks/useEventDetails';
 import { getImagePath } from '@/utils/getImagePath';
 import styles from './EventoSeleccionadoPage.module.css';
 
 const EventoSeleccionadoPage: React.FC = () => {
   const searchParams = useSearchParams();
   const eventoId = searchParams.get('eventoId');
-  const { users, event, loading, error } = useEventUsers(eventoId);
+  const { event, loading, error } = useEventDetails(eventoId);
   return (
     <main className={styles.eventoSeleccionadoPage}>
       {/* Navegación breadcrumb */}
@@ -56,23 +56,12 @@ const EventoSeleccionadoPage: React.FC = () => {
               <div className={styles.eventInfo}>
                 <h4>📋 Información del Evento:</h4>
                 <p><strong>ID:</strong> {event.id}</p>
-                <p><strong>Nombre:</strong> {event.name}</p>
-              </div>
-            )}
-            
-            {eventoId && users.length > 0 && (
-              <div className={styles.usersInfo}>
-                <h4>👥 Usuarios del Evento ({users.length}):</h4>
-                <div className={styles.usersList}>
-                  {users.map((user, index) => (
-                    <div key={user._id} className={styles.userCard}>
-                      <p><strong>Nombre:</strong> {user.nombreCompleto}</p>
-                      <p><strong>Email:</strong> {user.correoElectronico}</p>
-                      <p><strong>Rol:</strong> {user.rol}</p>
-                      <p><strong>Teléfono:</strong> {user.telefonoContacto}</p>
-                    </div>
-                  ))}
-                </div>
+                <p><strong>Nombre:</strong> {event.informacionGeneral?.nombreEvento || 'N/A'}</p>
+                <p><strong>Descripción:</strong> {event.informacionGeneral?.descripcion || 'N/A'}</p>
+                <p><strong>Fecha:</strong> {event.informacionGeneral?.fechaEvento || 'N/A'}</p>
+                <p><strong>Hora:</strong> {event.informacionGeneral?.horaInicio || 'N/A'} - {event.informacionGeneral?.horaTermino || 'N/A'}</p>
+                <p><strong>Lugar:</strong> {event.informacionGeneral?.lugarEvento || 'N/A'}</p>
+                <p><strong>Estado:</strong> {event.informacionGeneral?.estado || 'N/A'}</p>
               </div>
             )}
           </div>
