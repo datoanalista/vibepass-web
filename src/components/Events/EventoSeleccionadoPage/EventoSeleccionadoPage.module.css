@@ -349,7 +349,7 @@
   height: auto;
   border-radius: 0; /* Sin border-radius para que ocupe todo el ancho */
   object-fit: cover;
-  max-height: 260px; /* 200px + 30% = 260px */
+  max-height: 338px; /* 260px + 30% = 338px */
   display: block;
 }
 
@@ -545,7 +545,7 @@
   }
 
   .childrenImage {
-    max-height: 195px; /* 150px + 30% = 195px */
+    max-height: 254px; /* 195px + 30% = 254px */
   }
 
   .constructionContent {
