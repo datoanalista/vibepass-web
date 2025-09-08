@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { API_ENDPOINTS } from '@/config/api';
 
 interface Event {
+  _id: string;
   informacionGeneral: {
     nombreEvento: string;
     descripcion: string;
