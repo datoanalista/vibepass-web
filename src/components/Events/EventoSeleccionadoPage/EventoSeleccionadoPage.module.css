@@ -372,10 +372,10 @@
 
 .infoContainer {
   width: 100%;
-  max-width: 1000px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columnas principales */
+  gap: 40px;
 }
 
 .infoSection {
@@ -400,7 +400,7 @@
 
 .infoGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas por sección */
   gap: 15px;
   width: 100%;
   justify-items: center;
@@ -686,6 +686,7 @@
   }
 
   .infoContainer {
+    grid-template-columns: 1fr; /* Una sola columna en móvil */
     gap: 25px;
   }
 
@@ -698,7 +699,7 @@
   }
 
   .infoGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Una sola columna por sección en móvil */
     gap: 12px;
   }
 
