@@ -375,38 +375,12 @@
   position: relative;
 }
 
-.carouselContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
 .carouselContent {
   display: flex;
   gap: 20px;
-  overflow: hidden;
-  width: 820px; /* Ancho para mostrar exactamente 3 cards: 260px * 3 + 20px * 2 = 820px */
   justify-content: center;
-}
-
-.carouselButton {
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
-}
-
-.carouselButton:hover {
-  background: white;
-  transform: scale(1.1);
+  transition: transform 0.5s ease;
 }
 
 .infoCard {
@@ -469,7 +443,7 @@
   letter-spacing: 0%;
   color: white;
   font-size: 14px;
-  margin: 0 0 6px 0;
+  margin: 12px 0 6px 0; /* Aumentar margin-top de 0 a 12px */
 }
 
 .cardDescription {
@@ -498,23 +472,6 @@
   margin: 0;
 }
 
-.verMasBtn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background: linear-gradient(90deg, #01A8E2 0%, #B0BBDB 100%);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  font-family: Inter;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.verMasBtn:hover {
-  transform: scale(1.05);
-}
 
 .loadingContainer {
   display: flex;
@@ -716,7 +673,7 @@
   }
 
   .carouselContent {
-    width: 400px; /* Ancho para 2 cards en móvil: 180px * 2 + 20px = 380px */
+    gap: 15px;
   }
 
   .infoCard {
@@ -724,11 +681,6 @@
     height: 110px;
     padding: 12px;
     gap: 8px;
-  }
-
-  .carouselButton {
-    width: 35px;
-    height: 35px;
   }
 
   .cardIcon {
@@ -746,11 +698,6 @@
 
   .cardPrice {
     font-size: 14px;
-  }
-
-  .verMasBtn {
-    font-size: 12px;
-    padding: 8px 16px;
   }
 
   .constructionContent {

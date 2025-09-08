@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEventDetails } from '@/hooks/useEventDetails';
@@ -85,6 +85,17 @@ const EventoSeleccionadoPage: React.FC = () => {
     const startIndex = carouselIndex * itemsPerPage;
     return allItems.slice(startIndex, startIndex + itemsPerPage);
   };
+
+  // Carrusel automático cada 4 segundos
+  useEffect(() => {
+    if (totalPages > 1) {
+      const interval = setInterval(() => {
+        setCarouselIndex((prev) => (prev + 1) % totalPages);
+      }, 4000); // 4 segundos
+
+      return () => clearInterval(interval);
+    }
+  }, [totalPages]);
   return (
     <main className={styles.eventoSeleccionadoPage}>
       {/* Navegación breadcrumb */}
@@ -185,57 +196,27 @@ const EventoSeleccionadoPage: React.FC = () => {
               {/* Carrusel informativo sobre la imagen */}
               <div className={styles.infoOverlay}>
                 <div className={styles.infoContainer}>
-                  <div className={styles.carouselContainer}>
-                    {/* Botón anterior */}
-                    {totalPages > 1 && (
-                      <button 
-                        className={styles.carouselButton}
-                        onClick={prevSlide}
-                      >
+                  {/* Contenido del carrusel automático */}
+                  <div className={styles.carouselContent}>
+                    {getCurrentItems().map((item: any) => (
+                      <div key={item.id || item._id} className={styles.infoCard}>
+                        <span className={styles.cardCategory}>
+                          {item.type === 'alimento' ? 'Alimento y Bebida' : 'Actividad'}
+                        </span>
                         <img 
-                          src={getImagePath("/images/icon_left.svg")} 
-                          alt="Anterior" 
-                          style={{width: '20px', height: '20px'}}
+                          src={getImagePath(item.type === 'alimento' ? "/images/fastfood.png" : "/images/person-play.png")} 
+                          alt={item.type === 'alimento' ? 'Alimento' : 'Actividad'}
+                          className={styles.cardIcon}
                         />
-                      </button>
-                    )}
-                    
-                    {/* Contenido del carrusel */}
-                    <div className={styles.carouselContent}>
-                      {getCurrentItems().map((item: any) => (
-                        <div key={item.id || item._id} className={styles.infoCard}>
-                          <span className={styles.cardCategory}>
-                            {item.type === 'alimento' ? 'Alimento y Bebida' : 'Actividad'}
-                          </span>
-                          <img 
-                            src={getImagePath(item.type === 'alimento' ? "/images/fastfood.png" : "/images/person-play.png")} 
-                            alt={item.type === 'alimento' ? 'Alimento' : 'Actividad'}
-                            className={styles.cardIcon}
-                          />
-                          <div className={styles.cardContent}>
-                            <h4 className={styles.cardTitle}>{item.displayName}</h4>
-                            <p className={styles.cardDescription}>{item.descripcion}</p>
-                            <p className={styles.cardPrice}>
-                              ${item.displayPrice.toLocaleString('es-CL')}
-                            </p>
-                          </div>
+                        <div className={styles.cardContent}>
+                          <h4 className={styles.cardTitle}>{item.displayName}</h4>
+                          <p className={styles.cardDescription}>{item.descripcion}</p>
+                          <p className={styles.cardPrice}>
+                            ${item.displayPrice.toLocaleString('es-CL')}
+                          </p>
                         </div>
-                      ))}
-                    </div>
-                    
-                    {/* Botón siguiente */}
-                    {totalPages > 1 && (
-                      <button 
-                        className={styles.carouselButton}
-                        onClick={nextSlide}
-                      >
-                        <img 
-                          src={getImagePath("/images/icon_right.svg")} 
-                          alt="Siguiente" 
-                          style={{width: '20px', height: '20px'}}
-                        />
-                      </button>
-                    )}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
