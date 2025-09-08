@@ -62,7 +62,10 @@ export const useEventUsers = (eventoId: string | null) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log('🔍 useEventUsers - eventoId:', eventoId);
+    
     if (!eventoId) {
+      console.log('❌ No eventoId provided');
       setUsers([]);
       setEvent(null);
       return;
@@ -73,9 +76,15 @@ export const useEventUsers = (eventoId: string | null) => {
       setError(null);
 
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_EVENTS_URL?.replace('/api/events', '') || 'http://localhost:3001';
+        // Usar la misma lógica que useEvents para determinar la URL base
+        const eventsUrl = process.env.NEXT_PUBLIC_API_EVENTS_URL || 'http://localhost:3001/api/events';
+        const apiUrl = eventsUrl.replace('/api/events', '');
+        
+        console.log('🌍 Fetching users from:', `${apiUrl}/api/users?eventoId=${eventoId}`);
+        
         const response = await fetch(`${apiUrl}/api/users?eventoId=${eventoId}`, {
           headers: {
+            'Content-Type': 'application/json',
             'ngrok-skip-browser-warning': 'true'
           }
         });

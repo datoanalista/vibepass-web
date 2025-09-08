@@ -86,11 +86,18 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
           const timeRange = formatTime(event.informacionGeneral.horaInicio, event.informacionGeneral.horaTermino);
           const availableTickets = calculateAvailableTickets(event.entradas);
           
+          // Debug: verificar la estructura del evento
+          console.log('🔍 Event data:', event);
+          console.log('🆔 Event ID:', event._id);
+          
           return (
             <div 
               key={index} 
               className={styles.eventCard}
-              onClick={() => handleEventClick(event._id)}
+              onClick={() => {
+                console.log('🖱️ Clicking event with ID:', event._id);
+                handleEventClick(event._id);
+              }}
             >
               {/* Cantidad de tickets */}
               <div className={styles.ticketsInfo}>
