@@ -310,7 +310,7 @@
 }
 
 .caracteristicasBox {
-  width: 315px; /* 300px + 15px más ancho */
+  width: 473px; /* 315px + 50% más ancho */
   height: 42px;
   margin-left: -10px; /* Cambiar de -27px a -10px */
   border-radius: 10px;
@@ -542,7 +542,7 @@
   }
 
   .caracteristicasBox {
-    width: 295px; /* 280px + 15px más ancho */
+    width: 443px; /* 295px + 50% más ancho */
     height: 38px;
     margin-left: -10px; /* Consistente con desktop */
   }
