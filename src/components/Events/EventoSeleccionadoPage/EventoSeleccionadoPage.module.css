@@ -384,7 +384,9 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 16px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   transition: transform 0.3s ease, background 0.3s ease;
   width: 100%;
   max-width: 280px;
@@ -393,6 +395,18 @@
 .infoCard:hover {
   transform: translateY(-3px);
   background: rgba(255, 255, 255, 0.25);
+}
+
+.cardIcon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.cardContent {
+  flex: 1;
+  text-align: left;
 }
 
 .cardTitle {
@@ -651,6 +665,12 @@
   .infoCard {
     max-width: 100%;
     padding: 12px;
+    gap: 10px;
+  }
+
+  .cardIcon {
+    width: 28px;
+    height: 28px;
   }
 
   .cardTitle {

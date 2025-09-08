@@ -153,11 +153,18 @@ const EventoSeleccionadoPage: React.FC = () => {
                     .slice(0, showMore ? undefined : 9)
                     .map((item: any) => (
                       <div key={item.id || item._id} className={styles.infoCard}>
-                        <h4 className={styles.cardTitle}>{item.nombre}</h4>
-                        <p className={styles.cardDescription}>{item.descripcion}</p>
-                        <p className={styles.cardPrice}>
-                          ${item.precioUnitario.toLocaleString('es-CL')}
-                        </p>
+                        <img 
+                          src={getImagePath("/images/fastfood.png")} 
+                          alt="Alimento" 
+                          className={styles.cardIcon}
+                        />
+                        <div className={styles.cardContent}>
+                          <h4 className={styles.cardTitle}>{item.nombre}</h4>
+                          <p className={styles.cardDescription}>{item.descripcion}</p>
+                          <p className={styles.cardPrice}>
+                            ${item.precioUnitario.toLocaleString('es-CL')}
+                          </p>
+                        </div>
                       </div>
                     ))}
                   
@@ -167,11 +174,18 @@ const EventoSeleccionadoPage: React.FC = () => {
                     .slice(0, showMore ? undefined : 9)
                     .map((actividad: any) => (
                       <div key={actividad.id || actividad._id} className={styles.infoCard}>
-                        <h4 className={styles.cardTitle}>{actividad.nombreActividad}</h4>
-                        <p className={styles.cardDescription}>{actividad.descripcion}</p>
-                        <p className={styles.cardPrice}>
-                          ${actividad.precioUnitario.toLocaleString('es-CL')}
-                        </p>
+                        <img 
+                          src={getImagePath("/images/person-play.png")} 
+                          alt="Actividad" 
+                          className={styles.cardIcon}
+                        />
+                        <div className={styles.cardContent}>
+                          <h4 className={styles.cardTitle}>{actividad.nombreActividad}</h4>
+                          <p className={styles.cardDescription}>{actividad.descripcion}</p>
+                          <p className={styles.cardPrice}>
+                            ${actividad.precioUnitario.toLocaleString('es-CL')}
+                          </p>
+                        </div>
                       </div>
                     ))}
                 </div>
