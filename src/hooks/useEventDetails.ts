@@ -89,7 +89,12 @@ export const useEventDetails = (eventoId: string | null) => {
         const data = await response.json();
         console.log('🎪 Event Details API Response:', data);
         
-        setEvent(data);
+        // La API devuelve { status, message, data: { event: {...} } }
+        if (data.status === 'success' && data.data?.event) {
+          setEvent(data.data.event);
+        } else {
+          throw new Error(data.message || 'Error al obtener el evento');
+        }
       } catch (err) {
         console.error('Error fetching event details:', err);
         setError(err instanceof Error ? err.message : 'Error desconocido');
