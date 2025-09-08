@@ -203,20 +203,16 @@
 }
 
 .entradasGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
-  justify-items: center;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
   max-width: 900px;
   margin: 0 auto 20px auto;
 }
 
-.entradasGrid::after {
-  content: '';
-  grid-column: 1 / -1;
-  height: 0;
-}
 
 .entradaCard {
   width: 260px; /* 30% más ancho */
@@ -469,8 +465,8 @@
   }
 
   .entradasGrid {
-    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
+    max-width: 100%;
   }
 
   .entradaCard {
