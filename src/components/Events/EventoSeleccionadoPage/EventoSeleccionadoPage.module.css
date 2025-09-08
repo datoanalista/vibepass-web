@@ -312,7 +312,7 @@
 /* Barra azul - Especificaciones exactas */
 .caracteristicasBar {
   width: 650px;
-  height: 82px;
+  height: 57px; /* 82px - 30% = 57px */
   background: linear-gradient(90deg, #01A8E2 0%, #B0BBDB 100%);
   margin: 0;
   margin-left: calc(-50vw + 50%); /* PEGADO AL BORDE IZQUIERDO ABSOLUTO */
@@ -320,16 +320,19 @@
   z-index: 10; /* Sobre la imagen */
   display: flex;
   align-items: center;
+  justify-content: flex-end; /* Alinear título a la derecha */
   padding: 0 20px;
   border-radius: 10px;
 }
 
 .caracteristicasTitle {
-  font-family: 'Inter', sans-serif;
+  font-family: Inter;
   font-weight: 700;
+  font-style: Bold;
   font-size: 20px;
   line-height: 100%;
-  color: white;
+  letter-spacing: 0%;
+  color: #000000;
   margin: 0;
 }
 
@@ -337,7 +340,7 @@
   position: relative;
   width: 100vw;
   margin-left: calc(-50vw + 50%); /* La imagen ocupa todo el ancho */
-  margin-top: -25px; /* 30% de 82px = ~25px para que la barra se superponga */
+  margin-top: -17px; /* 30% de 57px = ~17px para que la barra se superponga */
   z-index: 1; /* Debajo de la barra */
 }
 
