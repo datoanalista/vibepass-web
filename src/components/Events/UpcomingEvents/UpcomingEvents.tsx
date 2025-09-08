@@ -92,8 +92,8 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
               key={index} 
               className={styles.eventCard}
               onClick={() => {
-                // Usar el ID del evento (la API devuelve 'id', no '_id')
-                const eventId = event.id || event._id || `event-${index}`;
+                // Usar el ID del evento (la API devuelve 'id')
+                const eventId = event.id || `event-${index}`;
                 handleEventClick(eventId);
               }}
             >
