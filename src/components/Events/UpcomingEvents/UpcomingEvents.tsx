@@ -86,6 +86,10 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
           const timeRange = formatTime(event.informacionGeneral.horaInicio, event.informacionGeneral.horaTermino);
           const availableTickets = calculateAvailableTickets(event.entradas);
           
+          // Debug temporal para ver la estructura real de los eventos
+          console.log('🔍 Event structure:', event);
+          console.log('🆔 Event _id:', event._id);
+          console.log('🔑 All keys:', Object.keys(event));
           
           return (
             <div 
