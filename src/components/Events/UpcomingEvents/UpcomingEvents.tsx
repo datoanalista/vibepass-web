@@ -89,6 +89,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
           // Debug: verificar la estructura del evento
           console.log('🔍 Event data:', event);
           console.log('🆔 Event ID:', event._id);
+          console.log('🔑 All event keys:', Object.keys(event));
           
           return (
             <div 

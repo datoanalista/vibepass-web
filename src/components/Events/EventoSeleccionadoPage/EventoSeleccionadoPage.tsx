@@ -34,43 +34,48 @@ const EventoSeleccionadoPage: React.FC = () => {
           </p>
 
           {/* Debug Info - Datos del evento */}
-          {eventoId && (
-            <div className={styles.debugInfo}>
-              <h3>🔍 Debug Info - Evento ID: {eventoId}</h3>
-              
-              {loading && <p>⏳ Cargando datos del evento...</p>}
-              
-              {error && (
-                <div className={styles.errorInfo}>
-                  <p><strong>❌ Error:</strong> {error}</p>
+          <div className={styles.debugInfo}>
+            <h3>🔍 Debug Info - Evento ID: {eventoId || 'undefined'}</h3>
+            
+            {!eventoId && (
+              <div className={styles.warningInfo}>
+                <p><strong>⚠️ Advertencia:</strong> No se proporcionó un ID de evento. Ve a la página de eventos y haz clic en una card para ver los detalles.</p>
+                <p>URL actual: {typeof window !== 'undefined' ? window.location.href : 'N/A'}</p>
+              </div>
+            )}
+            
+            {eventoId && loading && <p>⏳ Cargando datos del evento...</p>}
+            
+            {eventoId && error && (
+              <div className={styles.errorInfo}>
+                <p><strong>❌ Error:</strong> {error}</p>
+              </div>
+            )}
+            
+            {eventoId && event && (
+              <div className={styles.eventInfo}>
+                <h4>📋 Información del Evento:</h4>
+                <p><strong>ID:</strong> {event.id}</p>
+                <p><strong>Nombre:</strong> {event.name}</p>
+              </div>
+            )}
+            
+            {eventoId && users.length > 0 && (
+              <div className={styles.usersInfo}>
+                <h4>👥 Usuarios del Evento ({users.length}):</h4>
+                <div className={styles.usersList}>
+                  {users.map((user, index) => (
+                    <div key={user._id} className={styles.userCard}>
+                      <p><strong>Nombre:</strong> {user.nombreCompleto}</p>
+                      <p><strong>Email:</strong> {user.correoElectronico}</p>
+                      <p><strong>Rol:</strong> {user.rol}</p>
+                      <p><strong>Teléfono:</strong> {user.telefonoContacto}</p>
+                    </div>
+                  ))}
                 </div>
-              )}
-              
-              {event && (
-                <div className={styles.eventInfo}>
-                  <h4>📋 Información del Evento:</h4>
-                  <p><strong>ID:</strong> {event.id}</p>
-                  <p><strong>Nombre:</strong> {event.name}</p>
-                </div>
-              )}
-              
-              {users.length > 0 && (
-                <div className={styles.usersInfo}>
-                  <h4>👥 Usuarios del Evento ({users.length}):</h4>
-                  <div className={styles.usersList}>
-                    {users.map((user, index) => (
-                      <div key={user._id} className={styles.userCard}>
-                        <p><strong>Nombre:</strong> {user.nombreCompleto}</p>
-                        <p><strong>Email:</strong> {user.correoElectronico}</p>
-                        <p><strong>Rol:</strong> {user.rol}</p>
-                        <p><strong>Teléfono:</strong> {user.telefonoContacto}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
 
           <div className={styles.constructionFeatures}>
             <div className={styles.feature}>
