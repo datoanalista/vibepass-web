@@ -146,48 +146,62 @@ const EventoSeleccionadoPage: React.FC = () => {
               />
               {/* Contenido informativo sobre la imagen */}
               <div className={styles.infoOverlay}>
-                <div className={styles.infoGrid}>
-                  {/* Alimentos y Bebidas */}
-                  {event.alimentosBebestibles && event.alimentosBebestibles
-                    .filter((item: any) => item.activo)
-                    .slice(0, showMore ? undefined : 9)
-                    .map((item: any) => (
-                      <div key={item.id || item._id} className={styles.infoCard}>
-                        <img 
-                          src={getImagePath("/images/fastfood.png")} 
-                          alt="Alimento" 
-                          className={styles.cardIcon}
-                        />
-                        <div className={styles.cardContent}>
-                          <h4 className={styles.cardTitle}>{item.nombre}</h4>
-                          <p className={styles.cardDescription}>{item.descripcion}</p>
-                          <p className={styles.cardPrice}>
-                            ${item.precioUnitario.toLocaleString('es-CL')}
-                          </p>
-                        </div>
+                <div className={styles.infoContainer}>
+                  {/* Sección Alimentos y Bebidas */}
+                  {event.alimentosBebestibles && event.alimentosBebestibles.filter((item: any) => item.activo).length > 0 && (
+                    <div className={styles.infoSection}>
+                      <h3 className={styles.sectionTitle}>Alimentos y Bebidas</h3>
+                      <div className={styles.infoGrid}>
+                        {event.alimentosBebestibles
+                          .filter((item: any) => item.activo)
+                          .slice(0, showMore ? undefined : 9)
+                          .map((item: any) => (
+                            <div key={item.id || item._id} className={styles.infoCard}>
+                              <img 
+                                src={getImagePath("/images/fastfood.png")} 
+                                alt="Alimento" 
+                                className={styles.cardIcon}
+                              />
+                              <div className={styles.cardContent}>
+                                <h4 className={styles.cardTitle}>{item.nombre}</h4>
+                                <p className={styles.cardDescription}>{item.descripcion}</p>
+                                <p className={styles.cardPrice}>
+                                  ${item.precioUnitario.toLocaleString('es-CL')}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
                       </div>
-                    ))}
+                    </div>
+                  )}
                   
-                  {/* Actividades */}
-                  {event.actividades && event.actividades
-                    .filter((actividad: any) => actividad.activa)
-                    .slice(0, showMore ? undefined : 9)
-                    .map((actividad: any) => (
-                      <div key={actividad.id || actividad._id} className={styles.infoCard}>
-                        <img 
-                          src={getImagePath("/images/person-play.png")} 
-                          alt="Actividad" 
-                          className={styles.cardIcon}
-                        />
-                        <div className={styles.cardContent}>
-                          <h4 className={styles.cardTitle}>{actividad.nombreActividad}</h4>
-                          <p className={styles.cardDescription}>{actividad.descripcion}</p>
-                          <p className={styles.cardPrice}>
-                            ${actividad.precioUnitario.toLocaleString('es-CL')}
-                          </p>
-                        </div>
+                  {/* Sección Actividades */}
+                  {event.actividades && event.actividades.filter((actividad: any) => actividad.activa).length > 0 && (
+                    <div className={styles.infoSection}>
+                      <h3 className={styles.sectionTitle}>Actividades</h3>
+                      <div className={styles.infoGrid}>
+                        {event.actividades
+                          .filter((actividad: any) => actividad.activa)
+                          .slice(0, showMore ? undefined : 9)
+                          .map((actividad: any) => (
+                            <div key={actividad.id || actividad._id} className={styles.infoCard}>
+                              <img 
+                                src={getImagePath("/images/person-play.png")} 
+                                alt="Actividad" 
+                                className={styles.cardIcon}
+                              />
+                              <div className={styles.cardContent}>
+                                <h4 className={styles.cardTitle}>{actividad.nombreActividad}</h4>
+                                <p className={styles.cardDescription}>{actividad.descripcion}</p>
+                                <p className={styles.cardPrice}>
+                                  ${actividad.precioUnitario.toLocaleString('es-CL')}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
                       </div>
-                    ))}
+                    </div>
+                  )}
                 </div>
                 
                 {/* Botón Ver más */}
