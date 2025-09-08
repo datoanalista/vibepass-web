@@ -310,13 +310,15 @@
 }
 
 .caracteristicasBox {
-  width: 473px; /* 315px + 50% más ancho */
+  width: 504px; /* 315px + 60% más ancho */
   height: 42px;
-  margin-left: -10px; /* Cambiar de -27px a -10px */
+  margin-left: auto; /* Quitar margin-left negativo */
+  margin-right: -27px; /* Pegado a la derecha con extensión */
   border-radius: 10px;
   background: linear-gradient(90deg, #01A8E2 0%, #A5B9DB 100%);
   display: flex;
   align-items: center;
+  justify-content: flex-end; /* Alinear contenido a la derecha */
   padding: 0 20px;
   position: relative;
   z-index: 2;
@@ -542,9 +544,11 @@
   }
 
   .caracteristicasBox {
-    width: 443px; /* 295px + 50% más ancho */
+    width: 472px; /* 295px + 60% más ancho */
     height: 38px;
-    margin-left: -10px; /* Consistente con desktop */
+    margin-left: auto; /* Alinear a la derecha */
+    margin-right: -20px; /* Pegado a la derecha con extensión */
+    justify-content: flex-end; /* Alinear contenido a la derecha */
   }
 
   .caracteristicasTitle {
