@@ -314,7 +314,8 @@
   width: 650px;
   height: 82px;
   background: linear-gradient(90deg, #01A8E2 0%, #B0BBDB 100%);
-  margin: 0; /* Pegado al límite izquierdo */
+  margin: 0;
+  margin-left: calc(-50vw + 50%); /* PEGADO AL BORDE IZQUIERDO ABSOLUTO */
   position: relative;
   z-index: 10; /* Sobre la imagen */
   display: flex;
