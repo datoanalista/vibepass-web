@@ -396,7 +396,7 @@
 }
 
 .carouselContent {
-  width: 976px; /* Ancho para mostrar exactamente 3 cards: 312px * 3 + 20px * 2 = 976px */
+  width: 312px; /* Ancho para mostrar exactamente 1 card: 312px */
   overflow: hidden;
   position: relative;
   margin: 0 auto; /* Centrar el carrusel */
@@ -719,7 +719,7 @@
   }
 
   .carouselContent {
-    width: 580px; /* Ancho para mostrar 3 cards en móvil: 180px * 3 + 15px * 2 = 570px */
+    width: 180px; /* Ancho para mostrar exactamente 1 card: 180px */
   }
 
   .carouselTrack {

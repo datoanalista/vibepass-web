@@ -33,51 +33,56 @@ const EventoSeleccionadoPage: React.FC = () => {
     setSelectedEntrada(selectedEntrada === tipo ? null : tipo);
   };
 
-  // Obtener todos los items para el carrusel
-  const getAllItems = () => {
+  // Obtener items alternados (actividad, alimento, actividad, alimento...)
+  const getAlternatingItems = () => {
     if (!event) return [];
     
-    const allItems: any[] = [];
-    
-    // Agregar alimentos/bebidas
-    if (event.alimentosBebestibles) {
-      event.alimentosBebestibles
-        .filter((item: any) => item.activo)
-        .forEach((item: any) => {
-          allItems.push({
+    const alimentos = event.alimentosBebestibles 
+      ? event.alimentosBebestibles
+          .filter((item: any) => item.activo)
+          .map((item: any) => ({
             ...item,
             type: 'alimento',
             displayName: item.nombre,
             displayPrice: item.precioUnitario
-          });
-        });
-    }
+          }))
+      : [];
     
-    // Agregar actividades
-    if (event.actividades) {
-      event.actividades
-        .filter((actividad: any) => actividad.activa)
-        .forEach((actividad: any) => {
-          allItems.push({
+    const actividades = event.actividades 
+      ? event.actividades
+          .filter((actividad: any) => actividad.activa)
+          .map((actividad: any) => ({
             ...actividad,
             type: 'actividad',
             displayName: actividad.nombreActividad,
             displayPrice: actividad.precioUnitario
-          });
-        });
+          }))
+      : [];
+    
+    // Alternar entre actividades y alimentos
+    const alternatingItems: any[] = [];
+    const maxLength = Math.max(alimentos.length, actividades.length);
+    
+    for (let i = 0; i < maxLength; i++) {
+      if (actividades[i]) {
+        alternatingItems.push(actividades[i]);
+      }
+      if (alimentos[i]) {
+        alternatingItems.push(alimentos[i]);
+      }
     }
     
-    return allItems;
+    return alternatingItems;
   };
 
-  const allItems = getAllItems();
+  const allItems = getAlternatingItems();
 
   // Carrusel automático ping-pong cada 4 segundos
   useEffect(() => {
-    if (allItems.length > 3) {
+    if (allItems.length > 1) {
       const interval = setInterval(() => {
         setCarouselIndex((prev) => {
-          const maxIndex = allItems.length - 3; // Máximo índice para mostrar 3 cards
+          const maxIndex = allItems.length - 1; // Máximo índice para mostrar 1 card
           
           if (direction === 1) {
             // Yendo hacia adelante
