@@ -107,11 +107,19 @@ const EventoSeleccionadoPage: React.FC = () => {
         <Link href="/" className={styles.breadcrumbLink} title="Ir a Home">
           HOME
         </Link>
-        <span className={styles.breadcrumbSeparator}>></span>
+        <img 
+          src={getImagePath("/images/triangulo.png")} 
+          alt=">" 
+          className={styles.breadcrumbSeparator}
+        />
         <Link href="/eventos" className={styles.breadcrumbLink} title="Volver a eventos">
           EVENTOS
         </Link>
-        <span className={styles.breadcrumbSeparator}>></span>
+        <img 
+          src={getImagePath("/images/triangulo.png")} 
+          alt=">" 
+          className={styles.breadcrumbSeparator}
+        />
         <span className={styles.breadcrumbCurrent} title="Evento actual">
           {event?.informacionGeneral?.nombreEvento || 'Evento'}
         </span>

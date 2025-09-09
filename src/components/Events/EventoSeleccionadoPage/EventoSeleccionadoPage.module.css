@@ -30,11 +30,10 @@
 }
 
 .breadcrumbSeparator {
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 24px;
-  color: #424040;
-  margin: 0 4px;
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+  margin: 0 8px;
 }
 
 .breadcrumbCurrent {
@@ -643,7 +642,9 @@
   }
 
   .breadcrumbSeparator {
-    font-size: 20px;
+    width: 14px;
+    height: 14px;
+    margin: 0 6px;
   }
 
   .breadcrumbCurrent {
