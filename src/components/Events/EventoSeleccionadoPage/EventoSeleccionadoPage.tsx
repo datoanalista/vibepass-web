@@ -70,32 +70,29 @@ const EventoSeleccionadoPage: React.FC = () => {
   };
 
   const allItems = getAllItems();
-  const itemsPerPage = 3; // Siempre 3 cards por página
-  const totalPages = Math.ceil(allItems.length / itemsPerPage);
-
-  const nextSlide = () => {
-    setCarouselIndex((prev) => (prev + 1) % totalPages);
-  };
-
-  const prevSlide = () => {
-    setCarouselIndex((prev) => (prev - 1 + totalPages) % totalPages);
-  };
-
-  const getCurrentItems = () => {
-    const startIndex = carouselIndex * itemsPerPage;
-    return allItems.slice(startIndex, startIndex + itemsPerPage);
-  };
+  
+  // Duplicar items para efecto infinito
+  const extendedItems = allItems.length > 0 ? [...allItems, ...allItems, ...allItems] : [];
 
   // Carrusel automático cada 4 segundos
   useEffect(() => {
-    if (totalPages > 1) {
+    if (allItems.length > 3) {
       const interval = setInterval(() => {
-        setCarouselIndex((prev) => (prev + 1) % totalPages);
+        setCarouselIndex((prev) => prev + 1);
       }, 4000); // 4 segundos
 
       return () => clearInterval(interval);
     }
-  }, [totalPages]);
+  }, [allItems.length]);
+
+  // Reset del índice cuando llega al final
+  useEffect(() => {
+    if (carouselIndex >= allItems.length && allItems.length > 0) {
+      setTimeout(() => {
+        setCarouselIndex(0);
+      }, 500); // Esperar a que termine la transición
+    }
+  }, [carouselIndex, allItems.length]);
   return (
     <main className={styles.eventoSeleccionadoPage}>
       {/* Navegación breadcrumb */}
@@ -198,25 +195,33 @@ const EventoSeleccionadoPage: React.FC = () => {
                 <div className={styles.infoContainer}>
                   {/* Contenido del carrusel automático */}
                   <div className={styles.carouselContent}>
-                    {getCurrentItems().map((item: any) => (
-                      <div key={item.id || item._id} className={styles.infoCard}>
-                        <span className={styles.cardCategory}>
-                          {item.type === 'alimento' ? 'Alimento y Bebida' : 'Actividad'}
-                        </span>
-                        <img 
-                          src={getImagePath(item.type === 'alimento' ? "/images/fastfood.png" : "/images/person-play.png")} 
-                          alt={item.type === 'alimento' ? 'Alimento' : 'Actividad'}
-                          className={styles.cardIcon}
-                        />
-                        <div className={styles.cardContent}>
-                          <h4 className={styles.cardTitle}>{item.displayName}</h4>
-                          <p className={styles.cardDescription}>{item.descripcion}</p>
-                          <p className={styles.cardPrice}>
-                            ${item.displayPrice.toLocaleString('es-CL')}
-                          </p>
+                    <div 
+                      className={styles.carouselTrack}
+                      style={{
+                        transform: `translateX(-${carouselIndex * 280}px)`, // 260px card + 20px gap
+                        transition: 'transform 0.5s ease'
+                      }}
+                    >
+                      {extendedItems.map((item: any, index: number) => (
+                        <div key={`${item.id || item._id}-${index}`} className={styles.infoCard}>
+                          <span className={styles.cardCategory}>
+                            {item.type === 'alimento' ? 'Alimento y Bebida' : 'Actividad'}
+                          </span>
+                          <img 
+                            src={getImagePath(item.type === 'alimento' ? "/images/fastfood.png" : "/images/person-play.png")} 
+                            alt={item.type === 'alimento' ? 'Alimento' : 'Actividad'}
+                            className={styles.cardIcon}
+                          />
+                          <div className={styles.cardContent}>
+                            <h4 className={styles.cardTitle}>{item.displayName}</h4>
+                            <p className={styles.cardDescription}>{item.descripcion}</p>
+                            <p className={styles.cardPrice}>
+                              ${item.displayPrice.toLocaleString('es-CL')}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

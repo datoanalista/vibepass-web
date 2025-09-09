@@ -376,10 +376,14 @@
 }
 
 .carouselContent {
+  width: 820px; /* Ancho para mostrar exactamente 3 cards: 260px * 3 + 20px * 2 = 820px */
+  overflow: hidden;
+  position: relative;
+}
+
+.carouselTrack {
   display: flex;
   gap: 20px;
-  justify-content: center;
-  align-items: center;
   transition: transform 0.5s ease;
 }
 
@@ -673,6 +677,10 @@
   }
 
   .carouselContent {
+    width: 580px; /* Ancho para mostrar 3 cards en móvil: 180px * 3 + 15px * 2 = 570px */
+  }
+
+  .carouselTrack {
     gap: 15px;
   }
 
