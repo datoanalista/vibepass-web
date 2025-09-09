@@ -521,7 +521,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 60px;
+  gap: 360px; /* 60px × 6 = 360px */
   flex-wrap: wrap;
 }
 
@@ -800,7 +800,7 @@
   }
 
   .partnerLogos {
-    gap: 40px;
+    gap: 240px; /* 40px × 6 = 240px */
     flex-direction: column;
   }
 
