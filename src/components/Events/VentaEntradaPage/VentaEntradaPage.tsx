@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useEventDetails } from '@/hooks/useEventDetails';
 import { getImagePath } from '@/utils/getImagePath';
 import { foodItemsData, FoodItem } from '@/data/FoodCart/foodItemsData';
@@ -24,6 +24,7 @@ interface Entrada {
 
 const VentaEntradaPage: React.FC = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const eventoId = searchParams.get('eventoId');
   const tipoEntrada = searchParams.get('tipoEntrada');
   const { event, loading, error } = useEventDetails(eventoId);
@@ -842,8 +843,8 @@ const VentaEntradaPage: React.FC = () => {
                 } else if (currentSection === 'activities') {
                   setCurrentSection('attendees');
                 } else {
-                  // Aquí iría la lógica para proceder al checkout
-                  console.log('Proceeding to purchase...');
+                  // Navegar a la página de compra exitosa
+                  router.push('/compra-exitosa');
                 }
               }}
               disabled={currentSection === 'attendees' && !areAllFormsComplete()}
