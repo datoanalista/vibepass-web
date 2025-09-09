@@ -1,0 +1,318 @@
+.ventaEntradaPage {
+  padding: 0 80px 40px 80px; /* Sin padding top para que la línea gradiente esté pegada */
+}
+
+/* Línea gradiente pegada al header */
+.gradientLine {
+  width: 100vw;
+  height: 5px;
+  background: linear-gradient(90deg, #12C70E 0%, #00A8A3 50.48%, #BC28AA 100%);
+  margin-left: -80px; /* Compensar el padding del contenedor */
+  margin-bottom: 30px;
+}
+
+/* Contenedor del breadcrumb con imagen */
+.breadcrumbContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Breadcrumb Styles */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Imagen preview del evento */
+.eventImagePreview {
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.previewImage {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Línea separadora debajo del breadcrumb */
+.separatorLine {
+  width: 100vw;
+  height: 2px;
+  border: 1px solid #424040;
+  margin-left: -80px; /* Compensar el padding del contenedor */
+  margin-bottom: 40px;
+}
+
+.breadcrumbLink {
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #424040;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.breadcrumbLink:hover {
+  color: #01A8E2;
+}
+
+.breadcrumbSeparator {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+  margin: 0 8px;
+}
+
+.breadcrumbCurrent {
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #424040;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Construction Banner Styles */
+.constructionBanner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #01A8E2 0%, #A5B9DB 100%);
+  border-radius: 20px;
+  padding: 60px 40px;
+  margin: 40px auto;
+  max-width: 800px;
+  box-shadow: 0px 8px 32px rgba(1, 168, 226, 0.3);
+}
+
+.constructionContent {
+  text-align: center;
+  color: white;
+}
+
+.iconContainer {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.constructionIcon {
+  width: 80px;
+  height: 80px;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.constructionTitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 120%;
+  margin: 0 0 20px 0;
+  color: white;
+}
+
+.constructionText {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  margin: 0;
+  opacity: 0.95;
+  max-width: 500px;
+}
+
+/* Event Info Styles */
+.eventInfo {
+  max-width: 800px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.eventDetails {
+  text-align: center;
+}
+
+.eventTitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: #1B2735;
+  margin: 0 0 30px 0;
+  line-height: 120%;
+}
+
+.eventMetadata {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.eventDate,
+.eventLocation,
+.eventStatus,
+.selectedEntry {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #424040;
+  margin: 0;
+  padding: 12px 20px;
+  background: #F8F9FA;
+  border-radius: 10px;
+  border-left: 4px solid #01A8E2;
+  text-align: left;
+  width: 100%;
+  max-width: 400px;
+}
+
+.selectedEntry {
+  border-left-color: #F48E5A;
+  background: #FFF8F5;
+}
+
+/* Loading and Error Styles */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #1B2735;
+}
+
+.loadingSpinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #01A8E2;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #dc3545;
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  margin: 40px auto;
+  max-width: 600px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ventaEntradaPage {
+    padding: 0 20px 40px 20px;
+  }
+
+  .gradientLine {
+    margin-left: -20px; /* Compensar el padding móvil */
+    margin-bottom: 20px;
+  }
+
+  .breadcrumbContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .breadcrumb {
+    gap: 8px;
+  }
+
+  .eventImagePreview {
+    margin-left: 0;
+    align-self: center;
+  }
+
+  .previewImage {
+    width: 60px;
+    height: 45px;
+  }
+
+  .separatorLine {
+    margin-left: -20px; /* Compensar el padding móvil */
+    margin-bottom: 30px;
+  }
+
+  .breadcrumbLink {
+    font-size: 20px;
+  }
+
+  .breadcrumbSeparator {
+    width: 14px;
+    height: 14px;
+    margin: 0 6px;
+  }
+
+  .breadcrumbCurrent {
+    font-size: 20px;
+    max-width: 200px;
+  }
+
+  .constructionBanner {
+    padding: 40px 30px;
+    margin: 30px auto;
+  }
+
+  .constructionIcon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .constructionTitle {
+    font-size: 24px;
+  }
+
+  .constructionText {
+    font-size: 16px;
+  }
+
+  .eventInfo {
+    padding: 30px 20px;
+    margin: 30px auto;
+  }
+
+  .eventTitle {
+    font-size: 28px;
+  }
+
+  .eventDate,
+  .eventLocation,
+  .eventStatus,
+  .selectedEntry {
+    font-size: 16px;
+    padding: 10px 16px;
+  }
+}

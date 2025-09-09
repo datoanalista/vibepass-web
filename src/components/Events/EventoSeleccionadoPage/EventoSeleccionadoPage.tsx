@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useEventDetails } from '@/hooks/useEventDetails';
 import { getImagePath } from '@/utils/getImagePath';
 import styles from './EventoSeleccionadoPage.module.css';
@@ -23,6 +23,7 @@ interface Entrada {
 const EventoSeleccionadoPage: React.FC = () => {
   const searchParams = useSearchParams();
   const eventoId = searchParams.get('eventoId');
+  const router = useRouter();
   const { event, loading, error } = useEventDetails(eventoId);
   const [selectedEntrada, setSelectedEntrada] = useState<string | null>(null);
   const [showMore, setShowMore] = useState(false);
@@ -30,7 +31,13 @@ const EventoSeleccionadoPage: React.FC = () => {
   const [direction, setDirection] = useState(1); // 1 para adelante, -1 para atrás
 
   const handleEntradaSelect = (tipo: string) => {
-    setSelectedEntrada(selectedEntrada === tipo ? null : tipo);
+    // Navegar a venta-entrada con el tipo seleccionado
+    router.push(`/venta-entrada?eventoId=${eventoId}&tipoEntrada=${encodeURIComponent(tipo)}`);
+  };
+
+  const handleCaracteristicaClick = () => {
+    // Navegar a venta-entrada desde características
+    router.push(`/venta-entrada?eventoId=${eventoId}`);
   };
 
   // Obtener items alternados (actividad, alimento, actividad, alimento...)
@@ -226,7 +233,11 @@ const EventoSeleccionadoPage: React.FC = () => {
                       }}
                     >
                       {allItems.map((item: any, index: number) => (
-                        <div key={`${item.id || item._id}-${index}`} className={styles.infoCard}>
+                        <div 
+                          key={`${item.id || item._id}-${index}`} 
+                          className={styles.infoCard}
+                          onClick={handleCaracteristicaClick}
+                        >
                           <span className={styles.cardCategory}>
                             {item.type === 'alimento' ? 'Alimento y Bebida' : 'Actividad'}
                           </span>

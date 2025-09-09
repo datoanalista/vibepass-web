@@ -422,6 +422,7 @@
   height: 144px; /* 180px - 20% = 144px */
   position: relative; /* Para la etiqueta de categoría */
   flex-shrink: 0; /* No se compriman en el carrusel */
+  cursor: pointer; /* Indicar que es clickeable */
 }
 
 .infoCard:hover {

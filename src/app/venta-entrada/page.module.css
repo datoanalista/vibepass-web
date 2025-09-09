@@ -1,0 +1,10 @@
+.pageContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #FDFDFF;
+}
+
+.pageContainer > :last-child {
+  margin-top: auto;
+}
