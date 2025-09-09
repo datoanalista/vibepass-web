@@ -250,6 +250,23 @@ const EventoSeleccionadoPage: React.FC = () => {
               </div>
             </div>
           </div>
+
+          {/* Sección Partner */}
+          <div className={styles.partnerSection}>
+            <h2 className={styles.partnerTitle}>Partner</h2>
+            <div className={styles.partnerLogos}>
+              <img 
+                src={getImagePath("/images/trampoline_park.png")} 
+                alt="Trampoline Park" 
+                className={styles.partnerLogo}
+              />
+              <img 
+                src={getImagePath("/images/merca.png")} 
+                alt="Mercado Pago" 
+                className={styles.partnerLogo}
+              />
+            </div>
+          </div>
         </div>
       )}
     </main>

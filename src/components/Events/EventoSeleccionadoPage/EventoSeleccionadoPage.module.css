@@ -498,6 +498,46 @@
   margin: 0;
 }
 
+/* Partner Section Styles */
+.partnerSection {
+  width: 90%;
+  margin: 80px auto 60px auto;
+  text-align: center;
+}
+
+.partnerTitle {
+  font-family: Poppins;
+  font-weight: 800;
+  font-style: ExtraBold;
+  font-size: 40px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #424040;
+  margin: 0 0 40px 0;
+  text-transform: uppercase;
+}
+
+.partnerLogos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.partnerLogo {
+  max-width: 200px;
+  height: auto;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  filter: grayscale(20%);
+}
+
+.partnerLogo:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
 
 .loadingContainer {
   display: flex;
@@ -748,6 +788,24 @@
 
   .cardPrice {
     font-size: 14px;
+  }
+
+  .partnerSection {
+    margin: 60px auto 40px auto;
+  }
+
+  .partnerTitle {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .partnerLogos {
+    gap: 40px;
+    flex-direction: column;
+  }
+
+  .partnerLogo {
+    max-width: 160px;
   }
 
   .constructionContent {
