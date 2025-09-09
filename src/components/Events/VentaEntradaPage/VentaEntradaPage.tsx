@@ -28,11 +28,19 @@ const VentaEntradaPage: React.FC = () => {
   const tipoEntrada = searchParams.get('tipoEntrada');
   const { event, loading, error } = useEventDetails(eventoId);
   const [cart, setCart] = useState<{[key: string]: number}>({});
-  const [currentSection, setCurrentSection] = useState<'tickets' | 'food' | 'activities'>('tickets');
+  const [currentSection, setCurrentSection] = useState<'tickets' | 'food' | 'activities' | 'attendees'>('tickets');
   const [currentFoodIndex, setCurrentFoodIndex] = useState(0);
   const [currentActivityIndex, setCurrentActivityIndex] = useState(0);
   const [foodCart, setFoodCart] = useState<{[key: string]: number}>({});
   const [activityCart, setActivityCart] = useState<{[key: string]: number}>({});
+  const [openAttendeeIndex, setOpenAttendeeIndex] = useState<number>(0);
+  const [attendeesData, setAttendeesData] = useState<{[key: number]: {
+    nombreCompleto: string;
+    rut: string;
+    telefono: string;
+    correo: string;
+    confirmacionCorreo: string;
+  }}>({});
 
   // Funciones del carrito
   const updateQuantity = (entradaId: string, change: number) => {
@@ -168,6 +176,58 @@ const VentaEntradaPage: React.FC = () => {
   };
 
   const hasItemsInActivityCart = Object.keys(activityCart).length > 0;
+
+  // Funciones para asistentes
+  const getTotalAttendees = () => {
+    return getCartItems().reduce((total, item: any) => total + item.quantity, 0);
+  };
+
+  const getAttendeesList = () => {
+    const attendees: Array<{type: string, index: number}> = [];
+    let currentIndex = 0;
+    
+    getCartItems().forEach((item: any) => {
+      for (let i = 0; i < item.quantity; i++) {
+        attendees.push({
+          type: item.entrada.tipoEntrada.charAt(0).toUpperCase() + item.entrada.tipoEntrada.slice(1),
+          index: currentIndex
+        });
+        currentIndex++;
+      }
+    });
+    
+    return attendees;
+  };
+
+  const updateAttendeeData = (index: number, field: string, value: string) => {
+    setAttendeesData(prev => ({
+      ...prev,
+      [index]: {
+        ...prev[index],
+        [field]: value
+      }
+    }));
+  };
+
+  const isAttendeeFormComplete = (index: number) => {
+    const data = attendeesData[index];
+    if (!data) return false;
+    
+    return data.nombreCompleto && 
+           data.rut && 
+           data.telefono && 
+           data.correo && 
+           data.confirmacionCorreo &&
+           data.correo === data.confirmacionCorreo;
+  };
+
+  const areAllFormsComplete = () => {
+    const totalAttendees = getTotalAttendees();
+    for (let i = 0; i < totalAttendees; i++) {
+      if (!isAttendeeFormComplete(i)) return false;
+    }
+    return totalAttendees > 0;
+  };
 
   // Funciones del carrusel
   const nextFoodItem = () => {
@@ -316,7 +376,8 @@ const VentaEntradaPage: React.FC = () => {
               <div className={styles.selectionHeader}>
                 <h2 className={styles.selectionTitle}>
                   {currentSection === 'tickets' ? 'Escoge tus entradas' : 
-                   currentSection === 'food' ? 'Comida, Snacks y Bebestibles' : 'Actividades'}
+                   currentSection === 'food' ? 'Comida, Snacks y Bebestibles' : 
+                   currentSection === 'activities' ? 'Actividades' : 'Asistentes'}
                 </h2>
               </div>
               
@@ -345,6 +406,22 @@ const VentaEntradaPage: React.FC = () => {
                     <button 
                       className={styles.backBtn}
                       onClick={() => setCurrentSection('food')}
+                    >
+                      Atrás
+                    </button>
+                  </div>
+                </>
+              )}
+
+              {currentSection === 'attendees' && (
+                <>
+                  <div className={styles.descriptionItem}>
+                    <p className={styles.selectionDescription}>
+                      Ingresa tus datos para completar la compra de tus entradas
+                    </p>
+                    <button 
+                      className={styles.backBtn}
+                      onClick={() => setCurrentSection('activities')}
                     >
                       Atrás
                     </button>
@@ -570,6 +647,92 @@ const VentaEntradaPage: React.FC = () => {
                   </div>
                 </>
               )}
+
+              {currentSection === 'attendees' && (
+                <>
+                  {/* Línea separadora */}
+                  <div className={styles.foodSeparatorLine}></div>
+                  
+                  {/* Lista de asistentes */}
+                  <div className={styles.attendeesContainer}>
+                    {getAttendeesList().map((attendee, index) => (
+                      <div key={index} className={styles.attendeeItem}>
+                        <div 
+                          className={`${styles.attendeeHeader} ${openAttendeeIndex === index ? styles.attendeeHeaderOpen : ''}`}
+                          onClick={() => setOpenAttendeeIndex(index)}
+                        >
+                          <span className={styles.attendeeTitle}>
+                            {attendee.type} ({index + 1})
+                            {isAttendeeFormComplete(index) && <span className={styles.completedIcon}>✓</span>}
+                          </span>
+                          <span className={styles.attendeeToggle}>
+                            {openAttendeeIndex === index ? '−' : '+'}
+                          </span>
+                        </div>
+                        
+                        {openAttendeeIndex === index && (
+                          <div className={styles.attendeeForm}>
+                            <div className={styles.formGroup}>
+                              <input
+                                type="text"
+                                placeholder="Nombre completo"
+                                className={styles.formInput}
+                                value={attendeesData[index]?.nombreCompleto || ''}
+                                onChange={(e) => updateAttendeeData(index, 'nombreCompleto', e.target.value)}
+                                required
+                              />
+                            </div>
+                            
+                            <div className={styles.formGroup}>
+                              <input
+                                type="text"
+                                placeholder="RUT o ID personal"
+                                className={styles.formInput}
+                                value={attendeesData[index]?.rut || ''}
+                                onChange={(e) => updateAttendeeData(index, 'rut', e.target.value)}
+                                required
+                              />
+                            </div>
+                            
+                            <div className={styles.formGroup}>
+                              <input
+                                type="tel"
+                                placeholder="Teléfono de contacto"
+                                className={styles.formInput}
+                                value={attendeesData[index]?.telefono || ''}
+                                onChange={(e) => updateAttendeeData(index, 'telefono', e.target.value)}
+                                required
+                              />
+                            </div>
+                            
+                            <div className={styles.formGroup}>
+                              <input
+                                type="email"
+                                placeholder="Correo electrónico"
+                                className={styles.formInput}
+                                value={attendeesData[index]?.correo || ''}
+                                onChange={(e) => updateAttendeeData(index, 'correo', e.target.value)}
+                                required
+                              />
+                            </div>
+                            
+                            <div className={styles.formGroup}>
+                              <input
+                                type="email"
+                                placeholder="Confirmación de correo electrónico"
+                                className={styles.formInput}
+                                value={attendeesData[index]?.confirmacionCorreo || ''}
+                                onChange={(e) => updateAttendeeData(index, 'confirmacionCorreo', e.target.value)}
+                                required
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Sección derecha - Carrito de compras */}
@@ -670,19 +833,22 @@ const VentaEntradaPage: React.FC = () => {
           {/* Botón Continuar */}
           <div className={styles.continueSection}>
             <button 
-              className={styles.continueBtn}
+              className={`${styles.continueBtn} ${currentSection === 'attendees' && !areAllFormsComplete() ? styles.continueDisabled : ''}`}
               onClick={() => {
                 if (currentSection === 'tickets') {
                   setCurrentSection('food');
                 } else if (currentSection === 'food') {
                   setCurrentSection('activities');
+                } else if (currentSection === 'activities') {
+                  setCurrentSection('attendees');
                 } else {
                   // Aquí iría la lógica para proceder al checkout
-                  console.log('Proceeding to checkout...');
+                  console.log('Proceeding to purchase...');
                 }
               }}
+              disabled={currentSection === 'attendees' && !areAllFormsComplete()}
             >
-              Continuar
+              {currentSection === 'attendees' ? 'Comprar' : 'Continuar'}
             </button>
           </div>
         </div>

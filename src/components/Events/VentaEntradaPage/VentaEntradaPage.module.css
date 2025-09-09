@@ -630,10 +630,12 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 12px;
-  padding-top: 8px;
+  padding: 8px 16px;
   border-top: 1px solid #F0F0F0;
   font-weight: 600;
-  color: #555;
+  color: white;
+  background: #1B2735;
+  border-radius: 6px;
 }
 
 .foodSeparatorLine {
@@ -818,5 +820,121 @@
 
   .foodPriceNew {
     font-size: 14px;
+  }
+}
+
+/* Estilos para la sección de asistentes */
+.attendeesContainer {
+  padding: 20px 0;
+}
+
+.attendeeItem {
+  margin-bottom: 16px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.attendeeHeader {
+  background: #FFFFFF;
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.attendeeHeaderOpen {
+  background: #F8F9FA;
+}
+
+.attendeeHeader:hover {
+  background: #F8F9FA;
+}
+
+.attendeeTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.completedIcon {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.attendeeToggle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #666;
+}
+
+.attendeeForm {
+  background: #FFFFFF;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formInput {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.formInput:focus {
+  outline: none;
+  box-shadow: 0px 4px 8px 0px #00000060;
+  transform: translateY(-1px);
+}
+
+.formInput::placeholder {
+  color: #999;
+}
+
+.continueDisabled {
+  background: #ccc !important;
+  cursor: not-allowed !important;
+}
+
+.continueDisabled:hover {
+  background: #ccc !important;
+  transform: none !important;
+}
+
+/* Responsive para asistentes */
+@media (max-width: 768px) {
+  .attendeesContainer {
+    padding: 15px 0;
+  }
+
+  .attendeeHeader {
+    padding: 12px 16px;
+  }
+
+  .attendeeForm {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .formInput {
+    padding: 10px 12px;
+    font-size: 13px;
   }
 }
