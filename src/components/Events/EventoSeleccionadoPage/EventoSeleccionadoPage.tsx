@@ -104,14 +104,17 @@ const EventoSeleccionadoPage: React.FC = () => {
     <main className={styles.eventoSeleccionadoPage}>
       {/* Navegación breadcrumb */}
       <div className={styles.breadcrumb}>
-        <Link href="/eventos" className={styles.breadcrumbLink}>
-          <img 
-            src={getImagePath("/images/flecha_home.svg")} 
-            alt="<" 
-            className={styles.breadcrumbArrow}
-          />
-          Regresar a todos los eventos
+        <Link href="/" className={styles.breadcrumbLink} title="Ir a Home">
+          HOME
         </Link>
+        <span className={styles.breadcrumbSeparator}>></span>
+        <Link href="/eventos" className={styles.breadcrumbLink} title="Volver a eventos">
+          EVENTOS
+        </Link>
+        <span className={styles.breadcrumbSeparator}>></span>
+        <span className={styles.breadcrumbCurrent} title="Evento actual">
+          {event?.informacionGeneral?.nombreEvento || 'Evento'}
+        </span>
       </div>
 
       {/* Vista del evento */}

@@ -7,29 +7,48 @@
 
 .breadcrumb {
   margin-bottom: 40px;
-}
-
-.breadcrumbLink {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  color: #1B2735;
+}
+
+.breadcrumbLink {
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #424040;
   text-decoration: none;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .breadcrumbLink:hover {
   color: #01A8E2;
 }
 
-.breadcrumbArrow {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  transform: rotate(180deg);
+.breadcrumbSeparator {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 24px;
+  color: #424040;
+  margin: 0 4px;
+}
+
+.breadcrumbCurrent {
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #424040;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .constructionBanner {
@@ -612,6 +631,24 @@
 @media (max-width: 768px) {
   .eventoSeleccionadoPage {
     padding: 20px 40px;
+  }
+
+  .breadcrumb {
+    margin-bottom: 30px;
+    gap: 8px;
+  }
+
+  .breadcrumbLink {
+    font-size: 20px;
+  }
+
+  .breadcrumbSeparator {
+    font-size: 20px;
+  }
+
+  .breadcrumbCurrent {
+    font-size: 20px;
+    max-width: 200px;
   }
 
   .eventView {
