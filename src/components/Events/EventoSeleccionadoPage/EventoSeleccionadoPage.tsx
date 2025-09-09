@@ -205,7 +205,7 @@ const EventoSeleccionadoPage: React.FC = () => {
                     <div 
                       className={styles.carouselTrack}
                       style={{
-                        transform: `translateX(-${carouselIndex * 410}px)`, // 390px card + 20px gap = 410px
+                        transform: `translateX(-${carouselIndex * 332}px)`, // 312px card + 20px gap = 332px
                         transition: 'transform 0.5s ease'
                       }}
                     >
