@@ -396,7 +396,7 @@
 }
 
 .carouselContent {
-  width: 312px; /* Ancho para mostrar exactamente 1 card: 312px */
+  width: 976px; /* Ancho para mostrar exactamente 3 cards: 312px * 3 + 20px * 2 = 976px */
   overflow: hidden;
   position: relative;
   margin: 0 auto; /* Centrar el carrusel */

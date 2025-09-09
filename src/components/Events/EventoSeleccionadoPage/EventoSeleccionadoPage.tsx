@@ -79,10 +79,10 @@ const EventoSeleccionadoPage: React.FC = () => {
 
   // Carrusel automático ping-pong cada 4 segundos
   useEffect(() => {
-    if (allItems.length > 1) {
+    if (allItems.length > 3) {
       const interval = setInterval(() => {
         setCarouselIndex((prev) => {
-          const maxIndex = allItems.length - 1; // Máximo índice para mostrar 1 card
+          const maxIndex = allItems.length - 3; // Máximo índice para mostrar 3 cards
           
           if (direction === 1) {
             // Yendo hacia adelante
