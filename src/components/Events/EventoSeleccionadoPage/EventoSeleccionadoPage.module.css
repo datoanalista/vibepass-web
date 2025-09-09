@@ -376,9 +376,10 @@
 }
 
 .carouselContent {
-  width: 820px; /* Ancho para mostrar exactamente 3 cards: 260px * 3 + 20px * 2 = 820px */
+  width: 1210px; /* Ancho para mostrar exactamente 3 cards: 390px * 3 + 20px * 2 = 1210px */
   overflow: hidden;
   position: relative;
+  margin: 0 auto; /* Centrar el carrusel */
 }
 
 .carouselTrack {
@@ -392,14 +393,15 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
-  padding: 16px;
+  padding: 24px; /* 16px + 50% = 24px */
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 18px; /* 12px + 50% = 18px */
   transition: transform 0.3s ease, background 0.3s ease;
-  width: 260px; /* Tamaño fijo */
-  height: 120px; /* Altura fija */
+  width: 390px; /* 260px + 50% = 390px */
+  height: 180px; /* 120px + 50% = 180px */
   position: relative; /* Para la etiqueta de categoría */
+  flex-shrink: 0; /* No se compriman en el carrusel */
 }
 
 .infoCard:hover {

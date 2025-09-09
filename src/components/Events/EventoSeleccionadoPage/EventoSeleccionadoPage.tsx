@@ -27,6 +27,7 @@ const EventoSeleccionadoPage: React.FC = () => {
   const [selectedEntrada, setSelectedEntrada] = useState<string | null>(null);
   const [showMore, setShowMore] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 para adelante, -1 para atrás
 
   const handleEntradaSelect = (tipo: string) => {
     setSelectedEntrada(selectedEntrada === tipo ? null : tipo);
@@ -70,29 +71,35 @@ const EventoSeleccionadoPage: React.FC = () => {
   };
 
   const allItems = getAllItems();
-  
-  // Duplicar items para efecto infinito
-  const extendedItems = allItems.length > 0 ? [...allItems, ...allItems, ...allItems] : [];
 
-  // Carrusel automático cada 4 segundos
+  // Carrusel automático ping-pong cada 4 segundos
   useEffect(() => {
     if (allItems.length > 3) {
       const interval = setInterval(() => {
-        setCarouselIndex((prev) => prev + 1);
+        setCarouselIndex((prev) => {
+          const maxIndex = allItems.length - 3; // Máximo índice para mostrar 3 cards
+          
+          if (direction === 1) {
+            // Yendo hacia adelante
+            if (prev >= maxIndex) {
+              setDirection(-1); // Cambiar dirección a atrás
+              return prev - 1;
+            }
+            return prev + 1;
+          } else {
+            // Yendo hacia atrás
+            if (prev <= 0) {
+              setDirection(1); // Cambiar dirección a adelante
+              return prev + 1;
+            }
+            return prev - 1;
+          }
+        });
       }, 4000); // 4 segundos
 
       return () => clearInterval(interval);
     }
-  }, [allItems.length]);
-
-  // Reset del índice cuando llega al final
-  useEffect(() => {
-    if (carouselIndex >= allItems.length && allItems.length > 0) {
-      setTimeout(() => {
-        setCarouselIndex(0);
-      }, 500); // Esperar a que termine la transición
-    }
-  }, [carouselIndex, allItems.length]);
+  }, [allItems.length, direction]);
   return (
     <main className={styles.eventoSeleccionadoPage}>
       {/* Navegación breadcrumb */}
@@ -198,11 +205,11 @@ const EventoSeleccionadoPage: React.FC = () => {
                     <div 
                       className={styles.carouselTrack}
                       style={{
-                        transform: `translateX(-${carouselIndex * 280}px)`, // 260px card + 20px gap
+                        transform: `translateX(-${carouselIndex * 410}px)`, // 390px card + 20px gap = 410px
                         transition: 'transform 0.5s ease'
                       }}
                     >
-                      {extendedItems.map((item: any, index: number) => (
+                      {allItems.map((item: any, index: number) => (
                         <div key={`${item.id || item._id}-${index}`} className={styles.infoCard}>
                           <span className={styles.cardCategory}>
                             {item.type === 'alimento' ? 'Alimento y Bebida' : 'Actividad'}
