@@ -100,7 +100,7 @@
 
 /* Ticket Selection Styles */
 .ticketSelection {
-  background: white;
+  background: #EFEFEF;
   border-radius: 16px;
   padding: 0; /* Eliminar padding para que no haya separación interna */
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
@@ -108,7 +108,8 @@
 }
 
 .selectionHeader {
-  background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
+  background: linear-gradient(90deg, #01A8E2 0%, #B0BBDB 100%);
+  box-shadow: 0px 4px 4px 0px #00000040;
   border-radius: 16px 16px 0 0; /* Coincidir con el border-radius del contenedor */
   padding: 8.64px 20px; /* Reducir altura 20% más: 10.8px -> 8.64px */
   margin-bottom: 0; /* Eliminar separación */
@@ -130,6 +131,16 @@
   background: #EFEFEF;
   padding: 12px 20px;
   margin-bottom: 0;
+}
+
+/* Item de descripción separado - igual que dateItem */
+.descriptionItem {
+  background: #EFEFEF;
+  padding: 12px 20px;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .selectionDate {
@@ -570,8 +581,59 @@
 .selectionDescription {
   color: #666;
   font-size: 14px;
-  margin-top: 8px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.backBtn {
+  background: transparent;
+  color: black;
+  border: 0.7px solid #999;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+/* Estilos para grupos del carrito */
+.cartGroup {
   margin-bottom: 20px;
+  border-bottom: 1px solid #E5E5E5;
+  padding-bottom: 15px;
+}
+
+.cartGroup:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.cartGroupTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.cartSubtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #F0F0F0;
+  font-weight: 600;
+  color: #555;
 }
 
 .foodSeparatorLine {
@@ -587,6 +649,7 @@
   align-items: center;
   gap: 20px;
   padding: 20px 0;
+  background: #EFEFEF;
 }
 
 /* Flechas del carrusel - SOLO imagen con animación */
@@ -616,12 +679,17 @@
 .foodCarouselWrapper {
   flex: 1;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 /* Track del carrusel */
 .foodCarouselTrack {
   display: flex;
   gap: 20px;
+  justify-content: center;
+  max-width: 532px; /* 2 cards * 256px + gap */
+  width: 100%;
 }
 
 /* Cards de comida */
@@ -631,8 +699,8 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-width: 350px;
-  max-width: 350px;
+  min-width: 256px;
+  max-width: 256px;
   flex-shrink: 0;
 }
 
@@ -723,11 +791,13 @@
 
   .foodCarouselTrack {
     gap: 15px;
+    max-width: 431px; /* 2 cards * 208px + gap */
+    justify-content: center;
   }
 
   .foodCardNew {
-    min-width: 280px;
-    max-width: 280px;
+    min-width: 208px;
+    max-width: 208px;
   }
 
   .foodImageNew {

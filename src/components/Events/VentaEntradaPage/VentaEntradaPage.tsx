@@ -28,9 +28,11 @@ const VentaEntradaPage: React.FC = () => {
   const tipoEntrada = searchParams.get('tipoEntrada');
   const { event, loading, error } = useEventDetails(eventoId);
   const [cart, setCart] = useState<{[key: string]: number}>({});
-  const [currentSection, setCurrentSection] = useState<'tickets' | 'food'>('tickets');
+  const [currentSection, setCurrentSection] = useState<'tickets' | 'food' | 'activities'>('tickets');
   const [currentFoodIndex, setCurrentFoodIndex] = useState(0);
+  const [currentActivityIndex, setCurrentActivityIndex] = useState(0);
   const [foodCart, setFoodCart] = useState<{[key: string]: number}>({});
+  const [activityCart, setActivityCart] = useState<{[key: string]: number}>({});
 
   // Funciones del carrito
   const updateQuantity = (entradaId: string, change: number) => {
@@ -122,9 +124,56 @@ const VentaEntradaPage: React.FC = () => {
 
   const hasItemsInFoodCart = Object.keys(foodCart).length > 0;
 
+  // Funciones para el carrito de actividades
+  const updateActivityQuantity = (activityId: number | string, change: number) => {
+    const id = String(activityId);
+    setActivityCart(prev => {
+      const currentQuantity = prev[id] || 0;
+      const newQuantity = Math.max(0, currentQuantity + change);
+      
+      if (newQuantity === 0) {
+        const newCart = { ...prev };
+        delete newCart[id];
+        return newCart;
+      }
+      
+      return { ...prev, [id]: newQuantity };
+    });
+  };
+
+  const getActivityQuantity = (activityId: number | string) => activityCart[String(activityId)] || 0;
+
+  const getActivityTotalPrice = () => {
+    if (!event?.actividades) return 0;
+    
+    return Object.entries(activityCart).reduce((total, [activityId, quantity]) => {
+      const activity = event.actividades.find((a: any) => 
+        String(a.id || a._id) === String(activityId)
+      );
+      return total + (activity ? (activity.precioUnitario || activity.price) * quantity : 0);
+    }, 0);
+  };
+
+  const getActivityCartItems = () => {
+    if (!event?.actividades) return [];
+    
+    return Object.entries(activityCart)
+      .map(([activityId, quantity]) => {
+        const activity = event.actividades.find((a: any) => 
+          String(a.id || a._id) === String(activityId)
+        );
+        return activity ? { activity, quantity } : null;
+      })
+      .filter(item => item !== null);
+  };
+
+  const hasItemsInActivityCart = Object.keys(activityCart).length > 0;
+
   // Funciones del carrusel
   const nextFoodItem = () => {
     const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
+    if (activeFood.length <= 2) return; // No navegar si hay 2 o menos items
+    
     setCurrentFoodIndex(prev => 
       prev >= activeFood.length - 2 ? 0 : prev + 1
     );
@@ -132,6 +181,8 @@ const VentaEntradaPage: React.FC = () => {
 
   const prevFoodItem = () => {
     const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
+    if (activeFood.length <= 2) return; // No navegar si hay 2 o menos items
+    
     setCurrentFoodIndex(prev => 
       prev <= 0 ? Math.max(0, activeFood.length - 2) : prev - 1
     );
@@ -141,7 +192,39 @@ const VentaEntradaPage: React.FC = () => {
     if (!event?.alimentosBebestibles) return [];
     
     const activeFood = event.alimentosBebestibles.filter((item: any) => item.activo);
-    return activeFood.slice(currentFoodIndex, currentFoodIndex + 2);
+    const visibleItems = activeFood.slice(currentFoodIndex, currentFoodIndex + 2);
+    
+    // Asegurar que siempre mostramos máximo 2 cards
+    return visibleItems.slice(0, 2);
+  };
+
+  // Funciones del carrusel de actividades
+  const nextActivityItem = () => {
+    const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
+    if (activeActivities.length <= 2) return; // No navegar si hay 2 o menos items
+    
+    setCurrentActivityIndex(prev => 
+      prev >= activeActivities.length - 2 ? 0 : prev + 1
+    );
+  };
+
+  const prevActivityItem = () => {
+    const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
+    if (activeActivities.length <= 2) return; // No navegar si hay 2 o menos items
+    
+    setCurrentActivityIndex(prev => 
+      prev <= 0 ? Math.max(0, activeActivities.length - 2) : prev - 1
+    );
+  };
+
+  const getVisibleActivityItems = () => {
+    if (!event?.actividades) return [];
+    
+    const activeActivities = event.actividades.filter((item: any) => item.activa);
+    const visibleItems = activeActivities.slice(currentActivityIndex, currentActivityIndex + 2);
+    
+    // Asegurar que siempre mostramos máximo 2 cards
+    return visibleItems.slice(0, 2);
   };
 
   // Debug
@@ -232,14 +315,42 @@ const VentaEntradaPage: React.FC = () => {
             <div className={styles.ticketSelection}>
               <div className={styles.selectionHeader}>
                 <h2 className={styles.selectionTitle}>
-                  {currentSection === 'tickets' ? 'Escoge tus entradas' : 'Comida, Snacks y Bebestibles'}
+                  {currentSection === 'tickets' ? 'Escoge tus entradas' : 
+                   currentSection === 'food' ? 'Comida, Snacks y Bebestibles' : 'Actividades'}
                 </h2>
-                {currentSection === 'food' && (
-                  <p className={styles.selectionDescription}>
-                    Añade tus productos antes del evento
-                  </p>
-                )}
               </div>
+              
+              {currentSection === 'food' && (
+                <>
+                  <div className={styles.descriptionItem}>
+                    <p className={styles.selectionDescription}>
+                      Añade tus productos antes del evento
+                    </p>
+                    <button 
+                      className={styles.backBtn}
+                      onClick={() => setCurrentSection('tickets')}
+                    >
+                      Atrás
+                    </button>
+                  </div>
+                </>
+              )}
+
+              {currentSection === 'activities' && (
+                <>
+                  <div className={styles.descriptionItem}>
+                    <p className={styles.selectionDescription}>
+                      Participa de las actividades que tenemos para ti!
+                    </p>
+                    <button 
+                      className={styles.backBtn}
+                      onClick={() => setCurrentSection('food')}
+                    >
+                      Atrás
+                    </button>
+                  </div>
+                </>
+              )}
               
               {currentSection === 'tickets' && (
                 <>
@@ -321,8 +432,14 @@ const VentaEntradaPage: React.FC = () => {
                     <img 
                       src={getImagePath("/images/icon_left.svg")} 
                       alt="Anterior"
-                      className={`${styles.carouselArrowNew} ${currentFoodIndex === 0 ? styles.disabled : ''}`}
-                      onClick={currentFoodIndex > 0 ? prevFoodItem : undefined}
+                      className={`${styles.carouselArrowNew} ${(() => {
+                        const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
+                        return currentFoodIndex === 0 || activeFood.length <= 2 ? styles.disabled : '';
+                      })()}`}
+                      onClick={(() => {
+                        const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
+                        return currentFoodIndex > 0 && activeFood.length > 2 ? prevFoodItem : undefined;
+                      })()}
                     />
                     
                     <div className={styles.foodCarouselWrapper}>
@@ -367,11 +484,87 @@ const VentaEntradaPage: React.FC = () => {
                       alt="Siguiente"
                       className={`${styles.carouselArrowNew} ${(() => {
                         const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
-                        return currentFoodIndex >= activeFood.length - 2 ? styles.disabled : '';
+                        return currentFoodIndex >= activeFood.length - 2 || activeFood.length <= 2 ? styles.disabled : '';
                       })()}`}
                       onClick={(() => {
                         const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
-                        return currentFoodIndex < activeFood.length - 2 ? nextFoodItem : undefined;
+                        return currentFoodIndex < activeFood.length - 2 && activeFood.length > 2 ? nextFoodItem : undefined;
+                      })()}
+                    />
+                  </div>
+                </>
+              )}
+
+              {currentSection === 'activities' && (
+                <>
+                  {/* Línea separadora */}
+                  <div className={styles.foodSeparatorLine}></div>
+                  
+                  {/* Carrusel de actividades */}
+                  <div className={styles.foodCarouselContainer}>
+                    <img 
+                      src={getImagePath("/images/icon_left.svg")} 
+                      alt="Anterior"
+                      className={`${styles.carouselArrowNew} ${(() => {
+                        const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
+                        return currentActivityIndex === 0 || activeActivities.length <= 2 ? styles.disabled : '';
+                      })()}`}
+                      onClick={(() => {
+                        const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
+                        return currentActivityIndex > 0 && activeActivities.length > 2 ? prevActivityItem : undefined;
+                      })()}
+                    />
+                    
+                    <div className={styles.foodCarouselWrapper}>
+                      <div className={styles.foodCarouselTrack}>
+                        {getVisibleActivityItems().map((activity: any) => (
+                          <div key={activity.id || activity._id} className={styles.foodCardNew}>
+                            <img 
+                              src={activity.imagen || activity.imageUrl || activity.imagenActividad || getImagePath("/images/person-play.png")} 
+                              alt={activity.nombreActividad || activity.name}
+                              className={styles.foodImageNew}
+                              onError={(e) => {
+                                e.currentTarget.src = getImagePath("/images/person-play.png");
+                              }}
+                            />
+                            <div className={styles.foodInfoNew}>
+                              <h3 className={styles.foodNameNew}>{activity.nombreActividad || activity.name}</h3>
+                              <p className={styles.foodDescriptionNew}>{activity.descripcion || activity.description}</p>
+                              <p className={styles.foodPriceNew}>${(activity.precioUnitario || activity.price).toLocaleString('es-CL')}</p>
+                              
+                              <div className={styles.foodQuantityControlsNew}>
+                                <button 
+                                  className={styles.quantityBtn}
+                                  onClick={() => updateActivityQuantity(activity.id || activity._id, -1)}
+                                >
+                                  -
+                                </button>
+                                <span className={styles.quantity}>
+                                  {getActivityQuantity(activity.id || activity._id)}
+                                </span>
+                                <button 
+                                  className={styles.quantityBtn}
+                                  onClick={() => updateActivityQuantity(activity.id || activity._id, 1)}
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <img 
+                      src={getImagePath("/images/icon_right.svg")} 
+                      alt="Siguiente"
+                      className={`${styles.carouselArrowNew} ${(() => {
+                        const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
+                        return currentActivityIndex >= activeActivities.length - 2 || activeActivities.length <= 2 ? styles.disabled : '';
+                      })()}`}
+                      onClick={(() => {
+                        const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
+                        return currentActivityIndex < activeActivities.length - 2 && activeActivities.length > 2 ? nextActivityItem : undefined;
                       })()}
                     />
                   </div>
@@ -386,77 +579,90 @@ const VentaEntradaPage: React.FC = () => {
               </div>
               
               <div className={styles.cartContent}>
-                {currentSection === 'tickets' && !hasItemsInCart && (
+                {!hasItemsInCart && !hasItemsInFoodCart && !hasItemsInActivityCart && (
                   <p className={styles.cartEmpty}>
-                    El carrito de compras está vacío. Por favor, selecciona tus tickets
+                    El carrito de compras está vacío. Por favor, selecciona tus productos
                   </p>
                 )}
                 
-                {currentSection === 'food' && !hasItemsInFoodCart && (
-                  <p className={styles.cartEmpty}>
-                    No has seleccionado productos. Añade comida o bebidas a tu carrito
-                  </p>
-                )}
-                
-                {/* Mostrar items de tickets */}
-                {currentSection === 'tickets' && hasItemsInCart && (
-                  <div className={styles.cartItems}>
-                    {getCartItems().map((item: any) => (
-                      <div key={item.entrada.id || item.entrada._id} className={styles.cartItem}>
-                        <span className={styles.cartItemName}>
-                          {item.entrada.tipoEntrada.charAt(0).toUpperCase() + item.entrada.tipoEntrada.slice(1)} x{item.quantity}
-                        </span>
-                        <span className={styles.cartItemPrice}>
-                          ${(item.entrada.precio * item.quantity).toLocaleString('es-CL')}
-                        </span>
-                      </div>
-                    ))}
+                {/* Grupo Entradas */}
+                {hasItemsInCart && (
+                  <div className={styles.cartGroup}>
+                    <h4 className={styles.cartGroupTitle}>Entradas</h4>
+                    <div className={styles.cartItems}>
+                      {getCartItems().map((item: any) => (
+                        <div key={item.entrada.id || item.entrada._id} className={styles.cartItem}>
+                          <span className={styles.cartItemName}>
+                            {item.entrada.tipoEntrada.charAt(0).toUpperCase() + item.entrada.tipoEntrada.slice(1)} x{item.quantity}
+                          </span>
+                          <span className={styles.cartItemPrice}>
+                            ${(item.entrada.precio * item.quantity).toLocaleString('es-CL')}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className={styles.cartSubtotal}>
+                      <span>Subtotal Entradas</span>
+                      <span>${getTotalPrice().toLocaleString('es-CL')}</span>
+                    </div>
                   </div>
                 )}
                 
-                {/* Mostrar items de comida */}
-                {currentSection === 'food' && hasItemsInFoodCart && (
-                  <div className={styles.cartItems}>
-                    {getFoodCartItems().map((item: any) => (
-                      <div key={item.food.id || item.food._id} className={styles.cartItem}>
-                        <span className={styles.cartItemName}>
-                          {item.food.nombre || item.food.name} x{item.quantity}
-                        </span>
-                        <span className={styles.cartItemPrice}>
-                          ${((item.food.precioUnitario || item.food.price) * item.quantity).toLocaleString('es-CL')}
-                        </span>
-                      </div>
-                    ))}
+                {/* Grupo Alimentos */}
+                {hasItemsInFoodCart && (
+                  <div className={styles.cartGroup}>
+                    <h4 className={styles.cartGroupTitle}>Alimentos, Snacks y Bebestibles</h4>
+                    <div className={styles.cartItems}>
+                      {getFoodCartItems().map((item: any) => (
+                        <div key={item.food.id || item.food._id} className={styles.cartItem}>
+                          <span className={styles.cartItemName}>
+                            {item.food.nombre || item.food.name} x{item.quantity}
+                          </span>
+                          <span className={styles.cartItemPrice}>
+                            ${((item.food.precioUnitario || item.food.price) * item.quantity).toLocaleString('es-CL')}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className={styles.cartSubtotal}>
+                      <span>Subtotal Alimentos</span>
+                      <span>${getFoodTotalPrice().toLocaleString('es-CL')}</span>
+                    </div>
                   </div>
                 )}
                 
-                <div className={styles.cartSummary}>
-                  {currentSection === 'tickets' && (
-                    <>
-                      <div className={styles.cartItem}>
-                        <span>Entrada</span>
-                        <span>${getTotalPrice().toLocaleString('es-CL')}</span>
-                      </div>
-                      <div className={styles.cartTotal}>
-                        <span>Total</span>
-                        <span>${getTotalPrice().toLocaleString('es-CL')}</span>
-                      </div>
-                    </>
-                  )}
-                  
-                  {currentSection === 'food' && (
-                    <>
-                      <div className={styles.cartItem}>
-                        <span>Comida y Bebidas</span>
-                        <span>${getFoodTotalPrice().toLocaleString('es-CL')}</span>
-                      </div>
-                      <div className={styles.cartTotal}>
-                        <span>Total</span>
-                        <span>${getFoodTotalPrice().toLocaleString('es-CL')}</span>
-                      </div>
-                    </>
-                  )}
-                </div>
+                {/* Grupo Actividades */}
+                {hasItemsInActivityCart && (
+                  <div className={styles.cartGroup}>
+                    <h4 className={styles.cartGroupTitle}>Actividades</h4>
+                    <div className={styles.cartItems}>
+                      {getActivityCartItems().map((item: any) => (
+                        <div key={item.activity.id || item.activity._id} className={styles.cartItem}>
+                          <span className={styles.cartItemName}>
+                            {item.activity.nombreActividad || item.activity.name} x{item.quantity}
+                          </span>
+                          <span className={styles.cartItemPrice}>
+                            ${((item.activity.precioUnitario || item.activity.price) * item.quantity).toLocaleString('es-CL')}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className={styles.cartSubtotal}>
+                      <span>Subtotal Actividades</span>
+                      <span>${getActivityTotalPrice().toLocaleString('es-CL')}</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Total Final */}
+                {(hasItemsInCart || hasItemsInFoodCart || hasItemsInActivityCart) && (
+                  <div className={styles.cartSummary}>
+                    <div className={styles.cartTotal}>
+                      <span>Total</span>
+                      <span>${(getTotalPrice() + getFoodTotalPrice() + getActivityTotalPrice()).toLocaleString('es-CL')}</span>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -468,6 +674,8 @@ const VentaEntradaPage: React.FC = () => {
               onClick={() => {
                 if (currentSection === 'tickets') {
                   setCurrentSection('food');
+                } else if (currentSection === 'food') {
+                  setCurrentSection('activities');
                 } else {
                   // Aquí iría la lógica para proceder al checkout
                   console.log('Proceeding to checkout...');
