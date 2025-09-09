@@ -30,7 +30,7 @@ const VentaEntradaPage: React.FC = () => {
   const [cart, setCart] = useState<{[key: string]: number}>({});
   const [currentSection, setCurrentSection] = useState<'tickets' | 'food'>('tickets');
   const [currentFoodIndex, setCurrentFoodIndex] = useState(0);
-  const [foodCart, setFoodCart] = useState<{[key: number]: number}>({});
+  const [foodCart, setFoodCart] = useState<{[key: string]: number}>({});
 
   // Funciones del carrito
   const updateQuantity = (entradaId: string, change: number) => {
@@ -78,34 +78,43 @@ const VentaEntradaPage: React.FC = () => {
   const hasItemsInCart = Object.keys(cart).length > 0;
 
   // Funciones para el carrito de comida
-  const updateFoodQuantity = (foodId: number, change: number) => {
+  const updateFoodQuantity = (foodId: number | string, change: number) => {
+    const id = String(foodId);
     setFoodCart(prev => {
-      const currentQuantity = prev[foodId] || 0;
+      const currentQuantity = prev[id] || 0;
       const newQuantity = Math.max(0, currentQuantity + change);
       
       if (newQuantity === 0) {
         const newCart = { ...prev };
-        delete newCart[foodId];
+        delete newCart[id];
         return newCart;
       }
       
-      return { ...prev, [foodId]: newQuantity };
+      return { ...prev, [id]: newQuantity };
     });
   };
 
-  const getFoodQuantity = (foodId: number) => foodCart[foodId] || 0;
+  const getFoodQuantity = (foodId: number | string) => foodCart[String(foodId)] || 0;
 
   const getFoodTotalPrice = () => {
+    if (!event?.alimentosBebestibles) return 0;
+    
     return Object.entries(foodCart).reduce((total, [foodId, quantity]) => {
-      const food = foodItemsData.find((f: FoodItem) => f.id === parseInt(foodId));
-      return total + (food ? food.price * quantity : 0);
+      const food = event.alimentosBebestibles.find((f: any) => 
+        String(f.id || f._id) === String(foodId)
+      );
+      return total + (food ? (food.precioUnitario || food.price) * quantity : 0);
     }, 0);
   };
 
   const getFoodCartItems = () => {
+    if (!event?.alimentosBebestibles) return [];
+    
     return Object.entries(foodCart)
       .map(([foodId, quantity]) => {
-        const food = foodItemsData.find((f: FoodItem) => f.id === parseInt(foodId));
+        const food = event.alimentosBebestibles.find((f: any) => 
+          String(f.id || f._id) === String(foodId)
+        );
         return food ? { food, quantity } : null;
       })
       .filter(item => item !== null);
@@ -115,19 +124,24 @@ const VentaEntradaPage: React.FC = () => {
 
   // Funciones del carrusel
   const nextFoodItem = () => {
+    const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
     setCurrentFoodIndex(prev => 
-      prev >= foodItemsData.length - 3 ? 0 : prev + 1
+      prev >= activeFood.length - 2 ? 0 : prev + 1
     );
   };
 
   const prevFoodItem = () => {
+    const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
     setCurrentFoodIndex(prev => 
-      prev <= 0 ? Math.max(0, foodItemsData.length - 3) : prev - 1
+      prev <= 0 ? Math.max(0, activeFood.length - 2) : prev - 1
     );
   };
 
   const getVisibleFoodItems = () => {
-    return foodItemsData.slice(currentFoodIndex, currentFoodIndex + 3);
+    if (!event?.alimentosBebestibles) return [];
+    
+    const activeFood = event.alimentosBebestibles.filter((item: any) => item.activo);
+    return activeFood.slice(currentFoodIndex, currentFoodIndex + 2);
   };
 
   // Debug
@@ -302,58 +316,64 @@ const VentaEntradaPage: React.FC = () => {
                   {/* Línea separadora */}
                   <div className={styles.foodSeparatorLine}></div>
                   
-                  {/* Carrusel de comida */}
-                  <div className={styles.foodCarousel}>
-                    <button 
-                      className={styles.carouselArrow}
-                      onClick={prevFoodItem}
-                      disabled={currentFoodIndex === 0}
-                    >
-                      <img src={getImagePath("/images/icon_left.svg")} alt="Anterior" />
-                    </button>
+                  {/* Carrusel de comida - Implementación nueva */}
+                  <div className={styles.foodCarouselContainer}>
+                    <img 
+                      src={getImagePath("/images/icon_left.svg")} 
+                      alt="Anterior"
+                      className={`${styles.carouselArrowNew} ${currentFoodIndex === 0 ? styles.disabled : ''}`}
+                      onClick={currentFoodIndex > 0 ? prevFoodItem : undefined}
+                    />
                     
-                    <div className={styles.foodItems}>
-                      {getVisibleFoodItems().map((food: FoodItem) => (
-                        <div key={food.id} className={styles.foodCard}>
-                          <img 
-                            src={food.imageUrl} 
-                            alt={food.name}
-                            className={styles.foodImage}
-                          />
-                          <div className={styles.foodInfo}>
-                            <h3 className={styles.foodName}>{food.name}</h3>
-                            <p className={styles.foodDescription}>{food.description}</p>
-                            <p className={styles.foodPrice}>${food.price.toLocaleString('es-CL')}</p>
-                            
-                            <div className={styles.foodQuantityControls}>
-                              <button 
-                                className={styles.quantityBtn}
-                                onClick={() => updateFoodQuantity(food.id, -1)}
-                              >
-                                -
-                              </button>
-                              <span className={styles.quantity}>
-                                {getFoodQuantity(food.id)}
-                              </span>
-                              <button 
-                                className={styles.quantityBtn}
-                                onClick={() => updateFoodQuantity(food.id, 1)}
-                              >
-                                +
-                              </button>
+                    <div className={styles.foodCarouselWrapper}>
+                      <div className={styles.foodCarouselTrack}>
+                        {getVisibleFoodItems().map((food: any) => (
+                          <div key={food.id || food._id} className={styles.foodCardNew}>
+                            <img 
+                              src={food.imagen || food.imageUrl} 
+                              alt={food.nombre || food.name}
+                              className={styles.foodImageNew}
+                            />
+                            <div className={styles.foodInfoNew}>
+                              <h3 className={styles.foodNameNew}>{food.nombre || food.name}</h3>
+                              <p className={styles.foodDescriptionNew}>{food.descripcion || food.description}</p>
+                              <p className={styles.foodPriceNew}>${(food.precioUnitario || food.price).toLocaleString('es-CL')}</p>
+                              
+                              <div className={styles.foodQuantityControlsNew}>
+                                <button 
+                                  className={styles.quantityBtn}
+                                  onClick={() => updateFoodQuantity(food.id || food._id, -1)}
+                                >
+                                  -
+                                </button>
+                                <span className={styles.quantity}>
+                                  {getFoodQuantity(food.id || food._id)}
+                                </span>
+                                <button 
+                                  className={styles.quantityBtn}
+                                  onClick={() => updateFoodQuantity(food.id || food._id, 1)}
+                                >
+                                  +
+                                </button>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                     
-                    <button 
-                      className={styles.carouselArrow}
-                      onClick={nextFoodItem}
-                      disabled={currentFoodIndex >= foodItemsData.length - 3}
-                    >
-                      <img src={getImagePath("/images/icon_right.svg")} alt="Siguiente" />
-                    </button>
+                    <img 
+                      src={getImagePath("/images/icon_right.svg")} 
+                      alt="Siguiente"
+                      className={`${styles.carouselArrowNew} ${(() => {
+                        const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
+                        return currentFoodIndex >= activeFood.length - 2 ? styles.disabled : '';
+                      })()}`}
+                      onClick={(() => {
+                        const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
+                        return currentFoodIndex < activeFood.length - 2 ? nextFoodItem : undefined;
+                      })()}
+                    />
                   </div>
                 </>
               )}
@@ -398,12 +418,12 @@ const VentaEntradaPage: React.FC = () => {
                 {currentSection === 'food' && hasItemsInFoodCart && (
                   <div className={styles.cartItems}>
                     {getFoodCartItems().map((item: any) => (
-                      <div key={item.food.id} className={styles.cartItem}>
+                      <div key={item.food.id || item.food._id} className={styles.cartItem}>
                         <span className={styles.cartItemName}>
-                          {item.food.name} x{item.quantity}
+                          {item.food.nombre || item.food.name} x{item.quantity}
                         </span>
                         <span className={styles.cartItemPrice}>
-                          ${(item.food.price * item.quantity).toLocaleString('es-CL')}
+                          ${((item.food.precioUnitario || item.food.price) * item.quantity).toLocaleString('es-CL')}
                         </span>
                       </div>
                     ))}

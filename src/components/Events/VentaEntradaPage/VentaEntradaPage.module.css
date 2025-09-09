@@ -566,7 +566,7 @@
   }
 }
 
-/* Estilos para la sección de comida */
+/* Estilos para la sección de comida - NUEVA IMPLEMENTACIÓN */
 .selectionDescription {
   color: #666;
   font-size: 14px;
@@ -581,96 +581,98 @@
   margin: 20px 0;
 }
 
-.foodCarousel {
+/* Carrusel nuevo - contenedor principal */
+.foodCarouselContainer {
   display: flex;
   align-items: center;
   gap: 20px;
   padding: 20px 0;
 }
 
-.carouselArrow {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 40px;
+/* Flechas del carrusel - SOLO imagen con animación */
+.carouselArrowNew {
+  width: 40px;
   height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
-.carouselArrow:hover:not(:disabled) {
-  background-color: rgba(255, 107, 53, 0.1);
+.carouselArrowNew:hover {
   transform: scale(1.1);
 }
 
-.carouselArrow:disabled {
+.carouselArrowNew:active {
+  transform: scale(0.95);
+}
+
+.carouselArrowNew.disabled {
   opacity: 0.3;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
-.carouselArrow img {
-  width: 24px;
-  height: 24px;
-}
-
-.foodItems {
-  display: flex;
-  gap: 20px;
+/* Wrapper del carrusel */
+.foodCarouselWrapper {
   flex: 1;
   overflow: hidden;
 }
 
-.foodCard {
+/* Track del carrusel */
+.foodCarouselTrack {
+  display: flex;
+  gap: 20px;
+}
+
+/* Cards de comida */
+.foodCardNew {
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-width: 280px;
-  max-width: 280px;
+  min-width: 350px;
+  max-width: 350px;
+  flex-shrink: 0;
 }
 
-.foodCard:hover {
+.foodCardNew:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
-.foodImage {
+.foodImageNew {
   width: 100%;
   height: 180px;
   object-fit: cover;
 }
 
-.foodInfo {
+.foodInfoNew {
   padding: 16px;
 }
 
-.foodName {
+.foodNameNew {
   font-size: 18px;
   font-weight: 600;
   color: #333;
   margin: 0 0 8px 0;
 }
 
-.foodDescription {
+.foodDescriptionNew {
   font-size: 14px;
   color: #666;
   margin: 0 0 12px 0;
   line-height: 1.4;
 }
 
-.foodPrice {
+.foodPriceNew {
   font-size: 16px;
   font-weight: 600;
   color: #FF6B35;
   margin: 0 0 16px 0;
 }
 
-.foodQuantityControls {
+.foodQuantityControlsNew {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -678,7 +680,7 @@
   margin-top: 12px;
 }
 
-.foodQuantityControls .quantityBtn {
+.foodQuantityControlsNew .quantityBtn {
   width: 32px;
   height: 32px;
   border-radius: 6px;
@@ -694,63 +696,57 @@
   transition: all 0.2s ease;
 }
 
-.foodQuantityControls .quantityBtn:hover {
+.foodQuantityControlsNew .quantityBtn:hover {
   background-color: #FF6B35;
   color: white;
   border-color: #FF6B35;
 }
 
-.foodQuantityControls .quantity {
+.foodQuantityControlsNew .quantity {
   min-width: 30px;
   text-align: center;
   font-weight: 600;
   color: #333;
 }
 
-/* Responsive para carrusel de comida */
+/* Responsive para carrusel nuevo */
 @media (max-width: 768px) {
-  .foodCarousel {
-    gap: 10px;
+  .foodCarouselContainer {
+    gap: 15px;
     padding: 15px 0;
   }
 
-  .foodItems {
+  .carouselArrowNew {
+    width: 35px;
+    height: 35px;
+  }
+
+  .foodCarouselTrack {
     gap: 15px;
   }
 
-  .foodCard {
-    min-width: 240px;
-    max-width: 240px;
+  .foodCardNew {
+    min-width: 280px;
+    max-width: 280px;
   }
 
-  .foodImage {
+  .foodImageNew {
     height: 150px;
   }
 
-  .foodInfo {
+  .foodInfoNew {
     padding: 12px;
   }
 
-  .foodName {
+  .foodNameNew {
     font-size: 16px;
   }
 
-  .foodDescription {
+  .foodDescriptionNew {
     font-size: 12px;
   }
 
-  .foodPrice {
+  .foodPriceNew {
     font-size: 14px;
-  }
-
-  .carouselArrow {
-    min-width: 36px;
-    height: 36px;
-    padding: 8px;
-  }
-
-  .carouselArrow img {
-    width: 20px;
-    height: 20px;
   }
 }
