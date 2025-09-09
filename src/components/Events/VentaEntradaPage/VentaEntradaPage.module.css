@@ -88,107 +88,298 @@
   white-space: nowrap;
 }
 
-/* Construction Banner Styles */
-.constructionBanner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #01A8E2 0%, #A5B9DB 100%);
-  border-radius: 20px;
-  padding: 60px 40px;
+/* Purchase Container */
+.purchaseContainer {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 40px;
+  margin: 40px 0;
+  max-width: 1200px;
   margin: 40px auto;
-  max-width: 800px;
-  box-shadow: 0px 8px 32px rgba(1, 168, 226, 0.3);
 }
 
-.constructionContent {
-  text-align: center;
-  color: white;
-}
-
-.iconContainer {
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: center;
-}
-
-.constructionIcon {
-  width: 80px;
-  height: 80px;
-  filter: brightness(0) invert(1);
-  opacity: 0.9;
-}
-
-.constructionTitle {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 28px;
-  line-height: 120%;
-  margin: 0 0 20px 0;
-  color: white;
-}
-
-.constructionText {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 140%;
-  margin: 0;
-  opacity: 0.95;
-  max-width: 500px;
-}
-
-/* Event Info Styles */
-.eventInfo {
-  max-width: 800px;
-  margin: 40px auto;
+/* Ticket Selection Styles */
+.ticketSelection {
   background: white;
   border-radius: 16px;
-  padding: 40px;
+  padding: 0; /* Eliminar padding para que no haya separación interna */
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Para que el border-radius funcione correctamente */
 }
 
-.eventDetails {
-  text-align: center;
+.selectionHeader {
+  background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
+  border-radius: 16px 16px 0 0; /* Coincidir con el border-radius del contenedor */
+  padding: 8.64px 20px; /* Reducir altura 20% más: 10.8px -> 8.64px */
+  margin-bottom: 0; /* Eliminar separación */
 }
 
-.eventTitle {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 32px;
+.selectionTitle {
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
   color: #1B2735;
-  margin: 0 0 30px 0;
-  line-height: 120%;
+  margin: 0;
 }
 
-.eventMetadata {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+/* Item de fecha separado */
+.dateItem {
+  background: #EFEFEF;
+  padding: 12px 20px;
+  margin-bottom: 0;
+}
+
+.selectionDate {
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  line-height: 100%;
+  letter-spacing: 0%;
+  font-size: 14px;
+  color: #424040;
+  margin: 0;
+}
+
+/* Ticket Table Styles */
+.ticketTable {
+  width: 100%;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+  padding: 8.64px 0; /* Misma altura que "Escoge tus entradas" */
+  background: #01A8E2;
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFFFFF;
+  text-align: center;
+  border-radius: 0; /* Sin border-radius para conectar con header */
+}
+
+.headerEntrada,
+.headerPrecio,
+.headerCantidad {
+  padding: 0 10px;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+  padding: 20px; /* Agregar padding lateral para las filas */
+  border-bottom: 1px solid #E5E7EB;
   align-items: center;
 }
 
-.eventDate,
-.eventLocation,
-.eventStatus,
-.selectedEntry {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-  color: #424040;
-  margin: 0;
-  padding: 12px 20px;
-  background: #F8F9FA;
-  border-radius: 10px;
-  border-left: 4px solid #01A8E2;
+.entradaNombre {
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #1B2735;
   text-align: left;
-  width: 100%;
-  max-width: 400px;
+  padding-left: 10px;
 }
 
-.selectedEntry {
-  border-left-color: #F48E5A;
-  background: #FFF8F5;
+.entradaEdad {
+  font-weight: 400;
+  font-size: 12px;
+  color: #6B7280;
+  display: block;
+  margin-top: 2px;
+}
+
+.entradaPrecio {
+  font-family: Inter;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #121212;
+  text-align: center;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.quantityBtn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #D1D5DB;
+  background: white;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quantityBtn:hover {
+  background: #F3F4F6;
+  border-color: #01A8E2;
+}
+
+.quantity {
+  font-family: Inter;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #121212;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Shopping Cart Styles */
+.shoppingCart {
+  background: white;
+  border-radius: 16px;
+  padding: 0; /* Eliminar padding para que no haya separación interna */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  height: 100%; /* Altura completa para igualar la sección izquierda */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Para que el border-radius funcione correctamente */
+}
+
+.cartHeader {
+  background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
+  border-radius: 16px 16px 0 0; /* Coincidir con el border-radius del contenedor */
+  padding: 8.64px 20px; /* Misma altura que "Escoge tus entradas" */
+  margin-bottom: 0; /* Eliminar separación */
+}
+
+.cartTitle {
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #1B2735;
+  margin: 0;
+}
+
+.cartContent {
+  flex: 1; /* Expandir para llenar el espacio disponible */
+  padding: 20px; /* Agregar padding solo al contenido */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cartItems {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cartItemName {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #374151;
+}
+
+.cartItemPrice {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1B2735;
+}
+
+.cartEmpty {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #6B7280;
+  text-align: center;
+  margin: 40px 0;
+  line-height: 140%;
+}
+
+.cartSummary {
+  border-top: 1px solid #E5E7EB;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 10px;
+}
+
+.cartTotal {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #1B2735;
+  padding-top: 10px;
+  border-top: 1px solid #E5E7EB;
+}
+
+/* Continue Button Styles */
+.continueSection {
+  display: grid;
+  grid-template-columns: 1fr 400px; /* Misma estructura que purchaseContainer */
+  gap: 40px;
+  margin: 20px 0;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.continueSection::before {
+  content: ''; /* Espacio vacío para alinear con la sección izquierda */
+}
+
+.continueBtn {
+  width: 100%; /* Ancho completo de la columna del carrito (400px) */
+  height: 61px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  
+  font-family: Inter;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #1B2735;
+}
+
+.continueBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 8px 0px #00000040;
 }
 
 /* Loading and Error Styles */
@@ -264,6 +455,64 @@
   .separatorLine {
     margin-left: -20px; /* Compensar el padding móvil */
     margin-bottom: 30px;
+  }
+
+  .purchaseContainer {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin: 30px auto;
+  }
+
+  .ticketSelection,
+  .shoppingCart {
+    padding: 20px;
+  }
+
+  .selectionTitle,
+  .cartTitle {
+    font-size: 16px;
+  }
+
+  .tableHeader {
+    font-size: 12px;
+    padding: 12px 0;
+  }
+
+  .tableRow {
+    padding: 15px 0;
+  }
+
+  .entradaNombre {
+    font-size: 14px;
+  }
+
+  .entradaPrecio {
+    font-size: 14px;
+  }
+
+  .quantityBtn {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .quantity {
+    font-size: 14px;
+  }
+
+  .continueSection {
+    grid-template-columns: 1fr;
+    margin: 30px auto;
+  }
+
+  .continueSection::before {
+    display: none; /* No mostrar el espacio vacío en móvil */
+  }
+
+  .continueBtn {
+    width: 100%;
+    max-width: 350px;
+    font-size: 18px;
   }
 
   .breadcrumbLink {
