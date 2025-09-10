@@ -42,6 +42,7 @@ const VentaEntradaPage: React.FC = () => {
     correo: string;
     confirmacionCorreo: string;
   }}>({});
+  const [isProcessingPurchase, setIsProcessingPurchase] = useState(false);
 
   // Funciones del carrito
   const updateQuantity = (entradaId: string, change: number) => {
@@ -230,6 +231,112 @@ const VentaEntradaPage: React.FC = () => {
     return totalAttendees > 0;
   };
 
+  // Función para procesar la compra
+  const processPurchase = async () => {
+    setIsProcessingPurchase(true);
+    try {
+      // Crear el JSON completo de la compra
+      const purchaseData = {
+        eventoId: eventoId,
+        timestamp: new Date().toISOString(),
+        tickets: {
+          items: getCartItems().map((item: any) => ({
+            id: item.entrada.id || item.entrada._id,
+            tipoEntrada: item.entrada.tipoEntrada,
+            precio: item.entrada.precio,
+            cantidad: item.quantity,
+            subtotal: item.entrada.precio * item.quantity
+          })),
+          subtotal: getTotalPrice()
+        },
+        food: {
+          items: getFoodCartItems().map((item: any) => ({
+            id: item.food.id || item.food._id,
+            nombre: item.food.nombre || item.food.name,
+            precio: item.food.precioUnitario || item.food.price,
+            cantidad: item.quantity,
+            subtotal: (item.food.precioUnitario || item.food.price) * item.quantity
+          })),
+          subtotal: getFoodTotalPrice()
+        },
+        activities: {
+          items: getActivityCartItems().map((item: any) => ({
+            id: item.activity.id || item.activity._id,
+            nombreActividad: item.activity.nombreActividad || item.activity.name,
+            precio: item.activity.precioUnitario || item.activity.price,
+            cantidad: item.quantity,
+            subtotal: (item.activity.precioUnitario || item.activity.price) * item.quantity
+          })),
+          subtotal: getActivityTotalPrice()
+        },
+        attendees: getAttendeesList().map((attendee, index) => ({
+          index: index,
+          tipoEntrada: attendee.type,
+          datosPersonales: attendeesData[index] || {}
+        })),
+        totals: {
+          subtotalTickets: getTotalPrice(),
+          subtotalFood: getFoodTotalPrice(),
+          subtotalActivities: getActivityTotalPrice(),
+          total: getTotalPrice() + getFoodTotalPrice() + getActivityTotalPrice()
+        },
+        event: {
+          id: eventoId,
+          nombre: event?.informacionGeneral?.nombreEvento,
+          fecha: event?.informacionGeneral?.fechaEvento
+        }
+      };
+
+      // Realizar POST a la API externa
+      const apiBaseUrl = process.env.NEXT_PUBLIC_API_EVENTS_URL?.replace('/events', '') || 'http://localhost:3001/api';
+      const response = await fetch(`${apiBaseUrl}/sales`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(purchaseData)
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Venta procesada exitosamente:', result);
+        
+        // Guardar datos de la compra en localStorage para la página de éxito
+        const purchaseInfo = {
+          saleId: result.id || Date.now().toString(),
+          eventoId: eventoId,
+          eventoNombre: event?.informacionGeneral?.nombreEvento,
+          eventoFecha: event?.informacionGeneral?.fechaEvento,
+          total: getTotalPrice() + getFoodTotalPrice() + getActivityTotalPrice(),
+          tickets: getCartItems().map((item: any) => ({
+            tipo: item.entrada.tipoEntrada,
+            cantidad: item.quantity,
+            precio: item.entrada.precio
+          })),
+          timestamp: new Date().toISOString(),
+          attendees: getAttendeesList().map((attendee, index) => ({
+            nombre: attendeesData[index]?.nombreCompleto || '',
+            tipo: attendee.type
+          }))
+        };
+        
+        localStorage.setItem('purchaseData', JSON.stringify(purchaseInfo));
+        
+        // Navegar a la página de venta exitosa (el loading continuará allí)
+        router.push('/venta-exitosa');
+      } else {
+        const error = await response.json();
+        console.error('Error al procesar la venta:', error);
+        setIsProcessingPurchase(false);
+        alert('Error al procesar la compra. Por favor, intenta nuevamente.');
+      }
+    } catch (error) {
+      console.error('Error de conexión:', error);
+      setIsProcessingPurchase(false);
+      alert('Error de conexión. Por favor, verifica tu conexión a internet e intenta nuevamente.');
+    }
+  };
+
   // Funciones del carrusel
   const nextFoodItem = () => {
     const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
@@ -300,6 +407,17 @@ const VentaEntradaPage: React.FC = () => {
 
   return (
     <main className={styles.ventaEntradaPage}>
+      {/* Loading overlay para procesamiento de compra */}
+      {isProcessingPurchase && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingContent}>
+            <div className={styles.loadingSpinner}></div>
+            <h2 className={styles.loadingTitle}>Procesando pago...</h2>
+            <p className={styles.loadingText}>Estamos procesando tu compra de forma segura</p>
+          </div>
+        </div>
+      )}
+
       {/* Línea gradiente pegada al header */}
       <div className={styles.gradientLine}></div>
       
@@ -598,7 +716,7 @@ const VentaEntradaPage: React.FC = () => {
                         {getVisibleActivityItems().map((activity: any) => (
                           <div key={activity.id || activity._id} className={styles.foodCardNew}>
                             <img 
-                              src={activity.imagen || activity.imageUrl || activity.imagenActividad || getImagePath("/images/person-play.png")} 
+                              src={activity.imagenPromocional || activity.imagen || activity.imageUrl || getImagePath("/images/person-play.png")} 
                               alt={activity.nombreActividad || activity.name}
                               className={styles.foodImageNew}
                               onError={(e) => {
@@ -843,8 +961,8 @@ const VentaEntradaPage: React.FC = () => {
                 } else if (currentSection === 'activities') {
                   setCurrentSection('attendees');
                 } else {
-                  // Navegar a la página de venta exitosa
-                  router.push('/venta-exitosa');
+                  // Procesar la venta
+                  processPurchase();
                 }
               }}
               disabled={currentSection === 'attendees' && !areAllFormsComplete()}
