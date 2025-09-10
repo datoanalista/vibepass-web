@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { getImagePath } from '@/utils/getImagePath';
 import styles from './EventsCarousel.module.css';
 
 interface Event {
+  id?: string;
+  _id?: string;
   informacionGeneral: {
     nombreEvento: string;
     descripcion: string;
@@ -153,9 +156,12 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({ events }) => {
             </p>
           )}
           <div className={styles.actionButton}>
-            <button className={styles.qrButton}>
+            <Link 
+              href={`/evento-seleccionado?eventoId=${currentEvent.id || currentEvent._id}`}
+              className={styles.qrButton}
+            >
               Comprar QR
-            </button>
+            </Link>
           </div>
         </div>
       </div>

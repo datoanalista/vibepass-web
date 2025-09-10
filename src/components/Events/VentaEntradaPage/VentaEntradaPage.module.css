@@ -793,7 +793,15 @@
   font-size: 16px;
   font-weight: 600;
   color: #FF6B35;
+  margin: 0 0 8px 0;
+}
+
+.foodAvailability {
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
   margin: 0 0 16px 0;
+  font-style: italic;
 }
 
 .foodQuantityControlsNew {

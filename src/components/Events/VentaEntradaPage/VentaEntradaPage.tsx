@@ -597,11 +597,11 @@ const VentaEntradaPage: React.FC = () => {
                   {/* Fecha como item separado */}
                   <div className={styles.dateItem}>
                     <p className={styles.selectionDate}>
-                      {new Date(event.informacionGeneral?.fechaEvento + 'T00:00:00').toLocaleDateString('es-CL', {
-                        day: '2-digit',
-                        month: '2-digit',
+                      Día del evento: {new Date(event.informacionGeneral?.fechaEvento + 'T00:00:00').toLocaleDateString('es-CL', {
+                        day: 'numeric',
+                        month: 'long',
                         year: 'numeric'
-                      })}
+                      })} a las {event.informacionGeneral?.horaInicio} hrs.
                     </p>
                   </div>
                   
@@ -695,6 +695,9 @@ const VentaEntradaPage: React.FC = () => {
                               <h3 className={styles.foodNameNew}>{food.nombre || food.name}</h3>
                               <p className={styles.foodDescriptionNew}>{food.descripcion || food.description}</p>
                               <p className={styles.foodPriceNew}>${(food.precioUnitario || food.price).toLocaleString('es-CL')}</p>
+                              <p className={styles.foodAvailability}>
+                                Disponibles: {food.cantidadDisponible || food.cantidad || 'Sin límite'}
+                              </p>
                               
                               <div className={styles.foodQuantityControlsNew}>
                                 <button 
@@ -771,6 +774,9 @@ const VentaEntradaPage: React.FC = () => {
                               <h3 className={styles.foodNameNew}>{activity.nombreActividad || activity.name}</h3>
                               <p className={styles.foodDescriptionNew}>{activity.descripcion || activity.description}</p>
                               <p className={styles.foodPriceNew}>${(activity.precioUnitario || activity.price).toLocaleString('es-CL')}</p>
+                              <p className={styles.foodAvailability}>
+                                Cupos disponibles: {activity.cuposDisponibles - (activity.cuposOcupados || 0)}
+                              </p>
                               
                               <div className={styles.foodQuantityControlsNew}>
                                 <button 
