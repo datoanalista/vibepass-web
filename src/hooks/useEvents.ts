@@ -66,12 +66,24 @@ export const useEvents = (): UseEventsReturn => {
       console.log('📋 All events from API:', allEvents);
       
       
-      // Filtrar eventos con estado "programado" o "en_curso"
-      const activeEvents = allEvents.filter((event: Event) => 
-        event.informacionGeneral?.estado === 'programado' || 
-        event.informacionGeneral?.estado === 'en_curso'
-      );
-      console.log('🎯 Active events (programado/en_curso):', activeEvents);
+      // Filtrar eventos con estado "programado" o "en_curso" Y fecha futura
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // Establecer a medianoche para comparación de fechas
+      
+      const activeEvents = allEvents.filter((event: Event) => {
+        const isActiveStatus = event.informacionGeneral?.estado === 'programado' || 
+                              event.informacionGeneral?.estado === 'en_curso';
+        
+        // Verificar si la fecha del evento es hoy o futura
+        const eventDate = new Date(event.informacionGeneral?.fechaEvento);
+        eventDate.setHours(0, 0, 0, 0);
+        const isFutureOrToday = eventDate >= today;
+        
+        console.log(`📅 Event: ${event.informacionGeneral?.nombreEvento}, Date: ${event.informacionGeneral?.fechaEvento}, Status: ${event.informacionGeneral?.estado}, Future: ${isFutureOrToday}`);
+        
+        return isActiveStatus && isFutureOrToday;
+      });
+      console.log('🎯 Active and future events:', activeEvents);
       
       setEvents(activeEvents);
     } catch (err) {

@@ -280,11 +280,15 @@ const VentaEntradaPage: React.FC = () => {
           subtotalActivities: getActivityTotalPrice(),
           total: getTotalPrice() + getFoodTotalPrice() + getActivityTotalPrice()
         },
-        event: {
-          id: eventoId,
-          nombre: event?.informacionGeneral?.nombreEvento,
-          fecha: event?.informacionGeneral?.fechaEvento
-        }
+           event: {
+             id: eventoId,
+             nombre: event?.informacionGeneral?.nombreEvento,
+             fecha: event?.informacionGeneral?.fechaEvento,
+             horaInicio: event?.informacionGeneral?.horaInicio,
+             lugarEvento: event?.informacionGeneral?.lugarEvento,
+             descripcion: event?.informacionGeneral?.descripcion,
+             estado: event?.informacionGeneral?.estado
+           }
       };
 
       // Realizar POST a la API externa
@@ -301,26 +305,66 @@ const VentaEntradaPage: React.FC = () => {
         const result = await response.json();
         console.log('Venta procesada exitosamente:', result);
         
-        // Guardar datos de la compra en localStorage para la página de éxito
-        const purchaseInfo = {
-          saleId: result.id || Date.now().toString(),
-          eventoId: eventoId,
-          eventoNombre: event?.informacionGeneral?.nombreEvento,
-          eventoFecha: event?.informacionGeneral?.fechaEvento,
-          total: getTotalPrice() + getFoodTotalPrice() + getActivityTotalPrice(),
-          tickets: getCartItems().map((item: any) => ({
-            tipo: item.entrada.tipoEntrada,
-            cantidad: item.quantity,
-            precio: item.entrada.precio
-          })),
-          timestamp: new Date().toISOString(),
-          attendees: getAttendeesList().map((attendee, index) => ({
-            nombre: attendeesData[index]?.nombreCompleto || '',
-            tipo: attendee.type
-          }))
-        };
-        
-        localStorage.setItem('purchaseData', JSON.stringify(purchaseInfo));
+         // Guardar datos COMPLETOS de la compra en localStorage para la página de éxito
+         const purchaseInfo = {
+           saleId: result.id || Date.now().toString(),
+           eventoId: eventoId,
+           eventoNombre: event?.informacionGeneral?.nombreEvento,
+           eventoFecha: event?.informacionGeneral?.fechaEvento,
+           total: getTotalPrice() + getFoodTotalPrice() + getActivityTotalPrice(),
+           tickets: getCartItems().map((item: any) => ({
+             id: item.entrada.id || item.entrada._id,
+             tipo: item.entrada.tipoEntrada,
+             cantidad: item.quantity,
+             precio: item.entrada.precio,
+             subtotal: item.entrada.precio * item.quantity
+           })),
+           food: getFoodCartItems().map((item: any) => ({
+             id: item.food.id || item.food._id,
+             nombre: item.food.nombre || item.food.name,
+             descripcion: item.food.descripcion || item.food.description,
+             categoria: item.food.categoria || 'alimento',
+             cantidad: item.quantity,
+             precio: item.food.precioUnitario || item.food.price,
+             subtotal: (item.food.precioUnitario || item.food.price) * item.quantity
+           })),
+           activities: getActivityCartItems().map((item: any) => ({
+             id: item.activity.id || item.activity._id,
+             nombreActividad: item.activity.nombreActividad || item.activity.name,
+             descripcion: item.activity.descripcion || item.activity.description,
+             horaInicio: item.activity.horaInicio,
+             horaTermino: item.activity.horaTermino,
+             cantidad: item.quantity,
+             precio: item.activity.precioUnitario || item.activity.price,
+             subtotal: (item.activity.precioUnitario || item.activity.price) * item.quantity
+           })),
+           attendees: getAttendeesList().map((attendee, index) => {
+             const attendeeData = attendeesData[index] || {};
+             return {
+               index: index,
+               tipoEntrada: attendee.type,
+               datosPersonales: {
+                 nombreCompleto: attendeeData.nombreCompleto || '',
+                 rut: attendeeData.rut || '',
+                 telefono: attendeeData.telefono || '',
+                 correo: attendeeData.correo || '',
+                 confirmacionCorreo: attendeeData.confirmacionCorreo || ''
+               }
+             };
+           }),
+           subtotals: {
+             tickets: getTotalPrice(),
+             food: getFoodTotalPrice(),
+             activities: getActivityTotalPrice()
+           },
+           timestamp: new Date().toISOString()
+         };
+         
+         console.log('=== PURCHASE INFO GUARDADO EN LOCALSTORAGE ===');
+         console.log(JSON.stringify(purchaseInfo, null, 2));
+         console.log('=== FIN PURCHASE INFO ===');
+         
+         localStorage.setItem('purchaseData', JSON.stringify(purchaseInfo));
         
         // Navegar a la página de venta exitosa (el loading continuará allí)
         router.push('/venta-exitosa');
@@ -952,7 +996,11 @@ const VentaEntradaPage: React.FC = () => {
           {/* Botón Continuar */}
           <div className={styles.continueSection}>
             <button 
-              className={`${styles.continueBtn} ${currentSection === 'attendees' && !areAllFormsComplete() ? styles.continueDisabled : ''}`}
+              className={`${styles.continueBtn} ${
+                (currentSection === 'tickets' && !hasItemsInCart) || 
+                (currentSection === 'attendees' && !areAllFormsComplete()) 
+                ? styles.continueDisabled : ''
+              }`}
               onClick={() => {
                 if (currentSection === 'tickets') {
                   setCurrentSection('food');
@@ -965,7 +1013,10 @@ const VentaEntradaPage: React.FC = () => {
                   processPurchase();
                 }
               }}
-              disabled={currentSection === 'attendees' && !areAllFormsComplete()}
+              disabled={
+                (currentSection === 'tickets' && !hasItemsInCart) ||
+                (currentSection === 'attendees' && !areAllFormsComplete())
+              }
             >
               {currentSection === 'attendees' ? 'Comprar' : 'Continuar'}
             </button>
