@@ -843,8 +843,8 @@ const VentaEntradaPage: React.FC = () => {
                 } else if (currentSection === 'activities') {
                   setCurrentSection('attendees');
                 } else {
-                  // Navegar a la página de compra exitosa
-                  router.push('/compra-exitosa');
+                  // Navegar a la página de venta exitosa
+                  router.push('/venta-exitosa');
                 }
               }}
               disabled={currentSection === 'attendees' && !areAllFormsComplete()}
