@@ -1,38 +1,16 @@
 import { useState, useEffect } from 'react';
 import { API_ENDPOINTS } from '@/config/api';
-
-interface Event {
-  id: string;
-  informacionGeneral: {
-    nombreEvento: string;
-    descripcion: string;
-    fechaEvento: string;
-    horaInicio: string;
-    horaTermino: string;
-    lugarEvento: string;
-    bannerPromocional: string;
-    fechaCreacion: string;
-    estado: string;
-  };
-  entradas: Array<{
-    cuposDisponibles: number;
-    entradasVendidas: number;
-    tipoEntrada: string;
-    precio: number;
-    activa: boolean;
-  }>;
-  // Agregar más campos según la respuesta de la API
-}
+import { EventAPI } from '@/types/events';
 
 interface UseEventsReturn {
-  events: Event[];
+  events: EventAPI[];
   loading: boolean;
   error: string | null;
   refetch: () => void;
 }
 
 export const useEvents = (): UseEventsReturn => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventAPI[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

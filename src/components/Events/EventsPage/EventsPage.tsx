@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEventsContext } from '@/contexts/EventsContext';
+import { EventAPI, EventContextType } from '@/types/events';
 import EventsCarousel from '../EventsCarousel/EventsCarousel';
 import UpcomingEvents from '../UpcomingEvents/UpcomingEvents';
 import styles from './EventsPage.module.css';
@@ -11,6 +12,44 @@ const EventsPage: React.FC = () => {
   const { events, loading, error, refetch } = useEventsContext();
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const router = useRouter();
+
+  // Función para transformar eventos del contexto al formato esperado por los componentes
+  const transformEvents = (contextEvents: EventContextType[]): EventAPI[] => {
+    return contextEvents.filter(event => 
+      event.informacionGeneral?.nombreEvento &&
+      event.informacionGeneral?.descripcion &&
+      event.informacionGeneral?.fechaEvento &&
+      event.informacionGeneral?.horaInicio &&
+      event.informacionGeneral?.horaTermino &&
+      event.informacionGeneral?.lugarEvento &&
+      event.informacionGeneral?.bannerPromocional &&
+      event.informacionGeneral?.fechaCreacion &&
+      event.informacionGeneral?.estado
+    ).map(event => ({
+      id: event.id,
+      _id: event._id,
+      informacionGeneral: {
+        nombreEvento: event.informacionGeneral!.nombreEvento!,
+        descripcion: event.informacionGeneral!.descripcion!,
+        fechaEvento: event.informacionGeneral!.fechaEvento!,
+        horaInicio: event.informacionGeneral!.horaInicio!,
+        horaTermino: event.informacionGeneral!.horaTermino!,
+        lugarEvento: event.informacionGeneral!.lugarEvento!,
+        bannerPromocional: event.informacionGeneral!.bannerPromocional!,
+        fechaCreacion: event.informacionGeneral!.fechaCreacion!,
+        estado: event.informacionGeneral!.estado!,
+      },
+      entradas: event.entradas?.map(entrada => ({
+        cuposDisponibles: entrada.cuposDisponibles || 0,
+        entradasVendidas: entrada.entradasVendidas || 0,
+        tipoEntrada: entrada.tipoEntrada || '',
+        precio: entrada.precio || 0,
+        activa: entrada.activa || false,
+      })) || []
+    }));
+  };
+
+  const transformedEvents = transformEvents(events);
 
   // Cerrar dropdown al hacer click fuera
   React.useEffect(() => {
@@ -32,10 +71,10 @@ const EventsPage: React.FC = () => {
 
   // Log para debugging
   React.useEffect(() => {
-    console.log('🎪 Events loaded:', events);
+    console.log('🎪 Events loaded:', transformedEvents);
     console.log('⏳ Loading state:', loading);
     console.log('❌ Error state:', error);
-  }, [events, loading, error]);
+  }, [transformedEvents, loading, error]);
 
   return (
     <main className={styles.eventsPage}>
@@ -73,9 +112,9 @@ const EventsPage: React.FC = () => {
           {/* Dropdown con lista de eventos */}
           {isDropdownOpen && (
             <div className={styles.eventsDropdownMenu}>
-              {events.length > 0 ? (
+              {transformedEvents.length > 0 ? (
                 <>
-                  {events.slice(0, 15).map((event: any) => (
+                  {transformedEvents.slice(0, 15).map((event: any) => (
                     <div
                       key={event.id || event._id}
                       className={styles.eventDropdownItem}
@@ -92,9 +131,9 @@ const EventsPage: React.FC = () => {
                       </div>
                     </div>
                   ))}
-                  {events.length > 15 && (
+                  {transformedEvents.length > 15 && (
                     <div className={styles.dropdownFooter}>
-                      Mostrando 15 de {events.length} eventos
+                      Mostrando 15 de {transformedEvents.length} eventos
                     </div>
                   )}
                 </>
@@ -109,15 +148,15 @@ const EventsPage: React.FC = () => {
       </div>
 
       {/* Carrusel de eventos */}
-      {events.length > 0 && (
+      {transformedEvents.length > 0 && (
         <div className={styles.carouselSection}>
-          <EventsCarousel events={events} />
+          <EventsCarousel events={transformedEvents} />
         </div>
       )}
 
       {/* Próximos eventos */}
-      {events.length > 0 && (
-        <UpcomingEvents events={events} />
+      {transformedEvents.length > 0 && (
+        <UpcomingEvents events={transformedEvents} />
       )}
 
     </main>

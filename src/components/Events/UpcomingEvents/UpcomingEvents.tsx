@@ -1,32 +1,11 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { getImagePath } from '@/utils/getImagePath';
+import { EventAPI } from '@/types/events';
 import styles from './UpcomingEvents.module.css';
 
-interface Event {
-  id: string;
-  informacionGeneral: {
-    nombreEvento: string;
-    descripcion: string;
-    fechaEvento: string;
-    horaInicio: string;
-    horaTermino: string;
-    lugarEvento: string;
-    bannerPromocional: string;
-    fechaCreacion: string;
-    estado: string;
-  };
-  entradas: Array<{
-    cuposDisponibles: number;
-    entradasVendidas: number;
-    tipoEntrada: string;
-    precio: number;
-    activa: boolean;
-  }>;
-}
-
 interface UpcomingEventsProps {
-  events: Event[];
+  events: EventAPI[];
 }
 
 const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {

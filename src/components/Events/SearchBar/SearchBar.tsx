@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useEventsContext } from '@/contexts/EventsContext';
+import { EventContextType } from '@/types/events';
 import styles from './SearchBar.module.css';
 
 const SearchBar: React.FC = () => {
@@ -72,7 +73,7 @@ const SearchBar: React.FC = () => {
           <div className={styles.dropdown}>
             {filteredEvents.length > 0 ? (
               <>
-                {filteredEvents.map((event: any) => (
+                {filteredEvents.map((event: EventContextType) => (
                   <div
                     key={event.id || event._id}
                     className={styles.dropdownItem}

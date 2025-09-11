@@ -1,20 +1,9 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { API_ENDPOINTS } from '@/config/api';
-
-interface Event {
-  id?: string;
-  _id?: string;
-  informacionGeneral?: {
-    nombreEvento?: string;
-    descripcion?: string;
-    fechaEvento?: string;
-    lugarEvento?: string;
-    estado?: string;
-  };
-}
+import { EventContextType } from '@/types/events';
 
 interface EventsContextType {
-  events: Event[];
+  events: EventContextType[];
   loading: boolean;
   error: string | null;
   refetch: () => void;
@@ -27,7 +16,7 @@ interface EventsProviderProps {
 }
 
 export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventContextType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -64,7 +53,7 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
       const today = new Date();
       today.setHours(0, 0, 0, 0); // Establecer a medianoche para comparación de fechas
       
-      const activeEvents = allEvents.filter((event: Event) => {
+      const activeEvents = allEvents.filter((event: EventContextType) => {
         const isActiveStatus = event.informacionGeneral?.estado === 'programado' || 
                               event.informacionGeneral?.estado === 'en_curso';
         

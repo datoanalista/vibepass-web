@@ -1,26 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { getImagePath } from '@/utils/getImagePath';
+import { EventAPI } from '@/types/events';
 import styles from './EventsCarousel.module.css';
 
-interface Event {
-  id?: string;
-  _id?: string;
-  informacionGeneral: {
-    nombreEvento: string;
-    descripcion: string;
-    fechaEvento: string;
-    horaInicio: string;
-    horaTermino: string;
-    lugarEvento: string;
-    bannerPromocional: string;
-    fechaCreacion: string;
-    estado: string;
-  };
-}
-
 interface EventsCarouselProps {
-  events: Event[];
+  events: EventAPI[];
 }
 
 const EventsCarousel: React.FC<EventsCarouselProps> = ({ events }) => {
