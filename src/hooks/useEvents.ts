@@ -48,7 +48,7 @@ export const useEvents = (): UseEventsReturn => {
       const today = new Date();
       today.setHours(0, 0, 0, 0); // Establecer a medianoche para comparación de fechas
       
-      const activeEvents = allEvents.filter((event: Event) => {
+      const activeEvents = allEvents.filter((event: EventAPI) => {
         const isActiveStatus = event.informacionGeneral?.estado === 'programado' || 
                               event.informacionGeneral?.estado === 'en_curso';
         
