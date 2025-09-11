@@ -156,7 +156,7 @@ const VentaExitosaPage: React.FC = () => {
           <div style="text-align: center; margin-left: 30px;">
             <img src="${qrCodeDataURL || getImagePath("/images/codigoqr.png")}" alt="QR Code" style="width: 150px; height: 150px;" />
             <div style="background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%); padding: 10px; border-radius: 8px; margin-top: 10px; color: white; font-weight: bold;">
-              Código de Verificación
+              DESCARGAR
             </div>
           </div>
         </div>
@@ -330,7 +330,7 @@ const VentaExitosaPage: React.FC = () => {
           title={isGeneratingPDF ? "Generando PDF..." : "Haz clic para descargar tu entrada en PDF"}
         >
           <span className={styles.verificationText}>
-            {isGeneratingPDF ? 'Generando PDF...' : 'De verificación'}
+            {isGeneratingPDF ? 'Generando PDF...' : 'DESCARGAR'}
           </span>
         </div>
         
