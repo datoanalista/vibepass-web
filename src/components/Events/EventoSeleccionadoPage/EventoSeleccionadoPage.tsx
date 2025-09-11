@@ -200,9 +200,9 @@ const EventoSeleccionadoPage: React.FC = () => {
                 <>
                   {events.slice(0, 10).map((eventItem) => (
                     <div 
-                      key={eventItem.id || eventItem._id}
+                      key={eventItem.id}
                       className={styles.eventDropdownItem}
-                      onClick={() => handleEventNavigation(eventItem.id || eventItem._id || '')}
+                      onClick={() => handleEventNavigation(eventItem.id)}
                     >
                       <div className={styles.eventDropdownInfo}>
                         <div className={styles.eventDropdownName}>
