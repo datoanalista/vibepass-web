@@ -32,7 +32,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
     return `${horaInicio} - ${horaTermino}`;
   };
 
-  const calculateAvailableTickets = (entradas: Event['entradas']) => {
+  const calculateAvailableTickets = (entradas: EventAPI['entradas']) => {
     if (!entradas || entradas.length === 0) return 0;
     
     // Sumar todos los cupos disponibles menos las entradas vendidas
