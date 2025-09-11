@@ -24,6 +24,7 @@ const SearchBar: React.FC = () => {
   }, [events, searchTerm]);
 
   const handleEventSelect = (eventId: string) => {
+    if (!eventId) return; // No navegar si no hay ID
     router.push(`/evento-seleccionado?eventoId=${eventId}`);
     setIsOpen(false);
     setSearchTerm('');
@@ -77,7 +78,7 @@ const SearchBar: React.FC = () => {
                   <div
                     key={event.id || event._id}
                     className={styles.dropdownItem}
-                    onClick={() => handleEventSelect(event.id || event._id)}
+                    onClick={() => handleEventSelect(event.id || event._id || '')}
                   >
                     <div className={styles.eventInfo}>
                       <h4 className={styles.eventName}>{event.informacionGeneral?.nombreEvento}</h4>
