@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { getImagePath } from '@/utils/getImagePath';
 import styles from './EventsCarousel.module.css';
@@ -25,6 +25,8 @@ interface EventsCarouselProps {
 
 const EventsCarousel: React.FC<EventsCarouselProps> = ({ events }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [direction, setDirection] = useState(1); // 1 para adelante, -1 para atrás
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % events.length);
@@ -33,6 +35,35 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({ events }) => {
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + events.length) % events.length);
   };
+
+  // Movimiento automático con efecto ping-pong
+  useEffect(() => {
+    if (events.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prev) => {
+          const maxIndex = events.length - 1;
+          
+          if (direction === 1) {
+            // Yendo hacia adelante
+            if (prev >= maxIndex) {
+              setDirection(-1); // Cambiar dirección a atrás
+              return prev - 1;
+            }
+            return prev + 1;
+          } else {
+            // Yendo hacia atrás
+            if (prev <= 0) {
+              setDirection(1); // Cambiar dirección a adelante
+              return prev + 1;
+            }
+            return prev - 1;
+          }
+        });
+      }, 6000); // 6 segundos para que sea más lento
+
+      return () => clearInterval(interval);
+    }
+  }, [events.length, direction]);
 
   const formatDate = (fechaEvento: string, horaInicio: string) => {
     // Parsear la fecha correctamente para evitar problemas de zona horaria
@@ -96,7 +127,7 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({ events }) => {
 
   return (
     <div className={styles.carouselContainer}>
-      {/* Botones de navegación - Fuera de la imagen */}
+      {/* Botones de navegación */}
       <button 
         className={`${styles.navButton} ${styles.prevButton}`}
         onClick={prevSlide}
@@ -121,48 +152,68 @@ const EventsCarousel: React.FC<EventsCarouselProps> = ({ events }) => {
         />
       </button>
 
-      {/* Imagen principal */}
-      <div className={styles.imageContainer}>
-        <img
-          src={currentEvent.informacionGeneral.bannerPromocional}
-          alt={currentEvent.informacionGeneral.nombreEvento}
-          className={styles.eventImage}
-        />
-      </div>
-
-      {/* Barra de información */}
-      <div className={styles.infoBar}>
-        <div className={styles.eventInfo}>
-          <h2 className={styles.eventName}>
-            {currentEvent.informacionGeneral.nombreEvento}
-          </h2>
-          <p className={styles.eventDate}>
-            {formatDate(currentEvent.informacionGeneral.fechaEvento, currentEvent.informacionGeneral.horaInicio)}
-          </p>
-          <p className={styles.eventLocation}>
-            {currentEvent.informacionGeneral.lugarEvento}
-          </p>
-        </div>
-        
-        <div className={styles.rightSection}>
-          {eventStatus === 'en_curso' && (
-            <p className={styles.eventStatusEnCurso}>
-              ¡EVENTO EN CURSO!
-            </p>
-          )}
-          {eventStatus === 'finalizado' && (
-            <p className={styles.eventStatusFinalizado}>
-              EVENTO FINALIZADO
-            </p>
-          )}
-          <div className={styles.actionButton}>
-            <Link 
-              href={`/evento-seleccionado?eventoId=${currentEvent.id || currentEvent._id}`}
-              className={styles.qrButton}
+      {/* Contenedor del carrusel con overflow */}
+      <div className={styles.carouselWrapper} ref={carouselRef}>
+        <div 
+          className={styles.carouselTrack}
+          style={{
+            transform: `translateX(-${currentIndex * (100 / events.length)}%)`,
+            transition: 'transform 0.8s ease-in-out',
+            width: `${events.length * 100}%`
+          }}
+        >
+          {events.map((event, index) => (
+            <div 
+              key={event.id || event._id || index} 
+              className={styles.carouselSlide}
+              style={{ width: `${100 / events.length}%` }}
             >
-              Comprar QR
-            </Link>
-          </div>
+              {/* Imagen del evento */}
+              <div className={styles.imageContainer}>
+                <img
+                  src={event.informacionGeneral.bannerPromocional}
+                  alt={event.informacionGeneral.nombreEvento}
+                  className={styles.eventImage}
+                />
+              </div>
+
+              {/* Barra de información */}
+              <div className={styles.infoBar}>
+                <div className={styles.eventInfo}>
+                  <h2 className={styles.eventName}>
+                    {event.informacionGeneral.nombreEvento}
+                  </h2>
+                  <p className={styles.eventDate}>
+                    {formatDate(event.informacionGeneral.fechaEvento, event.informacionGeneral.horaInicio)}
+                  </p>
+                  <p className={styles.eventLocation}>
+                    {event.informacionGeneral.lugarEvento}
+                  </p>
+                </div>
+                
+                <div className={styles.rightSection}>
+                  {getEventStatus(event.informacionGeneral.fechaEvento, event.informacionGeneral.horaInicio, event.informacionGeneral.horaTermino) === 'en_curso' && (
+                    <p className={styles.eventStatusEnCurso}>
+                      ¡EVENTO EN CURSO!
+                    </p>
+                  )}
+                  {getEventStatus(event.informacionGeneral.fechaEvento, event.informacionGeneral.horaInicio, event.informacionGeneral.horaTermino) === 'finalizado' && (
+                    <p className={styles.eventStatusFinalizado}>
+                      EVENTO FINALIZADO
+                    </p>
+                  )}
+                  <div className={styles.actionButton}>
+                    <Link 
+                      href={`/evento-seleccionado?eventoId=${event.id || event._id}`}
+                      className={styles.qrButton}
+                    >
+                      Comprar QR
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

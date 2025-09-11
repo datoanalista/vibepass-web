@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEventDetails } from '@/hooks/useEventDetails';
+import { useEvents } from '@/hooks/useEvents';
 import { getImagePath } from '@/utils/getImagePath';
 import styles from './EventoSeleccionadoPage.module.css';
 
@@ -25,10 +26,13 @@ const EventoSeleccionadoPage: React.FC = () => {
   const eventoId = searchParams.get('eventoId');
   const router = useRouter();
   const { event, loading, error } = useEventDetails(eventoId);
+  const { events } = useEvents();
   const [selectedEntrada, setSelectedEntrada] = useState<string | null>(null);
   const [showMore, setShowMore] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [direction, setDirection] = useState(1); // 1 para adelante, -1 para atrás
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleEntradaSelect = (tipo: string) => {
     // Navegar a venta-entrada con el tipo seleccionado
@@ -112,38 +116,119 @@ const EventoSeleccionadoPage: React.FC = () => {
       return () => clearInterval(interval);
     }
   }, [allItems.length, direction]);
+
+  // Cerrar dropdown al hacer clic fuera
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleEventNavigation = (eventId: string) => {
+    setIsDropdownOpen(false);
+    router.push(`/evento-seleccionado?eventoId=${eventId}`);
+  };
+
+  const formatEventDate = (fechaEvento: string) => {
+    const date = new Date(fechaEvento);
+    return date.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  };
+
   return (
     <main className={styles.eventoSeleccionadoPage}>
-      {/* Navegación breadcrumb */}
-      <div className={styles.breadcrumb}>
-        <Link href="/" className={styles.breadcrumbLink} title="Ir a Home">
-          HOME
-        </Link>
-        <img 
-          src={getImagePath("/images/triangulo.png")} 
-          alt=">" 
-          className={styles.breadcrumbSeparator}
-        />
-        <Link href="/eventos" className={styles.breadcrumbLink} title="Volver a eventos">
-          EVENTOS
-        </Link>
-        <img 
-          src={getImagePath("/images/triangulo.png")} 
-          alt=">" 
-          className={styles.breadcrumbSeparator}
-        />
-        <span className={styles.breadcrumbCurrent} title="Evento actual">
-          {event?.informacionGeneral?.nombreEvento || 'Evento'}
-        </span>
-      </div>
-
-      {/* Vista del evento */}
-      {eventoId && loading && (
-        <div className={styles.loadingContainer}>
-          <div className={styles.loadingSpinner}></div>
-          <p>Cargando evento...</p>
+      {/* Loading overlay bonito */}
+      {loading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingContent}>
+            <div className={styles.loadingSpinner}></div>
+            <h2 className={styles.loadingTitle}>Cargando evento...</h2>
+            <p className={styles.loadingText}>Obteniendo la mejor experiencia para ti</p>
+          </div>
         </div>
       )}
+
+      {/* Navegación breadcrumb con dropdown */}
+      <div className={styles.breadcrumbContainer}>
+        <div className={styles.breadcrumb}>
+          <Link href="/" className={styles.breadcrumbLink} title="Ir a Home">
+            HOME
+          </Link>
+          <img 
+            src={getImagePath("/images/triangulo.png")} 
+            alt=">" 
+            className={styles.breadcrumbSeparator}
+          />
+          <Link href="/eventos" className={styles.breadcrumbLink} title="Volver a eventos">
+            EVENTOS
+          </Link>
+          <img 
+            src={getImagePath("/images/triangulo.png")} 
+            alt=">" 
+            className={styles.breadcrumbSeparator}
+          />
+          <span className={styles.breadcrumbCurrent} title="Evento actual">
+            {event?.informacionGeneral?.nombreEvento || 'Evento'}
+          </span>
+        </div>
+
+        {/* Dropdown Ver más */}
+        <div className={styles.eventsDropdown} ref={dropdownRef}>
+          <button 
+            className={styles.eventsDropdownButton}
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          >
+            <span className={styles.eventsDropdownText}>Ver más</span>
+            <span className={`${styles.eventsDropdownArrow} ${isDropdownOpen ? styles.eventsDropdownArrowOpen : ''}`}>
+              ▼
+            </span>
+          </button>
+
+          {isDropdownOpen && (
+            <div className={styles.eventsDropdownMenu}>
+              {events && events.length > 0 ? (
+                <>
+                  {events.slice(0, 10).map((eventItem) => (
+                    <div 
+                      key={eventItem.id || eventItem._id}
+                      className={styles.eventDropdownItem}
+                      onClick={() => handleEventNavigation(eventItem.id || eventItem._id || '')}
+                    >
+                      <div className={styles.eventDropdownInfo}>
+                        <div className={styles.eventDropdownName}>
+                          {eventItem.informacionGeneral.nombreEvento}
+                        </div>
+                        <div className={styles.eventDropdownDetails}>
+                          {formatEventDate(eventItem.informacionGeneral.fechaEvento)} - {eventItem.informacionGeneral.lugarEvento}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  {events.length > 10 && (
+                    <div className={styles.dropdownFooter}>
+                      Y {events.length - 10} eventos más...
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className={styles.noEventsMessage}>
+                  No hay eventos disponibles
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
       
       {eventoId && error && (
         <div className={styles.errorContainer}>

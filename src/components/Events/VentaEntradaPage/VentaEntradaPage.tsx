@@ -43,6 +43,42 @@ const VentaEntradaPage: React.FC = () => {
     confirmacionCorreo: string;
   }}>({});
   const [isProcessingPurchase, setIsProcessingPurchase] = useState(false);
+  
+  // Estado para modal de errores
+  const [modalInfo, setModalInfo] = useState<{
+    isOpen: boolean;
+    title: string;
+    message: string;
+    type: 'error' | 'warning' | 'info';
+    icon: string;
+  }>({
+    isOpen: false,
+    title: '',
+    message: '',
+    type: 'error',
+    icon: '❌'
+  });
+
+  // Función para mostrar modal
+  const showModal = (title: string, message: string, type: 'error' | 'warning' | 'info' = 'error') => {
+    const icons = {
+      error: '❌',
+      warning: '⚠️',
+      info: 'ℹ️'
+    };
+    
+    setModalInfo({
+      isOpen: true,
+      title,
+      message,
+      type,
+      icon: icons[type]
+    });
+  };
+
+  const closeModal = () => {
+    setModalInfo(prev => ({ ...prev, isOpen: false }));
+  };
 
   // Funciones del carrito
   const updateQuantity = (entradaId: string, change: number) => {
@@ -372,12 +408,47 @@ const VentaEntradaPage: React.FC = () => {
         const error = await response.json();
         console.error('Error al procesar la venta:', error);
         setIsProcessingPurchase(false);
-        alert('Error al procesar la compra. Por favor, intenta nuevamente.');
+        
+        // Manejar diferentes tipos de errores
+        let errorMessage = 'Error al procesar la compra. Por favor, intenta nuevamente.';
+        
+        if (error.message && error.message.includes('Not enough spots available')) {
+          // Extraer información del error de cupos
+          const match = error.message.match(/Not enough spots available for (.+)\. Available: (\d+), Requested: (\d+)/);
+          if (match) {
+            const [, entryType, available, requested] = match;
+            errorMessage = `❌ No hay suficientes cupos disponibles para "${entryType}".\n\n📊 Disponibles: ${available}\n🎫 Solicitados: ${requested}\n\n💡 Por favor, reduce la cantidad de entradas para "${entryType}" a máximo ${available}.`;
+          } else {
+            errorMessage = `❌ No hay suficientes cupos disponibles para completar tu compra.\n\n💡 Por favor, verifica las cantidades seleccionadas.`;
+          }
+        } else if (error.message && error.message.includes('stock')) {
+          errorMessage = `❌ No hay suficiente stock disponible para algunos productos.\n\n💡 Por favor, verifica las cantidades de alimentos y actividades.`;
+        } else if (error.message) {
+          errorMessage = `❌ ${error.message}`;
+        }
+        
+        // Determinar el título y tipo según el error
+        let title = 'Error de compra';
+        let type: 'error' | 'warning' | 'info' = 'error';
+        
+        if (error.message && error.message.includes('Not enough spots available')) {
+          title = 'Cupos insuficientes';
+          type = 'warning';
+        } else if (error.message && error.message.includes('stock')) {
+          title = 'Stock insuficiente';
+          type = 'warning';
+        }
+        
+        showModal(title, errorMessage.replace(/❌\s*/, ''), type);
       }
     } catch (error) {
       console.error('Error de conexión:', error);
       setIsProcessingPurchase(false);
-      alert('Error de conexión. Por favor, verifica tu conexión a internet e intenta nuevamente.');
+      showModal(
+        'Error de conexión',
+        'No se pudo conectar con el servidor. Por favor, verifica tu conexión a internet e intenta nuevamente.',
+        'error'
+      );
     }
   };
 
@@ -627,6 +698,9 @@ const VentaEntradaPage: React.FC = () => {
                                entrada.tipoEntrada === 'profesor' ? '' :
                                entrada.tipoEntrada === 'tercera_edad' ? '(Adulto mayor)' : ''}
                             </span>
+                            <span className={styles.entradaCupos}>
+                              Disponibles: {entrada.cuposDisponibles - entrada.entradasVendidas}
+                            </span>
                           </span>
                           <span className={styles.entradaPrecio}>
                             ${entrada.precio.toLocaleString('es-CL')}
@@ -649,9 +723,21 @@ const VentaEntradaPage: React.FC = () => {
                               className={styles.quantityBtn}
                               onClick={() => {
                                 const entradaId = String(entrada.id || entrada._id || '');
-                                console.log('Increasing:', entradaId, entrada);
-                                updateQuantity(entradaId, 1);
+                                const currentQuantity = getQuantity(entradaId);
+                                const availableSpots = entrada.cuposDisponibles - entrada.entradasVendidas;
+                                
+                                if (currentQuantity < availableSpots) {
+                                  console.log('Increasing:', entradaId, entrada);
+                                  updateQuantity(entradaId, 1);
+                                } else {
+                                  showModal(
+                                    'Cupos insuficientes',
+                                    `No puedes seleccionar más de ${availableSpots} entradas para "${entrada.tipoEntrada}".\n\nCupos disponibles: ${availableSpots}`,
+                                    'warning'
+                                  );
+                                }
                               }}
+                              disabled={getQuantity(String(entrada.id || entrada._id || '')) >= (entrada.cuposDisponibles - entrada.entradasVendidas)}
                             >
                               +
                             </button>
@@ -696,7 +782,11 @@ const VentaEntradaPage: React.FC = () => {
                               <p className={styles.foodDescriptionNew}>{food.descripcion || food.description}</p>
                               <p className={styles.foodPriceNew}>${(food.precioUnitario || food.price).toLocaleString('es-CL')}</p>
                               <p className={styles.foodAvailability}>
-                                Disponibles: {food.cantidadDisponible || food.cantidad || 'Sin límite'}
+                                Disponibles: {(() => {
+                                  console.log('Food item:', food);
+                                  console.log('stockActual:', food.stockActual);
+                                  return food.stockActual || 'Sin límite';
+                                })()}
                               </p>
                               
                               <div className={styles.foodQuantityControlsNew}>
@@ -711,7 +801,21 @@ const VentaEntradaPage: React.FC = () => {
                                 </span>
                                 <button 
                                   className={styles.quantityBtn}
-                                  onClick={() => updateFoodQuantity(food.id || food._id, 1)}
+                                  onClick={() => {
+                                    const currentQuantity = getFoodQuantity(food.id || food._id);
+                                    const availableStock = food.stockActual || 999999; // Si no hay límite, usar número alto
+                                    
+                                    if (food.stockActual && currentQuantity >= availableStock) {
+                                      showModal(
+                                        'Stock insuficiente',
+                                        `No hay más stock disponible para "${food.nombre || food.name}".\n\nStock disponible: ${availableStock}\nEn tu carrito: ${currentQuantity}`,
+                                        'warning'
+                                      );
+                                    } else {
+                                      updateFoodQuantity(food.id || food._id, 1);
+                                    }
+                                  }}
+                                  disabled={food.stockActual && getFoodQuantity(food.id || food._id) >= food.stockActual}
                                 >
                                   +
                                 </button>
@@ -790,7 +894,21 @@ const VentaEntradaPage: React.FC = () => {
                                 </span>
                                 <button 
                                   className={styles.quantityBtn}
-                                  onClick={() => updateActivityQuantity(activity.id || activity._id, 1)}
+                                  onClick={() => {
+                                    const currentQuantity = getActivityQuantity(activity.id || activity._id);
+                                    const availableSpots = activity.cuposDisponibles - (activity.cuposOcupados || 0);
+                                    
+                                    if (currentQuantity >= availableSpots) {
+                                      showModal(
+                                        'Cupos insuficientes',
+                                        `No hay más cupos disponibles para "${activity.nombreActividad || activity.name}".\n\nCupos disponibles: ${availableSpots}\nEn tu carrito: ${currentQuantity}`,
+                                        'warning'
+                                      );
+                                    } else {
+                                      updateActivityQuantity(activity.id || activity._id, 1);
+                                    }
+                                  }}
+                                  disabled={getActivityQuantity(activity.id || activity._id) >= (activity.cuposDisponibles - (activity.cuposOcupados || 0))}
                                 >
                                   +
                                 </button>
@@ -1026,6 +1144,33 @@ const VentaEntradaPage: React.FC = () => {
             >
               {currentSection === 'attendees' ? 'Comprar' : 'Continuar'}
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal bonito para errores */}
+      {modalInfo.isOpen && (
+        <div className={styles.modalOverlay} onClick={closeModal}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <span className={styles.modalIcon}>{modalInfo.icon}</span>
+              <h3 className={styles.modalTitle}>{modalInfo.title}</h3>
+            </div>
+            <div className={styles.modalBody}>
+              <p className={styles.modalMessage}>
+                {modalInfo.message.split('\n').map((line, index) => (
+                  <span key={index}>
+                    {line}
+                    {index < modalInfo.message.split('\n').length - 1 && <br />}
+                  </span>
+                ))}
+              </p>
+            </div>
+            <div className={styles.modalFooter}>
+              <button className={styles.modalButton} onClick={closeModal}>
+                Entendido
+              </button>
+            </div>
           </div>
         </div>
       )}
