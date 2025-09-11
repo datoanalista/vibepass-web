@@ -132,6 +132,7 @@ const EventoSeleccionadoPage: React.FC = () => {
   }, []);
 
   const handleEventNavigation = (eventId: string) => {
+    if (!eventId) return; // No navegar si no hay ID
     setIsDropdownOpen(false);
     router.push(`/evento-seleccionado?eventoId=${eventId}`);
   };
@@ -200,9 +201,9 @@ const EventoSeleccionadoPage: React.FC = () => {
                 <>
                   {events.slice(0, 10).map((eventItem) => (
                     <div 
-                      key={eventItem.id}
+                      key={eventItem.id || eventItem._id}
                       className={styles.eventDropdownItem}
-                      onClick={() => handleEventNavigation(eventItem.id)}
+                      onClick={() => handleEventNavigation(eventItem.id || eventItem._id || '')}
                     >
                       <div className={styles.eventDropdownInfo}>
                         <div className={styles.eventDropdownName}>
