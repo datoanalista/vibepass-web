@@ -210,7 +210,7 @@ const EventoSeleccionadoPage: React.FC = () => {
                           {eventItem.informacionGeneral.nombreEvento}
                         </div>
                         <div className={styles.eventDropdownDetails}>
-                          {formatEventDate(eventItem.informacionGeneral.fechaEvento)} - {eventItem.informacionGeneral.lugarEvento}
+                          {eventItem.informacionGeneral.fechaEvento ? formatEventDate(eventItem.informacionGeneral.fechaEvento) : 'Fecha no disponible'} - {eventItem.informacionGeneral.lugarEvento}
                         </div>
                       </div>
                     </div>

@@ -53,7 +53,7 @@ export const useEvents = (): UseEventsReturn => {
                               event.informacionGeneral?.estado === 'en_curso';
         
         // Verificar si la fecha del evento es hoy o futura
-        const eventDate = new Date(event.informacionGeneral?.fechaEvento);
+        const eventDate = new Date(event.informacionGeneral?.fechaEvento || '');
         eventDate.setHours(0, 0, 0, 0);
         const isFutureOrToday = eventDate >= today;
         

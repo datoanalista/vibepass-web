@@ -668,11 +668,11 @@ const VentaEntradaPage: React.FC = () => {
                   {/* Fecha como item separado */}
                   <div className={styles.dateItem}>
                     <p className={styles.selectionDate}>
-                      Día del evento: {new Date(event.informacionGeneral?.fechaEvento + 'T00:00:00').toLocaleDateString('es-CL', {
+                      Día del evento: {event.informacionGeneral?.fechaEvento ? new Date(event.informacionGeneral.fechaEvento + 'T00:00:00').toLocaleDateString('es-CL', {
                         day: 'numeric',
                         month: 'long',
                         year: 'numeric'
-                      })} a las {event.informacionGeneral?.horaInicio} hrs.
+                      }) : 'Fecha no disponible'} a las {event.informacionGeneral?.horaInicio || 'Hora no disponible'} hrs.
                     </p>
                   </div>
                   

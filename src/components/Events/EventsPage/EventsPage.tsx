@@ -126,7 +126,7 @@ const EventsPage: React.FC = () => {
                       <div className={styles.eventDropdownInfo}>
                         <h4 className={styles.eventDropdownName}>{event.informacionGeneral?.nombreEvento}</h4>
                         <p className={styles.eventDropdownDetails}>
-                          {new Date(event.informacionGeneral?.fechaEvento).toLocaleDateString('es-CL')} - {event.informacionGeneral?.lugarEvento}
+                          {event.informacionGeneral?.fechaEvento ? new Date(event.informacionGeneral.fechaEvento).toLocaleDateString('es-CL') : 'Fecha no disponible'} - {event.informacionGeneral?.lugarEvento || 'Lugar no disponible'}
                         </p>
                       </div>
                     </div>

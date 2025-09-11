@@ -83,7 +83,7 @@ const SearchBar: React.FC = () => {
                     <div className={styles.eventInfo}>
                       <h4 className={styles.eventName}>{event.informacionGeneral?.nombreEvento}</h4>
                       <p className={styles.eventDetails}>
-                        {new Date(event.informacionGeneral?.fechaEvento).toLocaleDateString('es-CL')} - {event.informacionGeneral?.lugarEvento}
+                        {event.informacionGeneral?.fechaEvento ? new Date(event.informacionGeneral.fechaEvento).toLocaleDateString('es-CL') : 'Fecha no disponible'} - {event.informacionGeneral?.lugarEvento || 'Lugar no disponible'}
                       </p>
                     </div>
                   </div>
