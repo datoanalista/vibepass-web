@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useEvents } from '@/hooks/useEvents';
+import { useEventsContext } from '@/contexts/EventsContext';
 import styles from './SearchBar.module.css';
 
 const SearchBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const { events, loading } = useEvents();
+  const { events, loading } = useEventsContext();
   const router = useRouter();
 
   // Filtrar eventos por término de búsqueda

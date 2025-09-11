@@ -1,37 +1,32 @@
-import { useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { API_ENDPOINTS } from '@/config/api';
 
 interface Event {
-  id: string;
-  informacionGeneral: {
-    nombreEvento: string;
-    descripcion: string;
-    fechaEvento: string;
-    horaInicio: string;
-    horaTermino: string;
-    lugarEvento: string;
-    bannerPromocional: string;
-    fechaCreacion: string;
-    estado: string;
+  id?: string;
+  _id?: string;
+  informacionGeneral?: {
+    nombreEvento?: string;
+    descripcion?: string;
+    fechaEvento?: string;
+    lugarEvento?: string;
+    estado?: string;
   };
-  entradas: Array<{
-    cuposDisponibles: number;
-    entradasVendidas: number;
-    tipoEntrada: string;
-    precio: number;
-    activa: boolean;
-  }>;
-  // Agregar más campos según la respuesta de la API
 }
 
-interface UseEventsReturn {
+interface EventsContextType {
   events: Event[];
   loading: boolean;
   error: string | null;
   refetch: () => void;
 }
 
-export const useEvents = (): UseEventsReturn => {
+const EventsContext = createContext<EventsContextType | undefined>(undefined);
+
+interface EventsProviderProps {
+  children: ReactNode;
+}
+
+export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -41,7 +36,7 @@ export const useEvents = (): UseEventsReturn => {
       setLoading(true);
       setError(null);
       
-      console.log('🌍 Fetching events from:', API_ENDPOINTS.EVENTS);
+      console.log('🌍 [EventsContext] Fetching events from:', API_ENDPOINTS.EVENTS);
       
       const response = await fetch(API_ENDPOINTS.EVENTS, {
         method: 'GET',
@@ -59,12 +54,11 @@ export const useEvents = (): UseEventsReturn => {
       }
 
       const data = await response.json();
-      console.log('🎪 Events API Response:', data);
+      console.log('🎪 [EventsContext] Events API Response:', data);
       
       // La API devuelve { status, message, data: { events: [...] } }
       const allEvents = data?.data?.events || data?.events || (Array.isArray(data) ? data : []);
-      console.log('📋 All events from API:', allEvents);
-      
+      console.log('📋 [EventsContext] All events from API:', allEvents);
       
       // Filtrar eventos con estado "programado" o "en_curso" Y fecha futura
       const today = new Date();
@@ -75,20 +69,21 @@ export const useEvents = (): UseEventsReturn => {
                               event.informacionGeneral?.estado === 'en_curso';
         
         // Verificar si la fecha del evento es hoy o futura
-        const eventDate = new Date(event.informacionGeneral?.fechaEvento);
+        const eventDate = new Date(event.informacionGeneral?.fechaEvento || '');
         eventDate.setHours(0, 0, 0, 0);
         const isFutureOrToday = eventDate >= today;
         
-        console.log(`📅 Event: ${event.informacionGeneral?.nombreEvento}, Date: ${event.informacionGeneral?.fechaEvento}, Status: ${event.informacionGeneral?.estado}, Future: ${isFutureOrToday}`);
+        console.log(`📅 [EventsContext] Event: ${event.informacionGeneral?.nombreEvento}, Date: ${event.informacionGeneral?.fechaEvento}, Status: ${event.informacionGeneral?.estado}, Future: ${isFutureOrToday}`);
         
         return isActiveStatus && isFutureOrToday;
       });
-      console.log('🎯 Active and future events:', activeEvents);
+      
+      console.log('🎯 [EventsContext] Active and future events:', activeEvents);
       
       setEvents(activeEvents);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
-      console.error('❌ Error fetching events:', errorMessage);
+      console.error('❌ [EventsContext] Error fetching events:', errorMessage);
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -96,18 +91,27 @@ export const useEvents = (): UseEventsReturn => {
   };
 
   useEffect(() => {
-    // Agregar un pequeño delay para evitar múltiples llamadas simultáneas
-    const timer = setTimeout(() => {
-      fetchEvents();
-    }, 100);
-
-    return () => clearTimeout(timer);
+    fetchEvents();
   }, []);
 
-  return {
+  const value: EventsContextType = {
     events,
     loading,
     error,
     refetch: fetchEvents,
   };
+
+  return (
+    <EventsContext.Provider value={value}>
+      {children}
+    </EventsContext.Provider>
+  );
+};
+
+export const useEventsContext = (): EventsContextType => {
+  const context = useContext(EventsContext);
+  if (context === undefined) {
+    throw new Error('useEventsContext must be used within an EventsProvider');
+  }
+  return context;
 };

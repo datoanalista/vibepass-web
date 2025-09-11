@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import UniversalHeader from "@/components/Shared/UniversalHeader/UniversalHeader";
 import Footer from "@/components/Shared/Footer/Footer";
 import EventTypesSection from "./EventTypesSection/EventTypesSection";
@@ -11,6 +11,29 @@ import styles from "./Home.module.css";
 import { getImagePath } from "@/utils/getImagePath";
 
 const Home: React.FC = () => {
+  // Manejar scroll a sección específica cuando se navega con hash
+  useEffect(() => {
+    const hash = window.location.hash;
+    const sectionMap: { [key: string]: string } = {
+      '#cotizacion': 'cotizacion',
+      '#servicio': 'servicio',
+      '#qr': 'qr'
+    };
+    
+    const sectionId = sectionMap[hash];
+    if (sectionId) {
+      // Pequeño delay para asegurar que el DOM esté renderizado
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 100);
+    }
+  }, []);
   return (
     <div className={styles.homeContainer}>
       {/* Universal Header */}
@@ -29,7 +52,7 @@ const Home: React.FC = () => {
       <EventTypesSection />
       
       {/* Sección QR - Simple */}
-      <section style={{ 
+      <section id="qr" style={{ 
         width: '100%', 
         margin: '80px 0 60px 0', 
         padding: '0',

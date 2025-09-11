@@ -1,10 +1,31 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "./UniversalHeader.module.css";
 import { getImagePath } from "@/utils/getImagePath";
 
 const UniversalHeader: React.FC = () => {
+  const router = useRouter();
+
+  const handleSectionClick = (sectionId: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    // Si estamos en la página home, hacer scroll a la sección
+    if (window.location.pathname === '/home' || window.location.pathname === '/') {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    } else {
+      // Si estamos en otra página, navegar a home y luego hacer scroll
+      router.push(`/home#${sectionId}`);
+    }
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -24,18 +45,30 @@ const UniversalHeader: React.FC = () => {
             <Link href="/eventos" className={styles.navLink}>
               Eventos
             </Link>
-            <Link href="/qr" className={styles.navLink}>
+            <a 
+              href="/home#qr" 
+              className={styles.navLink}
+              onClick={handleSectionClick('qr')}
+            >
               QR
-            </Link>
+            </a>
             <Link href="/diferenciacion" className={styles.navLink}>
               Diferenciación
             </Link>
-            <Link href="/servicio" className={styles.navLink}>
+            <a 
+              href="/home#servicio" 
+              className={styles.navLink}
+              onClick={handleSectionClick('servicio')}
+            >
               Servicio
-            </Link>
-            <Link href="/cotizacion" className={styles.navLink}>
+            </a>
+            <a 
+              href="/home#cotizacion" 
+              className={styles.navLink}
+              onClick={handleSectionClick('cotizacion')}
+            >
               Cotización
-            </Link>
+            </a>
           </nav>
 
           {/* User Account Button */}

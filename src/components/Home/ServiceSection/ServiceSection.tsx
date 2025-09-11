@@ -29,7 +29,7 @@ const ServiceSection: React.FC = () => {
   ];
 
   return (
-    <section className={styles.serviceSection}>
+    <section id="servicio" className={styles.serviceSection}>
       <div className={styles.container}>
         {/* Lado izquierdo - Contenido */}
         <div className={styles.leftContent}>

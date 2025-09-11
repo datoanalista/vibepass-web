@@ -1,14 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEvents } from '@/hooks/useEvents';
+import { useEventsContext } from '@/contexts/EventsContext';
 import EventsCarousel from '../EventsCarousel/EventsCarousel';
 import UpcomingEvents from '../UpcomingEvents/UpcomingEvents';
 import styles from './EventsPage.module.css';
 import { getImagePath } from '@/utils/getImagePath';
 
 const EventsPage: React.FC = () => {
-  const { events, loading, error, refetch } = useEvents();
+  const { events, loading, error, refetch } = useEventsContext();
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const router = useRouter();
 
