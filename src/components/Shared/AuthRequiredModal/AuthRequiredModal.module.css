@@ -1,0 +1,101 @@
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Container */
+.modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Modal Content */
+.modalContent {
+  padding: 30px;
+  text-align: center;
+}
+
+/* Modal Title */
+.modalTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Modal Message */
+.modalMessage {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+/* Modal Buttons */
+.modalButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modalButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modalButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.modalButtonSecondary {
+  background: transparent;
+  color: #666;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modalButtonSecondary:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .modalButtons {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .modalButton,
+  .modalButtonSecondary {
+    flex: 1;
+    max-width: 180px;
+  }
+}

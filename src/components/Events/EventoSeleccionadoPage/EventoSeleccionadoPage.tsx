@@ -4,6 +4,8 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useEventDetails } from '@/hooks/useEventDetails';
 import { useEvents } from '@/hooks/useEvents';
 import { getImagePath } from '@/utils/getImagePath';
+import { useAuth } from '@/contexts/AuthContext';
+import AuthRequiredModal from '@/components/Shared/AuthRequiredModal/AuthRequiredModal';
 import styles from './EventoSeleccionadoPage.module.css';
 
 interface Entrada {
@@ -27,19 +29,29 @@ const EventoSeleccionadoPage: React.FC = () => {
   const router = useRouter();
   const { event, loading, error } = useEventDetails(eventoId);
   const { events } = useEvents();
+  const { isLoggedIn } = useAuth();
   const [selectedEntrada, setSelectedEntrada] = useState<string | null>(null);
   const [showMore, setShowMore] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [direction, setDirection] = useState(1); // 1 para adelante, -1 para atrás
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleEntradaSelect = (tipo: string) => {
+    if (!isLoggedIn) {
+      setShowAuthModal(true);
+      return;
+    }
     // Navegar a venta-entrada con el tipo seleccionado
     router.push(`/venta-entrada?eventoId=${eventoId}&tipoEntrada=${encodeURIComponent(tipo)}`);
   };
 
   const handleCaracteristicaClick = () => {
+    if (!isLoggedIn) {
+      setShowAuthModal(true);
+      return;
+    }
     // Navegar a venta-entrada desde características
     router.push(`/venta-entrada?eventoId=${eventoId}`);
   };
@@ -366,6 +378,12 @@ const EventoSeleccionadoPage: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Modal de autenticación requerida */}
+      <AuthRequiredModal 
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+      />
     </main>
   );
 };

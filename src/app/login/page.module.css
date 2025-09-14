@@ -1,0 +1,410 @@
+/* Container principal */
+.container {
+  min-height: 100vh;
+  background-image: url('/images/backgorundLogin.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenido principal */
+.mainContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 40px;
+  min-height: calc(100vh - 120px); /* Resta la altura aproximada del header */
+}
+
+/* Formulario de login */
+.loginForm {
+  width: 400px;
+  min-height: 500px; /* Altura mínima */
+  max-height: 600px;
+  background: #D9D9D9CC;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 60px;
+}
+
+/* Header del formulario */
+.formHeader {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  text-align: center !important;
+  color: #000000 !important;
+  margin: 0 0 10px 0 !important;
+}
+
+.description {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  text-align: center !important;
+  color: #000000 !important;
+  margin: 0 !important;
+}
+
+/* Formulario */
+.form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Error Message */
+.errorMessage {
+  background-color: #fee;
+  color: #c33;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #fcc;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Grupos de input */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  color: #000000 !important;
+}
+
+/* Inputs - COLORES EXPLÍCITOS PARA EVITAR INTERFERENCIAS */
+.input {
+  width: 100% !important;
+  height: 40px !important;
+  padding: 10px 12px !important;
+  border: 1px solid #cccccc !important;
+  border-radius: 5px !important;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+.input:focus {
+  outline: none !important;
+  border-color: #01A8E2 !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+.input::placeholder {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  color: #999999 !important;
+  -webkit-text-fill-color: #999999 !important;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+  -webkit-text-fill-color: #000000 !important;
+  color: #000000 !important;
+}
+
+/* Contenedor de contraseña */
+.passwordContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordInput {
+  width: 100% !important;
+  height: 40px !important;
+  padding: 10px 45px 10px 12px !important;
+  border: 1px solid #cccccc !important;
+  border-radius: 5px !important;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+.passwordInput:focus {
+  outline: none !important;
+  border-color: #01A8E2 !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+.passwordInput::placeholder {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  color: #999999 !important;
+  -webkit-text-fill-color: #999999 !important;
+}
+
+.passwordInput:-webkit-autofill,
+.passwordInput:-webkit-autofill:hover,
+.passwordInput:-webkit-autofill:focus,
+.passwordInput:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+  -webkit-text-fill-color: #000000 !important;
+  color: #000000 !important;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 12px;
+  background: none !important;
+  border: none !important;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666666 !important;
+}
+
+/* ¿Olvidaste tu contraseña? */
+.forgotPassword {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.forgotPasswordLink {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  text-align: center !important;
+  color: #000000 !important;
+  text-decoration: none;
+}
+
+.forgotPasswordLink:hover {
+  text-decoration: underline;
+}
+
+/* Recordar cuenta */
+.rememberContainer {
+  margin: 15px 0;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox {
+  width: 25px !important;
+  height: 25px !important;
+  border-radius: 8px !important;
+  background: #FFFFFF !important;
+  box-shadow: 0px 4px 4px 0px #00000040 !important;
+  border: none !important;
+  cursor: pointer;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  position: relative;
+  opacity: 1 !important;
+}
+
+.checkbox:checked {
+  background: #01A8E2 !important;
+}
+
+.checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.checkboxLabel {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 11px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  color: #000000 !important;
+  cursor: pointer;
+}
+
+/* Botón de iniciar sesión */
+.loginButton {
+  width: 50% !important;
+  height: 45px !important;
+  background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%) !important;
+  box-shadow: 0px 4px 4px 0px #00000040 !important;
+  border-radius: 100px !important;
+  border: none !important;
+  cursor: pointer;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  text-align: center !important;
+  color: #ffffff !important;
+  margin: 20px auto !important;
+  transition: all 0.3s ease;
+}
+
+.loginButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0px 6px 8px 0px #00000040 !important;
+}
+
+.loginButton:active {
+  transform: translateY(0);
+}
+
+.loginButton:disabled,
+.loginButton.loading {
+  background: #ccc !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Crear cuenta */
+.createAccountContainer {
+  text-align: right;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.noAccountText {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  text-align: center !important;
+  color: #424040 !important;
+  margin-right: 5px;
+}
+
+.createAccountLink {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  text-align: center !important;
+  color: #12C70E !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.createAccountLink:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 20px;
+  }
+  
+  .loginForm {
+    width: 100%;
+    max-width: 400px;
+    margin-left: 0;
+    margin: 0 auto;
+    min-height: 450px;
+    max-height: 550px;
+    padding: 30px 25px;
+  }
+  
+  .title {
+    font-size: 18px !important;
+  }
+  
+  .loginButton {
+    width: 60% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .loginForm {
+    padding: 25px 20px;
+    min-height: 400px;
+    max-height: 500px;
+  }
+  
+  .title {
+    font-size: 16px !important;
+  }
+  
+  .description {
+    font-size: 10px !important;
+  }
+  
+  .label {
+    font-size: 14px !important;
+  }
+  
+  .input,
+  .passwordInput {
+    font-size: 14px !important;
+    height: 36px !important;
+  }
+  
+  .checkbox {
+    width: 22px !important;
+    height: 22px !important;
+  }
+  
+  .loginButton {
+    width: 70% !important;
+    font-size: 12px !important;
+  }
+}
