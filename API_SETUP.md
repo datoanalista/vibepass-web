@@ -49,12 +49,25 @@ const NGROK_URL = 'https://5a5c56347372.ngrok-free.app';  // 👈 Cambiar aquí
 ## Verificación
 
 ### En Producción:
-- Verás un alert: `✅ PRODUCCIÓN: Usando https://5a5c56347372.ngrok-free.app/api`
 - En la consola: `🔧 [API Config] Modo: PRODUCCIÓN`
+- Todas las rutas funcionan: `/eventos`, `/login`, `/crear-cuenta`, etc.
 
 ### En Desarrollo:
 - En la consola: `🔧 [API Config] Modo: DESARROLLO`
 - Usará automáticamente `http://localhost:3001/api`
+
+## Rutas Estáticas Generadas
+
+El proyecto genera automáticamente todas estas rutas para GitHub Pages:
+- `/` - Página principal
+- `/home` - Home
+- `/eventos` - Lista de eventos
+- `/login` - Iniciar sesión
+- `/crear-cuenta` - Registro de usuarios
+- `/evento-seleccionado` - Detalles del evento
+- `/venta-entrada` - Compra de entradas
+- `/venta-exitosa` - Confirmación de compra
+- Y todas las páginas de admin
 
 ## Debug
 
