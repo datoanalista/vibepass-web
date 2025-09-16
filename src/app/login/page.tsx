@@ -185,6 +185,18 @@ export default function LoginPage() {
                 Crear cuenta
               </button>
             </div>
+
+            {/* Backoffice Link */}
+            <div className={styles.createAccountContainer}>
+              <span className={styles.noAccountText}>¿Quieres ser organizador?</span>
+              <a 
+                href="https://datoanalista.github.io/vibepass-panel/login/"
+                className={styles.createAccountLink}
+                target="_self"
+              >
+                Ir a Backoffice
+              </a>
+            </div>
           </form>
         </div>
       </div>
