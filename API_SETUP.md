@@ -29,42 +29,32 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:3001/api
 
 **IMPORTANTE**: Solo necesitas cambiar la variable `NEXT_PUBLIC_API_BASE_URL` en GitHub Secrets cuando cambie tu ngrok URL.
 
-## Cómo Configurar en GitHub Pages
+## Cómo Cambiar la URL de Ngrok
 
-### OPCIÓN 1: Variable de Entorno (Recomendado)
+### Configuración Simplificada (Hardcodeada)
 
-1. Ve a tu repositorio en GitHub
-2. Ve a **Settings** → **Secrets and variables** → **Actions**
-3. Haz clic en la pestaña **"Secrets"** (NO "Variables")
-4. Haz clic en **"New repository secret"**
-5. Name: `NEXT_PUBLIC_API_BASE_URL`
-6. Secret: `https://tu-nueva-ngrok-url.ngrok-free.app/api`
-7. Haz clic en **"Add secret"**
-8. Haz un nuevo deploy (push o manual)
+Cuando cambie tu URL de ngrok, solo necesitas:
 
-### OPCIÓN 2: Archivo de Configuración (Respaldo)
-
-Si la Opción 1 no funciona, usa esta alternativa:
-
-1. Edita el archivo `src/config/production-api.ts`
-2. Cambia la línea: `const URL_NGROK = "https://tu-nueva-ngrok-url.ngrok-free.app";`
+1. Edita el archivo `src/config/api.ts`
+2. Cambia la línea: `const NGROK_URL = 'https://tu-nueva-ngrok-url.ngrok-free.app';`
 3. Haz commit y push
-4. El deploy automático usará esta configuración
+4. El deploy automático usará la nueva URL
 
-### Verificar en GitHub Actions
-
-Después del deploy, ve a **Actions** → último workflow → **build** → **Debug environment variables**
-Deberías ver:
-```
-🔍 DEBUG: NEXT_PUBLIC_API_BASE_URL = https://tu-ngrok-url.ngrok-free.app/api
+### Ejemplo:
+```typescript
+// ⚠️ CAMBIAR SOLO ESTA URL CUANDO CAMBIE NGROK:
+const NGROK_URL = 'https://5a5c56347372.ngrok-free.app';  // 👈 Cambiar aquí
 ```
 
-## Debug en Producción
+## Verificación
 
-Revisa la consola del navegador para ver:
-- `🔧 [API Config] NEXT_PUBLIC_API_BASE_URL:` - Debe mostrar tu ngrok URL
-- `🔧 [API Config] API_BASE_URL final:` - URL final que se usará
-- `🔧 [API Config] Endpoints configurados:` - Todos los endpoints
+### En Producción:
+- Verás un alert: `✅ PRODUCCIÓN: Usando https://5a5c56347372.ngrok-free.app/api`
+- En la consola: `🔧 [API Config] Modo: PRODUCCIÓN`
+
+### En Desarrollo:
+- En la consola: `🔧 [API Config] Modo: DESARROLLO`
+- Usará automáticamente `http://localhost:3001/api`
 
 ## Debug
 

@@ -1,43 +1,24 @@
 // API Configuration
-import { PRODUCTION_API_CONFIG } from './production-api';
+// 🚀 CONFIGURACIÓN HARDCODEADA PARA ACCESO PÚBLICO
 
-// DEBUG AGRESIVO - Mostrar TODAS las variables de entorno
-console.log('🚨 [DEBUG] Todas las variables NEXT_PUBLIC_*:', Object.keys(process.env).filter(key => key.startsWith('NEXT_PUBLIC_')));
-console.log('🚨 [DEBUG] process.env completo:', process.env);
+// ⚠️ CAMBIAR SOLO ESTA URL CUANDO CAMBIE NGROK:
+const NGROK_URL = 'https://5a5c56347372.ngrok-free.app';
 
 // Determinar si estamos en producción
 const isProduction = process.env.NODE_ENV === 'production';
-const envApiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-// Lógica de fallback
-let API_BASE_URL: string;
-let configSource: string;
+// Configuración simplificada
+const API_BASE_URL = isProduction 
+  ? `${NGROK_URL}/api`  // Producción: usar ngrok
+  : 'http://localhost:3001/api';  // Desarrollo: usar localhost
 
-if (envApiUrl) {
-  // Si hay variable de entorno, usarla
-  API_BASE_URL = envApiUrl;
-  configSource = 'Environment Variable';
-} else if (isProduction) {
-  // Si estamos en producción pero no hay variable, usar configuración de respaldo
-  API_BASE_URL = PRODUCTION_API_CONFIG.BASE_URL;
-  configSource = 'Production Config File';
-} else {
-  // Desarrollo local
-  API_BASE_URL = 'http://localhost:3001/api';
-  configSource = 'Local Development';
+console.log('🔧 [API Config] Modo:', isProduction ? 'PRODUCCIÓN' : 'DESARROLLO');
+console.log('🔧 [API Config] API_BASE_URL:', API_BASE_URL);
+
+// Alert solo para confirmar en producción
+if (typeof window !== 'undefined' && isProduction) {
+  alert(`✅ PRODUCCIÓN: Usando ${API_BASE_URL}`);
 }
-
-// Alert para debugging en producción
-if (typeof window !== 'undefined') {
-  alert(`🚨 DEBUG: 
-Source: ${configSource}
-ENV VAR: ${envApiUrl || 'UNDEFINED'}
-Final URL: ${API_BASE_URL}`);
-}
-
-console.log('🔧 [API Config] Source:', configSource);
-console.log('🔧 [API Config] NEXT_PUBLIC_API_BASE_URL:', envApiUrl);
-console.log('🔧 [API Config] API_BASE_URL final:', API_BASE_URL);
 
 export const API_ENDPOINTS = {
   EVENTS: `${API_BASE_URL}/events?limit=50`,
