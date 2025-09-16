@@ -31,11 +31,24 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:3001/api
 
 ## Cómo Configurar en GitHub Pages
 
+### IMPORTANTE: Configurar como SECRET, no como variable
+
 1. Ve a tu repositorio en GitHub
 2. Ve a **Settings** → **Secrets and variables** → **Actions**
-3. Agrega/actualiza la variable: `NEXT_PUBLIC_API_BASE_URL`
-4. Valor: `https://tu-nueva-ngrok-url.ngrok-free.app/api`
-5. Haz un nuevo deploy (push o manual)
+3. Haz clic en la pestaña **"Secrets"** (NO "Variables")
+4. Haz clic en **"New repository secret"**
+5. Name: `NEXT_PUBLIC_API_BASE_URL`
+6. Secret: `https://tu-nueva-ngrok-url.ngrok-free.app/api`
+7. Haz clic en **"Add secret"**
+8. Haz un nuevo deploy (push o manual)
+
+### Verificar en GitHub Actions
+
+Después del deploy, ve a **Actions** → último workflow → **build** → **Debug environment variables**
+Deberías ver:
+```
+🔍 DEBUG: NEXT_PUBLIC_API_BASE_URL = https://tu-ngrok-url.ngrok-free.app/api
+```
 
 ## Debug en Producción
 
