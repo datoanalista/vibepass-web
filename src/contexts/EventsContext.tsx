@@ -25,8 +25,6 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
       setLoading(true);
       setError(null);
       
-      console.log('🌍 [EventsContext] Fetching events from:', API_ENDPOINTS.EVENTS);
-      
       const response = await fetch(API_ENDPOINTS.EVENTS, {
         method: 'GET',
         headers: {
@@ -43,11 +41,9 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
       }
 
       const data = await response.json();
-      console.log('🎪 [EventsContext] Events API Response:', data);
       
       // La API devuelve { status, message, data: { events: [...] } }
       const allEvents = data?.data?.events || data?.events || (Array.isArray(data) ? data : []);
-      console.log('📋 [EventsContext] All events from API:', allEvents);
       
       // Filtrar eventos con estado "programado" o "en_curso" Y fecha futura
       const today = new Date();
@@ -58,21 +54,19 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
                               event.informacionGeneral?.estado === 'en_curso';
         
         // Verificar si la fecha del evento es hoy o futura
-        const eventDate = new Date(event.informacionGeneral?.fechaEvento || '');
+        // Usar parsing manual para evitar problemas de zona horaria
+        const eventDateString = event.informacionGeneral?.fechaEvento || '';
+        const [year, month, day] = eventDateString.split('-').map(Number);
+        const eventDate = new Date(year, month - 1, day); // month es 0-indexed
         eventDate.setHours(0, 0, 0, 0);
         const isFutureOrToday = eventDate >= today;
-        
-        console.log(`📅 [EventsContext] Event: ${event.informacionGeneral?.nombreEvento}, Date: ${event.informacionGeneral?.fechaEvento}, Status: ${event.informacionGeneral?.estado}, Future: ${isFutureOrToday}`);
         
         return isActiveStatus && isFutureOrToday;
       });
       
-      console.log('🎯 [EventsContext] Active and future events:', activeEvents);
-      
       setEvents(activeEvents);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
-      console.error('❌ [EventsContext] Error fetching events:', errorMessage);
       setError(errorMessage);
     } finally {
       setLoading(false);
