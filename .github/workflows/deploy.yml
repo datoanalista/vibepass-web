@@ -44,15 +44,21 @@ jobs:
       - name: Debug environment variables
         env:
           NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
+          NEXT_PUBLIC_API_BASE_URL_VAR: ${{ vars.NEXT_PUBLIC_API_BASE_URL }}
         run: |
-          echo "🔍 DEBUG: NEXT_PUBLIC_API_BASE_URL = $NEXT_PUBLIC_API_BASE_URL"
-          echo "🔍 DEBUG: Variables que empiezan con NEXT_PUBLIC_:"
-          env | grep NEXT_PUBLIC_ || echo "No se encontraron variables NEXT_PUBLIC_"
+          echo "🔍 DEBUG: Secret NEXT_PUBLIC_API_BASE_URL = $NEXT_PUBLIC_API_BASE_URL"
+          echo "🔍 DEBUG: Variable NEXT_PUBLIC_API_BASE_URL = $NEXT_PUBLIC_API_BASE_URL_VAR"
+          echo "🔍 DEBUG: Todas las variables de entorno:"
+          env | grep NEXT_PUBLIC_ || echo "❌ No se encontraron variables NEXT_PUBLIC_"
+          echo "🔍 DEBUG: Secrets disponibles:"
+          echo "- NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-'NO DEFINIDO'}"
         
       - name: Build Next.js static export
         env:
-          NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
-        run: npm run build
+          NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL || vars.NEXT_PUBLIC_API_BASE_URL }}
+        run: |
+          echo "🚀 BUILD: Usando NEXT_PUBLIC_API_BASE_URL = $NEXT_PUBLIC_API_BASE_URL"
+          npm run build
         
       - name: Add .nojekyll file
         run: touch out/.nojekyll
