@@ -1,12 +1,17 @@
 // API Configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_EVENTS_URL || 'http://localhost:3001/api/events';
-const API_USERS_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
+// Usar una sola variable de entorno para la base de la API
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
+
+console.log('🔧 [API Config] NEXT_PUBLIC_API_BASE_URL:', process.env.NEXT_PUBLIC_API_BASE_URL);
+console.log('🔧 [API Config] API_BASE_URL final:', API_BASE_URL);
 
 export const API_ENDPOINTS = {
-  EVENTS: `${API_BASE_URL}?limit=50`,
-  HEALTH: process.env.NEXT_PUBLIC_API_EVENTS_URL?.replace('/events', '/health') || 'http://localhost:3001/api/health',
-  USERS_WEB: `${API_USERS_URL}/usersweb`,
-  LOGIN: `${API_USERS_URL}/usersweb/login`,
+  EVENTS: `${API_BASE_URL}/events?limit=50`,
+  HEALTH: `${API_BASE_URL}/health`,
+  USERS_WEB: `${API_BASE_URL}/usersweb`,
+  LOGIN: `${API_BASE_URL}/usersweb/login`,
 } as const;
+
+console.log('🔧 [API Config] Endpoints configurados:', API_ENDPOINTS);
 
 export default API_BASE_URL;

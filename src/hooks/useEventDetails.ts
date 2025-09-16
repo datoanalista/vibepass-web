@@ -71,11 +71,10 @@ export const useEventDetails = (eventoId: string | null) => {
       setError(null);
 
       try {
-        // Usar la misma lógica que useEvents para determinar la URL base
-        const eventsUrl = process.env.NEXT_PUBLIC_API_EVENTS_URL || 'http://localhost:3001/api/events';
-        const apiUrl = eventsUrl.replace('/api/events', '');
+        // Usar la nueva configuración unificada
+        const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
         
-        const response = await fetch(`${apiUrl}/api/events/${eventoId}`, {
+        const response = await fetch(`${apiBaseUrl}/events/${eventoId}`, {
           headers: {
             'Content-Type': 'application/json',
             'ngrok-skip-browser-warning': 'true'

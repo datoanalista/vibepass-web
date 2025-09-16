@@ -8,13 +8,11 @@ Para configurar la conexión con la API de eventos, necesitas crear un archivo `
 
 ```bash
 # API Configuration
-# Para desarrollo local (puerto 3001)
-NEXT_PUBLIC_API_EVENTS_URL=http://localhost:3001/api/events
+# SOLO necesitas configurar esta variable:
 NEXT_PUBLIC_API_BASE_URL=http://localhost:3001/api
 
-# Para producción (ngrok)
-# NEXT_PUBLIC_API_EVENTS_URL=https://e6ef5d8c3fd3.ngrok-free.app/api/events
-# NEXT_PUBLIC_API_BASE_URL=https://e6ef5d8c3fd3.ngrok-free.app/api
+# Para producción (ngrok) - SOLO cambia esta línea:
+# NEXT_PUBLIC_API_BASE_URL=https://tu-ngrok-url.ngrok-free.app/api
 ```
 
 ## Configuración por Ambiente
@@ -22,22 +20,29 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:3001/api
 ### Desarrollo Local
 - **Backend**: `http://localhost:3001`
 - **Frontend**: `http://localhost:3000`
-- **API Events**: `http://localhost:3001/api/events`
-- **API Users**: `http://localhost:3001/api/usersweb`
-- **API Login**: `http://localhost:3001/api/usersweb/login`
+- **Variable**: `NEXT_PUBLIC_API_BASE_URL=http://localhost:3001/api`
 
 ### Producción (GitHub Pages)
-- **Backend**: ngrok URL
+- **Backend**: ngrok URL (cambia cada reinicio)
 - **Frontend**: GitHub Pages
-- **API Events**: `https://e6ef5d8c3fd3.ngrok-free.app/api/events`
-- **API Users**: `https://e6ef5d8c3fd3.ngrok-free.app/api/usersweb`
-- **API Login**: `https://e6ef5d8c3fd3.ngrok-free.app/api/usersweb/login`
+- **Variable**: `NEXT_PUBLIC_API_BASE_URL=https://tu-ngrok-url.ngrok-free.app/api`
 
-## Cómo Cambiar entre Ambientes
+**IMPORTANTE**: Solo necesitas cambiar la variable `NEXT_PUBLIC_API_BASE_URL` en GitHub Secrets cuando cambie tu ngrok URL.
 
-1. **Para desarrollo local**: Usa `http://localhost:3001/api/events`
-2. **Para producción**: Cambia a la URL de ngrok
-3. **Reinicia el servidor** después de cambiar las variables
+## Cómo Configurar en GitHub Pages
+
+1. Ve a tu repositorio en GitHub
+2. Ve a **Settings** → **Secrets and variables** → **Actions**
+3. Agrega/actualiza la variable: `NEXT_PUBLIC_API_BASE_URL`
+4. Valor: `https://tu-nueva-ngrok-url.ngrok-free.app/api`
+5. Haz un nuevo deploy (push o manual)
+
+## Debug en Producción
+
+Revisa la consola del navegador para ver:
+- `🔧 [API Config] NEXT_PUBLIC_API_BASE_URL:` - Debe mostrar tu ngrok URL
+- `🔧 [API Config] API_BASE_URL final:` - URL final que se usará
+- `🔧 [API Config] Endpoints configurados:` - Todos los endpoints
 
 ## Debug
 

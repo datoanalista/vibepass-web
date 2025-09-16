@@ -328,7 +328,7 @@ const VentaEntradaPage: React.FC = () => {
       };
 
       // Realizar POST a la API externa
-      const apiBaseUrl = process.env.NEXT_PUBLIC_API_EVENTS_URL?.replace('/events', '') || 'http://localhost:3001/api';
+      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
       const response = await fetch(`${apiBaseUrl}/sales`, {
         method: 'POST',
         headers: {
