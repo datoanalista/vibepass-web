@@ -174,9 +174,16 @@ export default function LoginPage() {
             {/* Create Account */}
             <div className={styles.createAccountContainer}>
               <span className={styles.noAccountText}>¿No tienes cuenta?</span>
-              <Link href="/crear-cuenta" className={styles.createAccountLink} prefetch={false}>
+              <button 
+                onClick={() => {
+                  console.log('🚀 Navegando a /crear-cuenta');
+                  router.push('/crear-cuenta');
+                }} 
+                className={styles.createAccountLink}
+                type="button"
+              >
                 Crear cuenta
-              </Link>
+              </button>
             </div>
           </form>
         </div>

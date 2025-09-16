@@ -338,6 +338,10 @@
   color: #12C70E !important;
   text-decoration: none;
   cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 .createAccountLink:hover {
