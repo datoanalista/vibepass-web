@@ -49,13 +49,12 @@ jobs:
       - name: Fix GitHub Pages routing issues
         run: |
           echo "🔧 Arreglando problemas de routing de GitHub Pages..."
-          mkdir -p out/crear-cuenta
-          cp out/index.html out/crear-cuenta/index.html
-          echo "✅ Página crear-cuenta creada"
           
           echo "🗑️ Eliminando 404.html problemático..."
           rm -f out/404.html
           echo "✅ 404.html eliminado"
+          
+          echo "✅ Página crear-cuenta ya generada correctamente por Next.js"
         
       - name: Add .nojekyll file
         run: touch out/.nojekyll
