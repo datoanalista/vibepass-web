@@ -63,11 +63,13 @@ El proyecto genera automáticamente todas estas rutas para GitHub Pages:
 - `/home` - Home
 - `/eventos` - Lista de eventos
 - `/login` - Iniciar sesión
-- `/crear-cuenta` - Registro de usuarios
+- `/crear-cuenta` - Registro de usuarios (generada manualmente)
 - `/evento-seleccionado` - Detalles del evento
 - `/venta-entrada` - Compra de entradas
 - `/venta-exitosa` - Confirmación de compra
 - Y todas las páginas de admin
+
+**Nota**: La página `/crear-cuenta` se genera manualmente en el workflow debido a limitaciones del static export con páginas client-side complejas.
 
 ## Debug
 

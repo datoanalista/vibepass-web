@@ -46,6 +46,13 @@ jobs:
           echo "🚀 BUILD: Usando configuración hardcodeada de ngrok"
           npm run build
         
+      - name: Fix missing static pages
+        run: |
+          echo "🔧 Creando páginas estáticas faltantes..."
+          mkdir -p out/crear-cuenta
+          cp out/index.html out/crear-cuenta/index.html
+          echo "✅ Página crear-cuenta creada"
+        
       - name: Add .nojekyll file
         run: touch out/.nojekyll
         

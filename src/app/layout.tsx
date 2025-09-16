@@ -18,6 +18,26 @@ function DynamicFavicon() {
   );
 }
 
+// Componente para manejar routing de GitHub Pages
+function GitHubPagesRouting() {
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+          // GitHub Pages SPA routing fix
+          (function() {
+            var hash = window.location.hash;
+            if (hash && hash.length > 1) {
+              var path = hash.slice(1);
+              window.history.replaceState(null, null, path);
+            }
+          })();
+        `
+      }}
+    />
+  );
+}
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -42,6 +62,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <DynamicFavicon />
+        <GitHubPagesRouting />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <AuthProvider>
