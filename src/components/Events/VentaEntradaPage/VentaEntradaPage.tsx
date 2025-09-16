@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useEventDetails } from '@/hooks/useEventDetails';
 import { getImagePath } from '@/utils/getImagePath';
 import { foodItemsData, FoodItem } from '@/data/FoodCart/foodItemsData';
+import { API_ENDPOINTS } from '@/config/api';
 import styles from './VentaEntradaPage.module.css';
 
 interface Entrada {
@@ -327,9 +328,8 @@ const VentaEntradaPage: React.FC = () => {
            }
       };
 
-      // Realizar POST a la API externa
-      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
-      const response = await fetch(`${apiBaseUrl}/sales`, {
+      // Realizar POST a la API externa usando configuración centralizada
+      const response = await fetch(API_ENDPOINTS.SALES, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

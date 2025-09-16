@@ -15,14 +15,11 @@ const API_BASE_URL = isProduction
 console.log('🔧 [API Config] Modo:', isProduction ? 'PRODUCCIÓN' : 'DESARROLLO');
 console.log('🔧 [API Config] API_BASE_URL:', API_BASE_URL);
 
-// Alert solo para confirmar en producción
-if (typeof window !== 'undefined' && isProduction) {
-  alert(`✅ PRODUCCIÓN: Usando ${API_BASE_URL}`);
-}
-
 export const API_ENDPOINTS = {
   EVENTS: `${API_BASE_URL}/events?limit=50`,
+  EVENTS_BASE: `${API_BASE_URL}/events`,
   HEALTH: `${API_BASE_URL}/health`,
+  SALES: `${API_BASE_URL}/sales`,
   USERS_WEB: `${API_BASE_URL}/usersweb`,
   LOGIN: `${API_BASE_URL}/usersweb/login`,
 } as const;

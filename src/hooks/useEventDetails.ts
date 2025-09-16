@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { API_ENDPOINTS } from '@/config/api';
 
 interface User {
   _id: string;
@@ -71,10 +72,8 @@ export const useEventDetails = (eventoId: string | null) => {
       setError(null);
 
       try {
-        // Usar la nueva configuración unificada
-        const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
-        
-        const response = await fetch(`${apiBaseUrl}/events/${eventoId}`, {
+        // Usar la configuración centralizada
+        const response = await fetch(`${API_ENDPOINTS.EVENTS_BASE}/${eventoId}`, {
           headers: {
             'Content-Type': 'application/json',
             'ngrok-skip-browser-warning': 'true'
