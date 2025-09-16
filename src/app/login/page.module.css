@@ -333,7 +333,7 @@
   line-height: 100% !important;
   letter-spacing: 0% !important;
   text-align: center !important;
-  color: #12C70E !important;
+  color: #424040 !important;
   text-decoration: none;
   cursor: pointer;
   background: none;
@@ -343,6 +343,22 @@
 }
 
 .createAccountLink:hover {
+  text-decoration: underline;
+}
+
+.backofficeLink {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  text-align: center !important;
+  color: #1B2735 !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.backofficeLink:hover {
   text-decoration: underline;
 }
 
