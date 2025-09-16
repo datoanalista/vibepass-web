@@ -176,8 +176,8 @@ export default function LoginPage() {
               <span className={styles.noAccountText}>¿No tienes cuenta?</span>
               <button 
                 onClick={() => {
-                  console.log('🚀 Navegando a /crear-cuenta-simple');
-                  router.push('/crear-cuenta-simple');
+                  console.log('🚀 Navegando a /crear-cuenta');
+                  router.push('/crear-cuenta');
                 }} 
                 className={styles.createAccountLink}
                 type="button"

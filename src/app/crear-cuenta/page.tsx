@@ -4,12 +4,8 @@ import UniversalHeader from "@/components/Shared/UniversalHeader/UniversalHeader
 import styles from "./page.module.css";
 import { getImagePath } from "@/utils/getImagePath";
 import { API_ENDPOINTS } from "@/config/api";
-import { useAuth } from "@/contexts/AuthContext";
-import { useRouter } from "next/navigation";
 
 export default function CrearCuentaPage() {
-  const { login } = useAuth();
-  const router = useRouter();
   
   const [formData, setFormData] = useState({
     nombreCompleto: "",
@@ -245,7 +241,7 @@ export default function CrearCuentaPage() {
                       <div className={styles.modalButtons}>
                         <button 
                           className={styles.modalButton}
-                          onClick={() => router.push('/login')}
+                          onClick={() => window.location.href = '/vibepass-web/login/'}
                         >
                           Ir a Iniciar Sesión
                         </button>
