@@ -46,12 +46,16 @@ jobs:
           echo "🚀 BUILD: Usando configuración hardcodeada de ngrok"
           npm run build
         
-      - name: Fix missing static pages
+      - name: Fix GitHub Pages routing issues
         run: |
-          echo "🔧 Creando páginas estáticas faltantes..."
+          echo "🔧 Arreglando problemas de routing de GitHub Pages..."
           mkdir -p out/crear-cuenta
           cp out/index.html out/crear-cuenta/index.html
           echo "✅ Página crear-cuenta creada"
+          
+          echo "🗑️ Eliminando 404.html problemático..."
+          rm -f out/404.html
+          echo "✅ 404.html eliminado"
         
       - name: Add .nojekyll file
         run: touch out/.nojekyll

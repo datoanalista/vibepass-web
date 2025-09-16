@@ -18,24 +18,9 @@ function DynamicFavicon() {
   );
 }
 
-// Componente para manejar routing de GitHub Pages
+// Componente para manejar routing de GitHub Pages (simplificado)
 function GitHubPagesRouting() {
-  return (
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `
-          // GitHub Pages SPA routing fix
-          (function() {
-            var hash = window.location.hash;
-            if (hash && hash.length > 1) {
-              var path = hash.slice(1);
-              window.history.replaceState(null, null, path);
-            }
-          })();
-        `
-      }}
-    />
-  );
+  return null; // Deshabilitado temporalmente para debug
 }
 
 const geistSans = Geist({
