@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import UniversalHeader from "@/components/Shared/UniversalHeader/UniversalHeader";
 import { useAuth } from "@/contexts/AuthContext";
 import { API_ENDPOINTS } from "@/config/api";
+import { getImagePath } from "@/utils/getImagePath";
 import styles from "./page.module.css";
 
 export default function LoginPage() {
@@ -73,7 +74,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className={styles.container}>
+    <div 
+      className={styles.container}
+      style={{
+        backgroundImage: `url('${getImagePath('/images/backgorundLogin.png')}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
       {/* Header */}
       <UniversalHeader />
       
