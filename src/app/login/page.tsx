@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import UniversalHeader from "@/components/Shared/UniversalHeader/UniversalHeader";
 import { useAuth } from "@/contexts/AuthContext";
@@ -173,9 +174,9 @@ export default function LoginPage() {
             {/* Create Account */}
             <div className={styles.createAccountContainer}>
               <span className={styles.noAccountText}>¿No tienes cuenta?</span>
-              <a href="/crear-cuenta" className={styles.createAccountLink}>
+              <Link href="/crear-cuenta" className={styles.createAccountLink} prefetch={false}>
                 Crear cuenta
-              </a>
+              </Link>
             </div>
           </form>
         </div>
