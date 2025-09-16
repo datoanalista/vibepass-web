@@ -12,6 +12,8 @@ interface User {
 interface AuthContextType {
   user: User | null;
   isLoggedIn: boolean;
+  isLoading: boolean;
+  isHydrated: boolean;
   login: (userData: User) => void;
   logout: () => void;
   getFirstName: () => string;
@@ -25,11 +27,19 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   // Cargar usuario del localStorage al inicializar
   useEffect(() => {
+    console.log('🚀 [AuthContext] Inicializando AuthContext...');
+    
+    // Marcar como hidratado
+    setIsHydrated(true);
+    
     if (typeof window !== 'undefined') {
       const savedUser = localStorage.getItem('vibepass_user');
+      console.log('📦 [AuthContext] Datos en localStorage:', savedUser ? 'Encontrados' : 'No encontrados');
       if (savedUser) {
         try {
           const userData = JSON.parse(savedUser);
@@ -41,6 +51,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
       }
     }
+    
+    // Pequeño delay para asegurar que la hidratación se complete
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      console.log('✅ [AuthContext] Inicialización completada');
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   const login = (userData: User) => {
@@ -72,6 +90,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const value: AuthContextType = {
     user,
     isLoggedIn,
+    isLoading,
+    isHydrated,
     login,
     logout,
     getFirstName,

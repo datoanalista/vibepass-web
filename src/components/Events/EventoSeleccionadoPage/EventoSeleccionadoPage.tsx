@@ -29,7 +29,7 @@ const EventoSeleccionadoPage: React.FC = () => {
   const router = useRouter();
   const { event, loading, error } = useEventDetails(eventoId);
   const { events } = useEvents();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isLoading, isHydrated } = useAuth();
   const [selectedEntrada, setSelectedEntrada] = useState<string | null>(null);
   const [showMore, setShowMore] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -39,6 +39,9 @@ const EventoSeleccionadoPage: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleEntradaSelect = (tipo: string) => {
+    // Si aún está cargando o no está hidratado, no hacer nada
+    if (isLoading || !isHydrated) return;
+    
     if (!isLoggedIn) {
       setShowAuthModal(true);
       return;
@@ -48,6 +51,9 @@ const EventoSeleccionadoPage: React.FC = () => {
   };
 
   const handleCaracteristicaClick = () => {
+    // Si aún está cargando o no está hidratado, no hacer nada
+    if (isLoading || !isHydrated) return;
+    
     if (!isLoggedIn) {
       setShowAuthModal(true);
       return;

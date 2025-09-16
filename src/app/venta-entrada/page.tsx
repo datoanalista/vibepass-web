@@ -12,15 +12,18 @@ import styles from "./page.module.css";
 export const dynamic = 'force-dynamic';
 
 const VentaEntradaPageComponent: React.FC = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isLoading, isHydrated } = useAuth();
   const router = useRouter();
   const [showAuthModal, setShowAuthModal] = React.useState(false);
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    console.log('🎫 [VentaEntrada] Estado auth:', { isLoading, isLoggedIn, isHydrated });
+    // Solo mostrar modal si ya terminó de cargar, está hidratado y no está logueado
+    if (!isLoading && isHydrated && !isLoggedIn) {
+      console.log('🚨 [VentaEntrada] Mostrando modal de autenticación requerida');
       setShowAuthModal(true);
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, isLoading, isHydrated]);
 
   const handleModalClose = () => {
     setShowAuthModal(false);
@@ -30,7 +33,18 @@ const VentaEntradaPageComponent: React.FC = () => {
   return (
     <div className={styles.pageContainer}>
       <UniversalHeader />
-      {isLoggedIn ? (
+      {isLoading ? (
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: '50vh',
+          fontSize: '18px',
+          color: '#666'
+        }}>
+          Verificando autenticación...
+        </div>
+      ) : isLoggedIn ? (
         <Suspense fallback={<div>Cargando...</div>}>
           <VentaEntradaPage />
         </Suspense>
@@ -43,7 +57,7 @@ const VentaEntradaPageComponent: React.FC = () => {
           fontSize: '18px',
           color: '#666'
         }}>
-          Verificando autenticación...
+          Redirigiendo...
         </div>
       )}
       <Footer />
