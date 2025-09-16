@@ -67,7 +67,7 @@ const UniversalHeader: React.FC = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         {/* Logo */}
-        <Link href="/home" className={styles.logoLink}>
+        <Link href="/home" className={styles.logoLink} prefetch={false}>
           <img
             src={getImagePath("/images/icon_vibepass.svg")}
             alt="Vibepass"
@@ -79,7 +79,7 @@ const UniversalHeader: React.FC = () => {
         <div className={styles.rightGroup}>
           {/* Navigation */}
           <nav className={styles.nav}>
-            <Link href="/eventos" className={styles.navLink}>
+            <Link href="/eventos" className={styles.navLink} prefetch={false}>
               Eventos
             </Link>
             <a 
@@ -89,7 +89,7 @@ const UniversalHeader: React.FC = () => {
             >
               QR
             </a>
-            <Link href="/diferenciacion" className={styles.navLink}>
+            <Link href="/diferenciacion" className={styles.navLink} prefetch={false}>
               Diferenciación
             </Link>
             <a 
