@@ -340,10 +340,31 @@ const VentaEntradaPage: React.FC = () => {
       if (response.ok) {
         const result = await response.json();
         console.log('Venta procesada exitosamente:', result);
+        console.log('=== DEBUG SALENUMBER ===');
+        console.log('result.saleNumber:', result.saleNumber);
+        console.log('result.id:', result.id);
+        console.log('result._id:', result._id);
+        console.log('Estructura completa del result:', JSON.stringify(result, null, 2));
+        console.log('========================');
         
-         // Guardar datos COMPLETOS de la compra en localStorage para la página de éxito
+        // Extraer el saleNumber de la estructura anidada de la respuesta
+        let saleIdToUse = result.data?.sale?.saleNumber || 
+                          result.data?.summary?.saleNumber || 
+                          result.saleNumber || 
+                          result.id || 
+                          result._id ||
+                          Date.now().toString();
+        
+        console.log('🎯 saleNumber encontrado en:', {
+          'result.data.sale.saleNumber': result.data?.sale?.saleNumber,
+          'result.data.summary.saleNumber': result.data?.summary?.saleNumber,
+          'result.saleNumber': result.saleNumber
+        });
+        
+        console.log('saleIdToUse final:', saleIdToUse);
+         
          const purchaseInfo = {
-           saleId: result.id || Date.now().toString(),
+           saleId: saleIdToUse,
            eventoId: eventoId,
            eventoNombre: event?.informacionGeneral?.nombreEvento,
            eventoFecha: event?.informacionGeneral?.fechaEvento,

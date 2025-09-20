@@ -9,7 +9,7 @@ import html2canvas from 'html2canvas';
 import styles from './page.module.css';
 
 interface PurchaseData {
-  saleId: string;
+  saleId: string; // This contains the SaleNumber from the API
   eventoId: string;
   eventoNombre: string;
   eventoFecha: string;
@@ -73,11 +73,15 @@ const VentaExitosaPage: React.FC = () => {
         const storedData = localStorage.getItem('purchaseData');
         if (storedData) {
           const data: PurchaseData = JSON.parse(storedData);
+          console.log('=== DEBUG VENTA EXITOSA ===');
+          console.log('data.saleId:', data.saleId);
+          console.log('Datos completos:', data);
+          console.log('============================');
           setPurchaseData(data);
           
           // Crear información para el QR
           const qrInfo = {
-            saleId: data.saleId,
+            saleNumber: data.saleId, // Using SaleNumber as the primary identifier
             evento: data.eventoNombre,
             fecha: data.eventoFecha,
             total: data.total,
