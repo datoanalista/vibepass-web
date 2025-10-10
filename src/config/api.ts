@@ -2,7 +2,7 @@
 // 🚀 CONFIGURACIÓN HARDCODEADA PARA ACCESO PÚBLICO
 
 // ⚠️ CAMBIAR SOLO ESTA URL CUANDO CAMBIE NGROK:
-const NGROK_URL = 'https://65c7f7fea137.ngrok-free.app';
+const NGROK_URL = 'https://c063726ee7e8.ngrok-free.app';
 
 // Determinar si estamos en producción
 const isProduction = process.env.NODE_ENV === 'production';
