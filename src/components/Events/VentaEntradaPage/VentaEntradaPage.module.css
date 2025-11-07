@@ -658,6 +658,44 @@
   transform: translateY(-1px);
 }
 
+/* Estilos para checkbox de saltar otros asistentes */
+.skipAttendeesCheckbox {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 12px 20px;
+  background: #F9F9F9;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  gap: 10px;
+}
+
+.checkboxInput {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #01A8E2;
+  flex-shrink: 0;
+}
+
+.checkboxText {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #424040;
+  line-height: 1.5;
+}
+
+.checkboxLabel:hover .checkboxText {
+  color: #1B2735;
+}
+
 /* Estilos para grupos del carrito */
 .cartGroup {
   margin-bottom: 20px;

@@ -89,9 +89,14 @@ const UniversalHeader: React.FC = () => {
             >
               QR
             </a>
-            <Link href="/diferenciacion" className={styles.navLink} prefetch={false}>
-              Diferenciación
-            </Link>
+            <a 
+              href={process.env.NEXT_PUBLIC_PANEL_URL || 'https://datoanalista.github.io/vibepass-panel/login/'}
+              className={styles.navLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Crea tu evento!
+            </a>
             <a 
               href="/home#servicio" 
               className={styles.navLink}

@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEventDetails } from '@/hooks/useEventDetails';
 import { getImagePath } from '@/utils/getImagePath';
 import { foodItemsData, FoodItem } from '@/data/FoodCart/foodItemsData';
 import { API_ENDPOINTS } from '@/config/api';
+import { useAuth } from '@/contexts/AuthContext';
 import styles from './VentaEntradaPage.module.css';
 
 interface Entrada {
@@ -29,6 +30,7 @@ const VentaEntradaPage: React.FC = () => {
   const eventoId = searchParams.get('eventoId');
   const tipoEntrada = searchParams.get('tipoEntrada');
   const { event, loading, error } = useEventDetails(eventoId);
+  const { user } = useAuth();
   const [cart, setCart] = useState<{[key: string]: number}>({});
   const [currentSection, setCurrentSection] = useState<'tickets' | 'food' | 'activities' | 'attendees'>('tickets');
   const [currentFoodIndex, setCurrentFoodIndex] = useState(0);
@@ -44,6 +46,12 @@ const VentaEntradaPage: React.FC = () => {
     confirmacionCorreo: string;
   }}>({});
   const [isProcessingPurchase, setIsProcessingPurchase] = useState(false);
+  const hasPrefilledRef = useRef(false);
+  const [skipOtherAttendees, setSkipOtherAttendees] = useState(false);
+  
+  // Crear una clave estable para el cart para usar en dependencias
+  const cartKey = useMemo(() => JSON.stringify(cart), [cart]);
+  const userId = user?.id || null;
   
   // Estado para modal de errores
   const [modalInfo, setModalInfo] = useState<{
@@ -262,11 +270,66 @@ const VentaEntradaPage: React.FC = () => {
 
   const areAllFormsComplete = () => {
     const totalAttendees = getTotalAttendees();
+    if (totalAttendees === 0) return false;
+    
+    // Si el checkbox está marcado, solo validar el primer formulario
+    if (skipOtherAttendees) {
+      return isAttendeeFormComplete(0);
+    }
+    
+    // Si no está marcado, validar todos los formularios
     for (let i = 0; i < totalAttendees; i++) {
       if (!isAttendeeFormComplete(i)) return false;
     }
-    return totalAttendees > 0;
+    return true;
   };
+
+  // Pre-llenar el primer formulario con los datos del usuario
+  useEffect(() => {
+    if (!event?.entradas || !user) return;
+    
+    // Calcular el total de asistentes directamente desde el cart
+    const totalAttendees = Object.entries(cart).reduce((total, [entradaId, quantity]) => {
+      return total + quantity;
+    }, 0);
+    
+    // Si se eliminan todos los tickets, limpiar los datos de asistentes y resetear el ref
+    if (totalAttendees === 0) {
+      setAttendeesData({});
+      hasPrefilledRef.current = false;
+      return;
+    }
+    
+    // Solo pre-llenar si hay al menos un asistente, hay un usuario logueado
+    // y aún no se ha pre-llenado en esta sesión de tickets
+    if (totalAttendees > 0 && !hasPrefilledRef.current) {
+      // Verificar si el primer formulario está vacío antes de pre-llenar
+      setAttendeesData(prev => {
+        const firstAttendeeData = prev[0];
+        const isFirstFormEmpty = !firstAttendeeData || 
+          (!firstAttendeeData.nombreCompleto && 
+           !firstAttendeeData.rut && 
+           !firstAttendeeData.telefono && 
+           !firstAttendeeData.correo);
+        
+        if (isFirstFormEmpty) {
+          hasPrefilledRef.current = true;
+          return {
+            ...prev,
+            0: {
+              nombreCompleto: user.nombreCompleto || '',
+              rut: user.rut || '',
+              telefono: user.telefono || '',
+              correo: user.email || '',
+              confirmacionCorreo: user.email || ''
+            }
+          };
+        }
+        return prev;
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartKey, userId, eventoId]);
 
   // Función para procesar la compra
   const processPurchase = async () => {
@@ -306,11 +369,18 @@ const VentaEntradaPage: React.FC = () => {
           })),
           subtotal: getActivityTotalPrice()
         },
-        attendees: getAttendeesList().map((attendee, index) => ({
-          index: index,
-          tipoEntrada: attendee.type,
-          datosPersonales: attendeesData[index] || {}
-        })),
+        attendees: getAttendeesList().map((attendee, index) => {
+          // Si el checkbox está marcado, usar los datos del primer asistente para todos
+          const datosPersonales = skipOtherAttendees 
+            ? (attendeesData[0] || {})
+            : (attendeesData[index] || {});
+          
+          return {
+            index: index,
+            tipoEntrada: attendee.type,
+            datosPersonales: datosPersonales
+          };
+        }),
         totals: {
           subtotalTickets: getTotalPrice(),
           subtotalFood: getFoodTotalPrice(),
@@ -396,7 +466,11 @@ const VentaEntradaPage: React.FC = () => {
              subtotal: (item.activity.precioUnitario || item.activity.price) * item.quantity
            })),
            attendees: getAttendeesList().map((attendee, index) => {
-             const attendeeData = attendeesData[index] || {};
+             // Si el checkbox está marcado, usar los datos del primer asistente para todos
+             const attendeeData = skipOtherAttendees 
+               ? (attendeesData[0] || {})
+               : (attendeesData[index] || {});
+             
              return {
                index: index,
                tipoEntrada: attendee.type,
@@ -681,6 +755,27 @@ const VentaEntradaPage: React.FC = () => {
                       Atrás
                     </button>
                   </div>
+                  
+                  {/* Checkbox para saltar otros asistentes */}
+                  <div className={styles.skipAttendeesCheckbox}>
+                    <label className={styles.checkboxLabel}>
+                      <input
+                        type="checkbox"
+                        checked={skipOtherAttendees}
+                        onChange={(e) => {
+                          setSkipOtherAttendees(e.target.checked);
+                          // Si se marca, asegurar que el primer formulario esté abierto
+                          if (e.target.checked) {
+                            setOpenAttendeeIndex(0);
+                          }
+                        }}
+                        className={styles.checkboxInput}
+                      />
+                      <span className={styles.checkboxText}>
+                        No quiero completar otros asistentes
+                      </span>
+                    </label>
+                  </div>
                 </>
               )}
               
@@ -963,81 +1058,88 @@ const VentaEntradaPage: React.FC = () => {
                   
                   {/* Lista de asistentes */}
                   <div className={styles.attendeesContainer}>
-                    {getAttendeesList().map((attendee, index) => (
-                      <div key={index} className={styles.attendeeItem}>
-                        <div 
-                          className={`${styles.attendeeHeader} ${openAttendeeIndex === index ? styles.attendeeHeaderOpen : ''}`}
-                          onClick={() => setOpenAttendeeIndex(index)}
-                        >
-                          <span className={styles.attendeeTitle}>
-                            {attendee.type} ({index + 1})
-                            {isAttendeeFormComplete(index) && <span className={styles.completedIcon}>✓</span>}
-                          </span>
-                          <span className={styles.attendeeToggle}>
-                            {openAttendeeIndex === index ? '−' : '+'}
-                          </span>
-                        </div>
-                        
-                        {openAttendeeIndex === index && (
-                          <div className={styles.attendeeForm}>
-                            <div className={styles.formGroup}>
-                              <input
-                                type="text"
-                                placeholder="Nombre completo"
-                                className={styles.formInput}
-                                value={attendeesData[index]?.nombreCompleto || ''}
-                                onChange={(e) => updateAttendeeData(index, 'nombreCompleto', e.target.value)}
-                                required
-                              />
-                            </div>
-                            
-                            <div className={styles.formGroup}>
-                              <input
-                                type="text"
-                                placeholder="RUT o ID personal"
-                                className={styles.formInput}
-                                value={attendeesData[index]?.rut || ''}
-                                onChange={(e) => updateAttendeeData(index, 'rut', e.target.value)}
-                                required
-                              />
-                            </div>
-                            
-                            <div className={styles.formGroup}>
-                              <input
-                                type="tel"
-                                placeholder="Teléfono de contacto"
-                                className={styles.formInput}
-                                value={attendeesData[index]?.telefono || ''}
-                                onChange={(e) => updateAttendeeData(index, 'telefono', e.target.value)}
-                                required
-                              />
-                            </div>
-                            
-                            <div className={styles.formGroup}>
-                              <input
-                                type="email"
-                                placeholder="Correo electrónico"
-                                className={styles.formInput}
-                                value={attendeesData[index]?.correo || ''}
-                                onChange={(e) => updateAttendeeData(index, 'correo', e.target.value)}
-                                required
-                              />
-                            </div>
-                            
-                            <div className={styles.formGroup}>
-                              <input
-                                type="email"
-                                placeholder="Confirmación de correo electrónico"
-                                className={styles.formInput}
-                                value={attendeesData[index]?.confirmacionCorreo || ''}
-                                onChange={(e) => updateAttendeeData(index, 'confirmacionCorreo', e.target.value)}
-                                required
-                              />
-                            </div>
+                    {(skipOtherAttendees 
+                      ? getAttendeesList().slice(0, 1) 
+                      : getAttendeesList()
+                    ).map((attendee) => {
+                      // Usar el índice del objeto attendee, no el índice del map
+                      const attendeeIndex = attendee.index;
+                      return (
+                        <div key={attendeeIndex} className={styles.attendeeItem}>
+                          <div 
+                            className={`${styles.attendeeHeader} ${openAttendeeIndex === attendeeIndex ? styles.attendeeHeaderOpen : ''}`}
+                            onClick={() => setOpenAttendeeIndex(attendeeIndex)}
+                          >
+                            <span className={styles.attendeeTitle}>
+                              {attendee.type} ({attendeeIndex + 1})
+                              {isAttendeeFormComplete(attendeeIndex) && <span className={styles.completedIcon}>✓</span>}
+                            </span>
+                            <span className={styles.attendeeToggle}>
+                              {openAttendeeIndex === attendeeIndex ? '−' : '+'}
+                            </span>
                           </div>
-                        )}
-                      </div>
-                    ))}
+                          
+                          {openAttendeeIndex === attendeeIndex && (
+                            <div className={styles.attendeeForm}>
+                              <div className={styles.formGroup}>
+                                <input
+                                  type="text"
+                                  placeholder="Nombre completo"
+                                  className={styles.formInput}
+                                  value={attendeesData[attendeeIndex]?.nombreCompleto || ''}
+                                  onChange={(e) => updateAttendeeData(attendeeIndex, 'nombreCompleto', e.target.value)}
+                                  required
+                                />
+                              </div>
+                              
+                              <div className={styles.formGroup}>
+                                <input
+                                  type="text"
+                                  placeholder="RUT o ID personal"
+                                  className={styles.formInput}
+                                  value={attendeesData[attendeeIndex]?.rut || ''}
+                                  onChange={(e) => updateAttendeeData(attendeeIndex, 'rut', e.target.value)}
+                                  required
+                                />
+                              </div>
+                              
+                              <div className={styles.formGroup}>
+                                <input
+                                  type="tel"
+                                  placeholder="Teléfono de contacto"
+                                  className={styles.formInput}
+                                  value={attendeesData[attendeeIndex]?.telefono || ''}
+                                  onChange={(e) => updateAttendeeData(attendeeIndex, 'telefono', e.target.value)}
+                                  required
+                                />
+                              </div>
+                              
+                              <div className={styles.formGroup}>
+                                <input
+                                  type="email"
+                                  placeholder="Correo electrónico"
+                                  className={styles.formInput}
+                                  value={attendeesData[attendeeIndex]?.correo || ''}
+                                  onChange={(e) => updateAttendeeData(attendeeIndex, 'correo', e.target.value)}
+                                  required
+                                />
+                              </div>
+                              
+                              <div className={styles.formGroup}>
+                                <input
+                                  type="email"
+                                  placeholder="Confirmación de correo electrónico"
+                                  className={styles.formInput}
+                                  value={attendeesData[attendeeIndex]?.confirmacionCorreo || ''}
+                                  onChange={(e) => updateAttendeeData(attendeeIndex, 'confirmacionCorreo', e.target.value)}
+                                  required
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </>
               )}
