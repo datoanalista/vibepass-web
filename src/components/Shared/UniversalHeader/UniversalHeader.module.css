@@ -166,6 +166,12 @@
   flex-shrink: 0;
 }
 
+.profileIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
 /* Mobile Menu Button */
 .mobileMenuButton {
   display: none;

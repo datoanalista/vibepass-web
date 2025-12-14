@@ -79,17 +79,10 @@ const VentaExitosaPage: React.FC = () => {
           console.log('============================');
           setPurchaseData(data);
           
-          // Crear información para el QR
           const qrInfo = {
-            saleNumber: data.saleId, // Using SaleNumber as the primary identifier
-            evento: data.eventoNombre,
-            fecha: data.eventoFecha,
-            total: data.total,
-            tickets: data.tickets.length,
-            timestamp: data.timestamp
+            saleNumber: data.saleId 
           };
           
-          // Generar QR code
           const qrDataURL = await QRCode.toDataURL(JSON.stringify(qrInfo), {
             width: 200,
             margin: 2,

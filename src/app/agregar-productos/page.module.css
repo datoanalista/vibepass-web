@@ -1,0 +1,426 @@
+/* Page Container */
+.pageContainer {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f7fa;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page Header */
+.pageHeader {
+  margin-bottom: 32px;
+}
+
+.backLink {
+  display: inline-block;
+  color: #01A8E2;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 16px;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: #0087b8;
+}
+
+.pageTitle {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1B2735;
+  margin: 0 0 8px 0;
+}
+
+.eventName {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Loading & Error */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e5e9f0;
+  border-top-color: #01A8E2;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loadingContainer p {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 40px;
+}
+
+.errorContainer p {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #dc2626;
+  margin: 0 0 16px 0;
+}
+
+.backButton {
+  padding: 10px 24px;
+  background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
+  border: none;
+  border-radius: 8px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Content Grid */
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 32px;
+}
+
+/* Products Section */
+.productsSection {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+}
+
+/* Section Tabs */
+.sectionTabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 14px 20px;
+  background: #f5f7fa;
+  border: 2px solid #e5e9f0;
+  border-radius: 10px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tabButton:hover {
+  border-color: #01A8E2;
+  color: #01A8E2;
+}
+
+.tabActive {
+  background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
+  border-color: #01A8E2;
+  color: #ffffff;
+}
+
+.tabActive:hover {
+  color: #ffffff;
+}
+
+/* Products Grid */
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.noProducts {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #6b7280;
+  padding: 40px;
+}
+
+/* Product Card */
+.productCard {
+  background: #fafbfc;
+  border: 1px solid #e5e9f0;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.productCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #01A8E2;
+}
+
+.productImage {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #e5e9f0;
+}
+
+.productInfo {
+  flex: 1;
+}
+
+.productName {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1B2735;
+  margin: 0 0 4px 0;
+}
+
+.productPrice {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #01A8E2;
+  margin: 0;
+}
+
+.productStock {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #6b7280;
+  margin: 4px 0 0 0;
+}
+
+/* Quantity Control */
+.quantityControl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.qtyButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #e5e9f0;
+  background: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1B2735;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qtyButton:hover:not(:disabled) {
+  border-color: #01A8E2;
+  color: #01A8E2;
+}
+
+.qtyButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.qtyValue {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1B2735;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Cart Section */
+.cartSection {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.cartTitle {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1B2735;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #01A8E2;
+}
+
+.emptyCart {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.cartGroup {
+  margin-bottom: 16px;
+}
+
+.cartGroupTitle {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px 0;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #1B2735;
+  padding: 6px 0;
+}
+
+.cartSubtotal {
+  display: flex;
+  justify-content: space-between;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B2735;
+  padding: 8px 0;
+  margin-top: 4px;
+  border-top: 1px solid #e5e9f0;
+}
+
+.cartTotal {
+  display: flex;
+  justify-content: space-between;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1B2735;
+  padding: 16px 0;
+  margin-top: 16px;
+  border-top: 2px solid #1B2735;
+}
+
+/* Message */
+.message {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.messageSuccess {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.messageError {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Submit Button */
+.submitButton {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
+  border: none;
+  border-radius: 12px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(1, 168, 226, 0.3);
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(1, 168, 226, 0.4);
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cartSection {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContent {
+    padding: 20px 16px;
+  }
+
+  .pageTitle {
+    font-size: 22px;
+  }
+
+  .sectionTabs {
+    flex-direction: column;
+  }
+
+  .productsGrid {
+    grid-template-columns: 1fr;
+  }
+}

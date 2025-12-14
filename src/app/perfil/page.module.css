@@ -1,0 +1,674 @@
+/* Container principal */
+.pageContainer {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f7fa;
+}
+
+/* Contenido principal */
+.mainContent {
+  flex: 1;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ==================== PROFILE SECTION ==================== */
+.profileSection {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e9f0;
+}
+
+.avatarContainer {
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #01A8E2 0%, #99B7DB 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(1, 168, 226, 0.3);
+}
+
+.profileInfo {
+  flex: 1;
+}
+
+.userName {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1B2735;
+  margin: 0 0 8px 0;
+}
+
+.userEmail {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.profileDetails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detailLabel {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detailValue {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1B2735;
+}
+
+/* ==================== ORDERS SECTION ==================== */
+.ordersSection {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+}
+
+.sectionTitle {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1B2735;
+  margin: 0 0 24px 0;
+}
+
+/* ==================== LOADING STATE ==================== */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e5e9f0;
+  border-top-color: #01A8E2;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingContainer p {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* ==================== ERROR STATE ==================== */
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 16px;
+  text-align: center;
+}
+
+.errorContainer p {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #dc2626;
+  margin: 0;
+}
+
+.retryButton {
+  padding: 10px 24px;
+  background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
+  border: none;
+  border-radius: 8px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.retryButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(1, 168, 226, 0.3);
+}
+
+/* ==================== EMPTY STATE ==================== */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.emptyState h3 {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1B2735;
+  margin: 0 0 8px 0;
+}
+
+.emptyState p {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 24px 0;
+}
+
+.exploreButton {
+  padding: 12px 32px;
+  background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
+  border: none;
+  border-radius: 100px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(1, 168, 226, 0.3);
+}
+
+.exploreButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(1, 168, 226, 0.4);
+}
+
+/* ==================== ORDERS LIST ==================== */
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.orderCard {
+  background: #fafbfc;
+  border: 1px solid #e5e9f0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.orderCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-color: #01A8E2;
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e9f0;
+}
+
+.orderNumber {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.orderLabel {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.orderValue {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1B2735;
+}
+
+.orderStatus {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 100px;
+  text-transform: capitalize;
+}
+
+.statusCompleted {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.statusCancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.statusRefunded {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.orderBody {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.eventInfo {
+  flex: 1;
+}
+
+.eventName {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1B2735;
+  margin: 0 0 8px 0;
+}
+
+.eventDate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.eventDate svg {
+  color: #01A8E2;
+}
+
+/* ==================== ORDER SUMMARY & TOGGLE ==================== */
+.orderSummary {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid #e5e9f0;
+  border-radius: 6px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #01A8E2;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.toggleBtn:hover {
+  background: #f0f9ff;
+  border-color: #01A8E2;
+}
+
+.toggleArrow {
+  transition: transform 0.2s ease;
+}
+
+.toggleArrowOpen {
+  transform: rotate(180deg);
+}
+
+.eventDate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.eventDate svg {
+  color: #01A8E2;
+}
+
+.orderDetails {
+  display: flex;
+  gap: 24px;
+}
+
+.ticketsInfo,
+.attendeesInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.ticketsLabel,
+.attendeesLabel {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ticketsValue,
+.attendeesValue {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #01A8E2;
+}
+
+/* ==================== PRODUCTS SECTION ==================== */
+.productsSection {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed #e5e9f0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.productGroup {
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.productGroupTitle {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1B2735;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e9f0;
+}
+
+.productList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.productItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #6b7280;
+  gap: 12px;
+}
+
+.productItem span:first-child {
+  flex: 1;
+}
+
+.productItem span:nth-child(2) {
+  color: #01A8E2;
+  font-weight: 600;
+  min-width: 30px;
+  text-align: center;
+}
+
+.productItem span:last-child {
+  color: #1B2735;
+  font-weight: 500;
+  min-width: 80px;
+  text-align: right;
+}
+
+.orderFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: #f5f7fa;
+  border-top: 1px solid #e5e9f0;
+}
+
+.orderDate {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.orderTotal {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1B2735;
+}
+
+/* ==================== ORDER ACTIONS ==================== */
+.orderActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 12px 20px;
+  background: #ffffff;
+  border-top: 1px solid #e5e9f0;
+}
+
+.downloadQRButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #ffffff;
+  border: 2px solid #1B2735;
+  border-radius: 8px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B2735;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.downloadQRButton:hover {
+  background: #1B2735;
+  color: #ffffff;
+}
+
+.downloadQRButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+.addProductsButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
+  border: none;
+  border-radius: 8px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.addProductsButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(1, 168, 226, 0.3);
+}
+
+.addProductsButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 20px 16px;
+  }
+
+  .profileSection,
+  .ordersSection {
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+
+  .profileHeader {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .avatar {
+    width: 72px;
+    height: 72px;
+    font-size: 28px;
+  }
+
+  .userName {
+    font-size: 20px;
+  }
+
+  .userEmail {
+    font-size: 14px;
+  }
+
+  .profileDetails {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .orderBody {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .orderDetails {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .ticketsInfo,
+  .attendeesInfo {
+    align-items: flex-start;
+  }
+
+  .orderFooter {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .orderActions {
+    justify-content: center;
+  }
+
+  .addProductsButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .productsSection {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileDetails {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+  }
+
+  .orderHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .eventName {
+    font-size: 14px;
+  }
+
+  .orderDetails {
+    gap: 16px;
+  }
+}
+
