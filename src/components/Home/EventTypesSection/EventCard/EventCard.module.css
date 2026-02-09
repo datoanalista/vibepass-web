@@ -9,6 +9,49 @@
   cursor: pointer;
 }
 
+/* Decorations */
+.decorationLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.kotHat {
+  position: absolute;
+  top: clamp(-110px, -9vw, -60px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(240px, 34vw, 520px);
+  height: auto;
+}
+
+.partyLeft,
+.cinemaLeft {
+  position: absolute;
+  top: clamp(-70px, -6vw, -40px);
+  left: clamp(-30px, -3vw, -10px);
+  width: clamp(80px, 10vw, 140px);
+  height: auto;
+}
+
+.partyRight,
+.cinemaRight {
+  position: absolute;
+  top: clamp(-70px, -6vw, -40px);
+  right: clamp(-30px, -3vw, -10px);
+  width: clamp(80px, 10vw, 140px);
+  height: auto;
+}
+
+.cinemaLeft {
+  width: clamp(90px, 11vw, 150px);
+}
+
+.cinemaRight {
+  width: clamp(90px, 12vw, 160px);
+}
+
 /* Hover Effects - Elegantes y suaves */
 .eventCard:hover {
   transform: translateY(-8px) scale(1.02);

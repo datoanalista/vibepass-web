@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import UniversalHeader from "@/components/Shared/UniversalHeader/UniversalHeader";
 import { useAuth } from "@/contexts/AuthContext";
 import { API_ENDPOINTS } from "@/config/api";
-import { getImagePath } from "@/utils/getImagePath";
 import styles from "./page.module.css";
 
 export default function LoginPage() {
@@ -77,12 +76,6 @@ export default function LoginPage() {
   return (
     <div 
       className={styles.container}
-      style={{
-        backgroundImage: `url('${getImagePath('/images/backgorundLogin.png')}')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
     >
       {/* Header */}
       <UniversalHeader />
@@ -198,6 +191,27 @@ export default function LoginPage() {
               </a>
             </div>
           </form>
+        </div>
+      </div>
+
+      {/* Footer Bar */}
+      <div className={styles.footerBar}>
+        <div className={styles.footerIcons}>
+          <span className={styles.footerIcon} aria-hidden="true">
+            <svg viewBox="0 0 24 24" className={styles.footerSvg}>
+              <rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2" fill="none" />
+              <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" fill="none" />
+              <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" />
+            </svg>
+          </span>
+          <span className={styles.footerIcon} aria-hidden="true">
+            <svg viewBox="0 0 24 24" className={styles.footerSvg}>
+              <path
+                d="M14 4v8.2a3.8 3.8 0 1 1-2-3.3V6.2l7 1.4V5.2l-5-1.2Z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
         </div>
       </div>
     </div>

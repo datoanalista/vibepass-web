@@ -37,8 +37,8 @@
 
 .laptop {
   width: auto;
-  height: 90vh;
-  max-width: 600px;
+  height: min(110vh, 900px);
+  max-width: 760px;
 }
 
 .text {
@@ -96,8 +96,8 @@
   }
   
   .laptop {
-    height: 70vh;
-    max-width: 500px;
+    height: min(80vh, 620px);
+    max-width: 540px;
   }
   
   .title {

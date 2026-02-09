@@ -36,6 +36,12 @@ const Home: React.FC = () => {
   }, []);
   return (
     <div className={styles.homeContainer}>
+      <img
+        src={getImagePath("/images/mailer.png")}
+        alt=""
+        aria-hidden="true"
+        className={styles.mailerFloating}
+      />
       {/* Universal Header */}
       <UniversalHeader />
       

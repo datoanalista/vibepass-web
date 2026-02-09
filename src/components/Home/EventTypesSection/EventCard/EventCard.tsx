@@ -20,11 +20,11 @@ interface EventCardProps {
     cardGradient: string;
     features: Feature[];
     bottomText: string;
-    isCenter: boolean;
   };
+  isCenter: boolean;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ event }) => {
+const EventCard: React.FC<EventCardProps> = ({ event, isCenter }) => {
   const router = useRouter();
 
   const handleCardClick = () => {
@@ -33,19 +33,59 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
 
   return (
     <div 
-      className={`${styles.eventCard} ${event.isCenter ? styles.centerCard : styles.sideCard}`}
+      className={`${styles.eventCard} ${isCenter ? styles.centerCard : styles.sideCard}`}
       onClick={handleCardClick}
     >
+      {isCenter && (
+        <div className={styles.decorationLayer} aria-hidden="true">
+          {event.id === 2 && (
+            <img
+              src={getImagePath("/images/circoUp.png")}
+              alt=""
+              className={styles.kotHat}
+            />
+          )}
+          {event.id === 1 && (
+            <>
+              <img
+                src={getImagePath("/images/discoBall.png")}
+                alt=""
+                className={styles.partyLeft}
+              />
+              <img
+                src={getImagePath("/images/starsDisco.png")}
+                alt=""
+                className={styles.partyRight}
+              />
+            </>
+          )}
+          {event.id === 3 && (
+            <>
+              <img
+                src={getImagePath("/images/camCinema.png")}
+                alt=""
+                className={styles.cinemaLeft}
+              />
+              <img
+                src={getImagePath("/images/cinemaStars.png")}
+                alt=""
+                className={styles.cinemaRight}
+              />
+            </>
+          )}
+        </div>
+      )}
+
       {/* Background de la card */}
-      <div className={`${styles.cardBackground} ${event.isCenter ? styles.centerBackground : styles.sideBackground}`} />
+      <div className={`${styles.cardBackground} ${isCenter ? styles.centerBackground : styles.sideBackground}`} />
 
       {/* Header con título del evento */}
-      <div className={`${styles.cardHeader} ${event.isCenter ? styles.centerHeader : styles.sideHeader}`}>
+      <div className={`${styles.cardHeader} ${isCenter ? styles.centerHeader : styles.sideHeader}`}>
         <div className={styles.eventIcon}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path
               d="M10 2L12 8H18L13 12L15 18L10 14L5 18L7 12L2 8H8L10 2Z"
-              fill={event.isCenter ? "#1B2735" : "#666"}
+              fill={isCenter ? "#1B2735" : "#666"}
             />
           </svg>
         </div>

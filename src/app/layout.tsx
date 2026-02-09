@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { getImagePath } from "@/utils/getImagePath";
 
 // Componente para manejar el favicon dinámicamente
 function DynamicFavicon() {

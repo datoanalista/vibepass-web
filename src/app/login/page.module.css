@@ -3,6 +3,87 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background-image:
+    radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.05) 0%,
+      rgba(0, 0, 0, 0.25) 60%,
+      rgba(0, 0, 0, 0.6) 100%
+    ),
+    url("/images/cine_stgo_college.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.container::before,
+.container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: loginBackgroundRotate 24s infinite;
+}
+
+.container::before {
+  background-image:
+    radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.05) 0%,
+      rgba(0, 0, 0, 0.25) 60%,
+      rgba(0, 0, 0, 0.6) 100%
+    ),
+    url("/images/KERMESSE_SAN_BENITO.png");
+  animation-delay: 8s;
+}
+
+.container::after {
+  background-image:
+    radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.05) 0%,
+      rgba(0, 0, 0, 0.25) 60%,
+      rgba(0, 0, 0, 0.6) 100%
+    ),
+    url("/images/navidad_2025.png");
+  animation-delay: 16s;
+}
+
+.container > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes loginBackgroundRotate {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 1;
+  }
+  41% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container::before,
+  .container::after {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 /* Contenido principal */
@@ -12,6 +93,38 @@
   align-items: center;
   padding: 40px;
   min-height: calc(100vh - 120px); /* Resta la altura aproximada del header */
+}
+
+/* Footer Bar */
+.footerBar {
+  height: 60px;
+  background: #1B2735;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 32px;
+}
+
+.footerIcons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footerIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.footerSvg {
+  width: 18px;
+  height: 18px;
 }
 
 /* Formulario de login */

@@ -1,29 +1,31 @@
 /* Service Section */
 .serviceSection {
   width: 100%;
-  padding: 60px 0; /* Reducido padding */
+  padding: 0;
   background-color: #FFFFFF;
   position: relative;
   overflow: visible; /* Cambiar para permitir que barra se extienda */
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 80px;
+  gap: clamp(12px, 2.5vw, 32px);
   overflow: visible; /* Permitir que elementos se extiendan fuera */
 }
 
 /* Left Content */
 .leftContent {
-  flex: 1;
-  max-width: 600px;
+  flex: 0 0 clamp(360px, 42vw, 640px);
+  max-width: 640px;
   position: relative;
-  margin-left: 127px; /* Mitad de 255px = 127px */
+  margin-left: 0;
+  padding-left: clamp(16px, 4vw, 64px);
   overflow: visible; /* Permitir que titleBar se extienda */
 }
 
@@ -39,40 +41,40 @@
 .titleBar {
   position: relative;
   background: linear-gradient(90deg, #01A8E2 0%, #99B7DB 100%);
-  width: 440px !important; /* Doble de 220px = 440px */
-  max-width: 440px !important;
-  min-width: 440px !important;
-  height: 40px; /* Más compacto */
+  width: clamp(420px, 40vw, 680px) !important;
+  max-width: 680px !important;
+  min-width: 420px !important;
+  height: 54px;
   left: -15px; /* Barra extendida hacia la izquierda */
   border-radius: 8px;
   display: flex;
-  align-items: center;
-  padding: 0 30px !important; /* Padding proporcional al ancho doble */
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 6px 24px !important;
   overflow: hidden;
 }
 
-/* Section Title - Aumentado para barra doble */
+/* Title Eyebrow */
+.titleEyebrow {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #e6f6ff;
+  margin-bottom: 2px;
+}
+
+/* Section Title */
 .sectionTitle {
   font-family: Poppins, -apple-system, Roboto, Helvetica, sans-serif;
   font-weight: 800;
-  font-size: 22px !important; /* Aumentado para barra más ancha */
+  font-size: 18px !important;
   line-height: 100%;
   letter-spacing: 0%;
-  color: #424040;
+  color: #ffffff;
   margin: 0;
   text-transform: none;
   white-space: nowrap; /* Evitar quiebre */
-}
-
-/* Subtitle */
-.subtitle {
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-weight: 400;
-  font-size: 18px; /* Reducido de 24px a 18px */
-  line-height: 100%;
-  letter-spacing: 0%;
-  color: #424040;
-  margin: 0 0 25px 0; /* Más junto al título, menos espacio abajo */
 }
 
 /* Services List */
@@ -93,12 +95,25 @@
   transition: all 0.3s ease;
   cursor: pointer;
   box-shadow: none; /* Sin box-shadow */
-  border-bottom: 1px solid #E0E0E0; /* Solo línea inferior */
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-bottom: 1px solid #E0E0E0;
 }
 
 .serviceItem:hover {
   transform: translateX(10px);
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.serviceItemActive {
+  border-bottom-color: #01A8E2;
+}
+
+.serviceItemActive .serviceText {
+  color: #01A8E2;
+  font-weight: 700;
 }
 
 /* Service Text */
@@ -127,28 +142,50 @@
   justify-content: flex-end;
   align-items: stretch; /* Para que use toda la altura disponible */
   height: 100%;
+  padding-right: clamp(16px, 4vw, 64px);
 }
 
 /* Family Image */
-.familyImage {
-  width: 100%;
-  max-width: none; /* Sin límite de ancho */
-  height: 234px; /* Reducido 10%: 260px - 26px = 234px */
-  object-fit: cover;
-  border-radius: 0; /* Sin border-radius para usar todo el espacio */
-  box-shadow: none; /* Sin box shadow */
-  transition: all 0.3s ease;
+/* Ticket Card */
+.ticketCard {
+  position: relative;
+  width: clamp(520px, 55vw, 920px);
+  max-width: 100%;
 }
 
-.familyImage:hover {
-  transform: scale(1.02);
+.ticketImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ticketContent {
+  position: absolute;
+  inset: 32% 11% 33% 15%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #ffffff;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.ticketParagraph {
+  margin: 0;
+}
+
+.ticketContent strong {
+  color: #7fe6ff;
+  font-weight: 700;
 }
 
 /* Responsive Design */
 @media (max-width: 1400px) {
   .titleBar {
-    width: 700px; /* Reducir para pantallas más pequeñas */
-    left: -20px;
+    width: 420px;
+    left: -10px;
   }
   
   .container {
@@ -158,8 +195,8 @@
 
 @media (max-width: 1200px) {
   .titleBar {
-    width: 600px;
-    left: -16px;
+    width: 360px;
+    left: -8px;
   }
   
   .container {
@@ -194,11 +231,6 @@
     font-size: 26px;
   }
   
-  .subtitle {
-    font-size: 22px;
-    margin-bottom: 30px;
-  }
-  
   .serviceText {
     font-size: 20px;
   }
@@ -221,10 +253,6 @@
   
   .sectionTitle {
     font-size: 22px;
-  }
-  
-  .subtitle {
-    font-size: 20px;
   }
   
   .serviceText {

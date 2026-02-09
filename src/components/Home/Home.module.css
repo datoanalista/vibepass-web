@@ -2,6 +2,18 @@
 .homeContainer {
   min-height: 100vh;
   background-color: #FFFFFF;
+  position: relative;
+}
+
+.mailerFloating {
+  position: fixed;
+  right: clamp(12px, 2vw, 24px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(28px, 3vw, 56px);
+  height: auto;
+  z-index: 999;
+  pointer-events: none;
 }
 
 /* Hero GIF Container */
