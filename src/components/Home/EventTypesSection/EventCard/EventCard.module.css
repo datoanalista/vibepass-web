@@ -19,7 +19,7 @@
 
 .kotHat {
   position: absolute;
-  top: clamp(-110px, -9vw, -60px);
+  top: clamp(-160px, -12vw, -100px);
   left: 50%;
   transform: translateX(-50%);
   width: clamp(240px, 34vw, 520px);
