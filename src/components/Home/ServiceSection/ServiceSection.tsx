@@ -123,7 +123,13 @@ const ServiceSection: React.FC = () => {
               alt="Ticket del servicio"
               className={styles.ticketImage}
             />
-            <div className={styles.ticketContent}>
+            <div
+              className={`${styles.ticketContent} ${
+                activeService.content.length === 1
+                  ? styles.ticketContentSingle
+                  : ""
+              }`}
+            >
               {activeService.content.map((paragraph, index) => (
                 <p key={index} className={styles.ticketParagraph}>
                   {paragraph}

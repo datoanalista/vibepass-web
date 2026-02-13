@@ -93,15 +93,9 @@ const EventTypesSection: React.FC = () => {
             onClick={handlePrev}
           >
             <img
-              src={getImagePath("/images/rigth_arrow.png")}
-              alt=""
-              aria-hidden="true"
-              className={styles.arrowBackground}
-            />
-            <img
-              src={getImagePath("/images/left_arrow.png")}
+              src={getImagePath("/images/right_arrow.png")}
               alt="Anterior"
-              className={styles.arrowIcon}
+              className={`${styles.arrowImage} ${styles.arrowImageLeft}`}
             />
           </button>
 
@@ -119,15 +113,9 @@ const EventTypesSection: React.FC = () => {
             onClick={handleNext}
           >
             <img
-              src={getImagePath("/images/rigth_arrow.png")}
-              alt=""
-              aria-hidden="true"
-              className={styles.arrowBackground}
-            />
-            <img
-              src={getImagePath("/images/left_arrow.png")}
+              src={getImagePath("/images/right_arrow.png")}
               alt="Siguiente"
-              className={`${styles.arrowIcon} ${styles.arrowIconRight}`}
+              className={styles.arrowImage}
             />
           </button>
         </div>
