@@ -12,7 +12,7 @@
       rgba(0, 0, 0, 0.25) 60%,
       rgba(0, 0, 0, 0.6) 100%
     ),
-    url("/images/cine_stgo_college.png");
+    var(--login-bg-1);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -39,7 +39,7 @@
       rgba(0, 0, 0, 0.25) 60%,
       rgba(0, 0, 0, 0.6) 100%
     ),
-    url("/images/KERMESSE_SAN_BENITO.png");
+    var(--login-bg-2);
   animation-delay: 8s;
 }
 
@@ -51,7 +51,7 @@
       rgba(0, 0, 0, 0.25) 60%,
       rgba(0, 0, 0, 0.6) 100%
     ),
-    url("/images/navidad_2025.png");
+    var(--login-bg-3);
   animation-delay: 16s;
 }
 

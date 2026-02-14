@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import UniversalHeader from "@/components/Shared/UniversalHeader/UniversalHeader";
 import { useAuth } from "@/contexts/AuthContext";
 import { API_ENDPOINTS } from "@/config/api";
+import { getImagePath } from "@/utils/getImagePath";
 import styles from "./page.module.css";
 
 export default function LoginPage() {
@@ -76,6 +77,13 @@ export default function LoginPage() {
   return (
     <div 
       className={styles.container}
+      style={
+        {
+          "--login-bg-1": `url('${getImagePath("/images/cine_stgo_college.png")}')`,
+          "--login-bg-2": `url('${getImagePath("/images/KERMESSE_SAN_BENITO.png")}')`,
+          "--login-bg-3": `url('${getImagePath("/images/navidad_2025.png")}')`,
+        } as React.CSSProperties
+      }
     >
       {/* Header */}
       <UniversalHeader />
