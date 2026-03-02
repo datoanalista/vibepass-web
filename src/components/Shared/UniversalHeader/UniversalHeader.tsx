@@ -90,7 +90,7 @@ const UniversalHeader: React.FC = () => {
               QR
             </a>
             <a 
-              href={process.env.NEXT_PUBLIC_PANEL_URL || 'https://datoanalista.github.io/vibepass-panel/login/'}
+              href={process.env.NEXT_PUBLIC_PANEL_URL || '/vibepass-panel/login/'}
               className={styles.navLink}
               target="_blank"
               rel="noopener noreferrer"

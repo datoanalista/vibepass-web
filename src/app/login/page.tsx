@@ -191,7 +191,7 @@ export default function LoginPage() {
             <div className={styles.createAccountContainer}>
               <span className={styles.noAccountText}>¿Quieres ser organizador?</span>
               <a 
-                href="https://datoanalista.github.io/vibepass-panel/login/"
+                href={process.env.NEXT_PUBLIC_PANEL_URL || '/vibepass-panel/login/'}
                 className={styles.backofficeLink}
                 target="_self"
               >
