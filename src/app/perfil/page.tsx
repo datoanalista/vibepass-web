@@ -163,6 +163,7 @@ export default function PerfilPage() {
 
   const getStatusLabel = (status: string) => {
     const statusMap: Record<string, { label: string; className: string }> = {
+      'pending': { label: 'Pendiente', className: styles.statusCancelled },
       'completed': { label: 'Completado', className: styles.statusCompleted },
       'cancelled': { label: 'Cancelado', className: styles.statusCancelled },
       'refunded': { label: 'Reembolsado', className: styles.statusRefunded },

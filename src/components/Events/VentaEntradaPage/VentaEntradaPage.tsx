@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useEventDetails } from '@/hooks/useEventDetails';
 import { getImagePath } from '@/utils/getImagePath';
 import { foodItemsData, FoodItem } from '@/data/FoodCart/foodItemsData';
@@ -26,7 +26,6 @@ interface Entrada {
 
 const VentaEntradaPage: React.FC = () => {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const eventoId = searchParams.get('eventoId');
   const tipoEntrada = searchParams.get('tipoEntrada');
   const { event, loading, error } = useEventDetails(eventoId);
@@ -398,8 +397,8 @@ const VentaEntradaPage: React.FC = () => {
            }
       };
 
-      // Realizar POST a la API externa usando configuración centralizada
-      const response = await fetch(API_ENDPOINTS.SALES, {
+      // Crear preferencia de pago en Mercado Pago
+      const response = await fetch(API_ENDPOINTS.MERCADOPAGO_PREFERENCE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -409,103 +408,21 @@ const VentaEntradaPage: React.FC = () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log('Venta procesada exitosamente:', result);
-        console.log('=== DEBUG SALENUMBER ===');
-        console.log('result.saleNumber:', result.saleNumber);
-        console.log('result.id:', result.id);
-        console.log('result._id:', result._id);
-        console.log('Estructura completa del result:', JSON.stringify(result, null, 2));
-        console.log('========================');
-        
-        // Extraer el saleNumber de la estructura anidada de la respuesta
-        let saleIdToUse = result.data?.sale?.saleNumber || 
-                          result.data?.summary?.saleNumber || 
-                          result.saleNumber || 
-                          result.id || 
-                          result._id ||
-                          Date.now().toString();
-        
-        console.log('🎯 saleNumber encontrado en:', {
-          'result.data.sale.saleNumber': result.data?.sale?.saleNumber,
-          'result.data.summary.saleNumber': result.data?.summary?.saleNumber,
-          'result.saleNumber': result.saleNumber
-        });
-        
-        console.log('saleIdToUse final:', saleIdToUse);
-         
-         const purchaseInfo = {
-           saleId: saleIdToUse,
-           eventoId: eventoId,
-           eventoNombre: event?.informacionGeneral?.nombreEvento,
-           eventoFecha: event?.informacionGeneral?.fechaEvento,
-           total: getTotalPrice() + getFoodTotalPrice() + getActivityTotalPrice(),
-           tickets: getCartItems().map((item: any) => ({
-             id: item.entrada.id || item.entrada._id,
-             tipo: item.entrada.tipoEntrada,
-             cantidad: item.quantity,
-             precio: item.entrada.precio,
-             subtotal: item.entrada.precio * item.quantity
-           })),
-           food: getFoodCartItems().map((item: any) => ({
-             id: item.food.id || item.food._id,
-             nombre: item.food.nombre || item.food.name,
-             descripcion: item.food.descripcion || item.food.description,
-             categoria: item.food.categoria || 'alimento',
-             cantidad: item.quantity,
-             precio: item.food.precioUnitario || item.food.price,
-             subtotal: (item.food.precioUnitario || item.food.price) * item.quantity
-           })),
-           activities: getActivityCartItems().map((item: any) => ({
-             id: item.activity.id || item.activity._id,
-             nombreActividad: item.activity.nombreActividad || item.activity.name,
-             descripcion: item.activity.descripcion || item.activity.description,
-             horaInicio: item.activity.horaInicio,
-             horaTermino: item.activity.horaTermino,
-             cantidad: item.quantity,
-             precio: item.activity.precioUnitario || item.activity.price,
-             subtotal: (item.activity.precioUnitario || item.activity.price) * item.quantity
-           })),
-           attendees: getAttendeesList().map((attendee, index) => {
-             // Si el checkbox está marcado, usar los datos del primer asistente para todos
-             const attendeeData = skipOtherAttendees 
-               ? (attendeesData[0] || {})
-               : (attendeesData[index] || {});
-             
-             return {
-               index: index,
-               tipoEntrada: attendee.type,
-               datosPersonales: {
-                 nombreCompleto: attendeeData.nombreCompleto || '',
-                 rut: attendeeData.rut || '',
-                 telefono: attendeeData.telefono || '',
-                 correo: attendeeData.correo || '',
-                 confirmacionCorreo: attendeeData.confirmacionCorreo || ''
-               }
-             };
-           }),
-           subtotals: {
-             tickets: getTotalPrice(),
-             food: getFoodTotalPrice(),
-             activities: getActivityTotalPrice()
-           },
-           timestamp: new Date().toISOString()
-         };
-         
-         console.log('=== PURCHASE INFO GUARDADO EN LOCALSTORAGE ===');
-         console.log(JSON.stringify(purchaseInfo, null, 2));
-         console.log('=== FIN PURCHASE INFO ===');
-         
-         localStorage.setItem('purchaseData', JSON.stringify(purchaseInfo));
-        
-        // Navegar a la página de venta exitosa (el loading continuará allí)
-        router.push('/venta-exitosa');
+        const checkoutUrl = result.data?.checkoutUrl || result.data?.sandboxInitPoint || result.data?.initPoint;
+
+        if (!checkoutUrl) {
+          throw new Error('Mercado Pago no devolvió una URL de checkout válida');
+        }
+
+        localStorage.removeItem('purchaseData');
+        window.location.href = checkoutUrl;
       } else {
         const error = await response.json();
-        console.error('Error al procesar la venta:', error);
+        console.error('Error al crear preferencia de pago:', error);
         setIsProcessingPurchase(false);
         
         // Manejar diferentes tipos de errores
-        let errorMessage = 'Error al procesar la compra. Por favor, intenta nuevamente.';
+        let errorMessage = 'Error al iniciar el pago. Por favor, intenta nuevamente.';
         
         if (error.message && error.message.includes('Not enough spots available')) {
           // Extraer información del error de cupos
@@ -622,8 +539,8 @@ const VentaEntradaPage: React.FC = () => {
         <div className={styles.loadingOverlay}>
           <div className={styles.loadingContent}>
             <div className={styles.loadingSpinner}></div>
-            <h2 className={styles.loadingTitle}>Procesando pago...</h2>
-            <p className={styles.loadingText}>Estamos procesando tu compra de forma segura</p>
+            <h2 className={styles.loadingTitle}>Redirigiendo a Mercado Pago...</h2>
+            <p className={styles.loadingText}>Estamos preparando tu pago de forma segura</p>
           </div>
         </div>
       )}

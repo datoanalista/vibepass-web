@@ -15,6 +15,8 @@ export const API_ENDPOINTS = {
   SALES: `${API_BASE_URL}/sales`,
   SALES_BY_USER: (email: string) => `${API_BASE_URL}/sales/user/${encodeURIComponent(email)}`,
   ADD_PRODUCTS_TO_SALE: (saleNumber: string) => `${API_BASE_URL}/sales/${encodeURIComponent(saleNumber)}/add-products`,
+  MERCADOPAGO_PREFERENCE: `${API_BASE_URL}/payments/mercadopago/preference`,
+  MERCADOPAGO_CONFIRM: `${API_BASE_URL}/payments/mercadopago/confirm`,
   USERS_WEB: `${API_BASE_URL}/usersweb`,
   LOGIN: `${API_BASE_URL}/usersweb/login`,
 } as const;
