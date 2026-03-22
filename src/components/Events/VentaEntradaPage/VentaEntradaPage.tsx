@@ -178,6 +178,7 @@ const VentaEntradaPage: React.FC = () => {
 
   const hasItemsInFoodCart = Object.keys(foodCart).length > 0;
   const activeFoodItems = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
+  const hasActiveFoodItems = activeFoodItems.length > 0;
 
   // Funciones para el carrito de actividades
   const updateActivityQuantity = (activityId: number | string, change: number) => {
@@ -226,11 +227,36 @@ const VentaEntradaPage: React.FC = () => {
   const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
   const hasActiveActivities = activeActivities.length > 0;
 
-  useEffect(() => {
-    if (currentSection === 'activities' && !hasActiveActivities) {
-      setCurrentSection('attendees');
+  const getPreviousSection = (section: 'food' | 'activities' | 'attendees') => {
+    if (section === 'food') return 'tickets';
+    if (section === 'activities') return hasActiveFoodItems ? 'food' : 'tickets';
+    return hasActiveActivities ? 'activities' : (hasActiveFoodItems ? 'food' : 'tickets');
+  };
+
+  const getNextSection = (section: 'tickets' | 'food' | 'activities') => {
+    if (section === 'tickets') {
+      if (hasActiveFoodItems) return 'food';
+      if (hasActiveActivities) return 'activities';
+      return 'attendees';
     }
-  }, [currentSection, hasActiveActivities]);
+
+    if (section === 'food') {
+      return hasActiveActivities ? 'activities' : 'attendees';
+    }
+
+    return 'attendees';
+  };
+
+  useEffect(() => {
+    if (currentSection === 'food' && !hasActiveFoodItems) {
+      setCurrentSection(getNextSection('tickets'));
+      return;
+    }
+
+    if (currentSection === 'activities' && !hasActiveActivities) {
+      setCurrentSection(getNextSection(hasActiveFoodItems ? 'food' : 'tickets'));
+    }
+  }, [currentSection, hasActiveActivities, hasActiveFoodItems]);
 
   // Funciones para asistentes
   const getTotalAttendees = () => {
@@ -630,11 +656,13 @@ const VentaEntradaPage: React.FC = () => {
                 <>
                   <div className={styles.descriptionItem}>
                     <p className={styles.selectionDescription}>
-                      Añade tus productos antes del evento
+                      {hasActiveFoodItems
+                        ? 'Añade tus productos antes del evento'
+                        : 'No hay productos disponibles para este evento.'}
                     </p>
                     <button 
                       className={styles.backBtn}
-                      onClick={() => setCurrentSection('tickets')}
+                      onClick={() => setCurrentSection(getPreviousSection('food'))}
                     >
                       Atrás
                     </button>
@@ -652,7 +680,7 @@ const VentaEntradaPage: React.FC = () => {
                     </p>
                     <button 
                       className={styles.backBtn}
-                      onClick={() => setCurrentSection('food')}
+                      onClick={() => setCurrentSection(getPreviousSection('activities'))}
                     >
                       Atrás
                     </button>
@@ -668,7 +696,7 @@ const VentaEntradaPage: React.FC = () => {
                     </p>
                     <button 
                       className={styles.backBtn}
-                      onClick={() => setCurrentSection(hasActiveActivities ? 'activities' : 'food')}
+                      onClick={() => setCurrentSection(getPreviousSection('attendees'))}
                     >
                       Atrás
                     </button>
@@ -786,89 +814,93 @@ const VentaEntradaPage: React.FC = () => {
                 <>
                   {/* Línea separadora */}
                   <div className={styles.foodSeparatorLine}></div>
-                  
-                  {/* Carrusel de comida - Implementación nueva */}
-                  <div className={styles.foodCarouselContainer}>
-                    <img 
-                      src={getImagePath("/images/icon_left.svg")} 
-                      alt="Anterior"
-                      className={`${styles.carouselArrowNew} ${(() => {
-                        return currentFoodIndex === 0 || activeFoodItems.length <= 2 ? styles.disabled : '';
-                      })()}`}
-                      onClick={(() => {
-                        return currentFoodIndex > 0 && activeFoodItems.length > 2 ? prevFoodItem : undefined;
-                      })()}
-                    />
-                    
-                    <div className={styles.foodCarouselWrapper}>
-                      <div className={styles.foodCarouselTrack}>
-                        {getVisibleFoodItems().map((food: any) => (
-                          <div key={food.id || food._id} className={styles.foodCardNew}>
-                            <img 
-                              src={food.imagen || food.imageUrl} 
-                              alt={food.nombre || food.name}
-                              className={styles.foodImageNew}
-                            />
-                            <div className={styles.foodInfoNew}>
-                              <h3 className={styles.foodNameNew}>{food.nombre || food.name}</h3>
-                              <p className={styles.foodDescriptionNew}>{food.descripcion || food.description}</p>
-                              <p className={styles.foodPriceNew}>${(food.precioUnitario || food.price).toLocaleString('es-CL')}</p>
-                              <p className={styles.foodAvailability}>
-                                Disponibles: {(() => {
-                                  console.log('Food item:', food);
-                                  console.log('stockActual:', food.stockActual);
-                                  return food.stockActual || 'Sin límite';
-                                })()}
-                              </p>
-                              
-                              <div className={styles.foodQuantityControlsNew}>
-                                <button 
-                                  className={styles.quantityBtn}
-                                  onClick={() => updateFoodQuantity(food.id || food._id, -1)}
-                                >
-                                  -
-                                </button>
-                                <span className={styles.quantity}>
-                                  {getFoodQuantity(food.id || food._id)}
-                                </span>
-                                <button 
-                                  className={styles.quantityBtn}
-                                  onClick={() => {
-                                    const currentQuantity = getFoodQuantity(food.id || food._id);
-                                    const availableStock = food.stockActual || 999999; // Si no hay límite, usar número alto
-                                    
-                                    if (food.stockActual && currentQuantity >= availableStock) {
-                                      showModal(
-                                        'Stock insuficiente',
-                                        `No hay más stock disponible para "${food.nombre || food.name}".\n\nStock disponible: ${availableStock}\nEn tu carrito: ${currentQuantity}`,
-                                        'warning'
-                                      );
-                                    } else {
-                                      updateFoodQuantity(food.id || food._id, 1);
-                                    }
-                                  }}
-                                  disabled={food.stockActual && getFoodQuantity(food.id || food._id) >= food.stockActual}
-                                >
-                                  +
-                                </button>
+                  {hasActiveFoodItems ? (
+                    <div className={styles.foodCarouselContainer}>
+                      <img 
+                        src={getImagePath("/images/icon_left.svg")} 
+                        alt="Anterior"
+                        className={`${styles.carouselArrowNew} ${(() => {
+                          return currentFoodIndex === 0 || activeFoodItems.length <= 2 ? styles.disabled : '';
+                        })()}`}
+                        onClick={(() => {
+                          return currentFoodIndex > 0 && activeFoodItems.length > 2 ? prevFoodItem : undefined;
+                        })()}
+                      />
+                      
+                      <div className={styles.foodCarouselWrapper}>
+                        <div className={styles.foodCarouselTrack}>
+                          {getVisibleFoodItems().map((food: any) => (
+                            <div key={food.id || food._id} className={styles.foodCardNew}>
+                              <img 
+                                src={food.imagen || food.imageUrl} 
+                                alt={food.nombre || food.name}
+                                className={styles.foodImageNew}
+                              />
+                              <div className={styles.foodInfoNew}>
+                                <h3 className={styles.foodNameNew}>{food.nombre || food.name}</h3>
+                                <p className={styles.foodDescriptionNew}>{food.descripcion || food.description}</p>
+                                <p className={styles.foodPriceNew}>${(food.precioUnitario || food.price).toLocaleString('es-CL')}</p>
+                                <p className={styles.foodAvailability}>
+                                  Disponibles: {(() => {
+                                    console.log('Food item:', food);
+                                    console.log('stockActual:', food.stockActual);
+                                    return food.stockActual || 'Sin límite';
+                                  })()}
+                                </p>
+                                
+                                <div className={styles.foodQuantityControlsNew}>
+                                  <button 
+                                    className={styles.quantityBtn}
+                                    onClick={() => updateFoodQuantity(food.id || food._id, -1)}
+                                  >
+                                    -
+                                  </button>
+                                  <span className={styles.quantity}>
+                                    {getFoodQuantity(food.id || food._id)}
+                                  </span>
+                                  <button 
+                                    className={styles.quantityBtn}
+                                    onClick={() => {
+                                      const currentQuantity = getFoodQuantity(food.id || food._id);
+                                      const availableStock = food.stockActual || 999999; // Si no hay límite, usar número alto
+                                      
+                                      if (food.stockActual && currentQuantity >= availableStock) {
+                                        showModal(
+                                          'Stock insuficiente',
+                                          `No hay más stock disponible para "${food.nombre || food.name}".\n\nStock disponible: ${availableStock}\nEn tu carrito: ${currentQuantity}`,
+                                          'warning'
+                                        );
+                                      } else {
+                                        updateFoodQuantity(food.id || food._id, 1);
+                                      }
+                                    }}
+                                    disabled={food.stockActual && getFoodQuantity(food.id || food._id) >= food.stockActual}
+                                  >
+                                    +
+                                  </button>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
+                      
+                      <img 
+                        src={getImagePath("/images/icon_right.svg")} 
+                        alt="Siguiente"
+                        className={`${styles.carouselArrowNew} ${(() => {
+                          return currentFoodIndex >= activeFoodItems.length - 2 || activeFoodItems.length <= 2 ? styles.disabled : '';
+                        })()}`}
+                        onClick={(() => {
+                          return currentFoodIndex < activeFoodItems.length - 2 && activeFoodItems.length > 2 ? nextFoodItem : undefined;
+                        })()}
+                      />
                     </div>
-                    
-                    <img 
-                      src={getImagePath("/images/icon_right.svg")} 
-                      alt="Siguiente"
-                      className={`${styles.carouselArrowNew} ${(() => {
-                        return currentFoodIndex >= activeFoodItems.length - 2 || activeFoodItems.length <= 2 ? styles.disabled : '';
-                      })()}`}
-                      onClick={(() => {
-                        return currentFoodIndex < activeFoodItems.length - 2 && activeFoodItems.length > 2 ? nextFoodItem : undefined;
-                      })()}
-                    />
-                  </div>
+                  ) : (
+                    <div className={styles.emptyStateMessage}>
+                      No hay productos disponibles para agregar en este evento.
+                    </div>
+                  )}
                 </>
               )}
 
@@ -1156,11 +1188,11 @@ const VentaEntradaPage: React.FC = () => {
               }`}
               onClick={() => {
                 if (currentSection === 'tickets') {
-                  setCurrentSection('food');
+                  setCurrentSection(getNextSection('tickets'));
                 } else if (currentSection === 'food') {
-                  setCurrentSection(hasActiveActivities ? 'activities' : 'attendees');
+                  setCurrentSection(getNextSection('food'));
                 } else if (currentSection === 'activities') {
-                  setCurrentSection('attendees');
+                  setCurrentSection(getNextSection('activities'));
                 } else {
                   // Procesar la venta
                   processPurchase();
