@@ -408,7 +408,7 @@ const VentaEntradaPage: React.FC = () => {
 
       if (response.ok) {
         const result = await response.json();
-        const checkoutUrl = result.data?.checkoutUrl || result.data?.sandboxInitPoint || result.data?.initPoint;
+        const checkoutUrl = result.data?.checkoutUrl || result.data?.initPoint || result.data?.sandboxInitPoint;
 
         if (!checkoutUrl) {
           throw new Error('Mercado Pago no devolvió una URL de checkout válida');
