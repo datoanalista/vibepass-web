@@ -18,10 +18,6 @@ const AuthRequiredModal: React.FC<AuthRequiredModalProps> = ({ isOpen, onClose }
     router.push('/login');
   };
 
-  const handleStayAsGuest = () => {
-    onClose();
-  };
-
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -36,12 +32,6 @@ const AuthRequiredModal: React.FC<AuthRequiredModalProps> = ({ isOpen, onClose }
               onClick={handleRegister}
             >
               Quiero registrarme
-            </button>
-            <button 
-              className={styles.modalButtonSecondary}
-              onClick={handleStayAsGuest}
-            >
-              Permanecer como invitado
             </button>
           </div>
         </div>

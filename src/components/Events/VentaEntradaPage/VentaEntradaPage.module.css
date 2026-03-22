@@ -746,6 +746,17 @@
   background: #EFEFEF;
 }
 
+.emptyStateMessage {
+  margin: 20px;
+  padding: 24px;
+  border: 1px dashed #C7CDD9;
+  border-radius: 12px;
+  background: #F8FAFC;
+  color: #5B6574;
+  font-size: 15px;
+  text-align: center;
+}
+
 /* Flechas del carrusel - SOLO imagen con animación */
 .carouselArrowNew {
   width: 40px;
@@ -884,6 +895,12 @@
   .foodCarouselContainer {
     gap: 15px;
     padding: 15px 0;
+  }
+
+  .emptyStateMessage {
+    margin: 16px;
+    padding: 20px;
+    font-size: 14px;
   }
 
   .carouselArrowNew {

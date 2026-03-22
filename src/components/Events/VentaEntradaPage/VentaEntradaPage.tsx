@@ -177,6 +177,7 @@ const VentaEntradaPage: React.FC = () => {
   };
 
   const hasItemsInFoodCart = Object.keys(foodCart).length > 0;
+  const activeFoodItems = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
 
   // Funciones para el carrito de actividades
   const updateActivityQuantity = (activityId: number | string, change: number) => {
@@ -222,6 +223,14 @@ const VentaEntradaPage: React.FC = () => {
   };
 
   const hasItemsInActivityCart = Object.keys(activityCart).length > 0;
+  const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
+  const hasActiveActivities = activeActivities.length > 0;
+
+  useEffect(() => {
+    if (currentSection === 'activities' && !hasActiveActivities) {
+      setCurrentSection('attendees');
+    }
+  }, [currentSection, hasActiveActivities]);
 
   // Funciones para asistentes
   const getTotalAttendees = () => {
@@ -466,28 +475,23 @@ const VentaEntradaPage: React.FC = () => {
 
   // Funciones del carrusel
   const nextFoodItem = () => {
-    const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
-    if (activeFood.length <= 2) return; // No navegar si hay 2 o menos items
+    if (activeFoodItems.length <= 2) return; // No navegar si hay 2 o menos items
     
     setCurrentFoodIndex(prev => 
-      prev >= activeFood.length - 2 ? 0 : prev + 1
+      prev >= activeFoodItems.length - 2 ? 0 : prev + 1
     );
   };
 
   const prevFoodItem = () => {
-    const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
-    if (activeFood.length <= 2) return; // No navegar si hay 2 o menos items
+    if (activeFoodItems.length <= 2) return; // No navegar si hay 2 o menos items
     
     setCurrentFoodIndex(prev => 
-      prev <= 0 ? Math.max(0, activeFood.length - 2) : prev - 1
+      prev <= 0 ? Math.max(0, activeFoodItems.length - 2) : prev - 1
     );
   };
 
   const getVisibleFoodItems = () => {
-    if (!event?.alimentosBebestibles) return [];
-    
-    const activeFood = event.alimentosBebestibles.filter((item: any) => item.activo);
-    const visibleItems = activeFood.slice(currentFoodIndex, currentFoodIndex + 2);
+    const visibleItems = activeFoodItems.slice(currentFoodIndex, currentFoodIndex + 2);
     
     // Asegurar que siempre mostramos máximo 2 cards
     return visibleItems.slice(0, 2);
@@ -495,7 +499,6 @@ const VentaEntradaPage: React.FC = () => {
 
   // Funciones del carrusel de actividades
   const nextActivityItem = () => {
-    const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
     if (activeActivities.length <= 2) return; // No navegar si hay 2 o menos items
     
     setCurrentActivityIndex(prev => 
@@ -504,7 +507,6 @@ const VentaEntradaPage: React.FC = () => {
   };
 
   const prevActivityItem = () => {
-    const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
     if (activeActivities.length <= 2) return; // No navegar si hay 2 o menos items
     
     setCurrentActivityIndex(prev => 
@@ -513,9 +515,6 @@ const VentaEntradaPage: React.FC = () => {
   };
 
   const getVisibleActivityItems = () => {
-    if (!event?.actividades) return [];
-    
-    const activeActivities = event.actividades.filter((item: any) => item.activa);
     const visibleItems = activeActivities.slice(currentActivityIndex, currentActivityIndex + 2);
     
     // Asegurar que siempre mostramos máximo 2 cards
@@ -647,7 +646,9 @@ const VentaEntradaPage: React.FC = () => {
                 <>
                   <div className={styles.descriptionItem}>
                     <p className={styles.selectionDescription}>
-                      Participa de las actividades que tenemos para ti!
+                      {hasActiveActivities
+                        ? 'Participa de las actividades que tenemos para ti!'
+                        : 'No hay actividades disponibles para este evento.'}
                     </p>
                     <button 
                       className={styles.backBtn}
@@ -667,7 +668,7 @@ const VentaEntradaPage: React.FC = () => {
                     </p>
                     <button 
                       className={styles.backBtn}
-                      onClick={() => setCurrentSection('activities')}
+                      onClick={() => setCurrentSection(hasActiveActivities ? 'activities' : 'food')}
                     >
                       Atrás
                     </button>
@@ -792,12 +793,10 @@ const VentaEntradaPage: React.FC = () => {
                       src={getImagePath("/images/icon_left.svg")} 
                       alt="Anterior"
                       className={`${styles.carouselArrowNew} ${(() => {
-                        const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
-                        return currentFoodIndex === 0 || activeFood.length <= 2 ? styles.disabled : '';
+                        return currentFoodIndex === 0 || activeFoodItems.length <= 2 ? styles.disabled : '';
                       })()}`}
                       onClick={(() => {
-                        const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
-                        return currentFoodIndex > 0 && activeFood.length > 2 ? prevFoodItem : undefined;
+                        return currentFoodIndex > 0 && activeFoodItems.length > 2 ? prevFoodItem : undefined;
                       })()}
                     />
                     
@@ -863,12 +862,10 @@ const VentaEntradaPage: React.FC = () => {
                       src={getImagePath("/images/icon_right.svg")} 
                       alt="Siguiente"
                       className={`${styles.carouselArrowNew} ${(() => {
-                        const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
-                        return currentFoodIndex >= activeFood.length - 2 || activeFood.length <= 2 ? styles.disabled : '';
+                        return currentFoodIndex >= activeFoodItems.length - 2 || activeFoodItems.length <= 2 ? styles.disabled : '';
                       })()}`}
                       onClick={(() => {
-                        const activeFood = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
-                        return currentFoodIndex < activeFood.length - 2 && activeFood.length > 2 ? nextFoodItem : undefined;
+                        return currentFoodIndex < activeFoodItems.length - 2 && activeFoodItems.length > 2 ? nextFoodItem : undefined;
                       })()}
                     />
                   </div>
@@ -879,92 +876,84 @@ const VentaEntradaPage: React.FC = () => {
                 <>
                   {/* Línea separadora */}
                   <div className={styles.foodSeparatorLine}></div>
-                  
-                  {/* Carrusel de actividades */}
-                  <div className={styles.foodCarouselContainer}>
-                    <img 
-                      src={getImagePath("/images/icon_left.svg")} 
-                      alt="Anterior"
-                      className={`${styles.carouselArrowNew} ${(() => {
-                        const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
-                        return currentActivityIndex === 0 || activeActivities.length <= 2 ? styles.disabled : '';
-                      })()}`}
-                      onClick={(() => {
-                        const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
-                        return currentActivityIndex > 0 && activeActivities.length > 2 ? prevActivityItem : undefined;
-                      })()}
-                    />
-                    
-                    <div className={styles.foodCarouselWrapper}>
-                      <div className={styles.foodCarouselTrack}>
-                        {getVisibleActivityItems().map((activity: any) => (
-                          <div key={activity.id || activity._id} className={styles.foodCardNew}>
-                            <img 
-                              src={activity.imagenPromocional || activity.imagen || activity.imageUrl || getImagePath("/images/person-play.png")} 
-                              alt={activity.nombreActividad || activity.name}
-                              className={styles.foodImageNew}
-                              onError={(e) => {
-                                e.currentTarget.src = getImagePath("/images/person-play.png");
-                              }}
-                            />
-                            <div className={styles.foodInfoNew}>
-                              <h3 className={styles.foodNameNew}>{activity.nombreActividad || activity.name}</h3>
-                              <p className={styles.foodDescriptionNew}>{activity.descripcion || activity.description}</p>
-                              <p className={styles.foodPriceNew}>${(activity.precioUnitario || activity.price).toLocaleString('es-CL')}</p>
-                              <p className={styles.foodAvailability}>
-                                Cupos disponibles: {activity.cuposDisponibles - (activity.cuposOcupados || 0)}
-                              </p>
-                              
-                              <div className={styles.foodQuantityControlsNew}>
-                                <button 
-                                  className={styles.quantityBtn}
-                                  onClick={() => updateActivityQuantity(activity.id || activity._id, -1)}
-                                >
-                                  -
-                                </button>
-                                <span className={styles.quantity}>
-                                  {getActivityQuantity(activity.id || activity._id)}
-                                </span>
-                                <button 
-                                  className={styles.quantityBtn}
-                                  onClick={() => {
-                                    const currentQuantity = getActivityQuantity(activity.id || activity._id);
-                                    const availableSpots = activity.cuposDisponibles - (activity.cuposOcupados || 0);
-                                    
-                                    if (currentQuantity >= availableSpots) {
-                                      showModal(
-                                        'Cupos insuficientes',
-                                        `No hay más cupos disponibles para "${activity.nombreActividad || activity.name}".\n\nCupos disponibles: ${availableSpots}\nEn tu carrito: ${currentQuantity}`,
-                                        'warning'
-                                      );
-                                    } else {
-                                      updateActivityQuantity(activity.id || activity._id, 1);
-                                    }
-                                  }}
-                                  disabled={getActivityQuantity(activity.id || activity._id) >= (activity.cuposDisponibles - (activity.cuposOcupados || 0))}
-                                >
-                                  +
-                                </button>
+                  {hasActiveActivities ? (
+                    <div className={styles.foodCarouselContainer}>
+                      <img 
+                        src={getImagePath("/images/icon_left.svg")} 
+                        alt="Anterior"
+                        className={`${styles.carouselArrowNew} ${currentActivityIndex === 0 || activeActivities.length <= 2 ? styles.disabled : ''}`}
+                        onClick={currentActivityIndex > 0 && activeActivities.length > 2 ? prevActivityItem : undefined}
+                      />
+                      
+                      <div className={styles.foodCarouselWrapper}>
+                        <div className={styles.foodCarouselTrack}>
+                          {getVisibleActivityItems().map((activity: any) => (
+                            <div key={activity.id || activity._id} className={styles.foodCardNew}>
+                              <img 
+                                src={activity.imagenPromocional || activity.imagen || activity.imageUrl || getImagePath("/images/person-play.png")} 
+                                alt={activity.nombreActividad || activity.name}
+                                className={styles.foodImageNew}
+                                onError={(e) => {
+                                  e.currentTarget.src = getImagePath("/images/person-play.png");
+                                }}
+                              />
+                              <div className={styles.foodInfoNew}>
+                                <h3 className={styles.foodNameNew}>{activity.nombreActividad || activity.name}</h3>
+                                <p className={styles.foodDescriptionNew}>{activity.descripcion || activity.description}</p>
+                                <p className={styles.foodPriceNew}>${(activity.precioUnitario || activity.price).toLocaleString('es-CL')}</p>
+                                <p className={styles.foodAvailability}>
+                                  Cupos disponibles: {activity.cuposDisponibles - (activity.cuposOcupados || 0)}
+                                </p>
+                                
+                                <div className={styles.foodQuantityControlsNew}>
+                                  <button 
+                                    className={styles.quantityBtn}
+                                    onClick={() => updateActivityQuantity(activity.id || activity._id, -1)}
+                                  >
+                                    -
+                                  </button>
+                                  <span className={styles.quantity}>
+                                    {getActivityQuantity(activity.id || activity._id)}
+                                  </span>
+                                  <button 
+                                    className={styles.quantityBtn}
+                                    onClick={() => {
+                                      const currentQuantity = getActivityQuantity(activity.id || activity._id);
+                                      const availableSpots = activity.cuposDisponibles - (activity.cuposOcupados || 0);
+                                      
+                                      if (currentQuantity >= availableSpots) {
+                                        showModal(
+                                          'Cupos insuficientes',
+                                          `No hay más cupos disponibles para "${activity.nombreActividad || activity.name}".\n\nCupos disponibles: ${availableSpots}\nEn tu carrito: ${currentQuantity}`,
+                                          'warning'
+                                        );
+                                      } else {
+                                        updateActivityQuantity(activity.id || activity._id, 1);
+                                      }
+                                    }}
+                                    disabled={getActivityQuantity(activity.id || activity._id) >= (activity.cuposDisponibles - (activity.cuposOcupados || 0))}
+                                  >
+                                    +
+                                  </button>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
+                      
+                      <img 
+                        src={getImagePath("/images/icon_right.svg")} 
+                        alt="Siguiente"
+                        className={`${styles.carouselArrowNew} ${currentActivityIndex >= activeActivities.length - 2 || activeActivities.length <= 2 ? styles.disabled : ''}`}
+                        onClick={currentActivityIndex < activeActivities.length - 2 && activeActivities.length > 2 ? nextActivityItem : undefined}
+                      />
                     </div>
-                    
-                    <img 
-                      src={getImagePath("/images/icon_right.svg")} 
-                      alt="Siguiente"
-                      className={`${styles.carouselArrowNew} ${(() => {
-                        const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
-                        return currentActivityIndex >= activeActivities.length - 2 || activeActivities.length <= 2 ? styles.disabled : '';
-                      })()}`}
-                      onClick={(() => {
-                        const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
-                        return currentActivityIndex < activeActivities.length - 2 && activeActivities.length > 2 ? nextActivityItem : undefined;
-                      })()}
-                    />
-                  </div>
+                  ) : (
+                    <div className={styles.emptyStateMessage}>
+                      No hay actividades disponibles para agregar en este evento.
+                    </div>
+                  )}
                 </>
               )}
 
@@ -1169,7 +1158,7 @@ const VentaEntradaPage: React.FC = () => {
                 if (currentSection === 'tickets') {
                   setCurrentSection('food');
                 } else if (currentSection === 'food') {
-                  setCurrentSection('activities');
+                  setCurrentSection(hasActiveActivities ? 'activities' : 'attendees');
                 } else if (currentSection === 'activities') {
                   setCurrentSection('attendees');
                 } else {
