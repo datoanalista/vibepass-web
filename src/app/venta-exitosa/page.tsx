@@ -102,6 +102,14 @@ const getViewState = (saleStatus?: string, paymentStatus?: string): ViewState =>
   return 'missing';
 };
 
+const normalizeMercadoPagoParam = (value: string | null) => {
+  if (!value || value === 'null' || value === 'undefined') {
+    return null;
+  }
+
+  return value;
+};
+
 const LoadingState = () => (
   <div className={styles.pageContainer}>
     <UniversalHeader />
@@ -141,9 +149,11 @@ const VentaExitosaContent: React.FC = () => {
 
   useEffect(() => {
     const resolvePurchase = async () => {
-      const paymentId = searchParams.get('payment_id') || searchParams.get('collection_id');
-      const externalReference = searchParams.get('external_reference');
-      const incomingStatus = searchParams.get('status') || searchParams.get('collection_status');
+      const paymentId = normalizeMercadoPagoParam(searchParams.get('payment_id')) ||
+        normalizeMercadoPagoParam(searchParams.get('collection_id'));
+      const externalReference = normalizeMercadoPagoParam(searchParams.get('external_reference'));
+      const incomingStatus = normalizeMercadoPagoParam(searchParams.get('status')) ||
+        normalizeMercadoPagoParam(searchParams.get('collection_status'));
 
       try {
         if (paymentId || externalReference) {
