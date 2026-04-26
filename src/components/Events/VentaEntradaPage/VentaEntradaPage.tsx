@@ -432,8 +432,8 @@ const VentaEntradaPage: React.FC = () => {
            }
       };
 
-      // Crear preferencia de pago en Mercado Pago
-      const response = await fetch(API_ENDPOINTS.MERCADOPAGO_PREFERENCE, {
+      // Crear pago en Flow.cl
+      const response = await fetch(API_ENDPOINTS.FLOW_CREATE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -443,14 +443,15 @@ const VentaEntradaPage: React.FC = () => {
 
       if (response.ok) {
         const result = await response.json();
-        const checkoutUrl = result.data?.checkoutUrl || result.data?.initPoint || result.data?.sandboxInitPoint;
+        const checkoutUrl = result.data?.checkoutUrl;
+        const token = result.data?.token;
 
-        if (!checkoutUrl) {
-          throw new Error('Mercado Pago no devolvió una URL de checkout válida');
+        if (!checkoutUrl || !token) {
+          throw new Error('Flow no devolvió una URL de checkout u token válido');
         }
 
         localStorage.removeItem('purchaseData');
-        window.location.href = checkoutUrl;
+        window.location.href = `${checkoutUrl}?token=${token}`;
       } else {
         const error = await response.json();
         console.error('Error al crear preferencia de pago:', error);
@@ -564,7 +565,7 @@ const VentaEntradaPage: React.FC = () => {
         <div className={styles.loadingOverlay}>
           <div className={styles.loadingContent}>
             <div className={styles.loadingSpinner}></div>
-            <h2 className={styles.loadingTitle}>Redirigiendo a Mercado Pago...</h2>
+            <h2 className={styles.loadingTitle}>Redirigiendo al pago seguro...</h2>
             <p className={styles.loadingText}>Estamos preparando tu pago de forma segura</p>
           </div>
         </div>

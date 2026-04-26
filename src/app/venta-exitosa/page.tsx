@@ -102,7 +102,7 @@ const getViewState = (saleStatus?: string, paymentStatus?: string): ViewState =>
   return 'missing';
 };
 
-const normalizeMercadoPagoParam = (value: string | null) => {
+const normalizeParam = (value: string | null) => {
   if (!value || value === 'null' || value === 'undefined') {
     return null;
   }
@@ -131,7 +131,7 @@ const VentaExitosaContent: React.FC = () => {
   const [purchaseData, setPurchaseData] = useState<PurchaseData | null>(null);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [viewState, setViewState] = useState<ViewState>('missing');
-  const [statusMessage, setStatusMessage] = useState('Estamos verificando tu pago con Mercado Pago.');
+  const [statusMessage, setStatusMessage] = useState('Estamos verificando tu pago.');
 
   const generateQr = async (saleNumber: string) => {
     const qrInfo = { saleNumber };
@@ -149,24 +149,16 @@ const VentaExitosaContent: React.FC = () => {
 
   useEffect(() => {
     const resolvePurchase = async () => {
-      const paymentId = normalizeMercadoPagoParam(searchParams.get('payment_id')) ||
-        normalizeMercadoPagoParam(searchParams.get('collection_id'));
-      const externalReference = normalizeMercadoPagoParam(searchParams.get('external_reference'));
-      const incomingStatus = normalizeMercadoPagoParam(searchParams.get('status')) ||
-        normalizeMercadoPagoParam(searchParams.get('collection_status'));
+      const token = normalizeParam(searchParams.get('token'));
 
       try {
-        if (paymentId || externalReference) {
-          const response = await fetch(API_ENDPOINTS.MERCADOPAGO_CONFIRM, {
+        if (token) {
+          const response = await fetch(API_ENDPOINTS.FLOW_CONFIRM, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-              paymentId,
-              externalReference,
-              status: incomingStatus
-            })
+            body: JSON.stringify({ token })
           });
 
           const result: PaymentResolutionResponse = await response.json();
@@ -206,7 +198,7 @@ const VentaExitosaContent: React.FC = () => {
         setViewState('missing');
         setStatusMessage('No encontramos una compra asociada a este retorno.');
       } catch (error) {
-        console.error('Error resolving Mercado Pago purchase:', error);
+        console.error('Error resolving Flow payment:', error);
         setViewState('failed');
         setStatusMessage(error instanceof Error ? error.message : 'No fue posible validar el pago.');
       } finally {
