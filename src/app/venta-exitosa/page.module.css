@@ -158,13 +158,13 @@
 }
 
 .qrImage {
-  transform: scale(5);
-  height: 200px;
-  width: auto;
+  width: 400px;
+  height: 400px;
+  max-width: 90vw;
+  max-height: 90vw;
   object-fit: contain;
-  transform-origin: left center;
-  flex-shrink: 0;
-  margin-top: 120px;
+  margin-top: 40px;
+  margin-left: 60px;
 }
 
 .titleImage {
