@@ -405,33 +405,37 @@ const VentaExitosaContent: React.FC = () => {
       <UniversalHeader />
 
       <main className={styles.mainContent}>
-        <img
-          src={qrCodeDataURL || getImagePath('/images/codigoqr.png')}
-          alt="Código QR"
-          className={styles.qrImage}
-        />
+        <div className={styles.leftColumn}>
+          <img
+            src={getImagePath('/images/_titulo_CÓDIGO_QR.png')}
+            alt="CÓDIGO QR"
+            className={styles.titleImage}
+          />
 
-        <img
-          src={getImagePath('/images/_titulo_CÓDIGO_QR.png')}
-          alt="CÓDIGO QR"
-          className={styles.titleImage}
-        />
+          <div
+            className={`${styles.blueBox} ${isGeneratingPDF ? styles.generating : ''}`}
+            onClick={isGeneratingPDF ? undefined : downloadPDF}
+            title={isGeneratingPDF ? 'Generando PDF...' : 'Haz clic para descargar tu entrada en PDF'}
+          >
+            <span className={styles.verificationText}>
+              {isGeneratingPDF ? 'Generando PDF...' : 'DESCARGAR'}
+            </span>
+          </div>
 
-        <div
-          className={`${styles.blueBox} ${isGeneratingPDF ? styles.generating : ''}`}
-          onClick={isGeneratingPDF ? undefined : downloadPDF}
-          title={isGeneratingPDF ? 'Generando PDF...' : 'Haz clic para descargar tu entrada en PDF'}
-        >
-          <span className={styles.verificationText}>
-            {isGeneratingPDF ? 'Generando PDF...' : 'DESCARGAR'}
-          </span>
+          <img
+            src={getImagePath('/images/mensaje_exito.png')}
+            alt="Mensaje de éxito"
+            className={styles.successMessage}
+          />
         </div>
 
-        <img
-          src={getImagePath('/images/mensaje_exito.png')}
-          alt="Mensaje de éxito"
-          className={styles.successMessage}
-        />
+        <div className={styles.rightColumn}>
+          <img
+            src={qrCodeDataURL || getImagePath('/images/codigoqr.png')}
+            alt="Código QR"
+            className={styles.qrImage}
+          />
+        </div>
       </main>
 
       <Footer />
