@@ -23,6 +23,27 @@ interface Entrada {
   };
 }
 
+const toNumber = (...values: unknown[]): number => {
+  for (const value of values) {
+    if (value === null || value === undefined || value === '') continue;
+
+    const numberValue = typeof value === 'number' ? value : Number(value);
+    if (Number.isFinite(numberValue)) return numberValue;
+  }
+
+  return 0;
+};
+
+const formatPrice = (value: unknown) => toNumber(value).toLocaleString('es-CL');
+const getFoodPrice = (food: any) => toNumber(food?.precioUnitario, food?.price, food?.precio);
+const getActivityPrice = (activity: any) => toNumber(activity?.precioUnitario, activity?.price, activity?.precio);
+const getFoodStock = (food: any) => Math.max(0, toNumber(food?.stockActual));
+const getActivityAvailableSpots = (activity: any) =>
+  Math.max(0, toNumber(activity?.cuposDisponibles) - toNumber(activity?.cuposOcupados));
+const isFoodPurchasable = (food: any) => food?.activo === true && getFoodStock(food) > 0;
+const isActivityPurchasable = (activity: any) =>
+  activity?.activa === true && getActivityAvailableSpots(activity) > 0;
+
 const EventoSeleccionadoPage: React.FC = () => {
   const searchParams = useSearchParams();
   const eventoId = searchParams.get('eventoId');
@@ -68,23 +89,23 @@ const EventoSeleccionadoPage: React.FC = () => {
     
     const alimentos = event.alimentosBebestibles 
       ? event.alimentosBebestibles
-          .filter((item: any) => item.activo)
+          .filter(isFoodPurchasable)
           .map((item: any) => ({
             ...item,
             type: 'alimento',
             displayName: item.nombre,
-            displayPrice: item.precioUnitario
+            displayPrice: getFoodPrice(item)
           }))
       : [];
     
     const actividades = event.actividades 
       ? event.actividades
-          .filter((actividad: any) => actividad.activa)
+          .filter(isActivityPurchasable)
           .map((actividad: any) => ({
             ...actividad,
             type: 'actividad',
             displayName: actividad.nombreActividad,
-            displayPrice: actividad.precioUnitario
+            displayPrice: getActivityPrice(actividad)
           }))
       : [];
     
@@ -294,7 +315,7 @@ const EventoSeleccionadoPage: React.FC = () => {
                         {entrada.tipoEntrada.charAt(0).toUpperCase() + entrada.tipoEntrada.slice(1)}
                       </span>
                       <span className={styles.entradaPrecio}>
-                        ${entrada.precio.toLocaleString('es-CL')}
+                        ${formatPrice(entrada.precio)}
                       </span>
                       <span className={styles.entradaDisponibles}>
                         {entrada.cuposDisponibles - entrada.entradasVendidas} disponibles
@@ -354,7 +375,7 @@ const EventoSeleccionadoPage: React.FC = () => {
                             <h4 className={styles.cardTitle}>{item.displayName}</h4>
                             <p className={styles.cardDescription}>{item.descripcion}</p>
                             <p className={styles.cardPrice}>
-                              ${item.displayPrice.toLocaleString('es-CL')}
+                              ${formatPrice(item.displayPrice)}
                             </p>
                           </div>
                         </div>

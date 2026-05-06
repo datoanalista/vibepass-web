@@ -39,6 +39,12 @@ const formatPrice = (value: unknown) => toNumber(value).toLocaleString('es-CL');
 const getEntradaPrice = (entrada: Partial<Entrada>) => toNumber(entrada.precio);
 const getFoodPrice = (food: any) => toNumber(food?.precioUnitario, food?.price, food?.precio);
 const getActivityPrice = (activity: any) => toNumber(activity?.precioUnitario, activity?.price, activity?.precio);
+const getFoodStock = (food: any) => Math.max(0, toNumber(food?.stockActual));
+const getActivityAvailableSpots = (activity: any) =>
+  Math.max(0, toNumber(activity?.cuposDisponibles) - toNumber(activity?.cuposOcupados));
+const isFoodPurchasable = (food: any) => food?.activo === true && getFoodStock(food) > 0;
+const isActivityPurchasable = (activity: any) =>
+  activity?.activa === true && getActivityAvailableSpots(activity) > 0;
 
 const VentaEntradaPage: React.FC = () => {
   const searchParams = useSearchParams();
@@ -175,7 +181,7 @@ const VentaEntradaPage: React.FC = () => {
       const food = event.alimentosBebestibles.find((f: any) => 
         String(f.id || f._id) === String(foodId)
       );
-      return total + (food ? getFoodPrice(food) * quantity : 0);
+      return total + (food && isFoodPurchasable(food) ? getFoodPrice(food) * quantity : 0);
     }, 0);
   };
 
@@ -187,13 +193,13 @@ const VentaEntradaPage: React.FC = () => {
         const food = event.alimentosBebestibles.find((f: any) => 
           String(f.id || f._id) === String(foodId)
         );
-        return food ? { food, quantity } : null;
+        return food && isFoodPurchasable(food) ? { food, quantity } : null;
       })
       .filter(item => item !== null);
   };
 
-  const hasItemsInFoodCart = Object.keys(foodCart).length > 0;
-  const activeFoodItems = event?.alimentosBebestibles?.filter((item: any) => item.activo) || [];
+  const hasItemsInFoodCart = getFoodCartItems().length > 0;
+  const activeFoodItems = event?.alimentosBebestibles?.filter(isFoodPurchasable) || [];
   const hasActiveFoodItems = activeFoodItems.length > 0;
 
   // Funciones para el carrito de actividades
@@ -222,7 +228,7 @@ const VentaEntradaPage: React.FC = () => {
       const activity = event.actividades.find((a: any) => 
         String(a.id || a._id) === String(activityId)
       );
-      return total + (activity ? getActivityPrice(activity) * quantity : 0);
+      return total + (activity && isActivityPurchasable(activity) ? getActivityPrice(activity) * quantity : 0);
     }, 0);
   };
 
@@ -234,13 +240,13 @@ const VentaEntradaPage: React.FC = () => {
         const activity = event.actividades.find((a: any) => 
           String(a.id || a._id) === String(activityId)
         );
-        return activity ? { activity, quantity } : null;
+        return activity && isActivityPurchasable(activity) ? { activity, quantity } : null;
       })
       .filter(item => item !== null);
   };
 
-  const hasItemsInActivityCart = Object.keys(activityCart).length > 0;
-  const activeActivities = event?.actividades?.filter((item: any) => item.activa) || [];
+  const hasItemsInActivityCart = getActivityCartItems().length > 0;
+  const activeActivities = event?.actividades?.filter(isActivityPurchasable) || [];
   const hasActiveActivities = activeActivities.length > 0;
 
   const getPreviousSection = (section: 'food' | 'activities' | 'attendees') => {
@@ -273,6 +279,72 @@ const VentaEntradaPage: React.FC = () => {
       setCurrentSection(getNextSection(hasActiveFoodItems ? 'food' : 'tickets'));
     }
   }, [currentSection, hasActiveActivities, hasActiveFoodItems]);
+
+  useEffect(() => {
+    if (!event?.alimentosBebestibles) return;
+
+    setFoodCart(prev => {
+      const nextCart = { ...prev };
+      let changed = false;
+
+      Object.keys(nextCart).forEach(foodId => {
+        const food = event.alimentosBebestibles.find((item: any) =>
+          String(item.id || item._id) === foodId
+        );
+        const stock = getFoodStock(food);
+
+        if (!food || !isFoodPurchasable(food)) {
+          delete nextCart[foodId];
+          changed = true;
+          return;
+        }
+
+        if (nextCart[foodId] > stock) {
+          nextCart[foodId] = stock;
+          changed = true;
+        }
+      });
+
+      return changed ? nextCart : prev;
+    });
+  }, [event?.alimentosBebestibles]);
+
+  useEffect(() => {
+    setCurrentFoodIndex(prev => Math.min(prev, Math.max(0, activeFoodItems.length - 2)));
+  }, [activeFoodItems.length]);
+
+  useEffect(() => {
+    if (!event?.actividades) return;
+
+    setActivityCart(prev => {
+      const nextCart = { ...prev };
+      let changed = false;
+
+      Object.keys(nextCart).forEach(activityId => {
+        const activity = event.actividades.find((item: any) =>
+          String(item.id || item._id) === activityId
+        );
+        const availableSpots = getActivityAvailableSpots(activity);
+
+        if (!activity || !isActivityPurchasable(activity)) {
+          delete nextCart[activityId];
+          changed = true;
+          return;
+        }
+
+        if (nextCart[activityId] > availableSpots) {
+          nextCart[activityId] = availableSpots;
+          changed = true;
+        }
+      });
+
+      return changed ? nextCart : prev;
+    });
+  }, [event?.actividades]);
+
+  useEffect(() => {
+    setCurrentActivityIndex(prev => Math.min(prev, Math.max(0, activeActivities.length - 2)));
+  }, [activeActivities.length]);
 
   // Funciones para asistentes
   const getTotalAttendees = () => {
@@ -858,11 +930,7 @@ const VentaEntradaPage: React.FC = () => {
                                 <p className={styles.foodDescriptionNew}>{food.descripcion || food.description}</p>
                                 <p className={styles.foodPriceNew}>${formatPrice(getFoodPrice(food))}</p>
                                 <p className={styles.foodAvailability}>
-                                  Disponibles: {(() => {
-                                    console.log('Food item:', food);
-                                    console.log('stockActual:', food.stockActual);
-                                    return food.stockActual || 'Sin límite';
-                                  })()}
+                                  Disponibles: {getFoodStock(food)}
                                 </p>
                                 
                                 <div className={styles.foodQuantityControlsNew}>
@@ -879,9 +947,9 @@ const VentaEntradaPage: React.FC = () => {
                                     className={styles.quantityBtn}
                                     onClick={() => {
                                       const currentQuantity = getFoodQuantity(food.id || food._id);
-                                      const availableStock = food.stockActual || 999999; // Si no hay límite, usar número alto
+                                      const availableStock = getFoodStock(food);
                                       
-                                      if (food.stockActual && currentQuantity >= availableStock) {
+                                      if (currentQuantity >= availableStock) {
                                         showModal(
                                           'Stock insuficiente',
                                           `No hay más stock disponible para "${food.nombre || food.name}".\n\nStock disponible: ${availableStock}\nEn tu carrito: ${currentQuantity}`,
@@ -891,7 +959,7 @@ const VentaEntradaPage: React.FC = () => {
                                         updateFoodQuantity(food.id || food._id, 1);
                                       }
                                     }}
-                                    disabled={food.stockActual && getFoodQuantity(food.id || food._id) >= food.stockActual}
+                                    disabled={getFoodQuantity(food.id || food._id) >= getFoodStock(food)}
                                   >
                                     +
                                   </button>
@@ -951,7 +1019,7 @@ const VentaEntradaPage: React.FC = () => {
                                 <p className={styles.foodDescriptionNew}>{activity.descripcion || activity.description}</p>
                                 <p className={styles.foodPriceNew}>${formatPrice(getActivityPrice(activity))}</p>
                                 <p className={styles.foodAvailability}>
-                                  Cupos disponibles: {activity.cuposDisponibles - (activity.cuposOcupados || 0)}
+                                  Cupos disponibles: {getActivityAvailableSpots(activity)}
                                 </p>
                                 
                                 <div className={styles.foodQuantityControlsNew}>
@@ -968,7 +1036,7 @@ const VentaEntradaPage: React.FC = () => {
                                     className={styles.quantityBtn}
                                     onClick={() => {
                                       const currentQuantity = getActivityQuantity(activity.id || activity._id);
-                                      const availableSpots = activity.cuposDisponibles - (activity.cuposOcupados || 0);
+                                      const availableSpots = getActivityAvailableSpots(activity);
                                       
                                       if (currentQuantity >= availableSpots) {
                                         showModal(
@@ -980,7 +1048,7 @@ const VentaEntradaPage: React.FC = () => {
                                         updateActivityQuantity(activity.id || activity._id, 1);
                                       }
                                     }}
-                                    disabled={getActivityQuantity(activity.id || activity._id) >= (activity.cuposDisponibles - (activity.cuposOcupados || 0))}
+                                    disabled={getActivityQuantity(activity.id || activity._id) >= getActivityAvailableSpots(activity)}
                                   >
                                     +
                                   </button>

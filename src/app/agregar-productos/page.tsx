@@ -8,6 +8,26 @@ import { API_ENDPOINTS } from "@/config/api";
 import { useEventDetails } from "@/hooks/useEventDetails";
 import styles from "./page.module.css";
 
+const toNumber = (...values: unknown[]): number => {
+  for (const value of values) {
+    if (value === null || value === undefined || value === '') continue;
+
+    const numberValue = typeof value === 'number' ? value : Number(value);
+    if (Number.isFinite(numberValue)) return numberValue;
+  }
+
+  return 0;
+};
+
+const getFoodPrice = (food: any) => toNumber(food?.precioUnitario, food?.price, food?.precio);
+const getActivityPrice = (activity: any) => toNumber(activity?.precioUnitario, activity?.price, activity?.precio);
+const getFoodStock = (food: any) => Math.max(0, toNumber(food?.stockActual));
+const getActivityAvailableSpots = (activity: any) =>
+  Math.max(0, toNumber(activity?.cuposDisponibles) - toNumber(activity?.cuposOcupados));
+const isFoodPurchasable = (food: any) => food?.activo === true && getFoodStock(food) > 0;
+const isActivityPurchasable = (activity: any) =>
+  activity?.activa === true && getActivityAvailableSpots(activity) > 0;
+
 function AgregarProductosContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -30,6 +50,64 @@ function AgregarProductosContent() {
       router.push('/login');
     }
   }, [isHydrated, authLoading, isLoggedIn, router]);
+
+  useEffect(() => {
+    if (!event) return;
+
+    if (event.alimentosBebestibles) {
+      setFoodCart(prev => {
+        const nextCart = { ...prev };
+        let changed = false;
+
+        Object.keys(nextCart).forEach(foodId => {
+          const food = event.alimentosBebestibles.find((item: any) =>
+            String(item.id || item._id) === foodId
+          );
+          const stock = getFoodStock(food);
+
+          if (!food || !isFoodPurchasable(food)) {
+            delete nextCart[foodId];
+            changed = true;
+            return;
+          }
+
+          if (nextCart[foodId] > stock) {
+            nextCart[foodId] = stock;
+            changed = true;
+          }
+        });
+
+        return changed ? nextCart : prev;
+      });
+    }
+
+    if (event.actividades) {
+      setActivityCart(prev => {
+        const nextCart = { ...prev };
+        let changed = false;
+
+        Object.keys(nextCart).forEach(activityId => {
+          const activity = event.actividades.find((item: any) =>
+            String(item.id || item._id) === activityId
+          );
+          const availableSpots = getActivityAvailableSpots(activity);
+
+          if (!activity || !isActivityPurchasable(activity)) {
+            delete nextCart[activityId];
+            changed = true;
+            return;
+          }
+
+          if (nextCart[activityId] > availableSpots) {
+            nextCart[activityId] = availableSpots;
+            changed = true;
+          }
+        });
+
+        return changed ? nextCart : prev;
+      });
+    }
+  }, [event]);
 
   // Food cart functions
   const updateFoodQuantity = (foodId: number | string, change: number) => {
@@ -76,7 +154,7 @@ function AgregarProductosContent() {
       const food = event.alimentosBebestibles.find((f: any) => 
         String(f.id || f._id) === String(foodId)
       );
-      return total + (food ? (food.precioUnitario || food.price) * quantity : 0);
+      return total + (food && isFoodPurchasable(food) ? getFoodPrice(food) * quantity : 0);
     }, 0);
   };
 
@@ -86,7 +164,7 @@ function AgregarProductosContent() {
       const activity = event.actividades.find((a: any) => 
         String(a.id || a._id) === String(activityId)
       );
-      return total + (activity ? (activity.precioUnitario || activity.price) * quantity : 0);
+      return total + (activity && isActivityPurchasable(activity) ? getActivityPrice(activity) * quantity : 0);
     }, 0);
   };
 
@@ -94,13 +172,16 @@ function AgregarProductosContent() {
 
   const hasItemsInCart = Object.keys(foodCart).length > 0 || Object.keys(activityCart).length > 0;
 
-  const formatCurrency = (amount: number) => {
+  const formatCurrency = (amount: unknown) => {
     return new Intl.NumberFormat('es-CL', {
       style: 'currency',
       currency: 'CLP',
       minimumFractionDigits: 0
-    }).format(amount);
+    }).format(toNumber(amount));
   };
+
+  const availableFoodItems = event?.alimentosBebestibles?.filter(isFoodPurchasable) || [];
+  const availableActivities = event?.actividades?.filter(isActivityPurchasable) || [];
 
   // Submit products
   const handleSubmit = async () => {
@@ -110,15 +191,32 @@ function AgregarProductosContent() {
     setMessage(null);
     
     try {
-      const foodItems = Object.entries(foodCart).map(([id, cantidad]) => ({
-        id: parseInt(id),
-        cantidad
-      }));
+      const foodItems = Object.entries(foodCart).flatMap(([id, cantidad]) => {
+        const food = event.alimentosBebestibles?.find((item: any) =>
+          String(item.id || item._id) === id
+        );
+
+        if (!food || !isFoodPurchasable(food)) return [];
+
+        const availableQuantity = Math.min(cantidad, getFoodStock(food));
+        return availableQuantity > 0 ? [{ id: parseInt(id), cantidad: availableQuantity }] : [];
+      });
       
-      const activityItems = Object.entries(activityCart).map(([id, cantidad]) => ({
-        id: parseInt(id),
-        cantidad
-      }));
+      const activityItems = Object.entries(activityCart).flatMap(([id, cantidad]) => {
+        const activity = event.actividades?.find((item: any) =>
+          String(item.id || item._id) === id
+        );
+
+        if (!activity || !isActivityPurchasable(activity)) return [];
+
+        const availableQuantity = Math.min(cantidad, getActivityAvailableSpots(activity));
+        return availableQuantity > 0 ? [{ id: parseInt(id), cantidad: availableQuantity }] : [];
+      });
+
+      if (foodItems.length === 0 && activityItems.length === 0) {
+        setMessage({ type: 'error', text: 'No hay productos disponibles para agregar.' });
+        return;
+      }
 
       const url = API_ENDPOINTS.ADD_PRODUCTS_TO_SALE(saleNumber);
       const response = await fetch(url, {
@@ -286,10 +384,10 @@ function AgregarProductosContent() {
                 {/* Food Section */}
                 {currentSection === 'food' && (
                   <div className={styles.productsGrid}>
-                    {event.alimentosBebestibles?.filter((f: any) => f.activo).length === 0 ? (
+                    {availableFoodItems.length === 0 ? (
                       <p className={styles.noProducts}>No hay productos de comida disponibles</p>
                     ) : (
-                      event.alimentosBebestibles?.filter((f: any) => f.activo).map((food: any) => (
+                      availableFoodItems.map((food: any) => (
                         <div key={food.id || food._id} className={styles.productCard}>
                           {food.imagen && (
                             <img src={food.imagen} alt={food.nombre} className={styles.productImage} />
@@ -297,10 +395,10 @@ function AgregarProductosContent() {
                           <div className={styles.productInfo}>
                             <h3 className={styles.productName}>{food.nombre}</h3>
                             <p className={styles.productPrice}>
-                              {formatCurrency(food.precioUnitario || food.price)}
+                              {formatCurrency(getFoodPrice(food))}
                             </p>
                             <p className={styles.productStock}>
-                              Stock: {food.stockActual}
+                              Stock: {getFoodStock(food)}
                             </p>
                           </div>
                           <div className={styles.quantityControl}>
@@ -315,8 +413,12 @@ function AgregarProductosContent() {
                               {getFoodQuantity(food.id || food._id)}
                             </span>
                             <button 
-                              onClick={() => updateFoodQuantity(food.id || food._id, 1)}
-                              disabled={getFoodQuantity(food.id || food._id) >= food.stockActual}
+                              onClick={() => {
+                                if (getFoodQuantity(food.id || food._id) < getFoodStock(food)) {
+                                  updateFoodQuantity(food.id || food._id, 1);
+                                }
+                              }}
+                              disabled={getFoodQuantity(food.id || food._id) >= getFoodStock(food)}
                               className={styles.qtyButton}
                             >
                               +
@@ -331,11 +433,11 @@ function AgregarProductosContent() {
                 {/* Activities Section */}
                 {currentSection === 'activities' && (
                   <div className={styles.productsGrid}>
-                    {event.actividades?.filter((a: any) => a.activa).length === 0 ? (
+                    {availableActivities.length === 0 ? (
                       <p className={styles.noProducts}>No hay actividades disponibles</p>
                     ) : (
-                      event.actividades?.filter((a: any) => a.activa).map((activity: any) => {
-                        const cuposDisponibles = activity.cuposDisponibles - (activity.cuposOcupados || 0);
+                      availableActivities.map((activity: any) => {
+                        const cuposDisponibles = getActivityAvailableSpots(activity);
                         return (
                           <div key={activity.id || activity._id} className={styles.productCard}>
                             {activity.imagen && (
@@ -344,7 +446,7 @@ function AgregarProductosContent() {
                             <div className={styles.productInfo}>
                               <h3 className={styles.productName}>{activity.nombreActividad}</h3>
                               <p className={styles.productPrice}>
-                                {formatCurrency(activity.precioUnitario || activity.price)}
+                                {formatCurrency(getActivityPrice(activity))}
                               </p>
                               <p className={styles.productStock}>
                                 Cupos: {cuposDisponibles}
@@ -392,11 +494,11 @@ function AgregarProductosContent() {
                           const food = event.alimentosBebestibles?.find((f: any) => 
                             String(f.id || f._id) === id
                           );
-                          if (!food) return null;
+                          if (!food || !isFoodPurchasable(food)) return null;
                           return (
                             <div key={id} className={styles.cartItem}>
                               <span>{food.nombre} x{qty}</span>
-                              <span>{formatCurrency((food.precioUnitario || food.price) * qty)}</span>
+                              <span>{formatCurrency(getFoodPrice(food) * qty)}</span>
                             </div>
                           );
                         })}
@@ -414,11 +516,11 @@ function AgregarProductosContent() {
                           const activity = event.actividades?.find((a: any) => 
                             String(a.id || a._id) === id
                           );
-                          if (!activity) return null;
+                          if (!activity || !isActivityPurchasable(activity)) return null;
                           return (
                             <div key={id} className={styles.cartItem}>
                               <span>{activity.nombreActividad} x{qty}</span>
-                              <span>{formatCurrency((activity.precioUnitario || activity.price) * qty)}</span>
+                              <span>{formatCurrency(getActivityPrice(activity) * qty)}</span>
                             </div>
                           );
                         })}
