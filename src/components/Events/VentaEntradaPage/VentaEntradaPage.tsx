@@ -24,6 +24,22 @@ interface Entrada {
   };
 }
 
+const toNumber = (...values: unknown[]): number => {
+  for (const value of values) {
+    if (value === null || value === undefined || value === '') continue;
+
+    const numberValue = typeof value === 'number' ? value : Number(value);
+    if (Number.isFinite(numberValue)) return numberValue;
+  }
+
+  return 0;
+};
+
+const formatPrice = (value: unknown) => toNumber(value).toLocaleString('es-CL');
+const getEntradaPrice = (entrada: Partial<Entrada>) => toNumber(entrada.precio);
+const getFoodPrice = (food: any) => toNumber(food?.precioUnitario, food?.price, food?.precio);
+const getActivityPrice = (activity: any) => toNumber(activity?.precioUnitario, activity?.price, activity?.precio);
+
 const VentaEntradaPage: React.FC = () => {
   const searchParams = useSearchParams();
   const eventoId = searchParams.get('eventoId');
@@ -114,7 +130,7 @@ const VentaEntradaPage: React.FC = () => {
         String(e.id || e._id) === String(entradaId)
       );
       console.log('Finding entrada for ID:', entradaId, 'Found:', entrada);
-      return total + (entrada ? entrada.precio * quantity : 0);
+      return total + (entrada ? getEntradaPrice(entrada) * quantity : 0);
     }, 0);
   };
 
@@ -159,7 +175,7 @@ const VentaEntradaPage: React.FC = () => {
       const food = event.alimentosBebestibles.find((f: any) => 
         String(f.id || f._id) === String(foodId)
       );
-      return total + (food ? (food.precioUnitario || food.price) * quantity : 0);
+      return total + (food ? getFoodPrice(food) * quantity : 0);
     }, 0);
   };
 
@@ -206,7 +222,7 @@ const VentaEntradaPage: React.FC = () => {
       const activity = event.actividades.find((a: any) => 
         String(a.id || a._id) === String(activityId)
       );
-      return total + (activity ? (activity.precioUnitario || activity.price) * quantity : 0);
+      return total + (activity ? getActivityPrice(activity) * quantity : 0);
     }, 0);
   };
 
@@ -377,9 +393,9 @@ const VentaEntradaPage: React.FC = () => {
           items: getCartItems().map((item: any) => ({
             id: item.entrada.id || item.entrada._id,
             tipoEntrada: item.entrada.tipoEntrada,
-            precio: item.entrada.precio,
+            precio: getEntradaPrice(item.entrada),
             cantidad: item.quantity,
-            subtotal: item.entrada.precio * item.quantity
+            subtotal: getEntradaPrice(item.entrada) * item.quantity
           })),
           subtotal: getTotalPrice()
         },
@@ -387,9 +403,9 @@ const VentaEntradaPage: React.FC = () => {
           items: getFoodCartItems().map((item: any) => ({
             id: item.food.id || item.food._id,
             nombre: item.food.nombre || item.food.name,
-            precio: item.food.precioUnitario || item.food.price,
+            precio: getFoodPrice(item.food),
             cantidad: item.quantity,
-            subtotal: (item.food.precioUnitario || item.food.price) * item.quantity
+            subtotal: getFoodPrice(item.food) * item.quantity
           })),
           subtotal: getFoodTotalPrice()
         },
@@ -397,9 +413,9 @@ const VentaEntradaPage: React.FC = () => {
           items: getActivityCartItems().map((item: any) => ({
             id: item.activity.id || item.activity._id,
             nombreActividad: item.activity.nombreActividad || item.activity.name,
-            precio: item.activity.precioUnitario || item.activity.price,
+            precio: getActivityPrice(item.activity),
             cantidad: item.quantity,
-            subtotal: (item.activity.precioUnitario || item.activity.price) * item.quantity
+            subtotal: getActivityPrice(item.activity) * item.quantity
           })),
           subtotal: getActivityTotalPrice()
         },
@@ -766,7 +782,7 @@ const VentaEntradaPage: React.FC = () => {
                             </span>
                           </span>
                           <span className={styles.entradaPrecio}>
-                            ${entrada.precio.toLocaleString('es-CL')}
+                            ${formatPrice(getEntradaPrice(entrada))}
                           </span>
                           <div className={styles.quantityControls}>
                             <button 
@@ -840,7 +856,7 @@ const VentaEntradaPage: React.FC = () => {
                               <div className={styles.foodInfoNew}>
                                 <h3 className={styles.foodNameNew}>{food.nombre || food.name}</h3>
                                 <p className={styles.foodDescriptionNew}>{food.descripcion || food.description}</p>
-                                <p className={styles.foodPriceNew}>${(food.precioUnitario || food.price).toLocaleString('es-CL')}</p>
+                                <p className={styles.foodPriceNew}>${formatPrice(getFoodPrice(food))}</p>
                                 <p className={styles.foodAvailability}>
                                   Disponibles: {(() => {
                                     console.log('Food item:', food);
@@ -933,7 +949,7 @@ const VentaEntradaPage: React.FC = () => {
                               <div className={styles.foodInfoNew}>
                                 <h3 className={styles.foodNameNew}>{activity.nombreActividad || activity.name}</h3>
                                 <p className={styles.foodDescriptionNew}>{activity.descripcion || activity.description}</p>
-                                <p className={styles.foodPriceNew}>${(activity.precioUnitario || activity.price).toLocaleString('es-CL')}</p>
+                                <p className={styles.foodPriceNew}>${formatPrice(getActivityPrice(activity))}</p>
                                 <p className={styles.foodAvailability}>
                                   Cupos disponibles: {activity.cuposDisponibles - (activity.cuposOcupados || 0)}
                                 </p>
@@ -1108,14 +1124,14 @@ const VentaEntradaPage: React.FC = () => {
                             {item.entrada.tipoEntrada.charAt(0).toUpperCase() + item.entrada.tipoEntrada.slice(1)} x{item.quantity}
                           </span>
                           <span className={styles.cartItemPrice}>
-                            ${(item.entrada.precio * item.quantity).toLocaleString('es-CL')}
+                            ${formatPrice(getEntradaPrice(item.entrada) * item.quantity)}
                           </span>
                         </div>
                       ))}
                     </div>
                     <div className={styles.cartSubtotal}>
                       <span>Subtotal Entradas</span>
-                      <span>${getTotalPrice().toLocaleString('es-CL')}</span>
+                      <span>${formatPrice(getTotalPrice())}</span>
                     </div>
                   </div>
                 )}
@@ -1131,14 +1147,14 @@ const VentaEntradaPage: React.FC = () => {
                             {item.food.nombre || item.food.name} x{item.quantity}
                           </span>
                           <span className={styles.cartItemPrice}>
-                            ${((item.food.precioUnitario || item.food.price) * item.quantity).toLocaleString('es-CL')}
+                            ${formatPrice(getFoodPrice(item.food) * item.quantity)}
                           </span>
                         </div>
                       ))}
                     </div>
                     <div className={styles.cartSubtotal}>
                       <span>Subtotal Alimentos</span>
-                      <span>${getFoodTotalPrice().toLocaleString('es-CL')}</span>
+                      <span>${formatPrice(getFoodTotalPrice())}</span>
                     </div>
                   </div>
                 )}
@@ -1154,14 +1170,14 @@ const VentaEntradaPage: React.FC = () => {
                             {item.activity.nombreActividad || item.activity.name} x{item.quantity}
                           </span>
                           <span className={styles.cartItemPrice}>
-                            ${((item.activity.precioUnitario || item.activity.price) * item.quantity).toLocaleString('es-CL')}
+                            ${formatPrice(getActivityPrice(item.activity) * item.quantity)}
                           </span>
                         </div>
                       ))}
                     </div>
                     <div className={styles.cartSubtotal}>
                       <span>Subtotal Actividades</span>
-                      <span>${getActivityTotalPrice().toLocaleString('es-CL')}</span>
+                      <span>${formatPrice(getActivityTotalPrice())}</span>
                     </div>
                   </div>
                 )}
@@ -1171,7 +1187,7 @@ const VentaEntradaPage: React.FC = () => {
                   <div className={styles.cartSummary}>
                     <div className={styles.cartTotal}>
                       <span>Total</span>
-                      <span>${(getTotalPrice() + getFoodTotalPrice() + getActivityTotalPrice()).toLocaleString('es-CL')}</span>
+                      <span>${formatPrice(getTotalPrice() + getFoodTotalPrice() + getActivityTotalPrice())}</span>
                     </div>
                   </div>
                 )}
