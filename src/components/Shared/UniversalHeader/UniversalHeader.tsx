@@ -10,9 +10,11 @@ const UniversalHeader: React.FC = () => {
   const router = useRouter();
   const { isLoggedIn, getFirstName, logout } = useAuth();
   const [showDropdown, setShowDropdown] = React.useState(false);
+  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
 
   const handleSectionClick = (sectionId: string) => (e: React.MouseEvent) => {
     e.preventDefault();
+    setShowMobileMenu(false);
     
     // Si estamos en la página home, hacer scroll a la sección
     if (window.location.pathname === '/home' || window.location.pathname === '/') {
@@ -34,8 +36,10 @@ const UniversalHeader: React.FC = () => {
     if (isLoggedIn) {
       // Si está logueado, toggle dropdown
       setShowDropdown(!showDropdown);
+      setShowMobileMenu(false);
     } else {
       // Si no está logueado, ir a login
+      setShowMobileMenu(false);
       router.push('/login');
     }
   };
@@ -43,6 +47,7 @@ const UniversalHeader: React.FC = () => {
   const handleLogout = () => {
     logout();
     setShowDropdown(false);
+    setShowMobileMenu(false);
     router.push('/home');
   };
 
@@ -62,6 +67,15 @@ const UniversalHeader: React.FC = () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, [showDropdown]);
+
+  const handleMobileMenuToggle = () => {
+    setShowDropdown(false);
+    setShowMobileMenu((prev) => !prev);
+  };
+
+  const handleMobileLinkClick = () => {
+    setShowMobileMenu(false);
+  };
 
   return (
     <header className={styles.header}>
@@ -204,12 +218,77 @@ const UniversalHeader: React.FC = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button className={styles.mobileMenuButton}>
+        <button
+          className={`${styles.mobileMenuButton} ${showMobileMenu ? styles.mobileMenuButtonOpen : ''}`}
+          onClick={handleMobileMenuToggle}
+          aria-label="Abrir menú"
+          aria-expanded={showMobileMenu}
+          aria-controls="mobile-navigation"
+          type="button"
+        >
           <span className={styles.hamburger}></span>
           <span className={styles.hamburger}></span>
           <span className={styles.hamburger}></span>
         </button>
       </div>
+
+      {showMobileMenu && (
+        <div id="mobile-navigation" className={styles.mobileMenu}>
+          <nav className={styles.mobileNav}>
+            <Link
+              href="/eventos"
+              className={styles.mobileNavLink}
+              prefetch={false}
+              onClick={handleMobileLinkClick}
+            >
+              Eventos
+            </Link>
+            <a
+              href="/home#qr"
+              className={styles.mobileNavLink}
+              onClick={handleSectionClick('qr')}
+            >
+              QR
+            </a>
+            {/*
+            <a
+              href={process.env.NEXT_PUBLIC_PANEL_URL || '//vibepass.cl/vibepass-panel/login/'}
+              className={styles.mobileNavLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Crea tu evento!
+            </a>
+            */}
+            <a
+              href="/home#servicio"
+              className={styles.mobileNavLink}
+              onClick={handleSectionClick('servicio')}
+            >
+              Servicio
+            </a>
+            <a
+              href="/home#cotizacion"
+              className={styles.mobileNavLink}
+              onClick={handleSectionClick('cotizacion')}
+            >
+              Cotización
+            </a>
+            {!isLoggedIn && (
+              <button
+                type="button"
+                className={styles.mobileAccountLink}
+                onClick={() => {
+                  setShowMobileMenu(false);
+                  router.push('/login');
+                }}
+              >
+                Mi cuenta
+              </button>
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

@@ -183,12 +183,28 @@
   padding: 0.5rem;
 }
 
+.mobileMenuButtonOpen .hamburger:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobileMenuButtonOpen .hamburger:nth-child(2) {
+  opacity: 0;
+}
+
+.mobileMenuButtonOpen .hamburger:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 .hamburger {
   width: 25px;
   height: 3px;
   background-color: #FFFFFF;
   border-radius: 2px;
   transition: all 0.3s ease;
+}
+
+.mobileMenu {
+  display: none;
 }
 
 /* Responsive Design */
@@ -244,6 +260,41 @@
   .mobileMenuButton {
     display: flex;
   }
+
+  .mobileMenu {
+    display: block;
+    background: #1B2735;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  }
+
+  .mobileNav {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1rem 1rem;
+  }
+
+  .mobileNavLink,
+  .mobileAccountLink {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .mobileNavLink:last-child,
+  .mobileAccountLink:last-child {
+    border-bottom: none;
+  }
   
   .accountButton {
     padding: 0.5rem 1rem;
@@ -279,5 +330,9 @@
     height: 40px;
     justify-content: center;
     gap: 0;
+  }
+
+  .mobileNav {
+    padding: 0.75rem;
   }
 }

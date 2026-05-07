@@ -387,7 +387,7 @@ const EventoSeleccionadoPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Sección Partner */}
+          {/*
           <div className={styles.partnerSection}>
             <h2 className={styles.partnerTitle}>Partner</h2>
             <div className={styles.partnerLogos}>
@@ -403,6 +403,7 @@ const EventoSeleccionadoPage: React.FC = () => {
               />
             </div>
           </div>
+          */}
         </div>
       )}
 
