@@ -89,6 +89,7 @@ const UniversalHeader: React.FC = () => {
             >
               QR
             </a>
+            {/*
             <a 
               href={process.env.NEXT_PUBLIC_PANEL_URL || '//vibepass.cl/vibepass-panel/login/'}
               className={styles.navLink}
@@ -97,6 +98,7 @@ const UniversalHeader: React.FC = () => {
             >
               Crea tu evento!
             </a>
+            */}
             <a 
               href="/home#servicio" 
               className={styles.navLink}

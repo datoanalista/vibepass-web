@@ -36,13 +36,21 @@ const Footer: React.FC = () => {
         className={styles.footerImage}
       />
       <div className={styles.socialMask} aria-hidden="true" />
-      <div className={styles.socialIcons} aria-hidden="true">
+      <div className={styles.socialIcons}>
+        {/*
         <div className={styles.socialIcon}>
           <TikTokIcon />
         </div>
-        <div className={styles.socialIcon}>
+        */}
+        <a
+          href="https://www.instagram.com/molotovpro?igsh=MW92Y2ljZDN6ZzFseQ=="
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.socialIcon}
+          aria-label="Instagram Molotov Pro"
+        >
           <InstagramIcon />
-        </div>
+        </a>
       </div>
     </footer>
   );

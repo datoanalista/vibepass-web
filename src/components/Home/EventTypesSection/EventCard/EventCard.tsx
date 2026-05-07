@@ -36,6 +36,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, isCenter }) => {
       className={`${styles.eventCard} ${isCenter ? styles.centerCard : styles.sideCard}`}
       onClick={handleCardClick}
     >
+      {/*
       {isCenter && (
         <div className={styles.decorationLayer} aria-hidden="true">
           {event.id === 2 && (
@@ -75,6 +76,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, isCenter }) => {
           )}
         </div>
       )}
+      */}
 
       {/* Background de la card */}
       <div className={`${styles.cardBackground} ${isCenter ? styles.centerBackground : styles.sideBackground}`} />
