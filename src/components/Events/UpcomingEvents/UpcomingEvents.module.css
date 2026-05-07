@@ -94,14 +94,16 @@
 
 .eventImageContainer {
   width: 100%;
-  aspect-ratio: 1600 / 646;
+  aspect-ratio: 1600 / 710;
   overflow: hidden;
   position: relative;
   border-radius: 12px 12px 0 0;
-  background: #f8fafc;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
+  padding: 10px 0;
 }
 
 .eventImage {

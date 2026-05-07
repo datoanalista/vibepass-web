@@ -27,13 +27,15 @@
 .imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 1600 / 646;
+  aspect-ratio: 1600 / 710;
   overflow: hidden;
   border-radius: 16px 16px 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #ffffff;
+  box-sizing: border-box;
+  padding: 14px 0;
 }
 
 .eventImage {
