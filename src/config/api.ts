@@ -19,6 +19,8 @@ export const API_ENDPOINTS = {
   FLOW_CONFIRM: `${API_BASE_URL}/payments/flow/confirm`,
   USERS_WEB: `${API_BASE_URL}/usersweb`,
   LOGIN: `${API_BASE_URL}/usersweb/login`,
+  FORGOT_PASSWORD: `${API_BASE_URL}/usersweb/forgot-password`,
+  RESET_PASSWORD: `${API_BASE_URL}/usersweb/reset-password`,
 } as const;
 
 console.log('🔧 [API Config] Endpoints configurados:', API_ENDPOINTS);

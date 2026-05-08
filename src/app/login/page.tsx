@@ -142,9 +142,9 @@ export default function LoginPage() {
 
             {/* Forgot Password */}
             <div className={styles.forgotPassword}>
-              <a href="#" className={styles.forgotPasswordLink}>
+              <Link href="/recuperar-contrasena" className={styles.forgotPasswordLink}>
                 ¿Olvidaste tu contraseña?
-              </a>
+              </Link>
             </div>
 
             {/* Remember Me */}
