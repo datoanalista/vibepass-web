@@ -13,6 +13,14 @@ const EventsPage: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const router = useRouter();
 
+  const hasEventEnded = (fechaEvento: string, horaTermino: string) => {
+    const [year, month, day] = fechaEvento.split('-').map(Number);
+    const [hours, minutes] = horaTermino.split(':').map(Number);
+    const eventEndDate = new Date(year, month - 1, day, hours, minutes);
+
+    return eventEndDate < new Date();
+  };
+
   // Función para transformar eventos del contexto al formato esperado por los componentes
   const transformEvents = (contextEvents: EventContextType[]): EventAPI[] => {
     return contextEvents.filter(event => 
@@ -24,7 +32,11 @@ const EventsPage: React.FC = () => {
       event.informacionGeneral?.lugarEvento &&
       event.informacionGeneral?.bannerPromocional &&
       event.informacionGeneral?.fechaCreacion &&
-      event.informacionGeneral?.estado
+      event.informacionGeneral?.estado &&
+      !hasEventEnded(
+        event.informacionGeneral.fechaEvento!,
+        event.informacionGeneral.horaTermino!
+      )
     ).map(event => ({
       id: event.id,
       _id: event._id,
