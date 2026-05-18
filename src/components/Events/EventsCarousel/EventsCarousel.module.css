@@ -251,11 +251,26 @@
 
 @media (max-width: 768px) {
   .infoBar {
-    height: 112px;
-    padding: 0 14px;
+    height: auto;
+    min-height: 112px;
+    padding: 14px;
     flex-direction: column;
     gap: 10px;
     text-align: center;
+    align-items: stretch;
+  }
+
+  .eventInfo {
+    gap: 8px;
+  }
+
+  .rightSection {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .actionButton {
+    width: 100%;
   }
   
   .eventName {
@@ -288,14 +303,16 @@
   .qrButton {
     font-size: 14px;
     padding: 8px 16px;
-    min-width: 150px;
+    min-width: 0;
+    width: 100%;
+    max-width: 220px;
   }
 }
 
 @media (max-width: 480px) {
   .infoBar {
-    height: 98px;
-    padding: 0 10px;
+    min-height: 0;
+    padding: 12px 10px 16px;
   }
   
   .eventName {
@@ -328,6 +345,6 @@
   .qrButton {
     font-size: 12px;
     padding: 6px 12px;
-    min-width: 120px;
+    max-width: 180px;
   }
 }
