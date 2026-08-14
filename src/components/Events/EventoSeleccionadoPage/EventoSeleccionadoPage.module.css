@@ -876,8 +876,17 @@
 
   .eventImageContainer {
     width: 90%;
-    height: 250px;
+    height: auto;
+    aspect-ratio: 982 / 400;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+  }
+
+  .eventImage {
+    object-fit: contain;
   }
 
   .eventDescription {

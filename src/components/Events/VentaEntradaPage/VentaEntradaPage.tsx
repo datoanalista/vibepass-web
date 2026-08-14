@@ -56,6 +56,7 @@ const VentaEntradaPage: React.FC = () => {
   const [currentSection, setCurrentSection] = useState<'tickets' | 'food' | 'activities' | 'attendees'>('tickets');
   const [currentFoodIndex, setCurrentFoodIndex] = useState(0);
   const [currentActivityIndex, setCurrentActivityIndex] = useState(0);
+  const [isMobileCarousel, setIsMobileCarousel] = useState(false);
   const [foodCart, setFoodCart] = useState<{[key: string]: number}>({});
   const [activityCart, setActivityCart] = useState<{[key: string]: number}>({});
   const [openAttendeeIndex, setOpenAttendeeIndex] = useState<number>(0);
@@ -109,6 +110,19 @@ const VentaEntradaPage: React.FC = () => {
   const closeModal = () => {
     setModalInfo(prev => ({ ...prev, isOpen: false }));
   };
+
+  useEffect(() => {
+    const syncViewport = () => {
+      setIsMobileCarousel(window.innerWidth <= 768);
+    };
+
+    syncViewport();
+    window.addEventListener('resize', syncViewport);
+
+    return () => {
+      window.removeEventListener('resize', syncViewport);
+    };
+  }, []);
 
   // Funciones del carrito
   const updateQuantity = (entradaId: string, change: number) => {
@@ -248,6 +262,11 @@ const VentaEntradaPage: React.FC = () => {
   const hasItemsInActivityCart = getActivityCartItems().length > 0;
   const activeActivities = event?.actividades?.filter(isActivityPurchasable) || [];
   const hasActiveActivities = activeActivities.length > 0;
+  const visibleCarouselItemsCount = isMobileCarousel ? 1 : 2;
+  const maxFoodIndex = Math.max(0, activeFoodItems.length - visibleCarouselItemsCount);
+  const maxActivityIndex = Math.max(0, activeActivities.length - visibleCarouselItemsCount);
+  const canScrollFood = activeFoodItems.length > visibleCarouselItemsCount;
+  const canScrollActivities = activeActivities.length > visibleCarouselItemsCount;
 
   const getPreviousSection = (section: 'food' | 'activities' | 'attendees') => {
     if (section === 'food') return 'tickets';
@@ -310,8 +329,8 @@ const VentaEntradaPage: React.FC = () => {
   }, [event?.alimentosBebestibles]);
 
   useEffect(() => {
-    setCurrentFoodIndex(prev => Math.min(prev, Math.max(0, activeFoodItems.length - 2)));
-  }, [activeFoodItems.length]);
+    setCurrentFoodIndex(prev => Math.min(prev, maxFoodIndex));
+  }, [maxFoodIndex]);
 
   useEffect(() => {
     if (!event?.actividades) return;
@@ -343,8 +362,8 @@ const VentaEntradaPage: React.FC = () => {
   }, [event?.actividades]);
 
   useEffect(() => {
-    setCurrentActivityIndex(prev => Math.min(prev, Math.max(0, activeActivities.length - 2)));
-  }, [activeActivities.length]);
+    setCurrentActivityIndex(prev => Math.min(prev, maxActivityIndex));
+  }, [maxActivityIndex]);
 
   // Funciones para asistentes
   const getTotalAttendees = () => {
@@ -590,50 +609,50 @@ const VentaEntradaPage: React.FC = () => {
 
   // Funciones del carrusel
   const nextFoodItem = () => {
-    if (activeFoodItems.length <= 2) return; // No navegar si hay 2 o menos items
+    if (!canScrollFood) return;
     
     setCurrentFoodIndex(prev => 
-      prev >= activeFoodItems.length - 2 ? 0 : prev + 1
+      prev >= maxFoodIndex ? 0 : prev + 1
     );
   };
 
   const prevFoodItem = () => {
-    if (activeFoodItems.length <= 2) return; // No navegar si hay 2 o menos items
+    if (!canScrollFood) return;
     
     setCurrentFoodIndex(prev => 
-      prev <= 0 ? Math.max(0, activeFoodItems.length - 2) : prev - 1
+      prev <= 0 ? maxFoodIndex : prev - 1
     );
   };
 
   const getVisibleFoodItems = () => {
-    const visibleItems = activeFoodItems.slice(currentFoodIndex, currentFoodIndex + 2);
-    
-    // Asegurar que siempre mostramos máximo 2 cards
-    return visibleItems.slice(0, 2);
+    return activeFoodItems.slice(
+      currentFoodIndex,
+      currentFoodIndex + visibleCarouselItemsCount
+    );
   };
 
   // Funciones del carrusel de actividades
   const nextActivityItem = () => {
-    if (activeActivities.length <= 2) return; // No navegar si hay 2 o menos items
+    if (!canScrollActivities) return;
     
     setCurrentActivityIndex(prev => 
-      prev >= activeActivities.length - 2 ? 0 : prev + 1
+      prev >= maxActivityIndex ? 0 : prev + 1
     );
   };
 
   const prevActivityItem = () => {
-    if (activeActivities.length <= 2) return; // No navegar si hay 2 o menos items
+    if (!canScrollActivities) return;
     
     setCurrentActivityIndex(prev => 
-      prev <= 0 ? Math.max(0, activeActivities.length - 2) : prev - 1
+      prev <= 0 ? maxActivityIndex : prev - 1
     );
   };
 
   const getVisibleActivityItems = () => {
-    const visibleItems = activeActivities.slice(currentActivityIndex, currentActivityIndex + 2);
-    
-    // Asegurar que siempre mostramos máximo 2 cards
-    return visibleItems.slice(0, 2);
+    return activeActivities.slice(
+      currentActivityIndex,
+      currentActivityIndex + visibleCarouselItemsCount
+    );
   };
 
   // Debug
@@ -909,10 +928,10 @@ const VentaEntradaPage: React.FC = () => {
                         src={getImagePath("/images/icon_left.svg")} 
                         alt="Anterior"
                         className={`${styles.carouselArrowNew} ${(() => {
-                          return currentFoodIndex === 0 || activeFoodItems.length <= 2 ? styles.disabled : '';
+                          return currentFoodIndex === 0 || !canScrollFood ? styles.disabled : '';
                         })()}`}
                         onClick={(() => {
-                          return currentFoodIndex > 0 && activeFoodItems.length > 2 ? prevFoodItem : undefined;
+                          return currentFoodIndex > 0 && canScrollFood ? prevFoodItem : undefined;
                         })()}
                       />
                       
@@ -974,10 +993,10 @@ const VentaEntradaPage: React.FC = () => {
                         src={getImagePath("/images/icon_right.svg")} 
                         alt="Siguiente"
                         className={`${styles.carouselArrowNew} ${(() => {
-                          return currentFoodIndex >= activeFoodItems.length - 2 || activeFoodItems.length <= 2 ? styles.disabled : '';
+                          return currentFoodIndex >= maxFoodIndex || !canScrollFood ? styles.disabled : '';
                         })()}`}
                         onClick={(() => {
-                          return currentFoodIndex < activeFoodItems.length - 2 && activeFoodItems.length > 2 ? nextFoodItem : undefined;
+                          return currentFoodIndex < maxFoodIndex && canScrollFood ? nextFoodItem : undefined;
                         })()}
                       />
                     </div>
@@ -998,8 +1017,8 @@ const VentaEntradaPage: React.FC = () => {
                       <img 
                         src={getImagePath("/images/icon_left.svg")} 
                         alt="Anterior"
-                        className={`${styles.carouselArrowNew} ${currentActivityIndex === 0 || activeActivities.length <= 2 ? styles.disabled : ''}`}
-                        onClick={currentActivityIndex > 0 && activeActivities.length > 2 ? prevActivityItem : undefined}
+                        className={`${styles.carouselArrowNew} ${currentActivityIndex === 0 || !canScrollActivities ? styles.disabled : ''}`}
+                        onClick={currentActivityIndex > 0 && canScrollActivities ? prevActivityItem : undefined}
                       />
                       
                       <div className={styles.foodCarouselWrapper}>
@@ -1062,8 +1081,8 @@ const VentaEntradaPage: React.FC = () => {
                       <img 
                         src={getImagePath("/images/icon_right.svg")} 
                         alt="Siguiente"
-                        className={`${styles.carouselArrowNew} ${currentActivityIndex >= activeActivities.length - 2 || activeActivities.length <= 2 ? styles.disabled : ''}`}
-                        onClick={currentActivityIndex < activeActivities.length - 2 && activeActivities.length > 2 ? nextActivityItem : undefined}
+                        className={`${styles.carouselArrowNew} ${currentActivityIndex >= maxActivityIndex || !canScrollActivities ? styles.disabled : ''}`}
+                        onClick={currentActivityIndex < maxActivityIndex && canScrollActivities ? nextActivityItem : undefined}
                       />
                     </div>
                   ) : (
